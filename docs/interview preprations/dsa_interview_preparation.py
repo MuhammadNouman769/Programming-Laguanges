@@ -1,4 +1,5 @@
-''' ==================================
+'''     
+==================================
     Data Structures & Algorithms
              DSA
       Interview Preparation
@@ -22,11 +23,11 @@
     -Circular Queue
     -Priority Queue
     -Deque (Double-Ended Queue)
-    
+    '''
 
 
 
-
+'''
 
 2. Explain different types of Queue.
 3. What is Deque?
@@ -87,4 +88,28 @@
 58. Explain the Rabin-Karp Algorithm.
 59. Explain the Knuth-Morris-Pratt (KMP) Algorithm.
 60. What is the Boyer-Moore Algorithm?
-...
+'''
+'''
+Prepared by Muhammad Nouman (In Roman Urdu Language)
+Date: [02/april/2026]
+Version: 1.0
+
+1. what is Queue data structure?
+    -Queue aik linear data structure
+     hai jo FIFO (First In First Out)
+     principle par kaam karti hai. Is
+     mein elements ko ek end se add 
+     kiya jata hai (enqueue) aur doosre
+     end se remove kiya jata hai (dequeue).  
+    
+    use cases:
+    -Task scheduling
+    -Print spooling
+    -Handling requests in web servers
+    -Breadth-First Search (BFS) in graphs
+2. different types of Queue:
+    -Simple Queue
+    -Circular Queue
+    -Priority Queue
+    -Deque (Double-Ended Queue)
+'''
