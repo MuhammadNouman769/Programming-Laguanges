@@ -78,14 +78,6 @@ console.log(1 + 2 + "2");
 console.log((3 + 4) * 5);
 console.log(3 + 4 * 5 );
 
-// here we are using comparison operators
-console.log(3 > 4);
-console.log(3 < 4);
-console.log(3 >= 4);
-console.log(3 <= 4);
-console.log(3 == 4);
-console.log(3 != 4);
-
 // here we are using logical operators
 console.log(true && true);
 console.log(true && false);
