@@ -1,12 +1,8 @@
-print("chai or python")
-
-def chai(n):
-    print(n)
-    
-chai("masala tea")
-chai("lemon tea")    
-
-chai_one = "rose tea"
-chai_two = "cardamom tea"
-cha_three = "ginger tea"
-chai = f"{chai_one}, {chai_two}, and {cha_three}"
+def student(name , age, city):
+    print(f' {name} is {age} years old and lives in {city}')
+# positional arguments
+student('Shanzy', 20, 'Karachi')
+# keyword arguments
+student(city='Karachi', name='Shanzy', age=20, )
+print('--- Mixed Arguments ---')
+student('Shanzy', age=20, city='Karachi')

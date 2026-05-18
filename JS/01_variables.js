@@ -2,7 +2,7 @@ const accountId = 1;
 let accountEmail = "nomannisar769@gmail.com";
 var accountPassword = "@Usama22";
 accountCity = "Farooqabad";
-let accountState;
+let accountState; 
 
 // accountId = 2; not allowed because const is used
 
