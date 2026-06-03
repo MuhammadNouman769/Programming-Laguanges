@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95f70c46-3611-448e-bfbf-e7e2775cead0" name="Changes" comment="" />
+    <list default="true" id="95f70c46-3611-448e-bfbf-e7e2775cead0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_01/default_arguments.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_01/keyword_arguments.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_01/positional_arguments.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_01/variable_length_arguments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python_interview.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python_interview.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/01_basics/chai.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,9 +26,101 @@
       <entry key="_/home/moeez/Downloads/Nouman Data/projects/python_interview" value="39syGAkANyu9B1NHlzOWRJeDhJu" />
     </persistenceIdMap>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="32" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MuhammadNouman769&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MuhammadNouman769/Programming-Laguanges.git&quot;,
+    &quot;accountId&quot;: &quot;d7dfeb83-4264-4903-97e2-b150a3596a54&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/python_function_practice/default_arguments.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/python_function_practice/keyword_arguments.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000015152614914" />
+      <entry key="S5" value="1.0069993842160987" />
+      <entry key="S10" value="1.1222969209802691" />
+      <entry key="S30" value="1.943455960950589" />
+      <entry key="S60" value="2.6543154871268264" />
+      <entry key="M2" value="3.2174644299663724" />
+      <entry key="M5" value="3.6986821726333265" />
+      <entry key="M10" value="4.854245301834512" />
+      <entry key="M15" value="7.387648758673552" />
+      <entry key="M30" value="18.657385507119077" />
+      <entry key="H1" value="48.38588261032514" />
+      <entry key="H2" value="115.94326144815015" />
+      <entry key="H4" value="211.23883818422658" />
+      <entry key="D1" value="380.49610754786283" />
+      <entry key="W1" value="424.15896833872205" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="1.6307322677974012E-168" />
+      <entry key="S30" value="1.177048129750617E-56" />
+      <entry key="S60" value="1.0849184899109322E-28" />
+      <entry key="M2" value="1.0415942059704541E-14" />
+      <entry key="M5" value="2.5531954155579245E-6" />
+      <entry key="M10" value="0.0016052483206061262" />
+      <entry key="M15" value="0.014153118263847193" />
+      <entry key="M30" value="0.15481337155882427" />
+      <entry key="H1" value="0.8113448568337055" />
+      <entry key="H2" value="2.5863248679451436" />
+      <entry key="H4" value="5.149063755760858" />
+      <entry key="D1" value="9.647978884903507" />
+      <entry key="W1" value="10.7946517472022" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="3.712569638531523E-22" />
+      <entry key="MS500" value="5.1752927528878656E-5" />
+      <entry key="S2" value="0.08481804029879847" />
+      <entry key="S5" value="0.37848040890568324" />
+      <entry key="S10" value="0.7220620805793605" />
+      <entry key="S30" value="1.7670404653072418" />
+      <entry key="S60" value="2.555006450436457" />
+      <entry key="M2" value="3.164066259607966" />
+      <entry key="M5" value="3.67620998637154" />
+      <entry key="M10" value="4.843569086986762" />
+      <entry key="M15" value="7.391666526998598" />
+      <entry key="M30" value="18.801597857379473" />
+      <entry key="H1" value="49.184409660836295" />
+      <entry key="H2" value="118.51568611295077" />
+      <entry key="H4" value="216.37615849735752" />
+      <entry key="D1" value="390.1407994508608" />
+      <entry key="W1" value="434.95310298166277" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="39syGAkANyu9B1NHlzOWRJeDhJu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,26 +129,45 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.default_arguments.executor": "Run",
+    "Python.keyword_arguments.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.variable_length_arguments.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/home/moeez/Downloads/Nouman Data/projects/car_show_room",
+    "last_opened_file_path": "/home/moeez/Documents/projects/Programming-Laguanges",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.com.jetbrains.python.highlighting.PythonColorsPage",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/python_function_practice/class_01" />
+      <recent name="$PROJECT_DIR$/python_function_practice" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/python" />
+      <recent name="$PROJECT_DIR$/python_functions_practic" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.30387.173" />
-        <option value="bundled-python-sdk-4762d8aabb82-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.30387.173" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-PY-261.24374.152" />
+        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
       </set>
     </attachedChunks>
   </component>
@@ -57,11 +179,19 @@
       <option name="presentableId" value="Default" />
       <updated>1771498974643</updated>
       <workItem from="1771498976624" duration="4845000" />
+      <workItem from="1780391967446" duration="5214000" />
+      <workItem from="1780462839180" duration="17387000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Programming_Laguanges$test.coverage" NAME="test Coverage Results" MODIFIED="1780402499455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python/01_basics" />
+    <SUITE FILE_PATH="coverage/Programming_Laguanges$variable_length_arguments.coverage" NAME="variable_length_arguments Coverage Results" MODIFIED="1780486430917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python_function_practice/class_01" />
+    <SUITE FILE_PATH="coverage/Programming_Laguanges$keyword_arguments.coverage" NAME="keyword_arguments Coverage Results" MODIFIED="1780473057182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python_function_practice" />
+    <SUITE FILE_PATH="coverage/Programming_Laguanges$default_arguments.coverage" NAME="default_arguments Coverage Results" MODIFIED="1780474356975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python_function_practice" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
