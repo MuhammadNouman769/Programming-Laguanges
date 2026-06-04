@@ -1,6 +1,7 @@
 
 
 """ ============== KEy word Arguments ============ """
+from python_function_practice.class_01.positional_arguments import my_sons
 
 
 def info(name, country, profession):
@@ -60,3 +61,7 @@ def student(name, age, city):
     print(name, age, city)
 
 student(age=27, city="Farooqabad", name="Nouman")
+
+def my_sons(name, age):
+    print(f'{name} {age} months old')
+my_sons(name="Usama", age=7)

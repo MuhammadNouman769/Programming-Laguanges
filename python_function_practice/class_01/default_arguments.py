@@ -18,3 +18,7 @@ book(title="python")
 def car(brand, model="COROLA", year=2020):
     print(brand, model, year)
 car(brand="Toyota")
+
+def mu_song(name, age=7):
+    print(f'{name} is {age} months old')
+mu_song(name="Usama")

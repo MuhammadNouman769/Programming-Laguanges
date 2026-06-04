@@ -26,3 +26,8 @@ order('burger', '2x', 600)
 def book(title, author, pages):
     print(f' {title} by {author} has {pages} pages')
 book('python','john', 300)
+
+
+def my_sons(name, age, hieght):
+    return f'{name} is {age} months old his hieght is {hieght} inches'
+print(my_sons('Usama', 7, 3.3))
