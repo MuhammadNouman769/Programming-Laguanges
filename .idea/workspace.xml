@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95f70c46-3611-448e-bfbf-e7e2775cead0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/python_function_practice/class_02/lambda_function.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python_function_practice/class_02/scope.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_03/decorators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_03/deep_copy_shallow_copy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_03/generators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_03/iterable_vs_iterator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_03/oop.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_function_practice/class_03/recursion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/default_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_function_practice/class_01/default_arguments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/keyword_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_function_practice/class_01/keyword_arguments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/positional_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_function_practice/class_01/positional_arguments.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,7 @@
     </persistenceIdMap>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="37" />
+    <option name="cachedIndexableFilesCount" value="41" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -49,6 +50,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/python_function_practice/class_02/lambda_function.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/python_function_practice/class_03/generators.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -58,59 +60,59 @@
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0000003708446357" />
-      <entry key="S10" value="1.0009989242506638" />
-      <entry key="S30" value="1.2400245796022311" />
-      <entry key="S60" value="1.9741399636807684" />
-      <entry key="M2" value="2.9717068242985896" />
-      <entry key="M5" value="4.364739751196341" />
-      <entry key="M10" value="7.552710318682673" />
-      <entry key="M15" value="11.188313815361811" />
-      <entry key="M30" value="22.870686985579546" />
-      <entry key="H1" value="53.63669068711682" />
-      <entry key="H2" value="123.8834575538117" />
-      <entry key="H4" value="245.07005620445224" />
-      <entry key="D1" value="541.9657690581384" />
-      <entry key="W1" value="635.4868439136549" />
+      <entry key="S2" value="1.0000020937451435" />
+      <entry key="S5" value="1.0061192603202314" />
+      <entry key="S10" value="1.1010865280779898" />
+      <entry key="S30" value="1.825721408430527" />
+      <entry key="S60" value="3.4636257749142794" />
+      <entry key="M2" value="7.6310775888819" />
+      <entry key="M5" value="18.596218759115654" />
+      <entry key="M10" value="31.479723946053358" />
+      <entry key="M15" value="40.65627900873921" />
+      <entry key="M30" value="60.739152896846086" />
+      <entry key="H1" value="88.41536206208801" />
+      <entry key="H2" value="134.92038903412202" />
+      <entry key="H4" value="237.00247914519858" />
+      <entry key="D1" value="638.1973578711212" />
+      <entry key="W1" value="804.0379414980662" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.5604171957272083E-293" />
-      <entry key="S5" value="7.53869704859883E-118" />
-      <entry key="S10" value="2.7456687798419617E-59" />
-      <entry key="S30" value="3.016819883833404E-20" />
-      <entry key="S60" value="1.7368995030897448E-10" />
-      <entry key="M2" value="1.3179148315015692E-5" />
-      <entry key="M5" value="0.01116774363147367" />
-      <entry key="M10" value="0.10662467209788641" />
-      <entry key="M15" value="0.23875504984505497" />
-      <entry key="M30" value="0.7553178615352882" />
-      <entry key="H1" value="2.189429229064686" />
-      <entry key="H2" value="5.088903627977253" />
-      <entry key="H4" value="9.376147923130416" />
-      <entry key="D1" value="18.69434040513603" />
-      <entry key="W1" value="21.48265180762727" />
+      <entry key="S2" value="1.1286871571226478E-144" />
+      <entry key="S5" value="2.636510063507385E-58" />
+      <entry key="S10" value="1.6237333720495434E-29" />
+      <entry key="S30" value="2.532240237965309E-10" />
+      <entry key="S60" value="1.5913014290202266E-5" />
+      <entry key="M2" value="0.00398912710237275" />
+      <entry key="M5" value="0.1108666317060381" />
+      <entry key="M10" value="0.38123416500089163" />
+      <entry key="M15" value="0.6723821119202279" />
+      <entry key="M30" value="1.6010406279990375" />
+      <entry key="H1" value="3.150233857666317" />
+      <entry key="H2" value="5.592538540073104" />
+      <entry key="H4" value="10.018140819655612" />
+      <entry key="D1" value="24.41787360566546" />
+      <entry key="W1" value="29.922213174028787" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.003906250000000001" />
-      <entry key="MS500" value="0.3298769776932235" />
-      <entry key="S2" value="0.757858283255199" />
-      <entry key="S5" value="0.8950253935710077" />
-      <entry key="S10" value="0.946993575882877" />
-      <entry key="S30" value="1.2169873233063588" />
-      <entry key="S60" value="1.955569552699847" />
-      <entry key="M2" value="2.9577406961445987" />
-      <entry key="M5" value="4.368008484452791" />
-      <entry key="M10" value="7.65351711741671" />
-      <entry key="M15" value="11.421704396359035" />
-      <entry key="M30" value="23.61942908062565" />
-      <entry key="H1" value="55.81578912641104" />
-      <entry key="H2" value="128.9589466623514" />
-      <entry key="H4" value="254.43277827664073" />
-      <entry key="D1" value="560.6553189287217" />
-      <entry key="W1" value="656.96870070419" />
+      <entry key="MS100" value="1.2547090434149758E-9" />
+      <entry key="MS500" value="0.016584737639840537" />
+      <entry key="S2" value="0.35886190303806237" />
+      <entry key="S5" value="0.6662425646765139" />
+      <entry key="S10" value="0.8836016299966178" />
+      <entry key="S30" value="1.6788459217262" />
+      <entry key="S60" value="3.341508174034227" />
+      <entry key="M2" value="7.527044747394443" />
+      <entry key="M5" value="18.616718781608174" />
+      <entry key="M10" value="31.788106391868844" />
+      <entry key="M15" value="41.26781778112885" />
+      <entry key="M30" value="62.29774314960338" />
+      <entry key="H1" value="91.53682729629857" />
+      <entry key="H2" value="140.4928490079702" />
+      <entry key="H4" value="247.00481782148384" />
+      <entry key="D1" value="662.6090579729874" />
+      <entry key="W1" value="833.9590703424395" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -124,10 +126,16 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.decorators.executor": "Run",
+    "Python.deep_copy_shallow_copy.executor": "Run",
     "Python.default_arguments.executor": "Run",
+    "Python.generators.executor": "Run",
+    "Python.iterable_vs_iterator.executor": "Run",
     "Python.keyword_arguments.executor": "Run",
     "Python.lambda_function.executor": "Run",
+    "Python.oop.executor": "Run",
     "Python.positional_arguments.executor": "Run",
+    "Python.recursion.executor": "Run",
     "Python.scope.executor": "Run",
     "Python.test.executor": "Run",
     "Python.variable_length_arguments.executor": "Run",
