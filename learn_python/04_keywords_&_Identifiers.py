@@ -1,7 +1,7 @@
 ''' ============= keywords & Identifiers ================= '''
 
 
-# keywords 
+# keywords
 
 ''' Here is a list of the Python keywords, Enter any keywords to get more help.
 
@@ -25,3 +25,7 @@ print(name1)
 _ = 'Nouman'
 
 # identifier can be use keywords
+
+list1 = [1,2,3,4,5]
+list1 [0] = 10
+print(list1)

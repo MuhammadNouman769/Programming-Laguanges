@@ -43,3 +43,30 @@ account = Account(50000)
 
 account.set_balance(10000)
 print(account.get_balance())
+
+
+
+
+class Student:
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+
+    def get_name(self):
+        return self.__name
+
+    def set_name(self, name):
+        self.__name = name
+
+s1 = Student("Muhammad Nouman", 25)
+
+
+print(s1.get_name())
+
+s1.set_name("Usama")
+print(s1.get_name())
+
+class Employee:
+
+    def __init__(self,):
