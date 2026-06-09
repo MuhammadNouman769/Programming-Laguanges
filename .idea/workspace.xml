@@ -4,12 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95f70c46-3611-448e-bfbf-e7e2775cead0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/python_function_practice/class_04/association_aggregation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python_function_practice/class_04/modifiers.py" afterDir="false" />
+    <list default="true" id="95f70c46-3611-448e-bfbf-e7e2775cead0" name="Changes" comment="oop">
+      <change afterPath="$PROJECT_DIR$/python/python_function_practice/class_05/inheritance.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/learn_python/04_keywords_&amp;_Identifiers.py" beforeDir="false" afterPath="$PROJECT_DIR$/learn_python/04_keywords_&amp;_Identifiers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_function_practice/class_03/oop.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_function_practice/class_03/oop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Muhammad Nouman-Backend Engineer-Resume .pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/Muhammad Nouman-Backend Engineer-Resume .pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Usama-Backend Engineer-Resume .pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/Usama-Backend Engineer-Resume .pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interview preprations/Python Interview Preparation version_4.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interview preprations/Python Interview Preparation-5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interview preprations/dsa_interview_preparation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interview preprations/python interview prepration version-1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interview preprations/python interview.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interview preprations/python itnerview version-2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interview preprations/python_interview_preparation.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_interview_prepration/python_interview_preparation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn_python/01_print.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/01_print.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn_python/02_data_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/02_data_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn_python/03_variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/03_variables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn_python/04_keywords_&amp;_Identifiers.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/04_keywords_&amp;_Identifiers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn_python/05_user_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/05_user_input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn_python/06_type_conversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/06_type_conversion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn_python/07_Literals.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/07_Literals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/Untitled image.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/Untitled image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jan 4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jan 4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jan 6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jan 6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jan 7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jan 7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jan 9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jan 9.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jan.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jan.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jan2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jan2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jan5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jan5.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/bhai jna 3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resumes/personal data/bhai jna 3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/default_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/default_arguments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/keyword_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/keyword_arguments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/parameter_vs_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/parameter_vs_arguments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/positional_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/positional_arguments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_01/variable_length_arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_01/variable_length_arguments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_02/lambda_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_02/lambda_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_02/scope.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_02/scope.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_03/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_03/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_03/deep_copy_shallow_copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_03/deep_copy_shallow_copy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_03/generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_03/generators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_03/iterable_vs_iterator.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_03/iterable_vs_iterator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_03/oop.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_03/oop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_03/recursion.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_03/recursion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_04/association_aggregation.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_04/association_aggregation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_04/class.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_04/class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_function_practice/class_04/modifiers.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/python_function_practice/class_04/modifiers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +60,7 @@
     </persistenceIdMap>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="48" />
+    <option name="cachedIndexableFilesCount" value="66" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,10 +85,10 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/python_function_practice/class_02/lambda_function.py" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/python_function_practice/class_03/generators.py" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/python_function_practice/class_04/association_aggregation.py" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/python_function_practice/class_04/modifiers.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/python/python_function_practice/class_04/association_aggregation.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/python/python_function_practice/class_04/class.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/python/python_function_practice/class_04/modifiers.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/python/python_function_practice/class_05/inheritance.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -58,61 +96,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.00000000000563" />
-      <entry key="MS500" value="1.0056248522685673" />
-      <entry key="S2" value="1.2969892379511077" />
-      <entry key="S5" value="2.020972272877605" />
-      <entry key="S10" value="3.0384160846515607" />
-      <entry key="S30" value="4.661205566853816" />
-      <entry key="S60" value="5.960196253169139" />
-      <entry key="M2" value="9.989162613833656" />
-      <entry key="M5" value="21.762800764838083" />
-      <entry key="M10" value="33.64796627436016" />
-      <entry key="M15" value="43.69109541644226" />
-      <entry key="M30" value="71.88152091106029" />
-      <entry key="H1" value="119.74377766466903" />
-      <entry key="H2" value="201.97163725908223" />
-      <entry key="H4" value="338.6846909936962" />
-      <entry key="D1" value="883.9970921205665" />
-      <entry key="W1" value="1147.1536376061053" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000262740841175" />
+      <entry key="S2" value="1.0717707666333842" />
+      <entry key="S5" value="1.392151534979968" />
+      <entry key="S10" value="1.9217051663227154" />
+      <entry key="S30" value="3.2460813987198907" />
+      <entry key="S60" value="3.9645522065771193" />
+      <entry key="M2" value="4.434309080510611" />
+      <entry key="M5" value="4.760929406885406" />
+      <entry key="M10" value="4.878274536595933" />
+      <entry key="M15" value="4.924330422417124" />
+      <entry key="M30" value="5.7433922372047785" />
+      <entry key="H1" value="17.365969765128227" />
+      <entry key="H2" value="70.83414463509736" />
+      <entry key="H4" value="201.60292021195394" />
+      <entry key="D1" value="837.2752745209408" />
+      <entry key="W1" value="1182.5515397753522" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="5.0059098862557534E-172" />
-      <entry key="S2" value="1.4957904525628296E-43" />
-      <entry key="S5" value="7.412220029539283E-18" />
-      <entry key="S10" value="2.7225392613402832E-9" />
-      <entry key="S30" value="0.00139634065800162" />
-      <entry key="S60" value="0.0373676418611897" />
-      <entry key="M2" value="0.19330908398700536" />
-      <entry key="M5" value="0.5263572052534369" />
-      <entry key="M10" value="0.8985371382981311" />
-      <entry key="M15" value="1.3395359078231364" />
-      <entry key="M30" value="2.6472966243043072" />
-      <entry key="H1" value="4.866858536436682" />
-      <entry key="H2" value="9.076655826705794" />
-      <entry key="H4" value="16.069922587791844" />
-      <entry key="D1" value="39.10606634582917" />
-      <entry key="W1" value="48.990169146586226" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="3.1962630330927932E-149" />
+      <entry key="S60" value="5.653550241837668E-75" />
+      <entry key="M2" value="7.519085875306026E-38" />
+      <entry key="M5" value="1.4363017351749009E-15" />
+      <entry key="M10" value="4.6937352378663775E-8" />
+      <entry key="M15" value="1.871871638396004E-5" />
+      <entry key="M30" value="0.009896085936303225" />
+      <entry key="H1" value="0.29756315101829656" />
+      <entry key="H2" value="2.2443525639335187" />
+      <entry key="H4" value="7.990912794440837" />
+      <entry key="D1" value="34.807639084100444" />
+      <entry key="W1" value="48.181988017125285" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.5796309520189576E-10" />
-      <entry key="MS500" value="0.012976343469477814" />
-      <entry key="S2" value="0.5577061888115608" />
-      <entry key="S5" value="1.5783669824183328" />
-      <entry key="S10" value="2.755424400256629" />
-      <entry key="S30" value="4.537126721267842" />
-      <entry key="S60" value="5.911431530077334" />
-      <entry key="M2" value="10.096071037001279" />
-      <entry key="M5" value="22.209856722033862" />
-      <entry key="M10" value="34.48816834030629" />
-      <entry key="M15" value="44.98327171169578" />
-      <entry key="M30" value="74.49458747668051" />
-      <entry key="H1" value="124.58431030585864" />
-      <entry key="H2" value="211.02598623282253" />
-      <entry key="H4" value="354.7353244032523" />
-      <entry key="D1" value="923.0948164055897" />
-      <entry key="W1" value="1196.1422773441266" />
+      <entry key="MS100" value="0.8408964152537145" />
+      <entry key="MS500" value="0.9659622772329538" />
+      <entry key="S2" value="1.0629191834489409" />
+      <entry key="S5" value="1.3880911069613355" />
+      <entry key="S10" value="1.9190040974947926" />
+      <entry key="S30" value="3.244522219422042" />
+      <entry key="S60" value="3.963590136668223" />
+      <entry key="M2" value="4.433768431098563" />
+      <entry key="M5" value="4.760696593937397" />
+      <entry key="M10" value="4.8781551986620455" />
+      <entry key="M15" value="4.924267814383503" />
+      <entry key="M30" value="5.753101002866801" />
+      <entry key="H1" value="17.661811542263845" />
+      <entry key="H2" value="73.07282882869828" />
+      <entry key="H4" value="209.584110458102" />
+      <entry key="D1" value="872.0754539747827" />
+      <entry key="W1" value="1230.7320182781514" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -123,54 +161,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.04_keywords_&_Identifiers.executor": "Run",
-    "Python.association.executor": "Run",
-    "Python.association_aggregation.executor": "Run",
-    "Python.decorators.executor": "Run",
-    "Python.deep_copy_shallow_copy.executor": "Run",
-    "Python.default_arguments.executor": "Run",
-    "Python.generators.executor": "Run",
-    "Python.iterable_vs_iterator.executor": "Run",
-    "Python.keyword_arguments.executor": "Run",
-    "Python.lambda_function.executor": "Run",
-    "Python.modifiers.executor": "Run",
-    "Python.oop.executor": "Run",
-    "Python.positional_arguments.executor": "Run",
-    "Python.recursion.executor": "Run",
-    "Python.scope.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.variable_length_arguments.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/home/moeez/Documents/projects/Programming-Laguanges",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.com.jetbrains.python.highlighting.PythonColorsPage",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.04_keywords_&amp;_Identifiers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.association.executor&quot;: &quot;Run&quot;,
+    &quot;Python.association_aggregation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.decorators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.deep_copy_shallow_copy.executor&quot;: &quot;Run&quot;,
+    &quot;Python.default_arguments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.iterable_vs_iterator.executor&quot;: &quot;Run&quot;,
+    &quot;Python.keyword_arguments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lambda_function.executor&quot;: &quot;Run&quot;,
+    &quot;Python.modifiers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.oop.executor&quot;: &quot;Run&quot;,
+    &quot;Python.positional_arguments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.recursion.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scope.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.variable_length_arguments.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/moeez/Documents/projects/Programming-Laguanges&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/python_function_practice/class_01" />
-      <recent name="$PROJECT_DIR$/python_function_practice" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/python/python_function_practice/class_01" />
+      <recent name="$PROJECT_DIR$/python/DSA" />
+      <recent name="$PROJECT_DIR$/Resumes" />
       <recent name="$PROJECT_DIR$/python" />
-      <recent name="$PROJECT_DIR$/python_functions_practic" />
+      <recent name="$PROJECT_DIR$/python_function_practice/class_01" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -193,10 +231,31 @@
       <workItem from="1780550561697" duration="315000" />
       <workItem from="1780551087459" duration="36000" />
     </task>
+    <task id="LOCAL-00001" summary="oop">
+      <option name="closed" value="true" />
+      <created>1780920794797</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1780920794797</updated>
+    </task>
+    <task id="LOCAL-00002" summary="oop">
+      <option name="closed" value="true" />
+      <created>1780920803430</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1780920803430</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="oop" />
+    <option name="LAST_COMMIT_MESSAGE" value="oop" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Programming_Laguanges$test.coverage" NAME="test Coverage Results" MODIFIED="1780402499455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python/01_basics" />

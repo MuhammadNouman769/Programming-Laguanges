@@ -66,7 +66,3 @@ print(s1.get_name())
 
 s1.set_name("Usama")
 print(s1.get_name())
-
-class Employee:
-
-    def __init__(self,):
