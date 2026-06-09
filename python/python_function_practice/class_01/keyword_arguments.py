@@ -1,7 +1,6 @@
 
 
 """ ============== KEy word Arguments ============ """
-from python_function_practice.class_01.positional_arguments import my_sons
 
 
 def info(name, country, profession):
