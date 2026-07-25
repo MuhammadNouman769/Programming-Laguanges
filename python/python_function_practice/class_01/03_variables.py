@@ -40,7 +40,16 @@ b = 5
 print(a+b)
 print(a+b)
 """
+"""
 a = [1,2,3,45,6]
 
 print(a[1],a[-2])
+
 """
+
+
+"""
+
+a = "college"
+
+print(a[::2])
