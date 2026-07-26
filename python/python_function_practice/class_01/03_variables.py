@@ -1,4 +1,8 @@
+<<<<<<< HEAD:python/python_function_practice/class_01/03_variables.py
 ''' ================ Variables =============== '''
+=======
+"""''' ================ Variables =============== '''
+>>>>>>> 2391ce7 (add new files):learn_python/03_variables.py
 
 name ='Nouman'
 age = 26
@@ -46,6 +50,7 @@ a = [1,2,3,45,6]
 print(a[1],a[-2])
 
 """
+<<<<<<< HEAD:python/python_function_practice/class_01/03_variables.py
 
 
 """
@@ -53,3 +58,31 @@ print(a[1],a[-2])
 a = "college"
 
 print(a[::2])
+=======
+"""
+a = "college"
+
+print(a[::2])
+
+a = "12"
+b = int(a)
+
+print(type(a))
+print(type(b))
+"""
+
+# a = 12
+# b = 12
+# print(a+b)
+# c = 12
+# d = 100000
+# # print(c//2)
+# print(3 + 4 * 2)
+# print(15 // 4 + 15 -1)
+# print(3 + 2 ** 2 * 5 -1)
+
+print(12 == 12)
+print(13 == 12)
+print(13 > 12)
+print(12 < 12)
+>>>>>>> 2391ce7 (add new files):learn_python/03_variables.py
