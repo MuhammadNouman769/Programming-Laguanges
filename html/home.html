@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BTR Learning House</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ========== HEADER / NAVBAR ========== */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+            border-bottom: 1px solid #e9edf2;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar .logo i {
+            font-size: 28px;
+            color: #0b3b5c;
+        }
+
+        .navbar .logo span {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b3b5c;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar .logo span .highlight {
+            color: #e67e22;
+        }
+
+        /* ---- Nav Links (Languages & Frameworks) ---- */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            transition: all 0.2s;
+            background: transparent;
+        }
+
+        .nav-links a:hover {
+            background: #f1f5f9;
+            color: #0b3b5c;
+        }
+
+        .nav-links a i {
+            margin-right: 6px;
+            font-size: 13px;
+        }
+
+        .nav-links .btn-primary {
+            background: #0b3b5c;
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: 30px;
+        }
+
+        .nav-links .btn-primary:hover {
+            background: #1a4f6e;
+            color: #fff;
+        }
+
+        /* ---- Mobile Toggle ---- */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: #0b3b5c;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* ========== BANNER ========== */
+        .banner {
+            background: linear-gradient(145deg, #0b3b5c 0%, #1a5a7a 100%);
+            padding: 60px 32px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .banner h1 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner h1 span {
+            color: #fbbf24;
+        }
+
+        .banner p {
+            font-size: 18px;
+            opacity: 0.85;
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== HOME PAGE CONTENT ========== */
+        .home-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 48px 32px 32px;
+        }
+
+        /* ---- Hero Message ---- */
+        .hero-message {
+            text-align: center;
+            padding: 32px 0 48px;
+        }
+
+        .hero-message h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0b3b5c;
+            margin-bottom: 8px;
+        }
+
+        .hero-message h2 i {
+            color: #e67e22;
+            margin-right: 8px;
+        }
+
+        .hero-message p {
+            font-size: 18px;
+            color: #475569;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-message p strong {
+            color: #0b3b5c;
+        }
+
+        /* ---- CEO / Manager Section ---- */
+        .ceo-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            border: 1px solid #e9edf2;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .ceo-info {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .ceo-info .badge {
+            background: #dbeafe;
+            color: #0b3b5c;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 16px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .ceo-info h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0b3b5c;
+            margin-bottom: 4px;
+        }
+
+        .ceo-info .title {
+            font-size: 16px;
+            color: #e67e22;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .ceo-info p {
+            color: #475569;
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        .ceo-info .social-icons {
+            margin-top: 16px;
+            display: flex;
+            gap: 14px;
+        }
+
+        .ceo-info .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #0b3b5c;
+            transition: all 0.2s;
+            font-size: 18px;
+        }
+
+        .ceo-info .social-icons a:hover {
+            background: #0b3b5c;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ---- CEO Image Carousel ---- */
+        .ceo-carousel {
+            flex: 0 0 300px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            background: #f1f5f9;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ceo-carousel .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            aspect-ratio: 1 / 1;
+        }
+
+        .ceo-carousel .slide.active {
+            display: block;
+        }
+
+        .ceo-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 16px;
+        }
+
+        /* ---- Carousel Arrows ---- */
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 12px;
+            pointer-events: none;
+        }
+
+        .carousel-arrows button {
+            pointer-events: auto;
+            background: rgba(255,255,255,0.85);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            color: #0b3b5c;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-arrows button:hover {
+            background: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .carousel-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .carousel-dots .dot.active {
+            background: #ffffff;
+            width: 24px;
+            border-radius: 8px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: #0b1f2e;
+            color: #e2e8f0;
+            padding: 60px 32px 32px;
+            margin-top: 32px;
+            border-top: 4px solid #e67e22;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand h3 i {
+            color: #e67e22;
+            margin-right: 6px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            opacity: 0.7;
+            max-width: 300px;
+            line-height: 1.7;
+        }
+
+        .footer-brand .social {
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-brand .social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            color: #e2e8f0;
+            transition: all 0.2s;
+            font-size: 18px;
+        }
+
+        .footer-brand .social a:hover {
+            background: #e67e22;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer h4 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer ul {
+            list-style: none;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul li a {
+            font-size: 14px;
+            opacity: 0.7;
+            transition: all 0.2s;
+        }
+
+        .footer ul li a:hover {
+            opacity: 1;
+            color: #e67e22;
+        }
+
+        .footer .newsletter input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 30px;
+            border: none;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .footer .newsletter input:focus {
+            background: rgba(255,255,255,0.14);
+        }
+
+        .footer .newsletter input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .footer .newsletter button {
+            margin-top: 12px;
+            background: #e67e22;
+            border: none;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .footer .newsletter button:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+            opacity: 0.6;
+        }
+
+        .footer-bottom a {
+            opacity: 0.6;
+            transition: 0.2s;
+        }
+
+        .footer-bottom a:hover {
+            opacity: 1;
+            color: #e67e22;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            .ceo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .ceo-info p {
+                max-width: 100%;
+            }
+            .ceo-info .social-icons {
+                justify-content: center;
+            }
+            .ceo-carousel {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 360px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 16px;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #fff;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                padding: 16px 24px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+                border-top: 1px solid #e9edf2;
+                gap: 4px;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 10px 16px;
+                width: 100%;
+                border-radius: 8px;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .banner h1 {
+                font-size: 28px;
+            }
+            .banner p {
+                font-size: 16px;
+            }
+            .hero-message h2 {
+                font-size: 26px;
+            }
+            .ceo-carousel {
+                max-width: 100%;
+                min-height: 200px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .logo span {
+                font-size: 18px;
+            }
+            .ceo-section {
+                padding: 20px;
+            }
+            .ceo-info h3 {
+                font-size: 22px;
+            }
+            .carousel-arrows button {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER / NAVBAR ========== -->
+    <header class="navbar">
+        <!-- Logo -->
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>BTR <span class="highlight">Learning</span> House</span>
+        </div>
+
+        <!-- Navigation Links (Languages & Frameworks) -->
+        <nav class="nav-links" id="navLinks">
+            <a href="#"><i class="fab fa-python"></i> Python</a>
+            <a href="#"><i class="fab fa-js"></i> JavaScript</a>
+            <a href="#"><i class="fab fa-java"></i> Java</a>
+            <a href="#"><i class="fas fa-code"></i> C++</a>
+            <a href="#"><i class="fab fa-react"></i> React</a>
+            <a href="#"><i class="fab fa-angular"></i> Angular</a>
+            <a href="#"><i class="fab fa-node"></i> Node.js</a>
+            <a href="#"><i class="fas fa-database"></i> Django</a>
+            <a href="#" class="btn-primary"><i class="fas fa-rocket"></i> Get Started</a>
+        </nav>
+
+        <!-- Mobile Toggle -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- ========== BANNER ========== -->
+    <section class="banner">
+        <h1>Empowering <span>Future</span> Tech Leaders</h1>
+        <p>Learn from industry experts — master the skills that drive the digital world.</p>
+    </section>
+
+    <!-- ========== HOME PAGE CONTENT ========== -->
+    <main class="home-content">
+
+        <!-- Hero Message -->
+        <div class="hero-message">
+            <h2><i class="fas fa-home"></i> BTR Learning House</h2>
+            <p>
+                <strong>BTR Learning House</strong> is proudly operating under the esteemed umbrella of
+                <strong>BTR Solution</strong> — a technology-driven company committed to
+                building the next generation of innovators.
+            </p>
+        </div>
+
+        <!-- CEO / Manager Section with Carousel -->
+        <section class="ceo-section">
+
+            <!-- Left: Text Info -->
+            <div class="ceo-info">
+                <span class="badge"><i class="fas fa-crown"></i> Leadership</span>
+                <h3>Muhammad Nouman</h3>
+                <div class="title">CEO &amp; Founder — BTR Solution</div>
+                <p>
+                    A visionary leader with over a decade of experience in technology and education.
+                    Muhammad Nouman has built BTR Solution from the ground up, creating a culture of
+                    innovation, excellence, and hands-on learning that empowers teams to build
+                    world-class solutions.
+                </p>
+                <div class="social-icons">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <!-- Right: Image Carousel -->
+            <div class="ceo-carousel" id="ceoCarousel">
+
+                <!-- Slides -->
+                <img src="https://i.pravatar.cc/400?img=11" alt="CEO Image 1" class="slide active" />
+                <img src="https://i.pravatar.cc/400?img=32" alt="CEO Image 2" class="slide" />
+                <img src="https://i.pravatar.cc/400?img=56" alt="CEO Image 3" class="slide" />
+                <img src="https://i.pravatar.cc/400?img=70" alt="CEO Image 4" class="slide" />
+
+                <!-- Arrows -->
+                <div class="carousel-arrows">
+                    <button id="prevSlide" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextSlide" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <!-- Dots -->
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </section>
+
+        <!-- Optional: Quick Stats / Trust Badges (Industry Level) -->
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 24px 0 8px;">
+            <div style="background: #fff; border-radius: 16px; padding: 18px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #e9edf2; text-align: center; flex: 1 1 150px;">
+                <div style="font-size: 28px; font-weight: 800; color: #0b3b5c;">4.9</div>
+                <div style="font-size: 13px; color: #64748b;">⭐ Student Rating</div>
+            </div>
+            <div style="background: #fff; border-radius: 16px; padding: 18px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #e9edf2; text-align: center; flex: 1 1 150px;">
+                <div style="font-size: 28px; font-weight: 800; color: #0b3b5c;">500+</div>
+                <div style="font-size: 13px; color: #64748b;">🎓 Graduates</div>
+            </div>
+            <div style="background: #fff; border-radius: 16px; padding: 18px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #e9edf2; text-align: center; flex: 1 1 150px;">
+                <div style="font-size: 28px; font-weight: 800; color: #0b3b5c;">15+</div>
+                <div style="font-size: 13px; color: #64748b;">🏆 Industry Awards</div>
+            </div>
+            <div style="background: #fff; border-radius: 16px; padding: 18px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #e9edf2; text-align: center; flex: 1 1 150px;">
+                <div style="font-size: 28px; font-weight: 800; color: #0b3b5c;">98%</div>
+                <div style="font-size: 13px; color: #64748b;">💼 Placement Rate</div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ========== INDUSTRY-LEVEL FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-content">
+
+            <!-- Brand -->
+            <div class="footer-brand">
+                <h3><i class="fas fa-graduation-cap"></i> BTR Learning House</h3>
+                <p>
+                    Building the next generation of tech leaders through industry-aligned
+                    education, hands-on projects, and mentorship from experts at BTR Solution.
+                </p>
+                <div class="social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Support Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter">
+                <h4>Stay Updated</h4>
+                <p style="font-size: 14px; opacity: 0.6; margin-bottom: 12px;">
+                    Subscribe to our newsletter for the latest courses and tech insights.
+                </p>
+                <input type="email" placeholder="Enter your email" />
+                <button><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <span>&copy; 2026 <strong>BTR Solution</strong>. All rights reserved.</span>
+            <div>
+                <a href="#">Privacy</a> &middot;
+                <a href="#">Terms</a> &middot;
+                <a href="#">Cookies</a> &middot;
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ---- Mobile Menu Toggle ----
+        const toggleBtn = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            // Toggle icon
+            const icon = toggleBtn.querySelector('i');
+            if (navLinks.classList.contains('open')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                toggleBtn.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+
+        // ---- Carousel Logic ----
+        const slides = document.querySelectorAll('.ceo-carousel .slide');
+        const dotsContainer = document.getElementById('carouselDots');
+        let currentIndex = 0;
+        let interval;
+
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+            dot.dataset.index = index;
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function goToSlide(index) {
+            // Remove active from all
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+
+            // Set active
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentIndex = index;
+        }
+
+        function nextSlide() {
+            const next = (currentIndex + 1) % slides.length;
+            goToSlide(next);
+        }
+
+        function prevSlide() {
+            const prev = (currentIndex - 1 + slides.length) % slides.length;
+            goToSlide(prev);
+        }
+
+        // Arrow buttons
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            clearInterval(interval);
+            nextSlide();
+            startAutoSlide();
+        });
+
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            clearInterval(interval);
+            prevSlide();
+            startAutoSlide();
+        });
+
+        // Auto-slide every 4 seconds
+        function startAutoSlide() {
+            interval = setInterval(nextSlide, 4000);
+        }
+
+        // Pause on hover
+        const carousel = document.getElementById('ceoCarousel');
+        carousel.addEventListener('mouseenter', () => clearInterval(interval));
+        carousel.addEventListener('mouseleave', startAutoSlide);
+
+        // Start
+        startAutoSlide();
+
+        // ---- Smooth scroll for anchor links (optional) ----
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRF Notes – Sheryians Coding School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --primary-light: #ede9fe;
+            --secondary: #7c3aed;
+            --bg: #f5f3ff;
+            --surface: #ffffff;
+            --text-body: #334155;
+            --text-dark: #1e1b4b;
+            --text-muted: #64748b;
+            --border: #c4b5fd;
+            --shadow: 0 8px 24px rgba(124, 58, 237, 0.08);
+            --radius: 16px;
+            --code-bg: #0f172a;
+            --code-text: #a5f3fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.7;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 265px;
+            height: 100vh;
+            background: var(--primary-dark);
+            overflow-y: auto;
+            z-index: 1000;
+            padding-bottom: 40px;
+            scrollbar-width: thin;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+        }
+        .sidebar-logo h2 {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .sidebar-logo p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11.5px;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-label {
+            padding: 12px 20px 4px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 7px 20px 7px 24px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+            font-weight: 450;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+            border-left-color: #a78bfa;
+        }
+
+        /* ---- MAIN ---- */
+        .main {
+            margin-left: 265px;
+            min-height: 100vh;
+        }
+
+        /* ---- COVER ---- */
+        .cover {
+            background: linear-gradient(145deg, #4c1d95 0%, #7c3aed 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -140px;
+            right: -140px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.035);
+        }
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.025);
+        }
+        .cover-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 6px 24px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cover h1 {
+            color: #fff;
+            font-size: clamp(40px, 6.5vw, 76px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .cover h1 span {
+            color: #a78bfa;
+        }
+        .cover-sub {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 17px;
+            max-width: 520px;
+            margin: 0 auto 40px;
+        }
+        .cover-note {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            max-width: 500px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14.5px;
+            line-height: 1.65;
+        }
+        .cover-footer {
+            position: absolute;
+            bottom: 28px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ---- CHAPTER HEADER ---- */
+        .chapter-header {
+            background: linear-gradient(145deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 56px 60px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-header::after {
+            content: attr(data-num);
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 110px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            pointer-events: none;
+            font-family: 'Segoe UI', monospace;
+        }
+        .chapter-num {
+            color: #a78bfa;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .chapter-header h1 {
+            color: #fff;
+            font-size: clamp(26px, 4vw, 42px);
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- CONTENT ---- */
+        .content {
+            padding: 48px 60px;
+            max-width: 920px;
+        }
+
+        /* ---- SECTION CARD ---- */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s;
+        }
+        .section:hover {
+            box-shadow: 0 10px 32px rgba(124, 58, 237, 0.10);
+        }
+        .section h2 {
+            color: var(--primary);
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .section h3 {
+            color: var(--secondary);
+            font-size: 15.5px;
+            font-weight: 700;
+            margin: 20px 0 8px;
+        }
+        .section p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .section ul {
+            padding-left: 0;
+            list-style: none;
+        }
+        .section ul li {
+            padding: 5px 0 5px 24px;
+            position: relative;
+            font-size: 15px;
+        }
+        .section ul li::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 14px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.5;
+        }
+
+        /* ---- CODE ---- */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin: 14px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 13.5px;
+            line-height: 1.8;
+        }
+        .code-block code {
+            color: var(--code-text);
+            white-space: pre;
+        }
+        .code-kw {
+            color: #f472b6;
+        }
+        .code-fn {
+            color: #34d399;
+        }
+        .code-str {
+            color: #fcd34d;
+        }
+        .code-cmt {
+            color: #6b7280;
+            font-style: italic;
+        }
+        .code-num {
+            color: #fb923c;
+        }
+
+        /* ---- TABLES ---- */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+        }
+        .styled-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .styled-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            background: #fff;
+        }
+        .styled-table tr:last-child td {
+            border-bottom: none;
+        }
+        .styled-table tr:nth-child(even) td {
+            background: var(--primary-light);
+        }
+        .styled-table td:first-child {
+            color: var(--secondary);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+        }
+
+        /* ---- CALLOUTS ---- */
+        .callout {
+            border-radius: 12px;
+            padding: 16px 22px;
+            margin: 14px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .callout-info {
+            background: var(--primary-light);
+            border-left: 5px solid var(--primary);
+        }
+        .callout-warn {
+            background: #fffbeb;
+            border-left: 5px solid #b45309;
+        }
+        .callout-success {
+            background: #ecfdf5;
+            border-left: 5px solid #0b7e4b;
+        }
+        .callout-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .callout-text {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
+        .callout-text strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+        }
+
+        /* ---- GRIDS ---- */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 14px 0;
+        }
+        .compare-card {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .compare-card h4 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .powers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+        .power-item {
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            border-left: 4px solid var(--primary);
+        }
+        .power-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+        .power-item span {
+            font-size: 13px;
+            color: var(--text-body);
+        }
+
+        /* ---- QUESTIONS ---- */
+        .questions {
+            background: var(--primary-light);
+            border-radius: 14px;
+            padding: 22px 26px;
+            margin: 18px 0;
+        }
+        .questions h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 15.5px;
+        }
+        .q-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+        }
+        .q-item:last-child {
+            margin-bottom: 0;
+        }
+        .q-num {
+            color: var(--secondary);
+            font-weight: 800;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .q-text {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .q-io {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .q-io span {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 3px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+        }
+        .q-io .q-in {
+            color: var(--primary);
+        }
+        .q-io .q-out {
+            color: #0b7e4b;
+        }
+
+        /* ---- CLOSING ---- */
+        .closing {
+            background: linear-gradient(145deg, #4c1d95, #7c3aed);
+            padding: 60px 80px;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+            }
+            .content {
+                padding: 24px 18px;
+            }
+            .chapter-header {
+                padding: 36px 22px 28px;
+            }
+            .compare-grid,
+            .powers-grid {
+                grid-template-columns: 1fr;
+            }
+            .cover {
+                padding: 60px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══ SIDEBAR ══ -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Sheryians Coding School</h2>
+            <p>Django REST Framework Notes</p>
+        </div>
+        <div class="nav-label">Start Here</div>
+        <a href="#cover">📘 Cover</a>
+        <div class="nav-label">Introduction</div>
+        <a href="#intro">🚀 What is DRF?</a>
+        <div class="nav-label">Chapters</div>
+        <a href="#ch01">01 — Installation &amp; Setup</a>
+        <a href="#ch02">02 — Serializers</a>
+        <a href="#ch03">03 — ModelSerializers</a>
+        <a href="#ch04">04 — APIView &amp; Function-Based Views</a>
+        <a href="#ch05">05 — Generic Views</a>
+        <a href="#ch06">06 — ViewSets &amp; Routers</a>
+        <a href="#ch07">07 — Authentication</a>
+        <a href="#ch08">08 — Permissions</a>
+        <a href="#ch09">09 — Pagination</a>
+        <a href="#ch10">10 — Filtering &amp; Searching</a>
+        <a href="#ch11">11 — Nested Relationships</a>
+        <a href="#ch12">12 — ViewSet Actions</a>
+        <a href="#ch13">13 — Throttling</a>
+        <a href="#ch14">14 — Testing APIs</a>
+        <a href="#ch15">15 — API Documentation</a>
+        <a href="#ch16">16 — Deployment</a>
+    </nav>
+
+    <div class="main">
+
+        <!-- ══ COVER ══ -->
+        <section id="cover" class="cover">
+            <div class="cover-badge">Sheryians Coding School</div>
+            <h1>Django REST<br><span>Framework Notes</span></h1>
+            <p class="cover-sub">From basic serializers to advanced API design — build powerful REST APIs with Django.</p>
+            <div class="cover-note">
+                🎬 <strong>Watch alongside!</strong> This book is designed to work hand-in-hand with the video series on <strong>Sheryians AI</strong> on YouTube. Every concept here has a matching video explanation.
+            </div>
+            <div class="cover-footer">written by Muhammad Nouman · Sheryians Coding School</div>
+        </section>
+
+        <!-- ══ INTRO ══ -->
+        <section id="intro">
+            <div class="chapter-header" data-num="00">
+                <div class="chapter-num">Introduction</div>
+                <h1>What is Django REST Framework?</h1>
+            </div>
+            <div class="content">
+
+                <div class="section">
+                    <h2>🚀 DRF in Simple Words</h2>
+                    <p>Django REST Framework (DRF) is a powerful and flexible toolkit for building <strong>Web APIs</strong> in Django. It's the most popular framework for creating RESTful APIs in the Python ecosystem.</p>
+                    <p>DRF handles all the complexity of API development — serialization, authentication, permissions, pagination, and more — so you can focus on your business logic.</p>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📱 API-First Development</h4>
+                            <p>Build APIs that power mobile apps, single-page applications (React, Vue, Angular), and third-party integrations.</p>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🔧 Built on Django</h4>
+                            <p>Leverages all of Django's strengths — ORM, admin panel, security, and ecosystem — while adding API-specific features.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🏗️ DRF Architecture</h2>
+                    <p>DRF follows the same MVT pattern as Django but adds an additional layer for API development.</p>
+
+                    <div style="background:linear-gradient(145deg,#ede9fe,#f5f3ff);border:1px solid var(--border);border-radius:16px;padding:26px 30px;margin:16px 0;">
+                        <h3 style="color:var(--secondary);margin-bottom:16px;font-size:16px;">📐 DRF Components</h3>
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin:14px 0;">
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+                                <div style="font-size:28px;margin-bottom:8px;">📦</div>
+                                <h4 style="color:var(--primary);font-size:13px;font-weight:700;">Serializers</h4>
+                                <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">Convert complex data to/from JSON</p>
+                            </div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+                                <div style="font-size:28px;margin-bottom:8px;">👁️</div>
+                                <h4 style="color:var(--primary);font-size:13px;font-weight:700;">Views</h4>
+                                <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">Handle requests and return responses</p>
+                            </div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+                                <div style="font-size:28px;margin-bottom:8px;">🔐</div>
+                                <h4 style="color:var(--primary);font-size:13px;font-weight:700;">Auth &amp; Perms</h4>
+                                <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">Control access to your API endpoints</p>
+                            </div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+                                <div style="font-size:28px;margin-bottom:8px;">📄</div>
+                                <h4 style="color:var(--primary);font-size:13px;font-weight:700;">Routers</h4>
+                                <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">Auto-generate URL patterns for ViewSets</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background:linear-gradient(145deg,#eef2ff,#f5f3ff);border:1px solid var(--border);border-radius:16px;padding:26px 30px;margin:16px 0;">
+                        <h3 style="color:var(--secondary);margin-bottom:16px;font-size:16px;">🔄 API Request-Response Cycle</h3>
+                        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0;">
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">📱 Client Request</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">🔀 Router</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">👁️ View/ViewSet</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">📦 Serializer</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">📊 Model</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:var(--primary);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:#fff;">✅ JSON Response</div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info">
+                        <span class="callout-icon">🚀</span>
+                        <div class="callout-text"><strong>Why DRF?</strong> DRF is the industry standard for building APIs in Django. It's used by thousands of companies and is constantly maintained with regular updates.</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>⚡ DRF vs Other API Frameworks</h2>
+                    <table class="styled-table">
+                        <tr><th>Feature</th><th>DRF</th><th>Flask-RESTful</th><th>FastAPI</th></tr>
+                        <tr><td>Framework</td><td>Django</td><td>Flask</td><td>FastAPI</td></tr>
+                        <tr><td>Performance</td><td>Good</td><td>Good</td><td>⚡ Excellent</td></tr>
+                        <tr><td>Built-in Admin</td><td>✅ Yes</td><td>❌ No</td><td>❌ No</td></tr>
+                        <tr><td>ORM Integration</td><td>✅ Django ORM</td><td>⚠️ SQLAlchemy</td><td>⚠️ SQLAlchemy</td></tr>
+                        <tr><td>Documentation</td><td>✅ Browsable API</td><td>❌ No</td><td>✅ OpenAPI</td></tr>
+                        <tr><td>Authentication</td><td>✅ Built-in</td><td>⚠️ Extensions</td><td>⚠️ Extensions</td></tr>
+                        <tr><td>Best For</td><td>Django projects</td><td>Lightweight APIs</td><td>High-performance APIs</td></tr>
+                    </table>
+                </div>
+
+                <div class="callout callout-success" style="margin:0;">
+                    <span class="callout-icon">🚀</span>
+                    <div class="callout-text"><strong>You're all set!</strong> Now that you know what DRF is and how it works, let's get it installed and build your first API. Head to Chapter 01!</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══ CH 01 ══ -->
+        <section id="ch01">
+            <div class="chapter-header" data-num="01"><div class="chapter-num">Chapter 01</div><h1>Installation &amp; Setup</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Installing DRF</h2>
+                    <div class="code-block"><code><span class="code-cmt"># Install Django REST Framework</span>
+        pip install djangorestframework
+
+        <span class="code-cmt"># For browsable API styling</span>
+        pip install markdown django-filter
+
+        <span class="code-cmt"># settings.py — add to INSTALLED_APPS</span>
+        INSTALLED_APPS = [
+            ...
+            <span class="code-str">'rest_framework'</span>,
+            <span class="code-str">'rest_framework.authtoken'</span>,  <span class="code-cmt"># For token auth</span>
+        ]</code></div>
+                </div>
+                <div class="section">
+                    <h2>Basic Configuration</h2>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py — DRF settings</span>
+        REST_FRAMEWORK = {
+            <span class="code-str">'DEFAULT_AUTHENTICATION_CLASSES'</span>: [
+                <span class="code-str">'rest_framework.authentication.TokenAuthentication'</span>,
+                <span class="code-str">'rest_framework.authentication.SessionAuthentication'</span>,
+            ],
+            <span class="code-str">'DEFAULT_PERMISSION_CLASSES'</span>: [
+                <span class="code-str">'rest_framework.permissions.IsAuthenticated'</span>,
+            ],
+            <span class="code-str">'DEFAULT_PAGINATION_CLASS'</span>: <span class="code-str">'rest_framework.pagination.PageNumberPagination'</span>,
+            <span class="code-str">'PAGE_SIZE'</span>: <span class="code-num">10</span>,
+        }</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 02 ══ -->
+        <section id="ch02">
+            <div class="chapter-header" data-num="02"><div class="chapter-num">Chapter 02</div><h1>Serializers</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>What are Serializers?</h2>
+                    <p>Serializers convert complex data types (like Django models) into Python data types (JSON, XML) and vice versa. They also handle validation.</p>
+                    <div class="code-block"><code><span class="code-cmt"># serializers.py</span>
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> serializers
+
+        <span class="code-kw">class</span> CommentSerializer(serializers.Serializer):
+            id = serializers.IntegerField(read_only=<span class="code-kw">True</span>)
+            content = serializers.CharField(max_length=<span class="code-num">500</span>)
+            author = serializers.CharField(max_length=<span class="code-num">100</span>)
+            created_at = serializers.DateTimeField(read_only=<span class="code-kw">True</span>)
+
+            <span class="code-kw">def</span> <span class="code-fn">create</span>(self, validated_data):
+                <span class="code-kw">return</span> Comment.objects.create(**validated_data)
+
+            <span class="code-kw">def</span> <span class="code-fn">update</span>(self, instance, validated_data):
+                instance.content = validated_data.get(<span class="code-str">'content'</span>, instance.content)
+                instance.author = validated_data.get(<span class="code-str">'author'</span>, instance.author)
+                instance.save()
+                <span class="code-kw">return</span> instance</code></div>
+                </div>
+                <div class="section">
+                    <h2>Using Serializers</h2>
+                    <div class="code-block"><code><span class="code-cmt"># Creating a serializer instance</span>
+        comment = Comment.objects.get(id=<span class="code-num">1</span>)
+        serializer = CommentSerializer(comment)
+        serializer.data  <span class="code-cmt"># {'id': 1, 'content': '...', ...}</span>
+
+        <span class="code-cmt"># Serializing querysets (many=True)</span>
+        comments = Comment.objects.<span class="code-fn">all</span>()
+        serializer = CommentSerializer(comments, many=<span class="code-kw">True</span>)
+        serializer.data  <span class="code-cmt"># [{'id': 1, ...}, {'id': 2, ...}]</span>
+
+        <span class="code-cmt"># Deserialization (validation + save)</span>
+        data = {<span class="code-str">'content'</span>: <span class="code-str">'New comment'</span>, <span class="code-str">'author'</span>: <span class="code-str">'Akarsh'</span>}
+        serializer = CommentSerializer(data=data)
+        <span class="code-kw">if</span> serializer.is_valid():
+            serializer.save()  <span class="code-cmt"># Calls create() or update()</span></code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 03 ══ -->
+        <section id="ch03">
+            <div class="chapter-header" data-num="03"><div class="chapter-num">Chapter 03</div><h1>ModelSerializers</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>The Power of ModelSerializers</h2>
+                    <p><code>ModelSerializer</code> automatically generates fields and <code>create()</code>/<code>update()</code> methods based on your model. It's the most common way to serialize Django models.</p>
+                    <div class="code-block"><code><span class="code-cmt"># serializers.py</span>
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> serializers
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+
+        <span class="code-kw">class</span> BlogPostSerializer(serializers.ModelSerializer):
+            <span class="code-kw">class</span> Meta:
+                model = BlogPost
+                fields = [<span class="code-str">'id'</span>, <span class="code-str">'title'</span>, <span class="code-str">'content'</span>, <span class="code-str">'author'</span>, <span class="code-str">'published_at'</span>]
+                read_only_fields = [<span class="code-str">'id'</span>, <span class="code-str">'published_at'</span>]
+
+            <span class="code-cmt"># Custom validation</span>
+            <span class="code-kw">def</span> <span class="code-fn">validate_title</span>(self, value):
+                <span class="code-kw">if</span> len(value) < <span class="code-num">5</span>:
+                    <span class="code-kw">raise</span> serializers.ValidationError(<span class="code-str">"Title must be at least 5 characters"</span>)
+                <span class="code-kw">return</span> value
+
+        <span class="code-cmt"># Using __all__ to include all fields</span>
+        <span class="code-kw">class</span> Meta:
+            model = BlogPost
+            fields = <span class="code-str">'__all__'</span>
+
+        <span class="code-cmt"># Excluding specific fields</span>
+        <span class="code-kw">class</span> Meta:
+            model = BlogPost
+            exclude = [<span class="code-str">'draft'</span>]</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 04 ══ -->
+        <section id="ch04">
+            <div class="chapter-header" data-num="04"><div class="chapter-num">Chapter 04</div><h1>APIView &amp; Function-Based Views</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Function-Based Views (FBV)</h2>
+                    <p>Simple views using the <code>@api_view</code> decorator.</p>
+                    <div class="code-block"><code><span class="code-cmt"># views.py</span>
+        <span class="code-kw">from</span> rest_framework.decorators <span class="code-kw">import</span> api_view
+        <span class="code-kw">from</span> rest_framework.response <span class="code-kw">import</span> Response
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> status
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+        <span class="code-kw">from</span> .serializers <span class="code-kw">import</span> BlogPostSerializer
+
+        <span class="code-fn">@api_view</span>([<span class="code-str">'GET'</span>, <span class="code-str">'POST'</span>])
+        <span class="code-kw">def</span> <span class="code-fn">post_list</span>(request):
+            <span class="code-kw">if</span> request.method == <span class="code-str">'GET'</span>:
+                posts = BlogPost.objects.<span class="code-fn">all</span>()
+                serializer = BlogPostSerializer(posts, many=<span class="code-kw">True</span>)
+                <span class="code-kw">return</span> Response(serializer.data)
+
+            <span class="code-kw">elif</span> request.method == <span class="code-str">'POST'</span>:
+                serializer = BlogPostSerializer(data=request.data)
+                <span class="code-kw">if</span> serializer.is_valid():
+                    serializer.save()
+                    <span class="code-kw">return</span> Response(serializer.data, status=status.HTTP_201_CREATED)
+                <span class="code-kw">return</span> Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        <span class="code-fn">@api_view</span>([<span class="code-str">'GET'</span>, <span class="code-str">'PUT'</span>, <span class="code-str">'DELETE'</span>])
+        <span class="code-kw">def</span> <span class="code-fn">post_detail</span>(request, pk):
+            <span class="code-kw">try</span>:
+                post = BlogPost.objects.get(pk=pk)
+            <span class="code-kw">except</span> BlogPost.DoesNotExist:
+                <span class="code-kw">return</span> Response(status=status.HTTP_404_NOT_FOUND)
+
+            <span class="code-kw">if</span> request.method == <span class="code-str">'GET'</span>:
+                serializer = BlogPostSerializer(post)
+                <span class="code-kw">return</span> Response(serializer.data)
+
+            <span class="code-kw">elif</span> request.method == <span class="code-str">'PUT'</span>:
+                serializer = BlogPostSerializer(post, data=request.data)
+                <span class="code-kw">if</span> serializer.is_valid():
+                    serializer.save()
+                    <span class="code-kw">return</span> Response(serializer.data)
+                <span class="code-kw">return</span> Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            <span class="code-kw">elif</span> request.method == <span class="code-str">'DELETE'</span>:
+                post.delete()
+                <span class="code-kw">return</span> Response(status=status.HTTP_204_NO_CONTENT)</code></div>
+                </div>
+                <div class="section">
+                    <h2>Class-Based Views with APIView</h2>
+                    <div class="code-block"><code><span class="code-kw">from</span> rest_framework.views <span class="code-kw">import</span> APIView
+        <span class="code-kw">from</span> rest_framework.response <span class="code-kw">import</span> Response
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> status
+
+        <span class="code-kw">class</span> PostListAPIView(APIView):
+            <span class="code-kw">def</span> <span class="code-fn">get</span>(self, request):
+                posts = BlogPost.objects.<span class="code-fn">all</span>()
+                serializer = BlogPostSerializer(posts, many=<span class="code-kw">True</span>)
+                <span class="code-kw">return</span> Response(serializer.data)
+
+            <span class="code-kw">def</span> <span class="code-fn">post</span>(self, request):
+                serializer = BlogPostSerializer(data=request.data)
+                <span class="code-kw">if</span> serializer.is_valid():
+                    serializer.save()
+                    <span class="code-kw">return</span> Response(serializer.data, status=status.HTTP_201_CREATED)
+                <span class="code-kw">return</span> Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 05 ══ -->
+        <section id="ch05">
+            <div class="chapter-header" data-num="05"><div class="chapter-num">Chapter 05</div><h1>Generic Views</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Built-in Generic Views</h2>
+                    <p>DRF provides generic views that implement common CRUD patterns with minimal code.</p>
+                    <div class="code-block"><code><span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> generics
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+        <span class="code-kw">from</span> .serializers <span class="code-kw">import</span> BlogPostSerializer
+
+        <span class="code-cmt"># List and Create</span>
+        <span class="code-kw">class</span> PostListCreateView(generics.ListCreateAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+
+        <span class="code-cmt"># Retrieve, Update, Delete</span>
+        <span class="code-kw">class</span> PostRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer</code></div>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📋 Common Generic Views</h4>
+                            <ul>
+                                <li><strong>ListAPIView</strong> — GET all</li>
+                                <li><strong>CreateAPIView</strong> — POST new</li>
+                                <li><strong>RetrieveAPIView</strong> — GET detail</li>
+                                <li><strong>UpdateAPIView</strong> — PUT/PATCH</li>
+                                <li><strong>DestroyAPIView</strong> — DELETE</li>
+                                <li><strong>ListCreateAPIView</strong> — GET + POST</li>
+                                <li><strong>RetrieveUpdateAPIView</strong> — GET + PUT</li>
+                                <li><strong>RetrieveDestroyAPIView</strong> — GET + DELETE</li>
+                                <li><strong>RetrieveUpdateDestroyAPIView</strong> — GET + PUT + DELETE</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🔧 Customizing Generic Views</h4>
+                            <div class="code-block"><code><span class="code-kw">class</span> PostListCreateView(generics.ListCreateAPIView):
+                    queryset = BlogPost.objects.<span class="code-fn">all</span>()
+                    serializer_class = BlogPostSerializer
+                    permission_classes = [IsAuthenticated]
+
+                    <span class="code-kw">def</span> <span class="code-fn">perform_create</span>(self, serializer):
+                        serializer.save(author=self.request.user)
+
+                    <span class="code-kw">def</span> <span class="code-fn">get_queryset</span>(self):
+                        <span class="code-kw">return</span> self.queryset.filter(author=self.request.user)</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 06 ══ -->
+        <section id="ch06">
+            <div class="chapter-header" data-num="06"><div class="chapter-num">Chapter 06</div><h1>ViewSets &amp; Routers</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>ViewSets</h2>
+                    <p>ViewSets group all actions (list, create, retrieve, update, delete) into a single class.</p>
+                    <div class="code-block"><code><span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> viewsets
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+        <span class="code-kw">from</span> .serializers <span class="code-kw">import</span> BlogPostSerializer
+
+        <span class="code-cmt"># Full CRUD ViewSet</span>
+        <span class="code-kw">class</span> PostViewSet(viewsets.ModelViewSet):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+
+        <span class="code-cmt"># Read-only ViewSet (list + retrieve)</span>
+        <span class="code-kw">class</span> PostReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer</code></div>
+                </div>
+                <div class="section">
+                    <h2>Routers</h2>
+                    <p>Routers automatically generate URL patterns for ViewSets.</p>
+                    <div class="code-block"><code><span class="code-cmt"># urls.py</span>
+        <span class="code-kw">from</span> django.urls <span class="code-kw">import</span> path, include
+        <span class="code-kw">from</span> rest_framework.routers <span class="code-kw">import</span> DefaultRouter
+        <span class="code-kw">from</span> .views <span class="code-kw">import</span> PostViewSet
+
+        router = DefaultRouter()
+        router.register(<span class="code-str">r'posts'</span>, PostViewSet, basename=<span class="code-str">'post'</span>)
+
+        urlpatterns = [
+            path(<span class="code-str">''</span>, include(router.urls)),
+        ]
+
+        <span class="code-cmt"># Generated URLs:</span>
+        <span class="code-cmt"># GET /posts/          → list</span>
+        <span class="code-cmt"># POST /posts/         → create</span>
+        <span class="code-cmt"># GET /posts/{id}/     → retrieve</span>
+        <span class="code-cmt"># PUT /posts/{id}/     → update</span>
+        <span class="code-cmt"># PATCH /posts/{id}/   → partial_update</span>
+        <span class="code-cmt"># DELETE /posts/{id}/  → destroy</span></code></div>
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Best Practice:</strong> Use ViewSets + Routers for standard CRUD APIs. Use APIView/GenericViews for custom endpoints that don't fit the CRUD pattern.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 07 ══ -->
+        <section id="ch07">
+            <div class="chapter-header" data-num="07"><div class="chapter-num">Chapter 07</div><h1>Authentication</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Authentication Classes</h2>
+                    <p>DRF provides several authentication methods out of the box.</p>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py</span>
+        REST_FRAMEWORK = {
+            <span class="code-str">'DEFAULT_AUTHENTICATION_CLASSES'</span>: [
+                <span class="code-str">'rest_framework.authentication.BasicAuthentication'</span>,
+                <span class="code-str">'rest_framework.authentication.SessionAuthentication'</span>,
+                <span class="code-str">'rest_framework.authentication.TokenAuthentication'</span>,
+                <span class="code-str">'rest_framework_simplejwt.authentication.JWTAuthentication'</span>,
+            ],
+        }</code></div>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>🔑 Token Authentication</h4>
+                            <div class="code-block"><code><span class="code-cmt"># Generate tokens</span>
+        <span class="code-kw">from</span> rest_framework.authtoken.models <span class="code-kw">import</span> Token
+
+        token = Token.objects.create(user=user)
+
+        <span class="code-cmt"># Use in requests</span>
+        <span class="code-cmt"># Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b</span></code></div>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🔐 JWT Authentication</h4>
+                            <div class="code-block"><code><span class="code-cmt"># Install: pip install djangorestframework-simplejwt</span>
+
+        <span class="code-kw">from</span> rest_framework_simplejwt.views <span class="code-kw">import</span> (
+            TokenObtainPairView,
+            TokenRefreshView,
+        )
+
+        urlpatterns = [
+            path(<span class="code-str">'api/token/'</span>, TokenObtainPairView.as_view()),
+            path(<span class="code-str">'api/token/refresh/'</span>, TokenRefreshView.as_view()),
+        ]</code></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Custom Authentication</h2>
+                    <div class="code-block"><code><span class="code-kw">from</span> rest_framework.authentication <span class="code-kw">import</span> BaseAuthentication
+        <span class="code-kw">from</span> rest_framework.exceptions <span class="code-kw">import</span> AuthenticationFailed
+
+        <span class="code-kw">class</span> CustomAuthentication(BaseAuthentication):
+            <span class="code-kw">def</span> <span class="code-fn">authenticate</span>(self, request):
+                auth_header = request.headers.get(<span class="code-str">'X-API-Key'</span>)
+                <span class="code-kw">if</span> <span class="code-kw">not</span> auth_header:
+                    <span class="code-kw">return</span> <span class="code-kw">None</span>
+
+                <span class="code-cmt"># Validate API key</span>
+                <span class="code-kw">try</span>:
+                    user = User.objects.get(api_key=auth_header)
+                    <span class="code-kw">return</span> (user, <span class="code-kw">None</span>)
+                <span class="code-kw">except</span> User.DoesNotExist:
+                    <span class="code-kw">raise</span> AuthenticationFailed(<span class="code-str">'Invalid API Key'</span>)</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 08 ══ -->
+        <section id="ch08">
+            <div class="chapter-header" data-num="08"><div class="chapter-num">Chapter 08</div><h1>Permissions</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Built-in Permission Classes</h2>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py</span>
+        REST_FRAMEWORK = {
+            <span class="code-str">'DEFAULT_PERMISSION_CLASSES'</span>: [
+                <span class="code-str">'rest_framework.permissions.IsAuthenticated'</span>,
+            ],
+        }
+
+        <span class="code-cmt"># views.py</span>
+        <span class="code-kw">from</span> rest_framework.permissions <span class="code-kw">import</span> AllowAny, IsAuthenticated, IsAdminUser
+
+        <span class="code-kw">class</span> PostListCreateView(generics.ListCreateAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+            permission_classes = [IsAuthenticated]</code></div>
+                    <table class="styled-table">
+                        <tr><th>Permission</th><th>Description</th></tr>
+                        <tr><td>AllowAny</td><td>No restrictions</td></tr>
+                        <tr><td>IsAuthenticated</td><td>User must be logged in</td></tr>
+                        <tr><td>IsAdminUser</td><td>User must be staff/admin</td></tr>
+                        <tr><td>IsAuthenticatedOrReadOnly</td><td>Read-only for unauthenticated</td></tr>
+                        <tr><td>DjangoModelPermissions</td><td>Permissions based on Django's model permissions</td></tr>
+                        <tr><td>DjangoObjectPermissions</td><td>Object-level permissions</td></tr>
+                    </table>
+                </div>
+                <div class="section">
+                    <h2>Custom Permissions</h2>
+                    <div class="code-block"><code><span class="code-kw">from</span> rest_framework.permissions <span class="code-kw">import</span> BasePermission
+
+        <span class="code-kw">class</span> IsOwner(BasePermission):
+            <span class="code-kw">def</span> <span class="code-fn">has_object_permission</span>(self, request, view, obj):
+                <span class="code-kw">return</span> obj.author == request.user
+
+        <span class="code-kw">class</span> IsOwnerOrReadOnly(BasePermission):
+            <span class="code-kw">def</span> <span class="code-fn">has_object_permission</span>(self, request, view, obj):
+                <span class="code-kw">if</span> request.method <span class="code-kw">in</span> permissions.SAFE_METHODS:
+                    <span class="code-kw">return</span> <span class="code-kw">True</span>
+                <span class="code-kw">return</span> obj.author == request.user
+
+        <span class="code-cmt"># Usage</span>
+        <span class="code-kw">class</span> PostDetailView(generics.RetrieveUpdateDestroyAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+            permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 09 ══ -->
+        <section id="ch09">
+            <div class="chapter-header" data-num="09"><div class="chapter-num">Chapter 09</div><h1>Pagination</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Pagination Classes</h2>
+                    <p>DRF provides several pagination styles to handle large datasets.</p>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py</span>
+        REST_FRAMEWORK = {
+            <span class="code-str">'DEFAULT_PAGINATION_CLASS'</span>: <span class="code-str">'rest_framework.pagination.PageNumberPagination'</span>,
+            <span class="code-str">'PAGE_SIZE'</span>: <span class="code-num">10</span>,
+        }
+
+        <span class="code-cmt"># Custom pagination</span>
+        <span class="code-kw">from</span> rest_framework.pagination <span class="code-kw">import</span> PageNumberPagination
+
+        <span class="code-kw">class</span> CustomPagination(PageNumberPagination):
+            page_size = <span class="code-num">10</span>
+            page_size_query_param = <span class="code-str">'page_size'</span>
+            max_page_size = <span class="code-num">100</span>
+            page_query_param = <span class="code-str">'page'</span></code></div>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📄 PageNumberPagination</h4>
+                            <div class="code-block"><code><span class="code-cmt"># GET /api/posts/?page=2&page_size=20</span>
+        {
+            <span class="code-str">"count"</span>: <span class="code-num">100</span>,
+            <span class="code-str">"next"</span>: <span class="code-str">"http://.../?page=3"</span>,
+            <span class="code-str">"previous"</span>: <span class="code-str">"http://.../?page=1"</span>,
+            <span class="code-str">"results"</span>: [...]
+        }</code></div>
+                        </div>
+                        <div class="compare-card">
+                            <h4>📊 LimitOffsetPagination</h4>
+                            <div class="code-block"><code><span class="code-cmt"># GET /api/posts/?limit=10&offset=20</span>
+        {
+            <span class="code-str">"count"</span>: <span class="code-num">100</span>,
+            <span class="code-str">"next"</span>: <span class="code-str">"http://.../?limit=10&offset=30"</span>,
+            <span class="code-str">"previous"</span>: <span class="code-str">"http://.../?limit=10&offset=10"</span>,
+            <span class="code-str">"results"</span>: [...]
+        }</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 10 ══ -->
+        <section id="ch10">
+            <div class="chapter-header" data-num="10"><div class="chapter-num">Chapter 10</div><h1>Filtering &amp; Searching</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Filtering with django-filter</h2>
+                    <p>django-filter provides powerful filtering capabilities for your API endpoints.</p>
+                    <div class="code-block"><code><span class="code-cmt"># Install: pip install django-filter</span>
+
+        <span class="code-cmt"># settings.py</span>
+        INSTALLED_APPS = [
+            ...
+            <span class="code-str">'django_filters'</span>,
+        ]
+
+        REST_FRAMEWORK = {
+            <span class="code-str">'DEFAULT_FILTER_BACKENDS'</span>: [
+                <span class="code-str">'django_filters.rest_framework.DjangoFilterBackend'</span>,
+            ],
+        }
+
+        <span class="code-cmt"># views.py</span>
+        <span class="code-kw">class</span> PostListView(generics.ListAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+            filterset_fields = [<span class="code-str">'author'</span>, <span class="code-str">'published_at'</span>]</code></div>
+                </div>
+                <div class="section">
+                    <h2>Custom FilterSet</h2>
+                    <div class="code-block"><code><span class="code-kw">import</span> django_filters
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+
+        <span class="code-kw">class</span> PostFilter(django_filters.FilterSet):
+            author = django_filters.CharFilter(lookup_expr=<span class="code-str">'icontains'</span>)
+            published_after = django_filters.DateFilter(field_name=<span class="code-str">'published_at'</span>, lookup_expr=<span class="code-str">'gte'</span>)
+            published_before = django_filters.DateFilter(field_name=<span class="code-str">'published_at'</span>, lookup_expr=<span class="code-str">'lte'</span>)
+
+            <span class="code-kw">class</span> Meta:
+                model = BlogPost
+                fields = [<span class="code-str">'author'</span>, <span class="code-str">'published_after'</span>, <span class="code-str">'published_before'</span>]</code></div>
+                </div>
+                <div class="section">
+                    <h2>Search &amp; Ordering</h2>
+                    <div class="code-block"><code><span class="code-kw">from</span> rest_framework.filters <span class="code-kw">import</span> SearchFilter, OrderingFilter
+
+        <span class="code-kw">class</span> PostListView(generics.ListAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+            filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+            filterset_fields = [<span class="code-str">'author'</span>]
+            search_fields = [<span class="code-str">'title'</span>, <span class="code-str">'content'</span>]
+            ordering_fields = [<span class="code-str">'published_at'</span>, <span class="code-str">'title'</span>]
+            ordering = [<span class="code-str">'-published_at'</span>]
+
+        <span class="code-cmt"># Usage:</span>
+        <span class="code-cmt"># GET /api/posts/?search=django&ordering=-title</span></code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 11 ══ -->
+        <section id="ch11">
+            <div class="chapter-header" data-num="11"><div class="chapter-num">Chapter 11</div><h1>Nested Relationships</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Serializing Related Fields</h2>
+                    <div class="code-block"><code><span class="code-kw">class</span> CommentSerializer(serializers.ModelSerializer):
+            <span class="code-kw">class</span> Meta:
+                model = Comment
+                fields = [<span class="code-str">'id'</span>, <span class="code-str">'text'</span>, <span class="code-str">'author'</span>, <span class="code-str">'created_at'</span>]
+
+        <span class="code-kw">class</span> PostSerializer(serializers.ModelSerializer):
+            comments = CommentSerializer(many=<span class="code-kw">True</span>, read_only=<span class="code-kw">True</span>)
+            author_name = serializers.CharField(source=<span class="code-str">'author.username'</span>, read_only=<span class="code-kw">True</span>)
+
+            <span class="code-kw">class</span> Meta:
+                model = BlogPost
+                fields = [<span class="code-str">'id'</span>, <span class="code-str">'title'</span>, <span class="code-str">'content'</span>, <span class="code-str">'author_name'</span>, <span class="code-str">'comments'</span>, <span class="code-str">'published_at'</span>]</code></div>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>🔗 PrimaryKeyRelatedField</h4>
+                            <div class="code-block"><code><span class="code-kw">class</span> PostSerializer(serializers.ModelSerializer):
+                    comments = serializers.PrimaryKeyRelatedField(many=<span class="code-kw">True</span>, read_only=<span class="code-kw">True</span>)
+
+                    <span class="code-cmt"># Returns: { "comments": [1, 2, 3] }</span></code></div>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🔄 HyperlinkedRelatedField</h4>
+                            <div class="code-block"><code><span class="code-kw">class</span> PostSerializer(serializers.ModelSerializer):
+                    comments = serializers.HyperlinkedRelatedField(
+                        view_name=<span class="code-str">'comment-detail'</span>,
+                        many=<span class="code-kw">True</span>,
+                        read_only=<span class="code-kw">True</span>
+                    )
+
+                    <span class="code-cmt"># Returns: { "comments": ["/api/comments/1/", "/api/comments/2/"] }</span></code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 12 ══ -->
+        <section id="ch12">
+            <div class="chapter-header" data-num="12"><div class="chapter-num">Chapter 12</div><h1>ViewSet Actions</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Custom Actions</h2>
+                    <p>You can add custom actions to your ViewSets using the <code>@action</code> decorator.</p>
+                    <div class="code-block"><code><span class="code-kw">from</span> rest_framework.decorators <span class="code-kw">import</span> action
+        <span class="code-kw">from</span> rest_framework.response <span class="code-kw">import</span> Response
+
+        <span class="code-kw">class</span> PostViewSet(viewsets.ModelViewSet):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+
+            <span class="code-fn">@action</span>(detail=<span class="code-kw">True</span>, methods=[<span class="code-str">'post'</span>])
+            <span class="code-kw">def</span> <span class="code-fn">add_comment</span>(self, request, pk=<span class="code-kw">None</span>):
+                post = self.get_object()
+                serializer = CommentSerializer(data=request.data)
+                <span class="code-kw">if</span> serializer.is_valid():
+                    serializer.save(post=post, author=request.user)
+                    <span class="code-kw">return</span> Response(serializer.data, status=status.HTTP_201_CREATED)
+                <span class="code-kw">return</span> Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            <span class="code-fn">@action</span>(detail=<span class="code-kw">False</span>, methods=[<span class="code-str">'get'</span>])
+            <span class="code-kw">def</span> <span class="code-fn">recent</span>(self, request):
+                recent_posts = self.get_queryset().order_by(<span class="code-str">'-published_at'</span>)[:<span class="code-num">5</span>]
+                serializer = self.get_serializer(recent_posts, many=<span class="code-kw">True</span>)
+                <span class="code-kw">return</span> Response(serializer.data)
+
+        <span class="code-cmt"># URL: /api/posts/{id}/add_comment/</span>
+        <span class="code-cmt"># URL: /api/posts/recent/</span></code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 13 ══ -->
+        <section id="ch13">
+            <div class="chapter-header" data-num="13"><div class="chapter-num">Chapter 13</div><h1>Throttling</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Rate Limiting</h2>
+                    <p>Throttling controls the rate at which clients can make requests to your API.</p>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py</span>
+        REST_FRAMEWORK = {
+            <span class="code-str">'DEFAULT_THROTTLE_CLASSES'</span>: [
+                <span class="code-str">'rest_framework.throttling.AnonRateThrottle'</span>,
+                <span class="code-str">'rest_framework.throttling.UserRateThrottle'</span>,
+            ],
+            <span class="code-str">'DEFAULT_THROTTLE_RATES'</span>: {
+                <span class="code-str">'anon'</span>: <span class="code-str">'100/day'</span>,
+                <span class="code-str">'user'</span>: <span class="code-str">'1000/day'</span>,
+                <span class="code-str">'post_create'</span>: <span class="code-str">'10/hour'</span>,
+            },
+        }</code></div>
+                    <div class="code-block"><code><span class="code-cmt"># Custom throttling on specific views</span>
+        <span class="code-kw">from</span> rest_framework.throttling <span class="code-kw">import</span> ScopedRateThrottle
+
+        <span class="code-kw">class</span> PostCreateView(generics.CreateAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+            throttle_classes = [ScopedRateThrottle]
+            throttle_scope = <span class="code-str">'post_create'</span></code></div>
+                    <div class="code-block"><code><span class="code-cmt"># Custom throttle class</span>
+        <span class="code-kw">from</span> rest_framework.throttling <span class="code-kw">import</span> BaseThrottle
+
+        <span class="code-kw">class</span> CustomThrottle(BaseThrottle):
+            <span class="code-kw">def</span> <span class="code-fn">allow_request</span>(self, request, view):
+                ip = request.META.get(<span class="code-str">'REMOTE_ADDR'</span>)
+                <span class="code-cmt"># Custom logic to limit requests</span>
+                <span class="code-kw">return</span> <span class="code-kw">True</span>  <span class="code-cmt"># or False</span>
+
+            <span class="code-kw">def</span> <span class="code-fn">wait</span>(self):
+                <span class="code-kw">return</span> <span class="code-num">60</span>  <span class="code-cmt"># seconds to wait</span></code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 14 ══ -->
+        <section id="ch14">
+            <div class="chapter-header" data-num="14"><div class="chapter-num">Chapter 14</div><h1>Testing APIs</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Testing with APIClient</h2>
+                    <p>DRF provides a test client specifically for testing APIs.</p>
+                    <div class="code-block"><code><span class="code-cmt"># tests.py</span>
+        <span class="code-kw">from</span> rest_framework.test <span class="code-kw">import</span> APITestCase
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> status
+        <span class="code-kw">from</span> django.contrib.auth.models <span class="code-kw">import</span> User
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+
+        <span class="code-kw">class</span> PostAPITestCase(APITestCase):
+            <span class="code-kw">def</span> <span class="code-fn">setUp</span>(self):
+                self.user = User.objects.create_user(username=<span class="code-str">'testuser'</span>, password=<span class="code-str">'testpass'</span>)
+                self.client.force_authenticate(user=self.user)
+
+            <span class="code-kw">def</span> <span class="code-fn">test_create_post</span>(self):
+                url = <span class="code-str">'/api/posts/'</span>
+                data = {<span class="code-str">'title'</span>: <span class="code-str">'Test Post'</span>, <span class="code-str">'content'</span>: <span class="code-str">'Test content'</span>}
+                response = self.client.post(url, data, format=<span class="code-str">'json'</span>)
+                self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+                self.assertEqual(BlogPost.objects.count(), <span class="code-num">1</span>)
+                self.assertEqual(BlogPost.objects.get().title, <span class="code-str">'Test Post'</span>)
+
+            <span class="code-kw">def</span> <span class="code-fn">test_list_posts</span>(self):
+                BlogPost.objects.create(title=<span class="code-str">'Post 1'</span>, content=<span class="code-str">'Content 1'</span>, author=self.user)
+                BlogPost.objects.create(title=<span class="code-str">'Post 2'</span>, content=<span class="code-str">'Content 2'</span>, author=self.user)
+                response = self.client.get(<span class="code-str">'/api/posts/'</span>)
+                self.assertEqual(response.status_code, status.HTTP_200_OK)
+                self.assertEqual(len(response.data[<span class="code-str">'results'</span>]), <span class="code-num">2</span>)
+
+            <span class="code-kw">def</span> <span class="code-fn">test_update_post</span>(self):
+                post = BlogPost.objects.create(title=<span class="code-str">'Old Title'</span>, content=<span class="code-str">'Old content'</span>, author=self.user)
+                url = <span class="code-str">f'/api/posts/{post.id}/'</span>
+                data = {<span class="code-str">'title'</span>: <span class="code-str">'Updated Title'</span>, <span class="code-str">'content'</span>: <span class="code-str">'Updated content'</span>}
+                response = self.client.put(url, data, format=<span class="code-str">'json'</span>)
+                self.assertEqual(response.status_code, status.HTTP_200_OK)
+                post.refresh_from_db()
+                self.assertEqual(post.title, <span class="code-str">'Updated Title'</span>)</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 15 ══ -->
+        <section id="ch15">
+            <div class="chapter-header" data-num="15"><div class="chapter-num">Chapter 15</div><h1>API Documentation</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Browsable API</h2>
+                    <p>DRF provides a browsable HTML interface for your API, which is great for development and debugging.</p>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py</span>
+        REST_FRAMEWORK = {
+            <span class="code-str">'DEFAULT_RENDERER_CLASSES'</span>: [
+                <span class="code-str">'rest_framework.renderers.JSONRenderer'</span>,
+                <span class="code-str">'rest_framework.renderers.BrowsableAPIRenderer'</span>,  <span class="code-cmt"># Enable browsable API</span>
+            ],
+        }</code></div>
+                </div>
+                <div class="section">
+                    <h2>Auto-Generated Documentation</h2>
+                    <p>Install <code>drf-yasg</code> or <code>drf-spectacular</code> for OpenAPI/Swagger documentation.</p>
+                    <div class="code-block"><code><span class="code-cmt"># Install: pip install drf-yasg</span>
+
+        <span class="code-kw">from</span> drf_yasg.views <span class="code-kw">import</span> get_schema_view
+        <span class="code-kw">from</span> drf_yasg <span class="code-kw">import</span> openapi
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> permissions
+
+        schema_view = get_schema_view(
+            openapi.Info(
+                title=<span class="code-str">"Blog API"</span>,
+                default_version=<span class="code-str">'v1'</span>,
+                description=<span class="code-str">"API for blog posts and comments"</span>,
+                terms_of_service=<span class="code-str">"https://www.google.com/policies/terms/"</span>,
+                contact=openapi.Contact(email=<span class="code-str">"contact@blog.com"</span>),
+                license=openapi.License(name=<span class="code-str">"BSD License"</span>),
+            ),
+            public=<span class="code-kw">True</span>,
+            permission_classes=[permissions.AllowAny],
+        )
+
+        urlpatterns = [
+            path(<span class="code-str">'swagger/'</span>, schema_view.with_ui(<span class="code-str">'swagger'</span>, cache_timeout=<span class="code-num">0</span>), name=<span class="code-str">'schema-swagger-ui'</span>),
+            path(<span class="code-str">'redoc/'</span>, schema_view.with_ui(<span class="code-str">'redoc'</span>, cache_timeout=<span class="code-num">0</span>), name=<span class="code-str">'schema-redoc'</span>),
+        ]</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 16 ══ -->
+        <section id="ch16">
+            <div class="chapter-header" data-num="16"><div class="chapter-num">Chapter 16</div><h1>Deployment</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>API Deployment Checklist</h2>
+                    <div class="callout callout-warn"><span class="callout-icon">⚠️</span><div class="callout-text"><strong>Critical Settings:</strong>
+                        <br />• <code>DEBUG = False</code>
+                        <br />• <code>ALLOWED_HOSTS = ['api.yourdomain.com']</code>
+                        <br />• Use environment variables for sensitive data
+                        <br />• Enable HTTPS
+                        <br />• Set up CORS properly</div></div>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py — Production settings</span>
+        <span class="code-kw">import</span> os
+        <span class="code-kw">from</span> pathlib <span class="code-kw">import</span> Path
+
+        SECRET_KEY = os.getenv(<span class="code-str">'DJANGO_SECRET_KEY'</span>)
+        DEBUG = os.getenv(<span class="code-str">'DEBUG'</span>, <span class="code-str">'False'</span>) == <span class="code-str">'True'</span>
+        ALLOWED_HOSTS = os.getenv(<span class="code-str">'ALLOWED_HOSTS'</span>, <span class="code-str">'localhost'</span>).split(<span class="code-str">','</span>)
+
+        <span class="code-cmt"># CORS settings</span>
+        <span class="code-cmt"># Install: pip install django-cors-headers</span>
+        INSTALLED_APPS += [<span class="code-str">'corsheaders'</span>]
+        MIDDLEWARE = [<span class="code-str">'corsheaders.middleware.CorsMiddleware'</span>] + MIDDLEWARE
+        CORS_ALLOWED_ORIGINS = os.getenv(<span class="code-str">'CORS_ALLOWED_ORIGINS'</span>, <span class="code-str">''</span>).split(<span class="code-str">','</span>)</code></div>
+                    <div class="code-block"><code><span class="code-cmt"># Using Gunicorn for API deployment</span>
+        <span class="code-cmt"># Install: pip install gunicorn</span>
+
+        <span class="code-cmt"># gunicorn.conf.py</span>
+        bind = <span class="code-str">'0.0.0.0:8000'</span>
+        workers = <span class="code-num">4</span>
+        timeout = <span class="code-num">120</span>
+        max_requests = <span class="code-num">1000</span>
+
+        <span class="code-cmt"># Run</span>
+        gunicorn --config gunicorn.conf.py myproject.wsgi:application</code></div>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>🚀 Deployment Options</h4>
+                            <ul>
+                                <li>Heroku</li>
+                                <li>PythonAnywhere</li>
+                                <li>DigitalOcean</li>
+                                <li>AWS EC2 / Lambda</li>
+                                <li>Google Cloud Run</li>
+                                <li>Railway</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🔧 Essential Tools</h4>
+                            <ul>
+                                <li>Gunicorn / uWSGI</li>
+                                <li>Nginx</li>
+                                <li>PostgreSQL</li>
+                                <li>Redis (caching)</li>
+                                <li>Celery (async tasks)</li>
+                                <li>Docker</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CLOSING ══ -->
+        <div class="closing">
+            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;">A message from the creator</p>
+            <p style="font-size:18px;line-height:1.85;max-width:620px;margin:0 auto;color:rgba(255,255,255,0.9);">
+                "We'll be learning all of this and so much more on this channel. I, <strong>Akarsh Vyas</strong>, as a creator and representative of Sheryians AI, would like to sincerely thank each and every one of you who stayed with us till the end. You are truly precious to us. Much love! 💙"
+            </p>
+            <p style="margin-top:36px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);">Sheryians Coding School</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section[id]");
+            const links = document.querySelectorAll(".sidebar a");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(a => a.classList.remove("active"));
+                        const link = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+                        if (link) link.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.25 });
+            sections.forEach(s => observer.observe(s));
+        });
+    </script>
+
+</body>
+</html>

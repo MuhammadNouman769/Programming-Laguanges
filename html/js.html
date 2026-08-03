@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Complete Notes – Sheryians Coding School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --primary-light: #fef3c7;
+            --secondary: #f59e0b;
+            --bg: #fffbeb;
+            --surface: #ffffff;
+            --text-body: #334155;
+            --text-dark: #1e1b4b;
+            --text-muted: #64748b;
+            --border: #fcd34d;
+            --shadow: 0 8px 24px rgba(245, 158, 11, 0.08);
+            --radius: 16px;
+            --code-bg: #0f172a;
+            --code-text: #a5f3fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.7;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 265px;
+            height: 100vh;
+            background: var(--primary-dark);
+            overflow-y: auto;
+            z-index: 1000;
+            padding-bottom: 40px;
+            scrollbar-width: thin;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+        }
+        .sidebar-logo h2 {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .sidebar-logo p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11.5px;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-label {
+            padding: 12px 20px 4px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 7px 20px 7px 24px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+            font-weight: 450;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+            border-left-color: #fbbf24;
+        }
+
+        /* ---- MAIN ---- */
+        .main {
+            margin-left: 265px;
+            min-height: 100vh;
+        }
+
+        /* ---- COVER ---- */
+        .cover {
+            background: linear-gradient(145deg, #d97706 0%, #f59e0b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -140px;
+            right: -140px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.035);
+        }
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.025);
+        }
+        .cover-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 6px 24px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cover h1 {
+            color: #fff;
+            font-size: clamp(40px, 6.5vw, 76px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .cover h1 span {
+            color: #fcd34d;
+        }
+        .cover-sub {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 17px;
+            max-width: 520px;
+            margin: 0 auto 40px;
+        }
+        .cover-note {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            max-width: 500px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14.5px;
+            line-height: 1.65;
+        }
+        .cover-footer {
+            position: absolute;
+            bottom: 28px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ---- CHAPTER HEADER ---- */
+        .chapter-header {
+            background: linear-gradient(145deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 56px 60px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-header::after {
+            content: attr(data-num);
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 110px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            pointer-events: none;
+            font-family: 'Segoe UI', monospace;
+        }
+        .chapter-num {
+            color: #fcd34d;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .chapter-header h1 {
+            color: #fff;
+            font-size: clamp(26px, 4vw, 42px);
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- CONTENT ---- */
+        .content {
+            padding: 48px 60px;
+            max-width: 1020px;
+        }
+
+        /* ---- SECTION CARD ---- */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s;
+        }
+        .section:hover {
+            box-shadow: 0 10px 32px rgba(245, 158, 11, 0.10);
+        }
+        .section h2 {
+            color: var(--primary);
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .section h3 {
+            color: var(--secondary);
+            font-size: 15.5px;
+            font-weight: 700;
+            margin: 20px 0 8px;
+        }
+        .section h4 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            margin: 16px 0 6px;
+        }
+        .section p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .section ul,
+        .section ol {
+            padding-left: 24px;
+            margin-bottom: 10px;
+        }
+        .section ul li,
+        .section ol li {
+            padding: 3px 0;
+            font-size: 15px;
+        }
+        .section ul li::marker {
+            color: var(--primary);
+        }
+
+        /* ---- CODE ---- */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin: 14px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 13.5px;
+            line-height: 1.8;
+        }
+        .code-block code {
+            color: var(--code-text);
+            white-space: pre;
+        }
+        .code-kw {
+            color: #f472b6;
+        }
+        .code-fn {
+            color: #34d399;
+        }
+        .code-str {
+            color: #fcd34d;
+        }
+        .code-cmt {
+            color: #6b7280;
+            font-style: italic;
+        }
+        .code-num {
+            color: #fb923c;
+        }
+        .code-tag {
+            color: #f87171;
+        }
+        .code-attr {
+            color: #60a5fa;
+        }
+        .code-value {
+            color: #fcd34d;
+        }
+        .code-boolean {
+            color: #60a5fa;
+        }
+        .code-var {
+            color: #34d399;
+        }
+
+        /* ---- TABLES ---- */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+        }
+        .styled-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .styled-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            background: #fff;
+        }
+        .styled-table tr:last-child td {
+            border-bottom: none;
+        }
+        .styled-table tr:nth-child(even) td {
+            background: var(--primary-light);
+        }
+        .styled-table td:first-child {
+            color: var(--secondary);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+        }
+
+        /* ---- CALLOUTS ---- */
+        .callout {
+            border-radius: 12px;
+            padding: 16px 22px;
+            margin: 14px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .callout-info {
+            background: var(--primary-light);
+            border-left: 5px solid var(--primary);
+        }
+        .callout-warn {
+            background: #fffbeb;
+            border-left: 5px solid #b45309;
+        }
+        .callout-success {
+            background: #ecfdf5;
+            border-left: 5px solid #0b7e4b;
+        }
+        .callout-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .callout-text {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
+        .callout-text strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+        }
+
+        /* ---- GRIDS ---- */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 14px 0;
+        }
+        .compare-card {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .compare-card h4 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .powers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+        .power-item {
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            border-left: 4px solid var(--primary);
+        }
+        .power-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+        .power-item span {
+            font-size: 13px;
+            color: var(--text-body);
+        }
+
+        /* ---- DEMO BOX ---- */
+        .demo-box {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 14px 0;
+            background: #fff;
+            min-height: 60px;
+        }
+        .demo-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin: 4px;
+        }
+        .demo-box button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        .demo-box .output {
+            background: #f1f5f9;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            min-height: 30px;
+            color: var(--text-dark);
+        }
+
+        /* ---- CLOSING ---- */
+        .closing {
+            background: linear-gradient(145deg, #d97706, #f59e0b);
+            padding: 60px 80px;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+            }
+            .content {
+                padding: 24px 18px;
+            }
+            .chapter-header {
+                padding: 36px 22px 28px;
+            }
+            .compare-grid,
+            .powers-grid {
+                grid-template-columns: 1fr;
+            }
+            .cover {
+                padding: 60px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══ SIDEBAR ══ -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Sheryians Coding School</h2>
+            <p>JavaScript Complete Notes</p>
+        </div>
+        <div class="nav-label">Start Here</div>
+        <a href="#cover">📘 Cover</a>
+        <div class="nav-label">Introduction</div>
+        <a href="#intro">⚡ What is JavaScript?</a>
+        <div class="nav-label">Chapters</div>
+        <a href="#ch01">01 — JavaScript Basics</a>
+        <a href="#ch02">02 — Variables &amp; Data Types</a>
+        <a href="#ch03">03 — Operators</a>
+        <a href="#ch04">04 — Conditionals</a>
+        <a href="#ch05">05 — Loops</a>
+        <a href="#ch06">06 — Functions</a>
+        <a href="#ch07">07 — Arrays</a>
+        <a href="#ch08">08 — Objects</a>
+        <a href="#ch09">09 — DOM Manipulation</a>
+        <a href="#ch10">10 — Events</a>
+        <a href="#ch11">11 — ES6 Features</a>
+        <a href="#ch12">12 — Async JavaScript</a>
+        <a href="#ch13">13 — Error Handling</a>
+        <a href="#ch14">14 — OOP in JavaScript</a>
+        <a href="#ch15">15 — Modules</a>
+        <a href="#ch16">16 — Advanced Topics</a>
+    </nav>
+
+    <div class="main">
+
+        <!-- ══ COVER ══ -->
+        <section id="cover" class="cover">
+            <div class="cover-badge">Sheryians Coding School</div>
+            <h1>JavaScript<br><span>Complete Notes</span></h1>
+            <p class="cover-sub">From basics to advanced — the language that powers the modern web.</p>
+            <div class="cover-note">
+                🎬 <strong>Watch alongside!</strong> This book is designed to work hand-in-hand with the video series on <strong>Sheryians AI</strong> on YouTube. Every concept here has a matching video explanation.
+            </div>
+            <div class="cover-footer">written by Muhammad Nouman · Sheryians Coding School</div>
+        </section>
+
+        <!-- ══ INTRO ══ -->
+        <section id="intro">
+            <div class="chapter-header" data-num="00">
+                <div class="chapter-num">Introduction</div>
+                <h1>What is JavaScript?</h1>
+            </div>
+            <div class="content">
+
+                <div class="section">
+                    <h2>⚡ JavaScript in Simple Words</h2>
+                    <p><strong>JavaScript</strong> is a high-level, interpreted programming language that makes websites <strong>interactive</strong>. It's the "brain" of the web — it adds behavior to HTML and CSS.</p>
+                    <p>Think of it like this: HTML is the <strong>skeleton</strong>, CSS is the <strong>skin</strong>, and JavaScript is the <strong>brain</strong> that makes everything work.</p>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>🏗️ HTML = Structure</h4>
+                            <p>Defines the content and structure of the page.</p>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🎨 CSS = Presentation</h4>
+                            <p>Defines the visual appearance.</p>
+                        </div>
+                        <div class="compare-card" style="grid-column: 1/3;">
+                            <h4>🧠 JavaScript = Behavior</h4>
+                            <p>Makes the page interactive — responds to clicks, changes content, communicates with servers, and more.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>📜 A Brief History</h2>
+                    <ul>
+                        <li><strong>1995:</strong> Brendan Eich created JavaScript in 10 days while at Netscape</li>
+                        <li><strong>1997:</strong> ECMAScript standard was created</li>
+                        <li><strong>2009:</strong> ES5 introduced strict mode and JSON support</li>
+                        <li><strong>2015:</strong> ES6 (ECMAScript 2015) — major update with classes, arrow functions, modules, and more</li>
+                        <li><strong>2016+:</strong> Annual releases (ES7, ES8, ES9, etc.)</li>
+                    </ul>
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text">JavaScript is now the <strong>most popular programming language</strong> in the world, running on over 98% of websites.</div></div>
+                </div>
+
+                <div class="section">
+                    <h2>🌐 Where Does JavaScript Run?</h2>
+                    <ul>
+                        <li><strong>Browsers</strong> — Chrome, Firefox, Edge, Safari (client-side)</li>
+                        <li><strong>Node.js</strong> — Server-side JavaScript</li>
+                        <li><strong>Mobile Apps</strong> — React Native, Ionic</li>
+                        <li><strong>Desktop Apps</strong> — Electron (VS Code, Slack)</li>
+                        <li><strong>IoT Devices</strong> — Smart home devices, robots</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-success" style="margin:0;">
+                    <span class="callout-icon">🚀</span>
+                    <div class="callout-text"><strong>You're all set!</strong> Let's dive into the world of JavaScript. Head to Chapter 01!</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══ CH 01 ══ -->
+        <section id="ch01">
+            <div class="chapter-header" data-num="01"><div class="chapter-num">Chapter 01</div><h1>JavaScript Basics</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Adding JavaScript to HTML</h2>
+                    <div class="code-block"><code><span class="code-cmt">&lt;!-- Inline JavaScript --&gt;</span>
+        <span class="code-tag">&lt;button</span> <span class="code-attr">onclick=</span><span class="code-value">"alert('Hello!')"</span><span class="code-tag">&gt;</span>Click Me<span class="code-tag">&lt;/button&gt;</span>
+
+        <span class="code-cmt">&lt;!-- Internal JavaScript --&gt;</span>
+        <span class="code-tag">&lt;script&gt;</span>
+            console.log(<span class="code-str">"Hello from internal script"</span>);
+        <span class="code-tag">&lt;/script&gt;</span>
+
+        <span class="code-cmt">&lt;!-- External JavaScript (Recommended) --&gt;</span>
+        <span class="code-tag">&lt;script</span> <span class="code-attr">src=</span><span class="code-value">"script.js"</span><span class="code-tag">&gt;&lt;/script&gt;</span></code></div>
+
+                    <h3>Console Output</h3>
+                    <div class="code-block"><code><span class="code-cmt">// Print to console</span>
+        console.log(<span class="code-str">"Hello, World!"</span>);
+        console.warn(<span class="code-str">"This is a warning"</span>);
+        console.error(<span class="code-str">"This is an error"</span>);
+        console.info(<span class="code-str">"This is info"</span>);
+
+        <span class="code-cmt">// Alert box</span>
+        alert(<span class="code-str">"Hello!"</span>);
+
+        <span class="code-cmt">// Prompt</span>
+        <span class="code-var">let</span> name = prompt(<span class="code-str">"What is your name?"</span>);
+
+        <span class="code-cmt">// Confirm</span>
+        <span class="code-var">let</span> confirmed = confirm(<span class="code-str">"Are you sure?"</span>);</code></div>
+
+                    <h3>Comments</h3>
+                    <div class="code-block"><code><span class="code-cmt">// This is a single-line comment</span>
+
+        <span class="code-cmt">/*
+            This is a multi-line comment
+            It can span multiple lines
+        */</span></code></div>
+
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Best Practice:</strong> Always place your <code>&lt;script&gt;</code> tags at the end of the <code>&lt;body&gt;</code> to ensure HTML loads before the script runs.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 02 ══ -->
+        <section id="ch02">
+            <div class="chapter-header" data-num="02"><div class="chapter-num">Chapter 02</div><h1>Variables &amp; Data Types</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Declaring Variables</h2>
+                    <div class="code-block"><code><span class="code-cmt">// var (old way, avoid using)</span>
+        <span class="code-var">var</span> oldVariable = <span class="code-str">"old"</span>;
+
+        <span class="code-cmt">// let (mutable — can be reassigned)</span>
+        <span class="code-var">let</span> name = <span class="code-str">"Akarsh"</span>;
+        name = <span class="code-str">"Shery"</span>; <span class="code-cmt">// ✅ Allowed</span>
+
+        <span class="code-cmt">// const (immutable — cannot be reassigned)</span>
+        <span class="code-var">const</span> PI = <span class="code-num">3.14159</span>;
+        PI = <span class="code-num">3.14</span>; <span class="code-cmt">// ❌ TypeError: Assignment to constant variable</span>
+
+        <span class="code-cmt">// const objects can be mutated though!</span>
+        <span class="code-var">const</span> person = { name: <span class="code-str">"Akarsh"</span> };
+        person.name = <span class="code-str">"Shery"</span>; <span class="code-cmt">// ✅ Allowed</span></code></div>
+
+                    <h3>Data Types</h3>
+                    <table class="styled-table">
+                        <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+                        <tr><td>String</td><td>Text</td><td>"Hello"</td></tr>
+                        <tr><td>Number</td><td>Integers and decimals</td><td>42, 3.14</td></tr>
+                        <tr><td>Boolean</td><td>True or False</td><td>true, false</td></tr>
+                        <tr><td>Undefined</td><td>Variable declared but not assigned</td><td>let x;</td></tr>
+                        <tr><td>Null</td><td>Intentional absence of value</td><td>let x = null;</td></tr>
+                        <tr><td>Symbol</td><td>Unique identifier</td><td>Symbol('id')</td></tr>
+                        <tr><td>BigInt</td><td>Large integers</td><td>9007199254740991n</td></tr>
+                        <tr><td>Object</td><td>Key-value pairs</td><td>{name: "Akarsh"}</td></tr>
+                    </table>
+
+                    <div class="code-block"><code><span class="code-cmt">// Checking type</span>
+        <span class="code-var">typeof</span> <span class="code-str">"Hello"</span>;        <span class="code-cmt">// "string"</span>
+        <span class="code-var">typeof</span> <span class="code-num">42</span>;             <span class="code-cmt">// "number"</span>
+        <span class="code-var">typeof</span> <span class="code-boolean">true</span>;           <span class="code-cmt">// "boolean"</span>
+        <span class="code-var">typeof</span> undefined;      <span class="code-cmt">// "undefined"</span>
+        <span class="code-var">typeof</span> <span class="code-boolean">null</span>;            <span class="code-cmt">// "object" (this is a bug in JS)</span>
+        <span class="code-var">typeof</span> {};             <span class="code-cmt">// "object"</span>
+        <span class="code-var">typeof</span> [];             <span class="code-cmt">// "object"</span>
+        <span class="code-var">typeof</span> <span class="code-kw">function</span>() {};  <span class="code-cmt">// "function"</span></code></div>
+
+                    <div class="callout callout-warn"><span class="callout-icon">⚠️</span><div class="callout-text"><strong>Use let and const:</strong> Avoid using <code>var</code> as it has function-scoping issues. Use <code>let</code> for variables that change and <code>const</code> for constants.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 03 ══ -->
+        <section id="ch03">
+            <div class="chapter-header" data-num="03"><div class="chapter-num">Chapter 03</div><h1>Operators</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Arithmetic Operators</h2>
+                    <table class="styled-table">
+                        <tr><th>Operator</th><th>Description</th><th>Example</th></tr>
+                        <tr><td>+</td><td>Addition</td><td>5 + 3 = 8</td></tr>
+                        <tr><td>-</td><td>Subtraction</td><td>5 - 3 = 2</td></tr>
+                        <tr><td>*</td><td>Multiplication</td><td>5 * 3 = 15</td></tr>
+                        <tr><td>/</td><td>Division</td><td>10 / 3 = 3.333...</td></tr>
+                        <tr><td>%</td><td>Modulus (remainder)</td><td>10 % 3 = 1</td></tr>
+                        <tr><td>**</td><td>Exponentiation</td><td>2 ** 8 = 256</td></tr>
+                        <tr><td>++</td><td>Increment</td><td>x++ (adds 1)</td></tr>
+                        <tr><td>--</td><td>Decrement</td><td>x-- (subtracts 1)</td></tr>
+                    </table>
+
+                    <h2>Comparison Operators</h2>
+                    <table class="styled-table">
+                        <tr><th>Operator</th><th>Description</th><th>Example</th></tr>
+                        <tr><td>==</td><td>Equal (value only)</td><td>5 == '5' → true</td></tr>
+                        <tr><td>===</td><td>Strict equal (value + type)</td><td>5 === '5' → false</td></tr>
+                        <tr><td>!=</td><td>Not equal</td><td>5 != '5' → false</td></tr>
+                        <tr><td>!==</td><td>Strict not equal</td><td>5 !== '5' → true</td></tr>
+                        <tr><td>&gt;</td><td>Greater than</td><td>5 &gt; 3 → true</td></tr>
+                        <tr><td>&lt;</td><td>Less than</td><td>5 &lt; 3 → false</td></tr>
+                        <tr><td>&gt;=</td><td>Greater or equal</td><td>5 &gt;= 5 → true</td></tr>
+                        <tr><td>&lt;=</td><td>Less or equal</td><td>3 &lt;= 5 → true</td></tr>
+                    </table>
+
+                    <h2>Logical Operators</h2>
+                    <table class="styled-table">
+                        <tr><th>Operator</th><th>Description</th><th>Example</th></tr>
+                        <tr><td>&amp;&amp;</td><td>AND</td><td>true &amp;&amp; false → false</td></tr>
+                        <tr><td>||</td><td>OR</td><td>true || false → true</td></tr>
+                        <tr><td>!</td><td>NOT</td><td>!true → false</td></tr>
+                    </table>
+
+                    <div class="code-block"><code><span class="code-cmt">// Type coercion examples</span>
+        <span class="code-var">console</span>.log(<span class="code-num">5</span> + <span class="code-str">"5"</span>);  <span class="code-cmt">// "55" (string concatenation)</span>
+        <span class="code-var">console</span>.log(<span class="code-num">5</span> - <span class="code-str">"5"</span>);  <span class="code-cmt">// 0 (string converted to number)</span>
+        <span class="code-var">console</span>.log(<span class="code-boolean">true</span> + <span class="code-num">1</span>);  <span class="code-cmt">// 2 (true → 1)</span>
+        <span class="code-var">console</span>.log(<span class="code-boolean">false</span> + <span class="code-num">1</span>); <span class="code-cmt">// 1 (false → 0)</span>
+
+        <span class="code-cmt">// Nullish coalescing operator (??)</span>
+        <span class="code-var">let</span> value = <span class="code-boolean">null</span> ?? <span class="code-str">"default"</span>;  <span class="code-cmt">// "default"</span>
+        <span class="code-var">let</span> value2 = <span class="code-str">"hello"</span> ?? <span class="code-str">"default"</span>;  <span class="code-cmt">// "hello"</span>
+
+        <span class="code-cmt">// Ternary operator</span>
+        <span class="code-var">let</span> age = <span class="code-num">18</span>;
+        <span class="code-var">let</span> status = age >= <span class="code-num">18</span> ? <span class="code-str">"Adult"</span> : <span class="code-str">"Minor"</span>;</code></div>
+
+                    <div class="callout callout-warn"><span class="callout-icon">⚠️</span><div class="callout-text"><strong>Always use === and !==</strong> to avoid unexpected type coercion bugs.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 04 ══ -->
+        <section id="ch04">
+            <div class="chapter-header" data-num="04"><div class="chapter-num">Chapter 04</div><h1>Conditionals</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>if, else if, else</h2>
+                    <div class="code-block"><code><span class="code-var">let</span> score = <span class="code-num">85</span>;
+
+        <span class="code-kw">if</span> (score >= <span class="code-num">90</span>) {
+            console.log(<span class="code-str">"Grade: A"</span>);
+        } <span class="code-kw">else if</span> (score >= <span class="code-num">80</span>) {
+            console.log(<span class="code-str">"Grade: B"</span>);
+        } <span class="code-kw">else if</span> (score >= <span class="code-num">70</span>) {
+            console.log(<span class="code-str">"Grade: C"</span>);
+        } <span class="code-kw">else</span> {
+            console.log(<span class="code-str">"Grade: F"</span>);
+        }</code></div>
+
+                    <h2>Switch Statement</h2>
+                    <div class="code-block"><code><span class="code-var">let</span> day = <span class="code-num">3</span>;
+
+        <span class="code-kw">switch</span> (day) {
+            <span class="code-kw">case</span> <span class="code-num">1</span>:
+                console.log(<span class="code-str">"Monday"</span>);
+                <span class="code-kw">break</span>;
+            <span class="code-kw">case</span> <span class="code-num">2</span>:
+                console.log(<span class="code-str">"Tuesday"</span>);
+                <span class="code-kw">break</span>;
+            <span class="code-kw">case</span> <span class="code-num">3</span>:
+                console.log(<span class="code-str">"Wednesday"</span>);
+                <span class="code-kw">break</span>;
+            <span class="code-kw">default</span>:
+                console.log(<span class="code-str">"Invalid day"</span>);
+        }</code></div>
+
+                    <h2>Falsy Values</h2>
+                    <div class="demo-box">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 4px 14px; font-family: monospace; font-size: 14px; color: #b91c1c;">false</span>
+                            <span style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 4px 14px; font-family: monospace; font-size: 14px; color: #b91c1c;">0</span>
+                            <span style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 4px 14px; font-family: monospace; font-size: 14px; color: #b91c1c;">""</span>
+                            <span style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 4px 14px; font-family: monospace; font-size: 14px; color: #b91c1c;">null</span>
+                            <span style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 4px 14px; font-family: monospace; font-size: 14px; color: #b91c1c;">undefined</span>
+                            <span style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 4px 14px; font-family: monospace; font-size: 14px; color: #b91c1c;">NaN</span>
+                            <span style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 4px 14px; font-family: monospace; font-size: 14px; color: #b91c1c;">0n</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">These values are falsy — everything else is truthy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 05 ══ -->
+        <section id="ch05">
+            <div class="chapter-header" data-num="05"><div class="chapter-num">Chapter 05</div><h1>Loops</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>for Loop</h2>
+                    <div class="code-block"><code><span class="code-cmt">// For loop</span>
+        <span class="code-kw">for</span> (<span class="code-var">let</span> i = <span class="code-num">0</span>; i < <span class="code-num">5</span>; i++) {
+            console.log(i); <span class="code-cmt">// 0, 1, 2, 3, 4</span>
+        }
+
+        <span class="code-cmt">// For...of (for arrays)</span>
+        <span class="code-var">let</span> fruits = [<span class="code-str">"apple"</span>, <span class="code-str">"banana"</span>, <span class="code-str">"mango"</span>];
+        <span class="code-kw">for</span> (<span class="code-var">let</span> fruit <span class="code-kw">of</span> fruits) {
+            console.log(fruit);
+        }
+
+        <span class="code-cmt">// For...in (for objects)</span>
+        <span class="code-var">let</span> person = { name: <span class="code-str">"Akarsh"</span>, age: <span class="code-num">22</span> };
+        <span class="code-kw">for</span> (<span class="code-var">let</span> key <span class="code-kw">in</span> person) {
+            console.log(key + <span class="code-str">": "</span> + person[key]);
+        }</code></div>
+
+                    <h2>while Loop</h2>
+                    <div class="code-block"><code><span class="code-var">let</span> count = <span class="code-num">0</span>;
+        <span class="code-kw">while</span> (count < <span class="code-num">5</span>) {
+            console.log(count);
+            count++;
+        }
+
+        <span class="code-var">let</span> i = <span class="code-num">0</span>;
+        <span class="code-kw">do</span> {
+            console.log(i);
+            i++;
+        } <span class="code-kw">while</span> (i < <span class="code-num">5</span>);</code></div>
+
+                    <h3>break &amp; continue</h3>
+                    <div class="code-block"><code><span class="code-kw">for</span> (<span class="code-var">let</span> i = <span class="code-num">0</span>; i < <span class="code-num">10</span>; i++) {
+            <span class="code-kw">if</span> (i === <span class="code-num">5</span>) {
+                <span class="code-kw">break</span>;    <span class="code-cmt">// Stops the loop</span>
+            }
+            <span class="code-kw">if</span> (i === <span class="code-num">3</span>) {
+                <span class="code-kw">continue</span>; <span class="code-cmt">// Skips this iteration</span>
+            }
+            console.log(i);
+        }</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 06 ══ -->
+        <section id="ch06">
+            <div class="chapter-header" data-num="06"><div class="chapter-num">Chapter 06</div><h1>Functions</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Function Declaration</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Function Declaration</span>
+        <span class="code-kw">function</span> <span class="code-fn">greet</span>(name) {
+            <span class="code-kw">return</span> <span class="code-str">"Hello, "</span> + name + <span class="code-str">"!"</span>;
+        }
+
+        console.log(greet(<span class="code-str">"Akarsh"</span>)); <span class="code-cmt">// "Hello, Akarsh!"</span>
+
+        <span class="code-cmt">// Function Expression</span>
+        <span class="code-var">const</span> greet2 = <span class="code-kw">function</span>(name) {
+            <span class="code-kw">return</span> <span class="code-str">"Hello, "</span> + name + <span class="code-str">"!"</span>;
+        };
+
+        <span class="code-cmt">// Arrow Function (ES6)</span>
+        <span class="code-var">const</span> greet3 = (name) => {
+            <span class="code-kw">return</span> <span class="code-str">"Hello, "</span> + name + <span class="code-str">"!"</span>;
+        };
+
+        <span class="code-cmt">// Arrow Function (implicit return)</span>
+        <span class="code-var">const</span> greet4 = (name) => <span class="code-str">"Hello, "</span> + name + <span class="code-str">"!"</span>;
+
+        <span class="code-cmt">// Default Parameters</span>
+        <span class="code-kw">function</span> <span class="code-fn">greet5</span>(name = <span class="code-str">"Guest"</span>) {
+            <span class="code-kw">return</span> <span class="code-str">"Hello, "</span> + name + <span class="code-str">"!"</span>;
+        }
+
+        console.log(greet5()); <span class="code-cmt">// "Hello, Guest!"</span></code></div>
+
+                    <h3>Rest Parameters</h3>
+                    <div class="code-block"><code><span class="code-kw">function</span> <span class="code-fn">sum</span>(...numbers) {
+            <span class="code-var">let</span> total = <span class="code-num">0</span>;
+            <span class="code-kw">for</span> (<span class="code-var">let</span> num <span class="code-kw">of</span> numbers) {
+                total += num;
+            }
+            <span class="code-kw">return</span> total;
+        }
+
+        console.log(sum(<span class="code-num">1</span>, <span class="code-num">2</span>, <span class="code-num">3</span>)); <span class="code-cmt">// 6</span>
+        console.log(sum(<span class="code-num">1</span>, <span class="code-num">2</span>, <span class="code-num">3</span>, <span class="code-num">4</span>, <span class="code-num">5</span>)); <span class="code-cmt">// 15</span></code></div>
+
+                    <div class="demo-box">
+                        <button onclick="demoFunction()">Run Function Demo</button>
+                        <div id="functionOutput" class="output">Click the button to run the function.</div>
+                    </div>
+                    <script>
+                        function demoFunction() {
+                            const greet = (name) => `Hello, ${name}!`;
+                            document.getElementById('functionOutput').textContent = greet('Akarsh');
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 07 ══ -->
+        <section id="ch07">
+            <div class="chapter-header" data-num="07"><div class="chapter-num">Chapter 07</div><h1>Arrays</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Array Methods</h2>
+                    <div class="code-block"><code><span class="code-var">let</span> fruits = [<span class="code-str">"apple"</span>, <span class="code-str">"banana"</span>, <span class="code-str">"mango"</span>];
+
+        <span class="code-cmt">// Adding elements</span>
+        fruits.push(<span class="code-str">"orange"</span>);     <span class="code-cmt">// Adds to end</span>
+        fruits.unshift(<span class="code-str">"grape"</span>);    <span class="code-cmt">// Adds to start</span>
+
+        <span class="code-cmt">// Removing elements</span>
+        fruits.pop();              <span class="code-cmt">// Removes from end</span>
+        fruits.shift();            <span class="code-cmt">// Removes from start</span>
+
+        <span class="code-cmt">// Looping</span>
+        fruits.forEach(<span class="code-kw">function</span>(fruit) {
+            console.log(fruit);
+        });
+
+        <span class="code-cmt">// Map (transforms array)</span>
+        <span class="code-var">let</span> lengths = fruits.map(fruit => fruit.length);
+
+        <span class="code-cmt">// Filter</span>
+        <span class="code-var">let</span> longFruits = fruits.filter(fruit => fruit.length > <span class="code-num">5</span>);
+
+        <span class="code-cmt">// Reduce</span>
+        <span class="code-var">let</span> numbers = [<span class="code-num">1</span>, <span class="code-num">2</span>, <span class="code-num">3</span>, <span class="code-num">4</span>];
+        <span class="code-var">let</span> sum = numbers.reduce((acc, num) => acc + num, <span class="code-num">0</span>); <span class="code-cmt">// 10</span>
+
+        <span class="code-cmt">// Find</span>
+        <span class="code-var">let</span> found = fruits.find(fruit => fruit === <span class="code-str">"banana"</span>);
+
+        <span class="code-cmt">// Includes</span>
+        <span class="code-var">let</span> hasApple = fruits.includes(<span class="code-str">"apple"</span>);
+
+        <span class="code-cmt">// Sort</span>
+        fruits.sort();             <span class="code-cmt">// Sorts alphabetically</span>
+
+        <span class="code-cmt">// Spread operator (copy array)</span>
+        <span class="code-var">let</span> copy = [...fruits];
+
+        <span class="code-cmt">// Destructuring</span>
+        <span class="code-var">let</span> [first, second] = fruits;</code></div>
+
+                    <div class="demo-box">
+                        <button onclick="demoArray()">Run Array Demo</button>
+                        <div id="arrayOutput" class="output">Click the button to run the array demo.</div>
+                    </div>
+                    <script>
+                        function demoArray() {
+                            const fruits = ['apple', 'banana', 'mango', 'orange'];
+                            const upperFruits = fruits.map(f => f.toUpperCase());
+                            document.getElementById('arrayOutput').textContent = 'Original: ' + fruits.join(', ') + ' → Uppercase: ' + upperFruits.join(', ');
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 08 ══ -->
+        <section id="ch08">
+            <div class="chapter-header" data-num="08"><div class="chapter-num">Chapter 08</div><h1>Objects</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Creating and Using Objects</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Object literal</span>
+        <span class="code-var">let</span> person = {
+            name: <span class="code-str">"Akarsh"</span>,
+            age: <span class="code-num">22</span>,
+            city: <span class="code-str">"Indore"</span>,
+            greet() {
+                <span class="code-kw">return</span> <span class="code-str">"Hello, I'm "</span> + this.name;
+            }
+        };
+
+        <span class="code-cmt">// Accessing properties</span>
+        console.log(person.name);     <span class="code-cmt">// "Akarsh"</span>
+        console.log(person[<span class="code-str">"age"</span>]); <span class="code-cmt">// 22</span>
+        console.log(person.greet());  <span class="code-cmt">// "Hello, I'm Akarsh"</span>
+
+        <span class="code-cmt">// Adding/updating properties</span>
+        person.job = <span class="code-str">"Developer"</span>;
+        person.age = <span class="code-num">23</span>;
+
+        <span class="code-cmt">// Deleting properties</span>
+        <span class="code-kw">delete</span> person.city;
+
+        <span class="code-cmt">// Object destructuring</span>
+        <span class="code-var">let</span> { name, age } = person;
+
+        <span class="code-cmt">// Spread operator (copy object)</span>
+        <span class="code-var">let</span> copy = { ...person };
+
+        <span class="code-cmt">// Object methods</span>
+        <span class="code-var">let</span> keys = Object.keys(person);     <span class="code-cmt">// ["name", "age", "job"]</span>
+        <span class="code-var">let</span> values = Object.values(person); <span class="code-cmt">// ["Akarsh", 23, "Developer"]</span>
+        <span class="code-var">let</span> entries = Object.entries(person); <span class="code-cmt">// [["name","Akarsh"], ...]</span></code></div>
+
+                    <div class="demo-box">
+                        <button onclick="demoObject()">Run Object Demo</button>
+                        <div id="objectOutput" class="output">Click the button to run the object demo.</div>
+                    </div>
+                    <script>
+                        function demoObject() {
+                            const person = { name: 'Akarsh', age: 22, city: 'Indore' };
+                            const info = `Name: ${person.name}, Age: ${person.age}, City: ${person.city}`;
+                            document.getElementById('objectOutput').textContent = info;
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 09 ══ -->
+        <section id="ch09">
+            <div class="chapter-header" data-num="09"><div class="chapter-num">Chapter 09</div><h1>DOM Manipulation</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Selecting Elements</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Selecting by ID</span>
+        <span class="code-var">let</span> element = document.getElementById(<span class="code-str">"myId"</span>);
+
+        <span class="code-cmt">// Selecting by class</span>
+        <span class="code-var">let</span> elements = document.getElementsByClassName(<span class="code-str">"myClass"</span>);
+        <span class="code-var">let</span> elements2 = document.querySelectorAll(<span class="code-str">".myClass"</span>);
+
+        <span class="code-cmt">// Selecting by tag</span>
+        <span class="code-var">let</span> paragraphs = document.getElementsByTagName(<span class="code-str">"p"</span>);
+
+        <span class="code-cmt">// CSS Selector (returns first match)</span>
+        <span class="code-var">let</span> element2 = document.querySelector(<span class="code-str">"#myId .myClass"</span>);
+
+        <span class="code-cmt">// CSS Selector (returns all matches)</span>
+        <span class="code-var">let</span> elements3 = document.querySelectorAll(<span class="code-str">".myClass"</span>);</code></div>
+
+                    <h3>Manipulating Elements</h3>
+                    <div class="code-block"><code><span class="code-cmt">// Changing content</span>
+        element.textContent = <span class="code-str">"New text"</span>;
+        element.innerHTML = <span class="code-str">"&lt;strong&gt;HTML content&lt;/strong&gt;"</span>;
+
+        <span class="code-cmt">// Changing attributes</span>
+        element.setAttribute(<span class="code-str">"class"</span>, <span class="code-str">"new-class"</span>);
+        element.getAttribute(<span class="code-str">"src"</span>);
+        element.removeAttribute(<span class="code-str">"disabled"</span>);
+
+        <span class="code-cmt">// Changing styles</span>
+        element.style.color = <span class="code-str">"red"</span>;
+        element.style.backgroundColor = <span class="code-str">"blue"</span>;
+        element.style.fontSize = <span class="code-str">"20px"</span>;
+
+        <span class="code-cmt">// Adding/removing classes</span>
+        element.classList.add(<span class="code-str">"active"</span>);
+        element.classList.remove(<span class="code-str">"hidden"</span>);
+        element.classList.toggle(<span class="code-str">"visible"</span>);
+        element.classList.contains(<span class="code-str">"active"</span>);</code></div>
+
+                    <h3>Creating and Appending Elements</h3>
+                    <div class="code-block"><code><span class="code-cmt">// Creating elements</span>
+        <span class="code-var">let</span> newDiv = document.createElement(<span class="code-str">"div"</span>);
+        newDiv.textContent = <span class="code-str">"Hello"</span>;
+        newDiv.className = <span class="code-str">"box"</span>;
+
+        <span class="code-cmt">// Appending</span>
+        document.body.appendChild(newDiv);
+
+        <span class="code-cmt">// Inserting before</span>
+        <span class="code-var">let</span> parent = document.getElementById(<span class="code-str">"parent"</span>);
+        <span class="code-var">let</span> child = document.getElementById(<span class="code-str">"child"</span>);
+        parent.insertBefore(newDiv, child);
+
+        <span class="code-cmt">// Removing</span>
+        element.remove();</code></div>
+
+                    <div class="demo-box" id="domDemoBox">
+                        <button onclick="demoDOM()">Add Element</button>
+                        <button onclick="clearDOM()">Clear</button>
+                        <div id="domOutput" class="output" style="min-height: 50px;">Elements will appear here.</div>
+                    </div>
+                    <script>
+                        function demoDOM() {
+                            const container = document.getElementById('domOutput');
+                            const newDiv = document.createElement('div');
+                            newDiv.textContent = '📦 New Element ' + (container.children.length + 1);
+                            newDiv.style.background = '#dbeafe';
+                            newDiv.style.padding = '8px';
+                            newDiv.style.margin = '4px';
+                            newDiv.style.borderRadius = '6px';
+                            container.appendChild(newDiv);
+                        }
+                        function clearDOM() {
+                            document.getElementById('domOutput').innerHTML = '';
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 10 ══ -->
+        <section id="ch10">
+            <div class="chapter-header" data-num="10"><div class="chapter-num">Chapter 10</div><h1>Events</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Event Listeners</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Adding event listeners</span>
+        <span class="code-var">let</span> button = document.getElementById(<span class="code-str">"myButton"</span>);
+
+        button.addEventListener(<span class="code-str">"click"</span>, <span class="code-kw">function</span>() {
+            alert(<span class="code-str">"Button clicked!"</span>);
+        });
+
+        <span class="code-cmt">// Arrow function</span>
+        button.addEventListener(<span class="code-str">"mouseover"</span>, () => {
+            button.style.backgroundColor = <span class="code-str">"red"</span>;
+        });
+
+        <span class="code-cmt">// Named function (can be removed)</span>
+        <span class="code-kw">function</span> <span class="code-fn">handleClick</span>() {
+            console.log(<span class="code-str">"Clicked"</span>);
+        }
+        button.addEventListener(<span class="code-str">"click"</span>, handleClick);
+        button.removeEventListener(<span class="code-str">"click"</span>, handleClick);
+
+        <span class="code-cmt">// Event object</span>
+        button.addEventListener(<span class="code-str">"click"</span>, <span class="code-kw">function</span>(event) {
+            console.log(event.target);     <span class="code-cmt">// Element that was clicked</span>
+            console.log(event.type);       <span class="code-cmt">// "click"</span>
+            console.log(event.clientX);    <span class="code-cmt">// Mouse X position</span>
+            event.preventDefault();        <span class="code-cmt">// Prevent default behavior</span>
+            event.stopPropagation();       <span class="code-cmt">// Stop event bubbling</span>
+        });</code></div>
+
+                    <h3>Common Events</h3>
+                    <table class="styled-table">
+                        <tr><th>Event</th><th>Description</th></tr>
+                        <tr><td>click</td><td>Element clicked</td></tr>
+                        <tr><td>mouseover / mouseout</td><td>Mouse enters/exits element</td></tr>
+                        <tr><td>mousedown / mouseup</td><td>Mouse button pressed/released</td></tr>
+                        <tr><td>keydown / keyup</td><td>Keyboard key pressed/released</td></tr>
+                        <tr><td>submit</td><td>Form submitted</td></tr>
+                        <tr><td>change</td><td>Input value changed</td></tr>
+                        <tr><td>input</td><td>Input value changed (real-time)</td></tr>
+                        <tr><td>focus / blur</td><td>Element gains/loses focus</td></tr>
+                        <tr><td>load</td><td>Page or image loaded</td></tr>
+                        <tr><td>scroll</td><td>Element scrolled</td></tr>
+                        <tr><td>resize</td><td>Window resized</td></tr>
+                    </table>
+
+                    <div class="demo-box">
+                        <button id="eventButton" style="background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">Click Me</button>
+                        <div id="eventOutput" class="output">Click count: 0</div>
+                    </div>
+                    <script>
+                        let clickCount = 0;
+                        document.getElementById('eventButton').addEventListener('click', function() {
+                            clickCount++;
+                            document.getElementById('eventOutput').textContent = 'Click count: ' + clickCount;
+                            this.style.transform = 'scale(0.95)';
+                            setTimeout(() => this.style.transform = 'scale(1)', 200);
+                        });
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 11 ══ -->
+        <section id="ch11">
+            <div class="chapter-header" data-num="11"><div class="chapter-num">Chapter 11</div><h1>ES6 Features</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Modern JavaScript Features</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Template Literals</span>
+        <span class="code-var">let</span> name = <span class="code-str">"Akarsh"</span>;
+        <span class="code-var">let</span> message = <span class="code-str">`Hello, ${name}!`</span>;
+
+        <span class="code-cmt">// Destructuring (Arrays)</span>
+        <span class="code-var">let</span> [a, b, c] = [<span class="code-num">1</span>, <span class="code-num">2</span>, <span class="code-num">3</span>];
+
+        <span class="code-cmt">// Destructuring (Objects)</span>
+        <span class="code-var">let</span> person = { name: <span class="code-str">"Akarsh"</span>, age: <span class="code-num">22</span> };
+        <span class="code-var">let</span> { name, age } = person;
+
+        <span class="code-cmt">// Spread Operator</span>
+        <span class="code-var">let</span> arr1 = [<span class="code-num">1</span>, <span class="code-num">2</span>];
+        <span class="code-var">let</span> arr2 = [<span class="code-num">3</span>, <span class="code-num">4</span>];
+        <span class="code-var">let</span> combined = [...arr1, ...arr2]; <span class="code-cmt">// [1, 2, 3, 4]</span>
+
+        <span class="code-cmt">// Rest Parameters</span>
+        <span class="code-kw">function</span> <span class="code-fn">sum</span>(...numbers) {
+            <span class="code-kw">return</span> numbers.reduce((a, b) => a + b, <span class="code-num">0</span>);
+        }
+
+        <span class="code-cmt">// Default Parameters</span>
+        <span class="code-kw">function</span> <span class="code-fn">greet</span>(name = <span class="code-str">"Guest"</span>) {
+            <span class="code-kw">return</span> <span class="code-str">`Hello, ${name}!`</span>;
+        }
+
+        <span class="code-cmt">// Arrow Functions</span>
+        <span class="code-var">const</span> multiply = (a, b) => a * b;
+
+        <span class="code-cmt">// Class Syntax</span>
+        <span class="code-kw">class</span> Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            greet() {
+                <span class="code-kw">return</span> <span class="code-str">`Hello, I'm ${this.name}`</span>;
+            }
+        }
+
+        <span class="code-cmt">// Modules (import/export)</span>
+        <span class="code-cmt">// export const PI = 3.14;</span>
+        <span class="code-cmt">// import { PI } from './math.js';</span>
+
+        <span class="code-cmt">// Map and Set</span>
+        <span class="code-var">let</span> map = <span class="code-kw">new</span> Map();
+        map.set(<span class="code-str">"key"</span>, <span class="code-str">"value"</span>);
+        <span class="code-var">let</span> set = <span class="code-kw">new</span> Set([<span class="code-num">1</span>, <span class="code-num">2</span>, <span class="code-num">2</span>, <span class="code-num">3</span>]); <span class="code-cmt">// {1, 2, 3}</span>
+
+        <span class="code-cmt">// Promise</span>
+        <span class="code-var">let</span> promise = <span class="code-kw">new</span> Promise((resolve, reject) => {
+            <span class="code-cmt">// async operation</span>
+            resolve(<span class="code-str">"Success"</span>);
+        });</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 12 ══ -->
+        <section id="ch12">
+            <div class="chapter-header" data-num="12"><div class="chapter-num">Chapter 12</div><h1>Async JavaScript</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Callbacks, Promises, Async/Await</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Callback (old way)</span>
+        <span class="code-kw">function</span> <span class="code-fn">fetchData</span>(callback) {
+            setTimeout(() => {
+                callback(<span class="code-str">"Data received"</span>);
+            }, <span class="code-num">1000</span>);
+        }
+        fetchData(<span class="code-kw">function</span>(data) {
+            console.log(data);
+        });
+
+        <span class="code-cmt">// Promise</span>
+        <span class="code-kw">function</span> <span class="code-fn">fetchDataPromise</span>() {
+            <span class="code-kw">return</span> <span class="code-kw">new</span> Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(<span class="code-str">"Data received"</span>);
+                    <span class="code-cmt">// reject("Error occurred");</span>
+                }, <span class="code-num">1000</span>);
+            });
+        }
+
+        fetchDataPromise()
+            .then(data => console.log(data))
+            .catch(error => console.error(error))
+            .finally(() => console.log(<span class="code-str">"Done"</span>));
+
+        <span class="code-cmt">// Async/Await (ES8)</span>
+        <span class="code-kw">async</span> <span class="code-kw">function</span> <span class="code-fn">getData</span>() {
+            <span class="code-kw">try</span> {
+                <span class="code-var">let</span> data = <span class="code-kw">await</span> fetchDataPromise();
+                console.log(data);
+            } <span class="code-kw">catch</span> (error) {
+                console.error(error);
+            }
+        }
+
+        getData();
+
+        <span class="code-cmt">// Fetch API (AJAX)</span>
+        <span class="code-kw">async</span> <span class="code-kw">function</span> <span class="code-fn">getUsers</span>() {
+            <span class="code-kw">try</span> {
+                <span class="code-var">let</span> response = <span class="code-kw">await</span> fetch(<span class="code-str">"https://jsonplaceholder.typicode.com/users"</span>);
+                <span class="code-var">let</span> data = <span class="code-kw">await</span> response.json();
+                console.log(data);
+            } <span class="code-kw">catch</span> (error) {
+                console.error(<span class="code-str">"Error:"</span>, error);
+            }
+        }</code></div>
+
+                    <div class="demo-box">
+                        <button onclick="demoAsync()">Fetch Data</button>
+                        <div id="asyncOutput" class="output">Click to fetch user data.</div>
+                    </div>
+                    <script>
+                        async function demoAsync() {
+                            const output = document.getElementById('asyncOutput');
+                            output.textContent = 'Loading...';
+                            try {
+                                const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+                                const user = await response.json();
+                                output.textContent = `Name: ${user.name}, Email: ${user.email}, City: ${user.address.city}`;
+                            } catch (error) {
+                                output.textContent = 'Error fetching data';
+                            }
+                        }
+                    </script>
+
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Async/Await:</strong> Always use <code>try/catch</code> with async/await for proper error handling.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 13 ══ -->
+        <section id="ch13">
+            <div class="chapter-header" data-num="13"><div class="chapter-num">Chapter 13</div><h1>Error Handling</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>try, catch, finally, throw</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Basic try/catch</span>
+        <span class="code-kw">try</span> {
+            <span class="code-var">let</span> result = riskyOperation();
+        } <span class="code-kw">catch</span> (error) {
+            console.error(<span class="code-str">"Error:"</span>, error.message);
+        } <span class="code-kw">finally</span> {
+            console.log(<span class="code-str">"This always runs"</span>);
+        }
+
+        <span class="code-cmt">// Throwing custom errors</span>
+        <span class="code-kw">function</span> <span class="code-fn">divide</span>(a, b) {
+            <span class="code-kw">if</span> (b === <span class="code-num">0</span>) {
+                <span class="code-kw">throw</span> <span class="code-kw">new</span> Error(<span class="code-str">"Division by zero"</span>);
+            }
+            <span class="code-kw">return</span> a / b;
+        }
+
+        <span class="code-kw">try</span> {
+            divide(<span class="code-num">10</span>, <span class="code-num">0</span>);
+        } <span class="code-kw">catch</span> (error) {
+            console.error(error.message); <span class="code-cmt">// "Division by zero"</span>
+        }
+
+        <span class="code-cmt">// Custom Error Types</span>
+        <span class="code-kw">class</span> ValidationError <span class="code-kw">extends</span> Error {
+            constructor(message) {
+                super(message);
+                this.name = <span class="code-str">"ValidationError"</span>;
+            }
+        }
+
+        <span class="code-kw">function</span> <span class="code-fn">validateAge</span>(age) {
+            <span class="code-kw">if</span> (age < <span class="code-num">0</span> || age > <span class="code-num">120</span>) {
+                <span class="code-kw">throw</span> <span class="code-kw">new</span> ValidationError(<span class="code-str">"Invalid age"</span>);
+            }
+        }</code></div>
+
+                    <div class="demo-box">
+                        <button onclick="demoError()">Test Error Handling</button>
+                        <div id="errorOutput" class="output">Click to test error handling.</div>
+                    </div>
+                    <script>
+                        function demoError() {
+                            const output = document.getElementById('errorOutput');
+                            try {
+                                const num = parseInt(prompt('Enter a number:'));
+                                if (isNaN(num)) throw new Error('Not a valid number');
+                                output.textContent = `You entered: ${num}`;
+                            } catch (error) {
+                                output.textContent = `Error: ${error.message}`;
+                            } finally {
+                                console.log('Error handling demo completed');
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 14 ══ -->
+        <section id="ch14">
+            <div class="chapter-header" data-num="14"><div class="chapter-num">Chapter 14</div><h1>OOP in JavaScript</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Classes and Inheritance</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Class definition</span>
+        <span class="code-kw">class</span> Animal {
+            constructor(name) {
+                this.name = name;
+            }
+
+            speak() {
+                console.log(<span class="code-str">`${this.name} makes a sound.`</span>);
+            }
+        }
+
+        <span class="code-cmt">// Inheritance</span>
+        <span class="code-kw">class</span> Dog <span class="code-kw">extends</span> Animal {
+            constructor(name, breed) {
+                super(name); <span class="code-cmt">// Call parent constructor</span>
+                this.breed = breed;
+            }
+
+            speak() {
+                console.log(<span class="code-str">`${this.name} barks!`</span>);
+            }
+
+            fetch() {
+                console.log(<span class="code-str">`${this.name} is fetching.`</span>);
+            }
+        }
+
+        <span class="code-cmt">// Static methods</span>
+        <span class="code-kw">class</span> MathUtils {
+            static add(a, b) {
+                <span class="code-kw">return</span> a + b;
+            }
+        }
+
+        console.log(MathUtils.add(<span class="code-num">5</span>, <span class="code-num">3</span>)); <span class="code-cmt">// 8</span>
+
+        <span class="code-cmt">// Getters and Setters</span>
+        <span class="code-kw">class</span> Person {
+            constructor(name) {
+                this._name = name;
+            }
+
+            get name() {
+                <span class="code-kw">return</span> this._name;
+            }
+
+            set name(value) {
+                <span class="code-kw">if</span> (value.length < <span class="code-num">2</span>) {
+                    <span class="code-kw">throw</span> <span class="code-kw">new</span> Error(<span class="code-str">"Name too short"</span>);
+                }
+                this._name = value;
+            }
+        }
+
+        <span class="code-var">let</span> person = <span class="code-kw">new</span> Person(<span class="code-str">"Akarsh"</span>);
+        console.log(person.name); <span class="code-cmt">// "Akarsh"</span>
+        person.name = <span class="code-str">"Shery"</span>; <span class="code-cmt">// Works</span></code></div>
+
+                    <div class="demo-box">
+                        <button onclick="demoOOP()">Run OOP Demo</button>
+                        <div id="oopOutput" class="output">Click to run the OOP demo.</div>
+                    </div>
+                    <script>
+                        function demoOOP() {
+                            class Animal {
+                                constructor(name) { this.name = name; }
+                                speak() { return `${this.name} makes a sound.`; }
+                            }
+                            class Dog extends Animal {
+                                constructor(name, breed) {
+                                    super(name);
+                                    this.breed = breed;
+                                }
+                                speak() { return `${this.name} barks!`; }
+                                fetch() { return `${this.name} is fetching.`; }
+                            }
+                            const dog = new Dog('Buddy', 'Golden Retriever');
+                            const output = document.getElementById('oopOutput');
+                            output.textContent = `${dog.speak()} ${dog.fetch()} Breed: ${dog.breed}`;
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 15 ══ -->
+        <section id="ch15">
+            <div class="chapter-header" data-num="15"><div class="chapter-num">Chapter 15</div><h1>Modules</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Importing and Exporting</h2>
+                    <div class="code-block"><code><span class="code-cmt">// math.js (exporting)</span>
+        <span class="code-cmt">// export const PI = 3.14159;</span>
+        <span class="code-cmt">// export function add(a, b) { return a + b; }</span>
+        <span class="code-cmt">// export default function subtract(a, b) { return a - b; }</span>
+
+        <span class="code-cmt">// main.js (importing)</span>
+        <span class="code-cmt">// import subtract, { PI, add } from './math.js';</span>
+        <span class="code-cmt">// import * as math from './math.js';</span>
+
+        <span class="code-cmt">// Dynamic imports</span>
+        <span class="code-kw">async</span> <span class="code-kw">function</span> <span class="code-fn">loadModule</span>() {
+            <span class="code-var">const</span> module = <span class="code-kw">await</span> import(<span class="code-str">'./math.js'</span>);
+            console.log(module.PI);
+        }</code></div>
+
+                    <h3>CommonJS (Node.js)</h3>
+                    <div class="code-block"><code><span class="code-cmt">// exporting (math.js)</span>
+        <span class="code-var">const</span> PI = <span class="code-num">3.14159</span>;
+        <span class="code-kw">function</span> <span class="code-fn">add</span>(a, b) { <span class="code-kw">return</span> a + b; }
+        module.exports = { PI, add };
+
+        <span class="code-cmt">// importing (main.js)</span>
+        <span class="code-var">const</span> { PI, add } = require(<span class="code-str">'./math'</span>);</code></div>
+
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text">Use <strong>ES6 modules</strong> (import/export) for front-end development and <strong>CommonJS</strong> (require/module.exports) for Node.js.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 16 ══ -->
+        <section id="ch16">
+            <div class="chapter-header" data-num="16"><div class="chapter-num">Chapter 16</div><h1>Advanced Topics</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Closures</h2>
+                    <div class="code-block"><code><span class="code-cmt">// A function with access to its outer scope</span>
+        <span class="code-kw">function</span> <span class="code-fn">outerFunction</span>(outer) {
+            <span class="code-kw">return</span> <span class="code-kw">function</span>(inner) {
+                console.log(<span class="code-str">"Outer:"</span>, outer, <span class="code-str">"Inner:"</span>, inner);
+            };
+        }
+
+        <span class="code-var">const</span> closure = outerFunction(<span class="code-str">"outside"</span>);
+        closure(<span class="code-str">"inside"</span>); <span class="code-cmt">// Outer: outside Inner: inside</span>
+
+        <span class="code-cmt">// Practical: Private variables</span>
+        <span class="code-kw">function</span> <span class="code-fn">counter</span>() {
+            <span class="code-var">let</span> count = <span class="code-num">0</span>;
+            <span class="code-kw">return</span> {
+                increment: () => ++count,
+                decrement: () => --count,
+                getCount: () => count
+            };
+        }</code></div>
+
+                    <h2>Higher-Order Functions</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Functions that take functions as arguments or return functions</span>
+        <span class="code-kw">function</span> <span class="code-fn">operate</span>(a, b, operation) {
+            <span class="code-kw">return</span> operation(a, b);
+        }
+
+        <span class="code-var">const</span> add = (a, b) => a + b;
+        <span class="code-var">const</span> multiply = (a, b) => a * b;
+
+        console.log(operate(<span class="code-num">5</span>, <span class="code-num">3</span>, add));      <span class="code-cmt">// 8</span>
+        console.log(operate(<span class="code-num">5</span>, <span class="code-num">3</span>, multiply)); <span class="code-cmt">// 15</span></code></div>
+
+                    <h2>this Keyword</h2>
+                    <div class="code-block"><code><span class="code-cmt">// 'this' refers to the object that called the function</span>
+        <span class="code-var">const</span> person = {
+            name: <span class="code-str">"Akarsh"</span>,
+            greet() {
+                console.log(<span class="code-str">"Hello, I'm"</span>, this.name);
+            }
+        };
+
+        person.greet(); <span class="code-cmt">// Hello, I'm Akarsh</span>
+
+        <span class="code-cmt">// Arrow functions don't bind 'this'</span>
+        <span class="code-var">const</span> arrow = () => {
+            console.log(this); <span class="code-cmt">// 'this' is from outer scope</span>
+        };</code></div>
+
+                    <h2>Prototype Chain</h2>
+                    <div class="code-block"><code><span class="code-cmt">// Every object has a prototype</span>
+        <span class="code-var">const</span> animal = {
+            speak() { console.log(<span class="code-str">"Speaking..."</span>); }
+        };
+
+        <span class="code-var">const</span> dog = Object.create(animal);
+        dog.bark = <span class="code-kw">function</span>() { console.log(<span class="code-str">"Woof!"</span>); };
+
+        dog.speak(); <span class="code-cmt">// "Speaking..." (from prototype)</span>
+        dog.bark();  <span class="code-cmt">// "Woof!" (own method)</span></code></div>
+
+                    <h2>Event Loop</h2>
+                    <div class="code-block"><code><span class="code-cmt">// JavaScript is single-threaded with an event loop</span>
+        console.log(<span class="code-str">"1"</span>);
+        setTimeout(() => console.log(<span class="code-str">"2"</span>), <span class="code-num">0</span>);
+        console.log(<span class="code-str">"3"</span>);
+        <span class="code-cmt">// Output: 1, 3, 2 (not 1, 2, 3)</span>
+
+        <span class="code-cmt">// Microtasks (Promises) run before macrotasks (setTimeout)</span>
+        console.log(<span class="code-str">"1"</span>);
+        Promise.resolve().then(() => console.log(<span class="code-str">"2"</span>));
+        setTimeout(() => console.log(<span class="code-str">"3"</span>), <span class="code-num">0</span>);
+        console.log(<span class="code-str">"4"</span>);
+        <span class="code-cmt">// Output: 1, 4, 2, 3</span></code></div>
+
+                    <div class="callout callout-success" style="margin:0;">
+                        <span class="callout-icon">🎯</span>
+                        <div class="callout-text"><strong>Congratulations!</strong> You've covered all the essential JavaScript concepts. Keep practicing and building projects to become a JavaScript master!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CLOSING ══ -->
+        <div class="closing">
+            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;">A message from the creator</p>
+            <p style="font-size:18px;line-height:1.85;max-width:620px;margin:0 auto;color:rgba(255,255,255,0.9);">
+                "We'll be learning all of this and so much more on this channel. I, <strong>Akarsh Vyas</strong>, as a creator and representative of Sheryians AI, would like to sincerely thank each and every one of you who stayed with us till the end. You are truly precious to us. Much love! 💙"
+            </p>
+            <p style="margin-top:36px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);">Sheryians Coding School</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section[id]");
+            const links = document.querySelectorAll(".sidebar a");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(a => a.classList.remove("active"));
+                        const link = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+                        if (link) link.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.25 });
+            sections.forEach(s => observer.observe(s));
+        });
+    </script>
+
+</body>
+</html>

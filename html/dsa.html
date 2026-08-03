@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA with Python – Sheryians Coding School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary: #dc2626;
+            --primary-dark: #991b1b;
+            --primary-light: #fef2f2;
+            --secondary: #dc2626;
+            --bg: #fef2f2;
+            --surface: #ffffff;
+            --text-body: #334155;
+            --text-dark: #1e1b4b;
+            --text-muted: #64748b;
+            --border: #fecaca;
+            --shadow: 0 8px 24px rgba(220, 38, 38, 0.08);
+            --radius: 16px;
+            --code-bg: #0f172a;
+            --code-text: #a5f3fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.7;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 265px;
+            height: 100vh;
+            background: var(--primary-dark);
+            overflow-y: auto;
+            z-index: 1000;
+            padding-bottom: 40px;
+            scrollbar-width: thin;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+        }
+        .sidebar-logo h2 {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .sidebar-logo p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11.5px;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-label {
+            padding: 12px 20px 4px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 7px 20px 7px 24px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+            font-weight: 450;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+            border-left-color: #fca5a5;
+        }
+
+        /* ---- MAIN ---- */
+        .main {
+            margin-left: 265px;
+            min-height: 100vh;
+        }
+
+        /* ---- COVER ---- */
+        .cover {
+            background: linear-gradient(145deg, #991b1b 0%, #dc2626 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -140px;
+            right: -140px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.035);
+        }
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.025);
+        }
+        .cover-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 6px 24px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cover h1 {
+            color: #fff;
+            font-size: clamp(40px, 6.5vw, 76px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .cover h1 span {
+            color: #fca5a5;
+        }
+        .cover-sub {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 17px;
+            max-width: 520px;
+            margin: 0 auto 40px;
+        }
+        .cover-note {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            max-width: 500px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14.5px;
+            line-height: 1.65;
+        }
+        .cover-footer {
+            position: absolute;
+            bottom: 28px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ---- CHAPTER HEADER ---- */
+        .chapter-header {
+            background: linear-gradient(145deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 56px 60px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-header::after {
+            content: attr(data-num);
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 110px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            pointer-events: none;
+            font-family: 'Segoe UI', monospace;
+        }
+        .chapter-num {
+            color: #fca5a5;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .chapter-header h1 {
+            color: #fff;
+            font-size: clamp(26px, 4vw, 42px);
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- CONTENT ---- */
+        .content {
+            padding: 48px 60px;
+            max-width: 920px;
+        }
+
+        /* ---- SECTION CARD ---- */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s;
+        }
+        .section:hover {
+            box-shadow: 0 10px 32px rgba(220, 38, 38, 0.10);
+        }
+        .section h2 {
+            color: var(--primary);
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .section h3 {
+            color: var(--secondary);
+            font-size: 15.5px;
+            font-weight: 700;
+            margin: 20px 0 8px;
+        }
+        .section p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .section ul {
+            padding-left: 0;
+            list-style: none;
+        }
+        .section ul li {
+            padding: 5px 0 5px 24px;
+            position: relative;
+            font-size: 15px;
+        }
+        .section ul li::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 14px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.5;
+        }
+
+        /* ---- CODE ---- */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin: 14px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 13.5px;
+            line-height: 1.8;
+        }
+        .code-block code {
+            color: var(--code-text);
+            white-space: pre;
+        }
+        .code-kw {
+            color: #f472b6;
+        }
+        .code-fn {
+            color: #34d399;
+        }
+        .code-str {
+            color: #fcd34d;
+        }
+        .code-cmt {
+            color: #6b7280;
+            font-style: italic;
+        }
+        .code-num {
+            color: #fb923c;
+        }
+
+        /* ---- TABLES ---- */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+        }
+        .styled-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .styled-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            background: #fff;
+        }
+        .styled-table tr:last-child td {
+            border-bottom: none;
+        }
+        .styled-table tr:nth-child(even) td {
+            background: var(--primary-light);
+        }
+        .styled-table td:first-child {
+            color: var(--secondary);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+        }
+
+        /* ---- CALLOUTS ---- */
+        .callout {
+            border-radius: 12px;
+            padding: 16px 22px;
+            margin: 14px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .callout-info {
+            background: var(--primary-light);
+            border-left: 5px solid var(--primary);
+        }
+        .callout-warn {
+            background: #fffbeb;
+            border-left: 5px solid #b45309;
+        }
+        .callout-success {
+            background: #ecfdf5;
+            border-left: 5px solid #0b7e4b;
+        }
+        .callout-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .callout-text {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
+        .callout-text strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+        }
+
+        /* ---- GRIDS ---- */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 14px 0;
+        }
+        .compare-card {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .compare-card h4 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .powers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+        .power-item {
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            border-left: 4px solid var(--primary);
+        }
+        .power-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+        .power-item span {
+            font-size: 13px;
+            color: var(--text-body);
+        }
+
+        /* ---- QUESTIONS ---- */
+        .questions {
+            background: var(--primary-light);
+            border-radius: 14px;
+            padding: 22px 26px;
+            margin: 18px 0;
+        }
+        .questions h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 15.5px;
+        }
+        .q-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+        }
+        .q-item:last-child {
+            margin-bottom: 0;
+        }
+        .q-num {
+            color: var(--secondary);
+            font-weight: 800;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .q-text {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .q-io {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .q-io span {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 3px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+        }
+        .q-io .q-in {
+            color: var(--primary);
+        }
+        .q-io .q-out {
+            color: #0b7e4b;
+        }
+
+        /* ---- COMPLEXITY ---- */
+        .complexity-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 4px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 4px 0;
+        }
+        .complexity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+        .complexity-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 14px;
+            text-align: center;
+        }
+        .complexity-item .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .complexity-item .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* ---- CLOSING ---- */
+        .closing {
+            background: linear-gradient(145deg, #991b1b, #dc2626);
+            padding: 60px 80px;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+            }
+            .content {
+                padding: 24px 18px;
+            }
+            .chapter-header {
+                padding: 36px 22px 28px;
+            }
+            .compare-grid,
+            .powers-grid,
+            .complexity-grid {
+                grid-template-columns: 1fr;
+            }
+            .cover {
+                padding: 60px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══ SIDEBAR ══ -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Sheryians Coding School</h2>
+            <p>DSA with Python Notes</p>
+        </div>
+        <div class="nav-label">Start Here</div>
+        <a href="#cover">📘 Cover</a>
+        <div class="nav-label">Introduction</div>
+        <a href="#intro">🧠 What is DSA?</a>
+        <div class="nav-label">Chapters</div>
+        <a href="#ch01">01 — Complexity Analysis</a>
+        <a href="#ch02">02 — Arrays &amp; Lists</a>
+        <a href="#ch03">03 — Linked List</a>
+        <a href="#ch04">04 — Stack</a>
+        <a href="#ch05">05 — Queue</a>
+        <a href="#ch06">06 — Recursion</a>
+        <a href="#ch07">07 — Sorting Algorithms</a>
+        <a href="#ch08">08 — Searching Algorithms</a>
+        <a href="#ch09">09 — Trees</a>
+        <a href="#ch10">10 — Binary Search Tree</a>
+        <a href="#ch11">11 — Tree Traversals</a>
+        <a href="#ch12">12 — Heaps</a>
+        <a href="#ch13">13 — Hashing</a>
+        <a href="#ch14">14 — Graphs</a>
+        <a href="#ch15">15 — Graph Traversals</a>
+        <a href="#ch16">16 — Dynamic Programming</a>
+    </nav>
+
+    <div class="main">
+
+        <!-- ══ COVER ══ -->
+        <section id="cover" class="cover">
+            <div class="cover-badge">Sheryians Coding School</div>
+            <h1>Data Structures<br><span>&amp; Algorithms in Python</span></h1>
+            <p class="cover-sub">Master the fundamentals of DSA with Python — from arrays to dynamic programming.</p>
+            <div class="cover-note">
+                🎬 <strong>Watch alongside!</strong> This book is designed to work hand-in-hand with the video series on <strong>Sheryians AI</strong> on YouTube. Every concept here has a matching video explanation.
+            </div>
+            <div class="cover-footer">written by Muhammad Nouman · Sheryians Coding School</div>
+        </section>
+
+        <!-- ══ INTRO ══ -->
+        <section id="intro">
+            <div class="chapter-header" data-num="00">
+                <div class="chapter-num">Introduction</div>
+                <h1>What is Data Structures &amp; Algorithms?</h1>
+            </div>
+            <div class="content">
+
+                <div class="section">
+                    <h2>🧠 DSA in Simple Words</h2>
+                    <p><strong>Data Structures</strong> are ways to organize and store data efficiently. <strong>Algorithms</strong> are step-by-step procedures to solve problems.</p>
+                    <p>Think of it like this: Data structures are like different types of containers (boxes, shelves, files), and algorithms are like the methods to organize and find things in these containers.</p>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📦 Data Structures</h4>
+                            <p>How to store data:</p>
+                            <ul>
+                                <li>Arrays — simple list</li>
+                                <li>Linked Lists — flexible chain</li>
+                                <li>Trees — hierarchical</li>
+                                <li>Graphs — networked</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>⚙️ Algorithms</h4>
+                            <p>How to process data:</p>
+                            <ul>
+                                <li>Sorting — arrange data</li>
+                                <li>Searching — find data</li>
+                                <li>Dynamic Programming — optimize</li>
+                                <li>Graph algorithms — navigate networks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 Why Learn DSA?</h2>
+                    <div class="powers-grid">
+                        <div class="power-item"><strong>💼 Job Interviews</strong><span>Tech companies test DSA knowledge in interviews. It's the #1 skill assessed.</span></div>
+                        <div class="power-item"><strong>🚀 Efficient Code</strong><span>Choose the right data structure and algorithm to make your code 100x faster.</span></div>
+                        <div class="power-item"><strong>🧩 Problem Solving</strong><span>DSA teaches you to think logically and break down complex problems.</span></div>
+                        <div class="power-item"><strong>📈 Scalability</strong><span>Build systems that can handle millions of users and data points.</span></div>
+                        <div class="power-item"><strong>🔄 Reusable Patterns</strong><span>Many problems share the same underlying patterns — once learned, applied everywhere.</span></div>
+                        <div class="power-item"><strong>🏆 Competitive Programming</strong><span>Master DSA to excel in coding competitions like Codeforces, LeetCode, and more.</span></div>
+                    </div>
+                </div>
+
+                <div class="callout callout-success" style="margin:0;">
+                    <span class="callout-icon">🚀</span>
+                    <div class="callout-text"><strong>You're all set!</strong> Let's dive into the world of Data Structures and Algorithms with Python. Head to Chapter 01!</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══ CH 01 ══ -->
+        <section id="ch01">
+            <div class="chapter-header" data-num="01"><div class="chapter-num">Chapter 01</div><h1>Complexity Analysis</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Time &amp; Space Complexity</h2>
+                    <p>Complexity analysis helps us understand how efficient an algorithm is. It's measured in terms of <strong>time</strong> (how fast) and <strong>space</strong> (how much memory).</p>
+                    
+                    <h3>Big O Notation</h3>
+                    <p>Big O describes the worst-case scenario. It tells us how the runtime grows as input size grows.</p>
+                    
+                    <table class="styled-table">
+                        <tr><th>Notation</th><th>Name</th><th>Example</th></tr>
+                        <tr><td>O(1)</td><td>Constant</td><td>Accessing array element</td></tr>
+                        <tr><td>O(log n)</td><td>Logarithmic</td><td>Binary search</td></tr>
+                        <tr><td>O(n)</td><td>Linear</td><td>Loop through array</td></tr>
+                        <tr><td>O(n log n)</td><td>Linearithmic</td><td>Merge sort, Quick sort</td></tr>
+                        <tr><td>O(n²)</td><td>Quadratic</td><td>Nested loops (Bubble sort)</td></tr>
+                        <tr><td>O(2^n)</td><td>Exponential</td><td>Recursive Fibonacci (naive)</td></tr>
+                        <tr><td>O(n!)</td><td>Factorial</td><td>Traveling Salesman (naive)</td></tr>
+                    </table>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># O(1) — Constant Time</span>
+        <span class="code-kw">def</span> <span class="code-fn">get_first</span>(arr):
+            <span class="code-kw">return</span> arr[<span class="code-num">0</span>]   <span class="code-cmt"># Always takes the same time</span>
+
+        <span class="code-cmt"># O(n) — Linear Time</span>
+        <span class="code-kw">def</span> <span class="code-fn">find_max</span>(arr):
+            max_val = arr[<span class="code-num">0</span>]
+            <span class="code-kw">for</span> num <span class="code-kw">in</span> arr:    <span class="code-cmt"># Runs n times</span>
+                <span class="code-kw">if</span> num > max_val:
+                    max_val = num
+            <span class="code-kw">return</span> max_val
+
+        <span class="code-cmt"># O(n²) — Quadratic Time</span>
+        <span class="code-kw">def</span> <span class="code-fn">print_pairs</span>(arr):
+            <span class="code-kw">for</span> i <span class="code-kw">in</span> <span class="code-fn">range</span>(<span class="code-fn">len</span>(arr)):
+                <span class="code-kw">for</span> j <span class="code-kw">in</span> <span class="code-fn">range</span>(<span class="code-fn">len</span>(arr)):  <span class="code-cmt"># Nested loop</span>
+                    <span class="code-fn">print</span>(arr[i], arr[j])</code></div>
+                    
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Space Complexity:</strong> Similar to time complexity, but measures memory usage. For example, creating a new array of size n adds O(n) space.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 02 ══ -->
+        <section id="ch02">
+            <div class="chapter-header" data-num="02"><div class="chapter-num">Chapter 02</div><h1>Arrays &amp; Lists</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Arrays in Python</h2>
+                    <p>Python's <code>list</code> is a dynamic array that can grow and shrink as needed.</p>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Creating arrays</span>
+        arr = [<span class="code-num">1</span>, <span class="code-num">2</span>, <span class="code-num">3</span>, <span class="code-num">4</span>, <span class="code-num">5</span>]
+        arr = <span class="code-fn">list</span>(<span class="code-fn">range</span>(<span class="code-num">5</span>))     <span class="code-cmt"># [0, 1, 2, 3, 4]</span>
+
+        <span class="code-cmt"># Accessing elements</span>
+        arr[<span class="code-num">0</span>]   <span class="code-cmt"># First element</span>
+        arr[<span class="code-num">-1</span>]  <span class="code-cmt"># Last element</span>
+
+        <span class="code-cmt"># Slicing</span>
+        arr[<span class="code-num">1</span>:<span class="code-num">4</span>]  <span class="code-cmt"># [2, 3, 4]</span>
+        arr[::<span class="code-num">2</span>]   <span class="code-cmt"># [1, 3, 5] — every 2nd element</span>
+
+        <span class="code-cmt"># Operations</span>
+        arr.append(<span class="code-num">6</span>)     <span class="code-cmt"># Add to end — O(1)</span>
+        arr.insert(<span class="code-num">0</span>, <span class="code-num">0</span>)  <span class="code-cmt"># Insert at index — O(n)</span>
+        arr.pop()            <span class="code-cmt"># Remove from end — O(1)</span>
+        arr.pop(<span class="code-num">0</span>)          <span class="code-cmt"># Remove from start — O(n)</span>
+        arr.remove(<span class="code-num">3</span>)        <span class="code-cmt"># Remove first 3 — O(n)</span>
+        arr.index(<span class="code-num">5</span>)         <span class="code-cmt"># Find index — O(n)</span>
+        arr.sort()           <span class="code-cmt"># Sort — O(n log n)</span>
+        arr.reverse()        <span class="code-cmt"># Reverse — O(n)</span></code></div>
+                    
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>✅ Advantages</h4>
+                            <ul>
+                                <li>Fast random access O(1)</li>
+                                <li>Cache-friendly</li>
+                                <li>Simple to use</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>❌ Disadvantages</h4>
+                            <ul>
+                                <li>Insert/delete at start O(n)</li>
+                                <li>Fixed size (in some languages)</li>
+                                <li>Memory fragmentation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="questions">
+                        <h3>📝 Array Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Find the maximum and minimum element in an array.</div><div class="q-io"><span class="q-in">Input: [3, 1, 4, 1, 5]</span><span class="q-out">Max: 5, Min: 1</span></div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Reverse an array in-place.</div><div class="q-io"><span class="q-in">Input: [1, 2, 3, 4]</span><span class="q-out">[4, 3, 2, 1]</span></div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Find the second largest element.</div><div class="q-io"><span class="q-in">Input: [10, 20, 5, 30, 15]</span><span class="q-out">Second largest: 20</span></div></div>
+                        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">Move all zeros to the end while maintaining order.</div><div class="q-io"><span class="q-in">Input: [0, 1, 0, 3, 12]</span><span class="q-out">[1, 3, 12, 0, 0]</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 03 ══ -->
+        <section id="ch03">
+            <div class="chapter-header" data-num="03"><div class="chapter-num">Chapter 03</div><h1>Linked List</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Singly Linked List</h2>
+                    <p>A linked list is a linear data structure where elements are stored in nodes, each pointing to the next node.</p>
+                    
+                    <div class="code-block"><code><span class="code-kw">class</span> Node:
+        <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, data):
+            self.data = data
+            self.next = <span class="code-kw">None</span>
+
+        <span class="code-kw">class</span> LinkedList:
+            <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+                self.head = <span class="code-kw">None</span>
+
+            <span class="code-kw">def</span> <span class="code-fn">append</span>(self, data):    <span class="code-cmt"># O(n)</span>
+                new_node = Node(data)
+                <span class="code-kw">if</span> self.head <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                    self.head = new_node
+                    <span class="code-kw">return</span>
+                last = self.head
+                <span class="code-kw">while</span> last.next:
+                    last = last.next
+                last.next = new_node
+
+            <span class="code-kw">def</span> <span class="code-fn">prepend</span>(self, data):   <span class="code-cmt"># O(1)</span>
+                new_node = Node(data)
+                new_node.next = self.head
+                self.head = new_node
+
+            <span class="code-kw">def</span> <span class="code-fn">delete</span>(self, key):      <span class="code-cmt"># O(n)</span>
+                current = self.head
+                <span class="code-kw">if</span> current <span class="code-kw">and</span> current.data == key:
+                    self.head = current.next
+                    <span class="code-kw">return</span>
+                prev = <span class="code-kw">None</span>
+                <span class="code-kw">while</span> current <span class="code-kw">and</span> current.data != key:
+                    prev = current
+                    current = current.next
+                <span class="code-kw">if</span> current <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                    <span class="code-kw">return</span>
+                prev.next = current.next
+
+            <span class="code-kw">def</span> <span class="code-fn">display</span>(self):
+                current = self.head
+                <span class="code-kw">while</span> current:
+                    <span class="code-fn">print</span>(current.data, end=<span class="code-str">" -> "</span>)
+                    current = current.next
+                <span class="code-fn">print</span>(<span class="code-str">"None"</span>)</code></div>
+                    
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>✅ Advantages</h4>
+                            <ul>
+                                <li>Dynamic size</li>
+                                <li>Fast insert/delete at start O(1)</li>
+                                <li>No memory wastage</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>❌ Disadvantages</h4>
+                            <ul>
+                                <li>No random access O(n)</li>
+                                <li>Extra memory for pointers</li>
+                                <li>Not cache-friendly</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="questions">
+                        <h3>📝 Linked List Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Reverse a linked list iteratively.</div><div class="q-io"><span class="q-in">Input: 1→2→3→4</span><span class="q-out">4→3→2→1</span></div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Detect a loop/cycle in a linked list.</div><div class="q-io"><span class="q-in">1→2→3→4→2 (cycle)</span><span class="q-out">Cycle detected ✅</span></div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Find the middle node of a linked list.</div><div class="q-io"><span class="q-in">1→2→3→4→5</span><span class="q-out">Middle: 3</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 04 ══ -->
+        <section id="ch04">
+            <div class="chapter-header" data-num="04"><div class="chapter-num">Chapter 04</div><h1>Stack</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>LIFO — Last In, First Out</h2>
+                    <p>A stack follows LIFO principle. Think of a stack of plates — you add to the top and remove from the top.</p>
+                    
+                    <div class="code-block"><code><span class="code-kw">class</span> Stack:
+        <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+            self.items = []
+
+        <span class="code-kw">def</span> <span class="code-fn">push</span>(self, item):     <span class="code-cmt"># O(1)</span>
+            self.items.append(item)
+
+        <span class="code-kw">def</span> <span class="code-fn">pop</span>(self):          <span class="code-cmt"># O(1)</span>
+            <span class="code-kw">if</span> <span class="code-kw">not</span> self.is_empty():
+                <span class="code-kw">return</span> self.items.pop()
+
+        <span class="code-kw">def</span> <span class="code-fn">peek</span>(self):         <span class="code-cmt"># O(1)</span>
+            <span class="code-kw">if</span> <span class="code-kw">not</span> self.is_empty():
+                <span class="code-kw">return</span> self.items[<span class="code-num">-1</span>]
+
+        <span class="code-kw">def</span> <span class="code-fn">is_empty</span>(self):
+            <span class="code-kw">return</span> len(self.items) == <span class="code-num">0</span>
+
+        <span class="code-kw">def</span> <span class="code-fn">size</span>(self):
+            <span class="code-kw">return</span> len(self.items)</code></div>
+                    
+                    <div class="questions">
+                        <h3>📝 Stack Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Check if parentheses are balanced. ( { [ ] } )</div><div class="q-io"><span class="q-in">Input: "({[]})"</span><span class="q-out">Balanced ✅</span><span class="q-in">Input: "({[})"</span><span class="q-out">Not balanced ❌</span></div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Evaluate a postfix expression.</div><div class="q-io"><span class="q-in">Input: "23*5+"</span><span class="q-out">11</span></div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Implement a queue using two stacks.</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 05 ══ -->
+        <section id="ch05">
+            <div class="chapter-header" data-num="05"><div class="chapter-num">Chapter 05</div><h1>Queue</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>FIFO — First In, First Out</h2>
+                    <p>A queue follows FIFO principle. Think of a ticket counter line — first person in line gets served first.</p>
+                    
+                    <div class="code-block"><code><span class="code-kw">class</span> Queue:
+        <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+            self.items = []
+
+        <span class="code-kw">def</span> <span class="code-fn">enqueue</span>(self, item):  <span class="code-cmt"># O(1)</span>
+            self.items.append(item)
+
+        <span class="code-kw">def</span> <span class="code-fn">dequeue</span>(self):       <span class="code-cmt"># O(n) — inefficient!</span>
+            <span class="code-kw">if</span> <span class="code-kw">not</span> self.is_empty():
+                <span class="code-kw">return</span> self.items.pop(<span class="code-num">0</span>)
+
+        <span class="code-kw">def</span> <span class="code-fn">front</span>(self):
+            <span class="code-kw">if</span> <span class="code-kw">not</span> self.is_empty():
+                <span class="code-kw">return</span> self.items[<span class="code-num">0</span>]
+
+        <span class="code-kw">def</span> <span class="code-fn">is_empty</span>(self):
+            <span class="code-kw">return</span> len(self.items) == <span class="code-num">0</span></code></div>
+
+                    <div class="code-block"><code><span class="code-cmt"># Better implementation using collections.deque</span>
+        <span class="code-kw">from</span> collections <span class="code-kw">import</span> deque
+
+        <span class="code-kw">class</span> Queue:
+            <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+                self.items = deque()
+
+            <span class="code-kw">def</span> <span class="code-fn">enqueue</span>(self, item):   <span class="code-cmt"># O(1)</span>
+                self.items.append(item)
+
+            <span class="code-kw">def</span> <span class="code-fn">dequeue</span>(self):        <span class="code-cmt"># O(1)</span>
+                <span class="code-kw">if</span> <span class="code-kw">not</span> self.is_empty():
+                    <span class="code-kw">return</span> self.items.popleft()
+
+            <span class="code-kw">def</span> <span class="code-fn">front</span>(self):
+                <span class="code-kw">if</span> <span class="code-kw">not</span> self.is_empty():
+                    <span class="code-kw">return</span> self.items[<span class="code-num">0</span>]
+
+            <span class="code-kw">def</span> <span class="code-fn">is_empty</span>(self):
+                <span class="code-kw">return</span> len(self.items) == <span class="code-num">0</span></code></div>
+                    
+                    <div class="questions">
+                        <h3>📝 Queue Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Implement a circular queue using array.</div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Generate binary numbers from 1 to n using a queue.</div><div class="q-io"><span class="q-in">Input: 5</span><span class="q-out">1, 10, 11, 100, 101</span></div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Implement a stack using two queues.</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 06 ══ -->
+        <section id="ch06">
+            <div class="chapter-header" data-num="06"><div class="chapter-num">Chapter 06</div><h1>Recursion</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Function Calling Itself</h2>
+                    <p>Recursion is when a function calls itself. Every recursive function needs:</p>
+                    <ul>
+                        <li><strong>Base case</strong> — when to stop</li>
+                        <li><strong>Recursive case</strong> — when to call itself</li>
+                    </ul>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Factorial using recursion</span>
+        <span class="code-kw">def</span> <span class="code-fn">factorial</span>(n):
+            <span class="code-kw">if</span> n <= <span class="code-num">1</span>:      <span class="code-cmt"># Base case</span>
+                <span class="code-kw">return</span> <span class="code-num">1</span>
+            <span class="code-kw">return</span> n * factorial(n - <span class="code-num">1</span>)  <span class="code-cmt"># Recursive case</span>
+
+        <span class="code-cmt"># Fibonacci using recursion</span>
+        <span class="code-kw">def</span> <span class="code-fn">fibonacci</span>(n):
+            <span class="code-kw">if</span> n <= <span class="code-num">1</span>:      <span class="code-cmt"># Base case</span>
+                <span class="code-kw">return</span> n
+            <span class="code-kw">return</span> fibonacci(n - <span class="code-num">1</span>) + fibonacci(n - <span class="code-num">2</span>)  <span class="code-cmt"># Recursive</span>
+
+        <span class="code-cmt"># Recursive traversal</span>
+        <span class="code-kw">def</span> <span class="code-fn">traverse</span>(node):
+            <span class="code-kw">if</span> node <span class="code-kw">is</span> <span class="code-kw">None</span>:   <span class="code-cmt"># Base case</span>
+                <span class="code-kw">return</span>
+            <span class="code-fn">print</span>(node.data)
+            traverse(node.left)   <span class="code-cmt"># Recursive</span>
+            traverse(node.right)  <span class="code-cmt"># Recursive</span></code></div>
+                    
+                    <div class="callout callout-warn"><span class="callout-icon">⚠️</span><div class="callout-text"><strong>Stack Overflow:</strong> Recursion uses the call stack. Deep recursion may cause stack overflow. Use iterative solutions for very deep recursion.</div></div>
+                    
+                    <div class="questions">
+                        <h3>📝 Recursion Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Calculate power of a number (x^n) recursively.</div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Print all permutations of a string.</div><div class="q-io"><span class="q-in">Input: "abc"</span><span class="q-out">abc, acb, bac, bca, cab, cba</span></div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Tower of Hanoi problem.</div></div>
+                        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">Check if a string is a palindrome recursively.</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 07 ══ -->
+        <section id="ch07">
+            <div class="chapter-header" data-num="07"><div class="chapter-num">Chapter 07</div><h1>Sorting Algorithms</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Popular Sorting Algorithms</h2>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Bubble Sort — O(n²)</span>
+        <span class="code-kw">def</span> <span class="code-fn">bubble_sort</span>(arr):
+            n = len(arr)
+            <span class="code-kw">for</span> i <span class="code-kw">in</span> <span class="code-fn">range</span>(n):
+                <span class="code-kw">for</span> j <span class="code-kw">in</span> <span class="code-fn">range</span>(<span class="code-num">0</span>, n - i - <span class="code-num">1</span>):
+                    <span class="code-kw">if</span> arr[j] > arr[j + <span class="code-num">1</span>]:
+                        arr[j], arr[j + <span class="code-num">1</span>] = arr[j + <span class="code-num">1</span>], arr[j]
+            <span class="code-kw">return</span> arr
+
+        <span class="code-cmt"># Selection Sort — O(n²)</span>
+        <span class="code-kw">def</span> <span class="code-fn">selection_sort</span>(arr):
+            n = len(arr)
+            <span class="code-kw">for</span> i <span class="code-kw">in</span> <span class="code-fn">range</span>(n):
+                min_idx = i
+                <span class="code-kw">for</span> j <span class="code-kw">in</span> <span class="code-fn">range</span>(i + <span class="code-num">1</span>, n):
+                    <span class="code-kw">if</span> arr[j] < arr[min_idx]:
+                        min_idx = j
+                arr[i], arr[min_idx] = arr[min_idx], arr[i]
+            <span class="code-kw">return</span> arr</code></div>
+
+                    <div class="code-block"><code><span class="code-cmt"># Merge Sort — O(n log n)</span>
+        <span class="code-kw">def</span> <span class="code-fn">merge_sort</span>(arr):
+            <span class="code-kw">if</span> len(arr) <= <span class="code-num">1</span>:
+                <span class="code-kw">return</span> arr
+            mid = len(arr) // <span class="code-num">2</span>
+            left = merge_sort(arr[:mid])
+            right = merge_sort(arr[mid:])
+            <span class="code-kw">return</span> <span class="code-fn">merge</span>(left, right)
+
+        <span class="code-kw">def</span> <span class="code-fn">merge</span>(left, right):
+            result = []
+            i = j = <span class="code-num">0</span>
+            <span class="code-kw">while</span> i < len(left) <span class="code-kw">and</span> j < len(right):
+                <span class="code-kw">if</span> left[i] <= right[j]:
+                    result.append(left[i])
+                    i += <span class="code-num">1</span>
+                <span class="code-kw">else</span>:
+                    result.append(right[j])
+                    j += <span class="code-num">1</span>
+            result.extend(left[i:])
+            result.extend(right[j:])
+            <span class="code-kw">return</span> result
+
+        <span class="code-cmt"># Quick Sort — O(n log n) average</span>
+        <span class="code-kw">def</span> <span class="code-fn">quick_sort</span>(arr):
+            <span class="code-kw">if</span> len(arr) <= <span class="code-num">1</span>:
+                <span class="code-kw">return</span> arr
+            pivot = arr[len(arr) // <span class="code-num">2</span>]
+            left = [x <span class="code-kw">for</span> x <span class="code-kw">in</span> arr <span class="code-kw">if</span> x < pivot]
+            middle = [x <span class="code-kw">for</span> x <span class="code-kw">in</span> arr <span class="code-kw">if</span> x == pivot]
+            right = [x <span class="code-kw">for</span> x <span class="code-kw">in</span> arr <span class="code-kw">if</span> x > pivot]
+            <span class="code-kw">return</span> quick_sort(left) + middle + quick_sort(right)</code></div>
+
+                    <table class="styled-table">
+                        <tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th></tr>
+                        <tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+                        <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+                        <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+                        <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td></tr>
+                        <tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td></tr>
+                        <tr><td>Heap Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(1)</td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 08 ══ -->
+        <section id="ch08">
+            <div class="chapter-header" data-num="08"><div class="chapter-num">Chapter 08</div><h1>Searching Algorithms</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Linear &amp; Binary Search</h2>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Linear Search — O(n)</span>
+        <span class="code-kw">def</span> <span class="code-fn">linear_search</span>(arr, target):
+            <span class="code-kw">for</span> i, val <span class="code-kw">in</span> <span class="code-fn">enumerate</span>(arr):
+                <span class="code-kw">if</span> val == target:
+                    <span class="code-kw">return</span> i
+            <span class="code-kw">return</span> -<span class="code-num">1</span>
+
+        <span class="code-cmt"># Binary Search — O(log n) — requires sorted array</span>
+        <span class="code-kw">def</span> <span class="code-fn">binary_search</span>(arr, target):
+            left, right = <span class="code-num">0</span>, len(arr) - <span class="code-num">1</span>
+            <span class="code-kw">while</span> left <= right:
+                mid = (left + right) // <span class="code-num">2</span>
+                <span class="code-kw">if</span> arr[mid] == target:
+                    <span class="code-kw">return</span> mid
+                <span class="code-kw">elif</span> arr[mid] < target:
+                    left = mid + <span class="code-num">1</span>
+                <span class="code-kw">else</span>:
+                    right = mid - <span class="code-num">1</span>
+            <span class="code-kw">return</span> -<span class="code-num">1</span>
+
+        <span class="code-cmt"># Binary Search (recursive)</span>
+        <span class="code-kw">def</span> <span class="code-fn">binary_search_recursive</span>(arr, target, left, right):
+            <span class="code-kw">if</span> left > right:
+                <span class="code-kw">return</span> -<span class="code-num">1</span>
+            mid = (left + right) // <span class="code-num">2</span>
+            <span class="code-kw">if</span> arr[mid] == target:
+                <span class="code-kw">return</span> mid
+            <span class="code-kw">elif</span> arr[mid] < target:
+                <span class="code-kw">return</span> binary_search_recursive(arr, target, mid + <span class="code-num">1</span>, right)
+            <span class="code-kw">else</span>:
+                <span class="code-kw">return</span> binary_search_recursive(arr, target, left, mid - <span class="code-num">1</span>)</code></div>
+                    
+                    <div class="questions">
+                        <h3>📝 Search Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Find the first and last occurrence of a target in a sorted array.</div><div class="q-io"><span class="q-in">Input: [1,2,2,2,3], target=2</span><span class="q-out">First: 1, Last: 3</span></div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Search in a rotated sorted array.</div><div class="q-io"><span class="q-in">Input: [4,5,6,7,0,1,2], target=0</span><span class="q-out">Index: 4</span></div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Find the square root of a number using binary search.</div><div class="q-io"><span class="q-in">Input: 16</span><span class="q-out">4</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 09 ══ -->
+        <section id="ch09">
+            <div class="chapter-header" data-num="09"><div class="chapter-num">Chapter 09</div><h1>Trees</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Tree Data Structure</h2>
+                    <p>A tree is a hierarchical data structure with a root node and child nodes. Each node has a parent (except root) and zero or more children.</p>
+                    
+                    <div class="code-block"><code><span class="code-kw">class</span> TreeNode:
+        <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, data):
+            self.data = data
+            self.children = []
+
+        <span class="code-cmt"># Creating a tree</span>
+        root = TreeNode(<span class="code-str">"A"</span>)
+        child1 = TreeNode(<span class="code-str">"B"</span>)
+        child2 = TreeNode(<span class="code-str">"C"</span>)
+        child3 = TreeNode(<span class="code-str">"D"</span>)
+
+        root.children.extend([child1, child2, child3])
+        child1.children.append(TreeNode(<span class="code-str">"E"</span>))
+        child1.children.append(TreeNode(<span class="code-str">"F"</span>))</code></div>
+
+                    <h3>Binary Tree</h3>
+                    <p>A binary tree is a tree where each node has at most 2 children (left and right).</p>
+                    
+                    <div class="code-block"><code><span class="code-kw">class</span> BinaryTreeNode:
+        <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, data):
+            self.data = data
+            self.left = <span class="code-kw">None</span>
+            self.right = <span class="code-kw">None</span>
+
+        <span class="code-cmt"># Creating a binary tree</span>
+        root = BinaryTreeNode(<span class="code-num">1</span>)
+        root.left = BinaryTreeNode(<span class="code-num">2</span>)
+        root.right = BinaryTreeNode(<span class="code-num">3</span>)
+        root.left.left = BinaryTreeNode(<span class="code-num">4</span>)
+        root.left.right = BinaryTreeNode(<span class="code-num">5</span>)
+
+        <span class="code-cmt">#       1</span>
+        <span class="code-cmt">#      / \</span>
+        <span class="code-cmt">#     2   3</span>
+        <span class="code-cmt">#    / \</span>
+        <span class="code-cmt">#   4   5</span></code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 10 ══ -->
+        <section id="ch10">
+            <div class="chapter-header" data-num="10"><div class="chapter-num">Chapter 10</div><h1>Binary Search Tree (BST)</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>BST — Sorted Binary Tree</h2>
+                    <p>A BST is a binary tree where:</p>
+                    <ul>
+                        <li>All nodes in the left subtree are <strong>less than</strong> the node</li>
+                        <li>All nodes in the right subtree are <strong>greater than</strong> the node</li>
+                    </ul>
+                    
+                    <div class="code-block"><code><span class="code-kw">class</span> BSTNode:
+        <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, data):
+            self.data = data
+            self.left = <span class="code-kw">None</span>
+            self.right = <span class="code-kw">None</span>
+
+        <span class="code-kw">class</span> BST:
+            <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+                self.root = <span class="code-kw">None</span>
+
+            <span class="code-kw">def</span> <span class="code-fn">insert</span>(self, data):
+                <span class="code-kw">if</span> self.root <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                    self.root = BSTNode(data)
+                <span class="code-kw">else</span>:
+                    self._insert_recursive(self.root, data)
+
+            <span class="code-kw">def</span> <span class="code-fn">_insert_recursive</span>(self, node, data):
+                <span class="code-kw">if</span> data < node.data:
+                    <span class="code-kw">if</span> node.left <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                        node.left = BSTNode(data)
+                    <span class="code-kw">else</span>:
+                        self._insert_recursive(node.left, data)
+                <span class="code-kw">else</span>:
+                    <span class="code-kw">if</span> node.right <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                        node.right = BSTNode(data)
+                    <span class="code-kw">else</span>:
+                        self._insert_recursive(node.right, data)
+
+            <span class="code-kw">def</span> <span class="code-fn">search</span>(self, data):
+                <span class="code-kw">return</span> self._search_recursive(self.root, data)
+
+            <span class="code-kw">def</span> <span class="code-fn">_search_recursive</span>(self, node, data):
+                <span class="code-kw">if</span> node <span class="code-kw">is</span> <span class="code-kw">None</span> <span class="code-kw">or</span> node.data == data:
+                    <span class="code-kw">return</span> node
+                <span class="code-kw">if</span> data < node.data:
+                    <span class="code-kw">return</span> self._search_recursive(node.left, data)
+                <span class="code-kw">return</span> self._search_recursive(node.right, data)
+
+        <span class="code-cmt"># Usage</span>
+        bst = BST()
+        bst.insert(<span class="code-num">5</span>)
+        bst.insert(<span class="code-num">3</span>)
+        bst.insert(<span class="code-num">7</span>)
+        bst.insert(<span class="code-num">2</span>)
+        bst.insert(<span class="code-num">4</span>)
+        bst.insert(<span class="code-num">6</span>)
+        bst.insert(<span class="code-num">8</span>)</code></div>
+                    
+                    <table class="styled-table">
+                        <tr><th>Operation</th><th>Average</th><th>Worst</th></tr>
+                        <tr><td>Search</td><td>O(log n)</td><td>O(n)</td></tr>
+                        <tr><td>Insert</td><td>O(log n)</td><td>O(n)</td></tr>
+                        <tr><td>Delete</td><td>O(log n)</td><td>O(n)</td></tr>
+                    </table>
+                    
+                    <div class="questions">
+                        <h3>📝 BST Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Find the minimum and maximum value in a BST.</div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Check if a binary tree is a valid BST.</div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Find the lowest common ancestor (LCA) of two nodes in a BST.</div></div>
+                        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">Find the kth smallest element in a BST.</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 11 ══ -->
+        <section id="ch11">
+            <div class="chapter-header" data-num="11"><div class="chapter-num">Chapter 11</div><h1>Tree Traversals</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>DFS &amp; BFS Traversals</h2>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Preorder: Root → Left → Right</span>
+        <span class="code-kw">def</span> <span class="code-fn">preorder</span>(node):
+            <span class="code-kw">if</span> node <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                <span class="code-kw">return</span>
+            <span class="code-fn">print</span>(node.data, end=<span class="code-str">" "</span>)
+            preorder(node.left)
+            preorder(node.right)
+
+        <span class="code-cmt"># Inorder: Left → Root → Right (gives sorted order for BST)</span>
+        <span class="code-kw">def</span> <span class="code-fn">inorder</span>(node):
+            <span class="code-kw">if</span> node <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                <span class="code-kw">return</span>
+            inorder(node.left)
+            <span class="code-fn">print</span>(node.data, end=<span class="code-str">" "</span>)
+            inorder(node.right)
+
+        <span class="code-cmt"># Postorder: Left → Right → Root</span>
+        <span class="code-kw">def</span> <span class="code-fn">postorder</span>(node):
+            <span class="code-kw">if</span> node <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                <span class="code-kw">return</span>
+            postorder(node.left)
+            postorder(node.right)
+            <span class="code-fn">print</span>(node.data, end=<span class="code-str">" "</span>)
+
+        <span class="code-cmt"># BFS / Level Order</span>
+        <span class="code-kw">from</span> collections <span class="code-kw">import</span> deque
+
+        <span class="code-kw">def</span> <span class="code-fn">level_order</span>(root):
+            <span class="code-kw">if</span> root <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                <span class="code-kw">return</span>
+            queue = deque([root])
+            <span class="code-kw">while</span> queue:
+                node = queue.popleft()
+                <span class="code-fn">print</span>(node.data, end=<span class="code-str">" "</span>)
+                <span class="code-kw">if</span> node.left:
+                    queue.append(node.left)
+                <span class="code-kw">if</span> node.right:
+                    queue.append(node.right)
+
+        <span class="code-cmt"># For the tree:</span>
+        <span class="code-cmt">#       1</span>
+        <span class="code-cmt">#      / \</span>
+        <span class="code-cmt">#     2   3</span>
+        <span class="code-cmt">#    / \</span>
+        <span class="code-cmt">#   4   5</span>
+
+        <span class="code-cmt"># Preorder:  1 2 4 5 3</span>
+        <span class="code-cmt"># Inorder:   4 2 5 1 3</span>
+        <span class="code-cmt"># Postorder: 4 5 2 3 1</span>
+        <span class="code-cmt"># Level:     1 2 3 4 5</span></code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 12 ══ -->
+        <section id="ch12">
+            <div class="chapter-header" data-num="12"><div class="chapter-num">Chapter 12</div><h1>Heaps</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Heap Data Structure</h2>
+                    <p>A heap is a complete binary tree that satisfies the heap property:</p>
+                    <ul>
+                        <li><strong>Max Heap:</strong> Parent ≥ Children</li>
+                        <li><strong>Min Heap:</strong> Parent ≤ Children</li>
+                    </ul>
+                    
+                    <div class="code-block"><code><span class="code-kw">import</span> heapq
+
+        <span class="code-cmt"># Min Heap (default)</span>
+        heap = []
+        heapq.heappush(heap, <span class="code-num">5</span>)
+        heapq.heappush(heap, <span class="code-num">3</span>)
+        heapq.heappush(heap, <span class="code-num">8</span>)
+        heapq.heappush(heap, <span class="code-num">1</span>)
+
+        <span class="code-fn">print</span>(heap[<span class="code-num">0</span>])  <span class="code-cmt"># 1 (smallest)</span>
+        heapq.heappop(heap)   <span class="code-cmt"># Removes 1</span>
+        <span class="code-fn">print</span>(heap[<span class="code-num">0</span>])  <span class="code-cmt"># 3</span>
+
+        <span class="code-cmt"># Max Heap (using negative values)</span>
+        max_heap = []
+        heapq.heappush(max_heap, -<span class="code-num">5</span>)
+        heapq.heappush(max_heap, -<span class="code-num">3</span>)
+        heapq.heappush(max_heap, -<span class="code-num">8</span>)
+        heapq.heappush(max_heap, -<span class="code-num">1</span>)
+
+        <span class="code-fn">print</span>(-max_heap[<span class="code-num">0</span>])  <span class="code-cmt"># 8 (largest)</span>
+
+        <span class="code-cmt"># Heapify an existing list</span>
+        arr = [<span class="code-num">5</span>, <span class="code-num">3</span>, <span class="code-num">8</span>, <span class="code-num">1</span>]
+        heapq.heapify(arr)
+        <span class="code-fn">print</span>(arr)  <span class="code-cmt"># [1, 3, 8, 5]</span>
+
+        <span class="code-cmt"># nlargest / nsmallest</span>
+        <span class="code-fn">print</span>(heapq.nlargest(<span class="code-num">2</span>, arr))  <span class="code-cmt"># [8, 5]</span>
+        <span class="code-fn">print</span>(heapq.nsmallest(<span class="code-num">2</span>, arr)) <span class="code-cmt"># [1, 3]</span></code></div>
+                    
+                    <div class="questions">
+                        <h3>📝 Heap Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Find the kth largest element in an array.</div><div class="q-io"><span class="q-in">Input: [3,2,1,5,6,4], k=2</span><span class="q-out">5</span></div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Merge K sorted lists using a heap.</div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Find the median of a stream of numbers.</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 13 ══ -->
+        <section id="ch13">
+            <div class="chapter-header" data-num="13"><div class="chapter-num">Chapter 13</div><h1>Hashing</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Hash Tables / Dictionaries</h2>
+                    <p>Hashing provides O(1) average time for insert, delete, and search operations.</p>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Python dictionaries are hash tables</span>
+        <span class="code-cmt"># Creating a dictionary</span>
+        hash_table = {}
+        hash_table = {<span class="code-str">"name"</span>: <span class="code-str">"Akarsh"</span>, <span class="code-str">"age"</span>: <span class="code-num">20</span>}
+
+        <span class="code-cmt"># Insert/Update — O(1)</span>
+        hash_table[<span class="code-str">"city"</span>] = <span class="code-str">"Indore"</span>
+        hash_table[<span class="code-str">"age"</span>] = <span class="code-num">21</span>
+
+        <span class="code-cmt"># Lookup — O(1)</span>
+        <span class="code-fn">print</span>(hash_table[<span class="code-str">"name"</span>])   <span class="code-cmt"># Akarsh</span>
+        <span class="code-fn">print</span>(hash_table.get(<span class="code-str">"city"</span>))  <span class="code-cmt"># Indore</span>
+
+        <span class="code-cmt"># Delete — O(1)</span>
+        <span class="code-kw">del</span> hash_table[<span class="code-str">"age"</span>]
+
+        <span class="code-cmt"># Iterating</span>
+        <span class="code-kw">for</span> key, value <span class="code-kw">in</span> hash_table.items():
+            <span class="code-fn">print</span>(key, value)
+
+        <span class="code-cmt"># Check existence</span>
+        <span class="code-kw">if</span> <span class="code-str">"name"</span> <span class="code-kw">in</span> hash_table:
+            <span class="code-fn">print</span>(<span class="code-str">"Name exists!"</span>)</code></div>
+                    
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>✅ Advantages</h4>
+                            <ul>
+                                <li>O(1) average time operations</li>
+                                <li>Simple key-value mapping</li>
+                                <li>Dynamic resizing</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>❌ Disadvantages</h4>
+                            <ul>
+                                <li>Collisions possible</li>
+                                <li>Unordered</li>
+                                <li>Memory overhead</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="questions">
+                        <h3>📝 Hashing Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Find the first non-repeating character in a string.</div><div class="q-io"><span class="q-in">Input: "leetcode"</span><span class="q-out">'l'</span></div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Check if two strings are anagrams.</div><div class="q-io"><span class="q-in">Input: "listen", "silent"</span><span class="q-out">True ✅</span></div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Find two numbers that sum to a target.</div><div class="q-io"><span class="q-in">Input: [2,7,11,15], target=9</span><span class="q-out">[0,1]</span></div></div>
+                        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">Count the frequency of each element in an array.</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 14 ══ -->
+        <section id="ch14">
+            <div class="chapter-header" data-num="14"><div class="chapter-num">Chapter 14</div><h1>Graphs</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Graph Representations</h2>
+                    <p>A graph is a collection of nodes (vertices) connected by edges.</p>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Adjacency List</span>
+        <span class="code-kw">class</span> Graph:
+            <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+                self.adj_list = {}
+
+            <span class="code-kw">def</span> <span class="code-fn">add_vertex</span>(self, vertex):
+                <span class="code-kw">if</span> vertex <span class="code-kw">not</span> <span class="code-kw">in</span> self.adj_list:
+                    self.adj_list[vertex] = []
+
+            <span class="code-kw">def</span> <span class="code-fn">add_edge</span>(self, v1, v2):
+                <span class="code-kw">if</span> v1 <span class="code-kw">in</span> self.adj_list <span class="code-kw">and</span> v2 <span class="code-kw">in</span> self.adj_list:
+                    self.adj_list[v1].append(v2)
+                    self.adj_list[v2].append(v1)  <span class="code-cmt"># Undirected</span>
+
+            <span class="code-kw">def</span> <span class="code-fn">display</span>(self):
+                <span class="code-kw">for</span> vertex, neighbors <span class="code-kw">in</span> self.adj_list.items():
+                    <span class="code-fn">print</span>(<span class="code-str">f"{vertex}: {neighbors}"</span>)
+
+        <span class="code-cmt"># Usage</span>
+        g = Graph()
+        g.add_vertex(<span class="code-str">"A"</span>)
+        g.add_vertex(<span class="code-str">"B"</span>)
+        g.add_vertex(<span class="code-str">"C"</span>)
+        g.add_vertex(<span class="code-str">"D"</span>)
+        g.add_edge(<span class="code-str">"A"</span>, <span class="code-str">"B"</span>)
+        g.add_edge(<span class="code-str">"A"</span>, <span class="code-str">"C"</span>)
+        g.add_edge(<span class="code-str">"B"</span>, <span class="code-str">"D"</span>)
+        g.add_edge(<span class="code-str">"C"</span>, <span class="code-str">"D"</span>)</code></div>
+
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📋 Graph Types</h4>
+                            <ul>
+                                <li><strong>Directed</strong> — edges have direction</li>
+                                <li><strong>Undirected</strong> — edges are bidirectional</li>
+                                <li><strong>Weighted</strong> — edges have weights</li>
+                                <li><strong>Cyclic</strong> — contains cycles</li>
+                                <li><strong>Acyclic</strong> — no cycles</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>📊 Representations</h4>
+                            <ul>
+                                <li><strong>Adjacency List</strong> — O(V+E) space</li>
+                                <li><strong>Adjacency Matrix</strong> — O(V²) space</li>
+                                <li><strong>Edge List</strong> — O(E) space</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 15 ══ -->
+        <section id="ch15">
+            <div class="chapter-header" data-num="15"><div class="chapter-num">Chapter 15</div><h1>Graph Traversals</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>BFS &amp; DFS on Graphs</h2>
+                    
+                    <div class="code-block"><code><span class="code-kw">from</span> collections <span class="code-kw">import</span> deque
+
+        <span class="code-cmt"># BFS — Breadth First Search</span>
+        <span class="code-kw">def</span> <span class="code-fn">bfs</span>(graph, start):
+            visited = set()
+            queue = deque([start])
+            visited.add(start)
+
+            <span class="code-kw">while</span> queue:
+                vertex = queue.popleft()
+                <span class="code-fn">print</span>(vertex, end=<span class="code-str">" "</span>)
+
+                <span class="code-kw">for</span> neighbor <span class="code-kw">in</span> graph.adj_list[vertex]:
+                    <span class="code-kw">if</span> neighbor <span class="code-kw">not</span> <span class="code-kw">in</span> visited:
+                        visited.add(neighbor)
+                        queue.append(neighbor)
+
+        <span class="code-cmt"># DFS — Depth First Search (Recursive)</span>
+        <span class="code-kw">def</span> <span class="code-fn">dfs</span>(graph, start, visited=<span class="code-kw">None</span>):
+            <span class="code-kw">if</span> visited <span class="code-kw">is</span> <span class="code-kw">None</span>:
+                visited = set()
+            visited.add(start)
+            <span class="code-fn">print</span>(start, end=<span class="code-str">" "</span>)
+
+            <span class="code-kw">for</span> neighbor <span class="code-kw">in</span> graph.adj_list[start]:
+                <span class="code-kw">if</span> neighbor <span class="code-kw">not</span> <span class="code-kw">in</span> visited:
+                    dfs(graph, neighbor, visited)
+
+        <span class="code-cmt"># DFS — Iterative (using stack)</span>
+        <span class="code-kw">def</span> <span class="code-fn">dfs_iterative</span>(graph, start):
+            visited = set()
+            stack = [start]
+
+            <span class="code-kw">while</span> stack:
+                vertex = stack.pop()
+                <span class="code-kw">if</span> vertex <span class="code-kw">not</span> <span class="code-kw">in</span> visited:
+                    visited.add(vertex)
+                    <span class="code-fn">print</span>(vertex, end=<span class="code-str">" "</span>)
+                    <span class="code-kw">for</span> neighbor <span class="code-kw">in</span> graph.adj_list[vertex]:
+                        <span class="code-kw">if</span> neighbor <span class="code-kw">not</span> <span class="code-kw">in</span> visited:
+                            stack.append(neighbor)</code></div>
+
+                    <div class="questions">
+                        <h3>📝 Graph Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Check if there's a path between two nodes.</div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Find the shortest path in an unweighted graph using BFS.</div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Detect a cycle in a directed graph.</div></div>
+                        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">Find the connected components in an undirected graph.</div></div>
+                        <div class="q-item"><div class="q-num">Q5</div><div class="q-text">Topological sort of a DAG.</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 16 ══ -->
+        <section id="ch16">
+            <div class="chapter-header" data-num="16"><div class="chapter-num">Chapter 16</div><h1>Dynamic Programming</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>DP — Optimize Recursion</h2>
+                    <p>Dynamic Programming solves problems by breaking them down into smaller subproblems and storing the results to avoid recomputation.</p>
+                    
+                    <div class="code-block"><code><span class="code-cmt"># Fibonacci with DP (Memoization)</span>
+        <span class="code-kw">def</span> <span class="code-fn">fib_memo</span>(n, memo={}):
+            <span class="code-kw">if</span> n <span class="code-kw">in</span> memo:
+                <span class="code-kw">return</span> memo[n]
+            <span class="code-kw">if</span> n <= <span class="code-num">1</span>:
+                <span class="code-kw">return</span> n
+            memo[n] = fib_memo(n - <span class="code-num">1</span>) + fib_memo(n - <span class="code-num">2</span>)
+            <span class="code-kw">return</span> memo[n]
+
+        <span class="code-cmt"># Fibonacci with DP (Tabulation)</span>
+        <span class="code-kw">def</span> <span class="code-fn">fib_tab</span>(n):
+            <span class="code-kw">if</span> n <= <span class="code-num">1</span>:
+                <span class="code-kw">return</span> n
+            dp = [<span class="code-num">0</span>] * (n + <span class="code-num">1</span>)
+            dp[<span class="code-num">0</span>] = <span class="code-num">0</span>
+            dp[<span class="code-num">1</span>] = <span class="code-num">1</span>
+            <span class="code-kw">for</span> i <span class="code-kw">in</span> <span class="code-fn">range</span>(<span class="code-num">2</span>, n + <span class="code-num">1</span>):
+                dp[i] = dp[i - <span class="code-num">1</span>] + dp[i - <span class="code-num">2</span>]
+            <span class="code-kw">return</span> dp[n]
+
+        <span class="code-cmt"># Climbing Stairs (LeetCode 70)</span>
+        <span class="code-cmt"># You can climb 1 or 2 steps. How many ways to reach the top?</span>
+        <span class="code-kw">def</span> <span class="code-fn">climb_stairs</span>(n):
+            <span class="code-kw">if</span> n <= <span class="code-num">2</span>:
+                <span class="code-kw">return</span> n
+            dp = [<span class="code-num">0</span>] * (n + <span class="code-num">1</span>)
+            dp[<span class="code-num">1</span>] = <span class="code-num">1</span>
+            dp[<span class="code-num">2</span>] = <span class="code-num">2</span>
+            <span class="code-kw">for</span> i <span class="code-kw">in</span> <span class="code-fn">range</span>(<span class="code-num">3</span>, n + <span class="code-num">1</span>):
+                dp[i] = dp[i - <span class="code-num">1</span>] + dp[i - <span class="code-num">2</span>]
+            <span class="code-kw">return</span> dp[n]</code></div>
+
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📝 Top-Down (Memoization)</h4>
+                            <ul>
+                                <li>Starts from the top</li>
+                                <li>Uses recursion</li>
+                                <li>Caches results</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>📊 Bottom-Up (Tabulation)</h4>
+                            <ul>
+                                <li>Starts from the bottom</li>
+                                <li>Uses iteration</li>
+                                <li>Fills DP table</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="questions">
+                        <h3>📝 DP Problems</h3>
+                        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Longest Common Subsequence (LCS).</div></div>
+                        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">0/1 Knapsack Problem.</div></div>
+                        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Coin Change — minimum coins to make an amount.</div></div>
+                        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">Longest Increasing Subsequence (LIS).</div></div>
+                        <div class="q-item"><div class="q-num">Q5</div><div class="q-text">Edit Distance (Levenshtein distance).</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CLOSING ══ -->
+        <div class="closing">
+            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;">A message from the creator</p>
+            <p style="font-size:18px;line-height:1.85;max-width:620px;margin:0 auto;color:rgba(255,255,255,0.9);">
+                "We'll be learning all of this and so much more on this channel. I, <strong>Akarsh Vyas</strong>, as a creator and representative of Sheryians AI, would like to sincerely thank each and every one of you who stayed with us till the end. You are truly precious to us. Much love! 💙"
+            </p>
+            <p style="margin-top:36px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);">Sheryians Coding School</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section[id]");
+            const links = document.querySelectorAll(".sidebar a");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(a => a.classList.remove("active"));
+                        const link = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+                        if (link) link.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.25 });
+            sections.forEach(s => observer.observe(s));
+        });
+    </script>
+
+</body>
+</html>

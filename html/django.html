@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Notes – Sheryians Coding School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary: #0b7e4b;
+            --primary-dark: #065f3a;
+            --primary-light: #ecfdf5;
+            --secondary: #0b7e4b;
+            --bg: #f0fdf4;
+            --surface: #ffffff;
+            --text-body: #334155;
+            --text-dark: #1e1b4b;
+            --text-muted: #64748b;
+            --border: #a7f3d0;
+            --shadow: 0 8px 24px rgba(11, 126, 75, 0.08);
+            --radius: 16px;
+            --code-bg: #0f172a;
+            --code-text: #a5f3fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.7;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 265px;
+            height: 100vh;
+            background: var(--primary-dark);
+            overflow-y: auto;
+            z-index: 1000;
+            padding-bottom: 40px;
+            scrollbar-width: thin;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+        }
+        .sidebar-logo h2 {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .sidebar-logo p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11.5px;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-label {
+            padding: 12px 20px 4px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 7px 20px 7px 24px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+            font-weight: 450;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+            border-left-color: #6ee7b7;
+        }
+
+        /* ---- MAIN ---- */
+        .main {
+            margin-left: 265px;
+            min-height: 100vh;
+        }
+
+        /* ---- COVER ---- */
+        .cover {
+            background: linear-gradient(145deg, #065f3a 0%, #0b7e4b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -140px;
+            right: -140px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.035);
+        }
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.025);
+        }
+        .cover-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 6px 24px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cover h1 {
+            color: #fff;
+            font-size: clamp(40px, 6.5vw, 76px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .cover h1 span {
+            color: #6ee7b7;
+        }
+        .cover-sub {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 17px;
+            max-width: 520px;
+            margin: 0 auto 40px;
+        }
+        .cover-note {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            max-width: 500px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14.5px;
+            line-height: 1.65;
+        }
+        .cover-footer {
+            position: absolute;
+            bottom: 28px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ---- CHAPTER HEADER ---- */
+        .chapter-header {
+            background: linear-gradient(145deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 56px 60px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-header::after {
+            content: attr(data-num);
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 110px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            pointer-events: none;
+            font-family: 'Segoe UI', monospace;
+        }
+        .chapter-num {
+            color: #6ee7b7;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .chapter-header h1 {
+            color: #fff;
+            font-size: clamp(26px, 4vw, 42px);
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- CONTENT ---- */
+        .content {
+            padding: 48px 60px;
+            max-width: 920px;
+        }
+
+        /* ---- SECTION CARD ---- */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s;
+        }
+        .section:hover {
+            box-shadow: 0 10px 32px rgba(11, 126, 75, 0.10);
+        }
+        .section h2 {
+            color: var(--primary);
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .section h3 {
+            color: var(--secondary);
+            font-size: 15.5px;
+            font-weight: 700;
+            margin: 20px 0 8px;
+        }
+        .section p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .section ul {
+            padding-left: 0;
+            list-style: none;
+        }
+        .section ul li {
+            padding: 5px 0 5px 24px;
+            position: relative;
+            font-size: 15px;
+        }
+        .section ul li::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 14px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.5;
+        }
+
+        /* ---- CODE ---- */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin: 14px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 13.5px;
+            line-height: 1.8;
+        }
+        .code-block code {
+            color: var(--code-text);
+            white-space: pre;
+        }
+        .code-kw {
+            color: #f472b6;
+        }
+        .code-fn {
+            color: #34d399;
+        }
+        .code-str {
+            color: #fcd34d;
+        }
+        .code-cmt {
+            color: #6b7280;
+            font-style: italic;
+        }
+        .code-num {
+            color: #fb923c;
+        }
+
+        /* ---- TABLES ---- */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+        }
+        .styled-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .styled-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            background: #fff;
+        }
+        .styled-table tr:last-child td {
+            border-bottom: none;
+        }
+        .styled-table tr:nth-child(even) td {
+            background: var(--primary-light);
+        }
+        .styled-table td:first-child {
+            color: var(--secondary);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+        }
+
+        /* ---- CALLOUTS ---- */
+        .callout {
+            border-radius: 12px;
+            padding: 16px 22px;
+            margin: 14px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .callout-info {
+            background: var(--primary-light);
+            border-left: 5px solid var(--primary);
+        }
+        .callout-warn {
+            background: #fffbeb;
+            border-left: 5px solid #b45309;
+        }
+        .callout-success {
+            background: #ecfdf5;
+            border-left: 5px solid #0b7e4b;
+        }
+        .callout-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .callout-text {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
+        .callout-text strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+        }
+
+        /* ---- GRIDS ---- */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 14px 0;
+        }
+        .compare-card {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .compare-card h4 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .powers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+        .power-item {
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            border-left: 4px solid var(--primary);
+        }
+        .power-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+        .power-item span {
+            font-size: 13px;
+            color: var(--text-body);
+        }
+
+        /* ---- QUESTIONS ---- */
+        .questions {
+            background: var(--primary-light);
+            border-radius: 14px;
+            padding: 22px 26px;
+            margin: 18px 0;
+        }
+        .questions h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 15.5px;
+        }
+        .q-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+        }
+        .q-item:last-child {
+            margin-bottom: 0;
+        }
+        .q-num {
+            color: var(--secondary);
+            font-weight: 800;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .q-text {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .q-io {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .q-io span {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 3px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+        }
+        .q-io .q-in {
+            color: var(--primary);
+        }
+        .q-io .q-out {
+            color: #0b7e4b;
+        }
+
+        /* ---- FALSY ---- */
+        .falsy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 14px 0;
+        }
+        .falsy-item {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 10px;
+            padding: 8px 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            color: #b91c1c;
+            font-weight: 700;
+        }
+
+        /* ---- ANALOGY ---- */
+        .analogy-card {
+            background: linear-gradient(145deg, #ecfdf5, #f0fdf4);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 16px 0;
+        }
+        .analogy-card h4 {
+            color: var(--secondary);
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .analogy-steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .analogy-step {
+            background: #fff;
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .analogy-step .step-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+        .analogy-step .step-kw {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 13px;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 4px;
+        }
+        .analogy-step .step-desc {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ---- CLOSING ---- */
+        .closing {
+            background: linear-gradient(145deg, #065f3a, #0b7e4b);
+            padding: 60px 80px;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+            }
+            .content {
+                padding: 24px 18px;
+            }
+            .chapter-header {
+                padding: 36px 22px 28px;
+            }
+            .compare-grid,
+            .powers-grid,
+            .analogy-steps {
+                grid-template-columns: 1fr;
+            }
+            .cover {
+                padding: 60px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══ SIDEBAR ══ -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Sheryians Coding School</h2>
+            <p>Django Complete Notes</p>
+        </div>
+        <div class="nav-label">Start Here</div>
+        <a href="#cover">📘 Cover</a>
+        <div class="nav-label">Introduction</div>
+        <a href="#intro">🌐 What is Django?</a>
+        <div class="nav-label">Chapters</div>
+        <a href="#ch01">01 — Django Installation</a>
+        <a href="#ch02">02 — Django Project Structure</a>
+        <a href="#ch03">03 — Django Apps</a>
+        <a href="#ch04">04 — Views &amp; URLs</a>
+        <a href="#ch05">05 — Templates</a>
+        <a href="#ch06">06 — Models</a>
+        <a href="#ch07">07 — Django ORM</a>
+        <a href="#ch08">08 — Migrations</a>
+        <a href="#ch09">09 — Admin Panel</a>
+        <a href="#ch10">10 — Forms</a>
+        <a href="#ch11">11 — Django Authentication</a>
+        <a href="#ch12">12 — Class-Based Views</a>
+        <a href="#ch13">13 — Django Middleware</a>
+        <a href="#ch14">14 — Static Files</a>
+        <a href="#ch15">15 — Django REST Framework</a>
+        <a href="#ch16">16 — Deployment</a>
+    </nav>
+
+    <div class="main">
+
+        <!-- ══ COVER ══ -->
+        <section id="cover" class="cover">
+            <div class="cover-badge">Sheryians Coding School</div>
+            <h1>Django<br><span>Complete Notes</span></h1>
+            <p class="cover-sub">From your first project to full-stack web development — everything you need, in one place.</p>
+            <div class="cover-note">
+                🎬 <strong>Watch alongside!</strong> This book is designed to work hand-in-hand with the video series on <strong>Sheryians AI</strong> on YouTube. Every concept here has a matching video explanation.
+            </div>
+            <div class="cover-footer">written by Muhammad Nouman · Sheryians Coding School</div>
+        </section>
+
+        <!-- ══ INTRO ══ -->
+        <section id="intro">
+            <div class="chapter-header" data-num="00">
+                <div class="chapter-num">Introduction</div>
+                <h1>What is Django?</h1>
+            </div>
+            <div class="content">
+
+                <div class="section">
+                    <h2>🌐 Django in Simple Words</h2>
+                    <p>Django is a <strong>high-level Python web framework</strong> that enables rapid development of secure and maintainable websites. Built by experienced developers, it takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel.</p>
+                    <p>Django follows the <strong>"batteries-included"</strong> philosophy — it comes with everything you need to build a web application right out of the box. It handles authentication, database access, URL routing, and much more.</p>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>⚡ Fast Development</h4>
+                            <p>Django lets you build web applications extremely quickly, thanks to its built-in features and the "Don't Repeat Yourself" (DRY) principle.</p>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🔒 Secure by Default</h4>
+                            <p>Django helps developers avoid many common security mistakes by providing built-in protection against CSRF, XSS, SQL injection, and clickjacking.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🏗️ How Does Django Work?</h2>
+                    <p>Django follows the <strong>MVT (Model-View-Template)</strong> architectural pattern, which is similar to MVC but with Django's own twist.</p>
+
+                    <div style="background:linear-gradient(145deg,#ecfdf5,#f0fdf4);border:1px solid var(--border);border-radius:16px;padding:26px 30px;margin:16px 0;">
+                        <h3 style="color:var(--secondary);margin-bottom:16px;font-size:16px;">📐 MVT Pattern Explained</h3>
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:14px 0;">
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+                                <div style="font-size:32px;margin-bottom:8px;">📊</div>
+                                <h4 style="color:var(--primary);font-size:14px;font-weight:700;">Model</h4>
+                                <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">Handles data and business logic. Works with the database.</p>
+                            </div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+                                <div style="font-size:32px;margin-bottom:8px;">👁️</div>
+                                <h4 style="color:var(--primary);font-size:14px;font-weight:700;">View</h4>
+                                <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">Handles user requests and returns responses. Contains the business logic.</p>
+                            </div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+                                <div style="font-size:32px;margin-bottom:8px;">🎨</div>
+                                <h4 style="color:var(--primary);font-size:14px;font-weight:700;">Template</h4>
+                                <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">Renders the HTML with dynamic data from the view.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background:linear-gradient(145deg,#eef2ff,#f5f3ff);border:1px solid var(--border);border-radius:16px;padding:26px 30px;margin:16px 0;">
+                        <h3 style="color:var(--secondary);margin-bottom:16px;font-size:16px;">🔄 Request-Response Cycle</h3>
+                        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0;">
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">🌐 Browser Request</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">📋 URL Dispatcher</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">👁️ View</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">📊 Model</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--primary);">🎨 Template</div>
+                            <div style="color:var(--secondary);font-size:20px;font-weight:700;">→</div>
+                            <div style="background:var(--primary);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:#fff;">🌐 HTTP Response</div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info">
+                        <span class="callout-icon">🐍</span>
+                        <div class="callout-text"><strong>Why Django?</strong> Django is built in Python, so if you already know Python, learning Django is natural. It's used by some of the largest websites in the world including Instagram, Spotify, and Pinterest.</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>⚡ Django vs Other Frameworks</h2>
+                    <table class="styled-table">
+                        <tr><th>Feature</th><th>Django</th><th>Flask</th><th>Express (Node.js)</th></tr>
+                        <tr><td>Language</td><td>Python</td><td>Python</td><td>JavaScript</td></tr>
+                        <tr><td>Batteries Included</td><td>✅ Yes</td><td>❌ No</td><td>❌ No</td></tr>
+                        <tr><td>ORM</td><td>✅ Built-in</td><td>❌ Needs extension</td><td>❌ Needs extension</td></tr>
+                        <tr><td>Admin Panel</td><td>✅ Built-in</td><td>❌ Needs extension</td><td>❌ Needs extension</td></tr>
+                        <tr><td>Authentication</td><td>✅ Built-in</td><td>❌ Needs extension</td><td>❌ Needs extension</td></tr>
+                        <tr><td>Learning Curve</td><td>📈 Steeper</td><td>📉 Gentle</td><td>📉 Gentle</td></tr>
+                        <tr><td>Best For</td><td>Large applications</td><td>Microservices / APIs</td><td>Real-time applications</td></tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>🏢 Who Uses Django?</h2>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0;">
+                        <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;border-top:4px solid #4f46e5;">
+                            <div style="font-size:28px;margin-bottom:8px;">📸</div>
+                            <h4 style="color:var(--primary);font-size:14px;font-weight:700;">Instagram</h4>
+                            <p style="font-size:13px;color:var(--text-muted);">Handles millions of users daily with Django</p>
+                        </div>
+                        <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;border-top:4px solid #7c3aed;">
+                            <div style="font-size:28px;margin-bottom:8px;">🎵</div>
+                            <h4 style="color:var(--secondary);font-size:14px;font-weight:700;">Spotify</h4>
+                            <p style="font-size:13px;color:var(--text-muted);">Uses Django for backend services</p>
+                        </div>
+                        <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;border-top:4px solid #0b7e4b;">
+                            <div style="font-size:28px;margin-bottom:8px;">📌</div>
+                            <h4 style="color:#0b7e4b;font-size:14px;font-weight:700;">Pinterest</h4>
+                            <p style="font-size:13px;color:var(--text-muted);">Runs on Django for content management</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout callout-success" style="margin:0;">
+                    <span class="callout-icon">🚀</span>
+                    <div class="callout-text"><strong>You're all set!</strong> Now that you know what Django is and how it works, let's get it installed and build your first web application. Head to Chapter 01!</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══ CH 01 ══ -->
+        <section id="ch01">
+            <div class="chapter-header" data-num="01"><div class="chapter-num">Chapter 01</div><h1>Django Installation</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Installing Django</h2>
+                    <p>Django is a Python package, so you install it using <code>pip</code>.</p>
+                    <div class="code-block"><code><span class="code-cmt"># Install Django</span>
+        pip install django
+
+        <span class="code-cmt"># Check installation</span>
+        django-admin --version
+
+        <span class="code-cmt"># Create a virtual environment (recommended)</span>
+        python -m venv myenv
+        source myenv/bin/activate   <span class="code-cmt"># On Windows: myenv\Scripts\activate</span>
+        pip install django</code></div>
+                    <div class="callout callout-warn"><span class="callout-icon">⚠️</span><div class="callout-text"><strong>Important</strong> Always use a virtual environment for your Django projects to keep dependencies isolated.</div></div>
+                </div>
+                <div class="section">
+                    <h2>Creating Your First Django Project</h2>
+                    <div class="code-block"><code><span class="code-cmt"># Create a new project</span>
+        django-admin startproject myproject
+
+        <span class="code-cmt"># Navigate into the project</span>
+        cd myproject
+
+        <span class="code-cmt"># Run the development server</span>
+        python manage.py runserver</code></div>
+                    <p>Open your browser and go to <strong>http://127.0.0.1:8000</strong> — you should see the Django welcome page!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 02 ══ -->
+        <section id="ch02">
+            <div class="chapter-header" data-num="02"><div class="chapter-num">Chapter 02</div><h1>Django Project Structure</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>What Django Created For You</h2>
+                    <div class="code-block"><code>myproject/          <span class="code-cmt"># Project root directory</span>
+        ├── manage.py       <span class="code-cmt"># Command-line utility</span>
+        ├── myproject/      <span class="code-cmt"># Project package</span>
+        │   ├── __init__.py <span class="code-cmt"># Makes Python treat as package</span>
+        │   ├── settings.py <span class="code-cmt"># Project configuration</span>
+        │   ├── urls.py     <span class="code-cmt"># URL declarations</span>
+        │   ├── asgi.py     <span class="code-cmt"># ASGI configuration</span>
+        │   └── wsgi.py     <span class="code-cmt"># WSGI configuration</span></code></div>
+                    <div class="powers-grid">
+                        <div class="power-item"><strong>manage.py</strong><span>The main command-line tool. Run <code>python manage.py --help</code> to see all commands.</span></div>
+                        <div class="power-item"><strong>settings.py</strong><span>The heart of your Django project — contains all configuration.</span></div>
+                        <div class="power-item"><strong>urls.py</strong><span>The URL dispatcher — maps URL patterns to views.</span></div>
+                        <div class="power-item"><strong>wsgi.py</strong><span>Entry point for WSGI servers (production).</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 03 ══ -->
+        <section id="ch03">
+            <div class="chapter-header" data-num="03"><div class="chapter-num">Chapter 03</div><h1>Django Apps</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>What is an App?</h2>
+                    <p>In Django, an <strong>app</strong> is a self-contained module that handles a specific functionality. A project can have many apps. Think of a project as a website (e.g., an e-commerce site), and apps as different features (e.g., products, cart, payments, user profiles).</p>
+                    <div class="code-block"><code><span class="code-cmt"># Create a new app</span>
+        python manage.py startapp myapp
+
+        <span class="code-cmt"># Register the app in settings.py</span>
+        <span class="code-cmt"># Add 'myapp' to INSTALLED_APPS</span></code></div>
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>App Structure:</strong> Each app has its own <code>models.py</code>, <code>views.py</code>, <code>urls.py</code>, <code>admin.py</code>, and <code>templates/</code> folder.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 04 ══ -->
+        <section id="ch04">
+            <div class="chapter-header" data-num="04"><div class="chapter-num">Chapter 04</div><h1>Views &amp; URLs</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Creating a View</h2>
+                    <p>A view is a Python function (or class) that takes a request and returns a response.</p>
+                    <div class="code-block"><code><span class="code-cmt"># views.py</span>
+        <span class="code-kw">from</span> django.http <span class="code-kw">import</span> HttpResponse
+
+        <span class="code-kw">def</span> <span class="code-fn">home</span>(request):
+            <span class="code-kw">return</span> HttpResponse(<span class="code-str">"Hello, World!"</span>)</code></div>
+                </div>
+                <div class="section">
+                    <h2>Mapping URLs</h2>
+                    <div class="code-block"><code><span class="code-cmt"># urls.py (project-level)</span>
+        <span class="code-kw">from</span> django.urls <span class="code-kw">import</span> path
+        <span class="code-kw">from</span> myapp <span class="code-kw">import</span> views
+
+        urlpatterns = [
+            path(<span class="code-str">''</span>, views.home, name=<span class="code-str">'home'</span>),
+        ]</code></div>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>Function-Based Views (FBV)</h4>
+                            <p>Simple and straightforward — just a Python function.</p>
+                            <div class="code-block"><code><span class="code-kw">def</span> <span class="code-fn">my_view</span>(request):
+                <span class="code-kw">return</span> render(request, <span class="code-str">'template.html'</span>)</code></div>
+                        </div>
+                        <div class="compare-card">
+                            <h4>Class-Based Views (CBV)</h4>
+                            <p>More structured and reusable — extend Django's built-in views.</p>
+                            <div class="code-block"><code><span class="code-kw">from</span> django.views.generic <span class="code-kw">import</span> TemplateView
+
+                <span class="code-kw">class</span> MyView(TemplateView):
+                    template_name = <span class="code-str">'template.html'</span></code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 05 ══ -->
+        <section id="ch05">
+            <div class="chapter-header" data-num="05"><div class="chapter-num">Chapter 05</div><h1>Templates</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Django Template Language</h2>
+                    <p>Django's template language is designed to be simple and readable. It uses special tags and filters to render dynamic content.</p>
+                    <div class="code-block"><code><span class="code-cmt">{# templates/index.html #}</span>
+
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;title&gt;{{ title }}&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1&gt;Welcome, {{ user.name }}!&lt;/h1&gt;
+
+            <span class="code-cmt">{# Loop through data #}</span>
+            &lt;ul&gt;
+            {% for item in items %}
+                &lt;li&gt;{{ item.name }} - {{ item.price }}&lt;/li&gt;
+            {% endfor %}
+            &lt;/ul&gt;
+
+            <span class="code-cmt">{# Conditional rendering #}</span>
+            {% if user.is_admin %}
+                &lt;p&gt;Admin privileges available.&lt;/p&gt;
+            {% endif %}
+
+            <span class="code-cmt">{# Template inheritance #}</span>
+            {% extends "base.html" %}
+            {% block content %}
+                &lt;p&gt;This is the content.&lt;/p&gt;
+            {% endblock content %}
+        &lt;/body&gt;
+        &lt;/html&gt;</code></div>
+                </div>
+                <div class="section">
+                    <h2>Common Template Tags</h2>
+                    <table class="styled-table">
+                        <tr><th>Tag</th><th>Purpose</th></tr>
+                        <tr><td>{% for %}</td><td>Loop over items</td></tr>
+                        <tr><td>{% if %}</td><td>Conditional rendering</td></tr>
+                        <tr><td>{% url %}</td><td>Generate URLs by name</td></tr>
+                        <tr><td>{% include %}</td><td>Include another template</td></tr>
+                        <tr><td>{% extends %}</td><td>Inherit from a parent template</td></tr>
+                        <tr><td>{% block %}</td><td>Define a block in a template</td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 06 ══ -->
+        <section id="ch06">
+            <div class="chapter-header" data-num="06"><div class="chapter-num">Chapter 06</div><h1>Models</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Defining Models</h2>
+                    <p>Models are Python classes that define the structure of your database tables. Each model maps to a single database table.</p>
+                    <div class="code-block"><code><span class="code-cmt"># models.py</span>
+        <span class="code-kw">from</span> django.db <span class="code-kw">import</span> models
+
+        <span class="code-kw">class</span> BlogPost(models.Model):
+            title = models.CharField(max_length=<span class="code-num">200</span>)
+            content = models.TextField()
+            published_at = models.DateTimeField(auto_now_add=<span class="code-kw">True</span>)
+            author = models.CharField(max_length=<span class="code-num">100</span>)
+
+            <span class="code-kw">def</span> <span class="code-fn">__str__</span>(self):
+                <span class="code-kw">return</span> self.title</code></div>
+                    <div class="powers-grid">
+                        <div class="power-item"><strong>CharField</strong><span>Text with limited length</span></div>
+                        <div class="power-item"><strong>TextField</strong><span>Unlimited text</span></div>
+                        <div class="power-item"><strong>IntegerField</strong><span>Whole numbers</span></div>
+                        <div class="power-item"><strong>DateTimeField</strong><span>Date and time</span></div>
+                        <div class="power-item"><strong>BooleanField</strong><span>True/False</span></div>
+                        <div class="power-item"><strong>ForeignKey</strong><span>One-to-many relationship</span></div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Model Relationships</h2>
+                    <div class="code-block"><code><span class="code-cmt"># One-to-Many (Foreign Key)</span>
+        <span class="code-kw">class</span> Comment(models.Model):
+            post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
+            text = models.TextField()
+            created_at = models.DateTimeField(auto_now_add=<span class="code-kw">True</span>)
+
+        <span class="code-cmt"># Many-to-Many</span>
+        <span class="code-kw">class</span> Post(models.Model):
+            tags = models.ManyToManyField(<span class="code-str">'Tag'</span>)
+
+        <span class="code-cmt"># One-to-One</span>
+        <span class="code-kw">class</span> UserProfile(models.Model):
+            user = models.OneToOneField(User, on_delete=models.CASCADE)
+            bio = models.TextField()</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 07 ══ -->
+        <section id="ch07">
+            <div class="chapter-header" data-num="07"><div class="chapter-num">Chapter 07</div><h1>Django ORM</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Querying the Database</h2>
+                    <p>The Django ORM (Object-Relational Mapper) lets you interact with the database using Python code instead of SQL.</p>
+                    <div class="code-block"><code><span class="code-cmt"># Get all objects</span>
+        posts = BlogPost.objects.<span class="code-fn">all</span>()
+
+        <span class="code-cmt"># Filter</span>
+        posts = BlogPost.objects.filter(author=<span class="code-str">"Akarsh"</span>)
+        posts = BlogPost.objects.filter(published_at__year=<span class="code-num">2024</span>)
+
+        <span class="code-cmt"># Get a single object</span>
+        post = BlogPost.objects.get(id=<span class="code-num">1</span>)
+
+        <span class="code-cmt"># Ordering</span>
+        posts = BlogPost.objects.order_by(<span class="code-str">'-published_at'</span>)  <span class="code-cmt"># descending</span>
+
+        <span class="code-cmt"># Chaining</span>
+        posts = BlogPost.objects.filter(author=<span class="code-str">"Akarsh"</span>).order_by(<span class="code-str">'-published_at'</span>)
+
+        <span class="code-cmt"># Creating</span>
+        post = BlogPost.objects.create(title=<span class="code-str">"New Post"</span>, content=<span class="code-str">"..."</span>, author=<span class="code-str">"Akarsh"</span>)
+
+        <span class="code-cmt"># Updating</span>
+        post.title = <span class="code-str">"Updated Title"</span>
+        post.save()
+
+        <span class="code-cmt"># Deleting</span>
+        post.delete()</code></div>
+                </div>
+                <div class="section">
+                    <h2>Field Lookups</h2>
+                    <table class="styled-table">
+                        <tr><th>Lookup</th><th>Description</th></tr>
+                        <tr><td>exact</td><td>Exact match (default)</td></tr>
+                        <tr><td>iexact</td><td>Case-insensitive exact match</td></tr>
+                        <tr><td>contains</td><td>Case-sensitive containment</td></tr>
+                        <tr><td>icontains</td><td>Case-insensitive containment</td></tr>
+                        <tr><td>gt, gte</td><td>Greater than, Greater than or equal</td></tr>
+                        <tr><td>lt, lte</td><td>Less than, Less than or equal</td></tr>
+                        <tr><td>in</td><td>Matches one of the values in a list</td></tr>
+                        <tr><td>startswith</td><td>Starts with</td></tr>
+                        <tr><td>endswith</td><td>Ends with</td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 08 ══ -->
+        <section id="ch08">
+            <div class="chapter-header" data-num="08"><div class="chapter-num">Chapter 08</div><h1>Migrations</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>What are Migrations?</h2>
+                    <p>Migrations are Django's way of propagating changes you make to your models into your database schema. They're like version control for your database.</p>
+                    <div class="code-block"><code><span class="code-cmt"># Create migrations for changes in models</span>
+        python manage.py makemigrations
+
+        <span class="code-cmt"># Apply migrations to the database</span>
+        python manage.py migrate
+
+        <span class="code-cmt"># See the SQL that will be executed</span>
+        python manage.py sqlmigrate myapp 0001
+
+        <span class="code-cmt"># Check for any unapplied migrations</span>
+        python manage.py showmigrations</code></div>
+                    <div class="callout callout-warn"><span class="callout-icon">⚠️</span><div class="callout-text"><strong>Important</strong> Always run <code>makemigrations</code> after changing your models, then <code>migrate</code> to apply the changes to your database.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 09 ══ -->
+        <section id="ch09">
+            <div class="chapter-header" data-num="09"><div class="chapter-num">Chapter 09</div><h1>Admin Panel</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Django's Built-in Admin</h2>
+                    <p>Django provides a fully-featured admin interface out of the box. You can register your models and get a complete CRUD interface for free.</p>
+                    <div class="code-block"><code><span class="code-cmt"># admin.py</span>
+        <span class="code-kw">from</span> django.contrib <span class="code-kw">import</span> admin
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+
+        <span class="code-kw">class</span> BlogPostAdmin(admin.ModelAdmin):
+            list_display = [<span class="code-str">'title'</span>, <span class="code-str">'author'</span>, <span class="code-str">'published_at'</span>]
+            list_filter = [<span class="code-str">'author'</span>, <span class="code-str">'published_at'</span>]
+            search_fields = [<span class="code-str">'title'</span>, <span class="code-str">'content'</span>]
+            ordering = [<span class="code-str">'-published_at'</span>]
+
+        admin.site.register(BlogPost, BlogPostAdmin)</code></div>
+                    <div class="callout callout-info"><span class="callout-icon">🔑</span><div class="callout-text"><strong>Create a superuser:</strong> <code>python manage.py createsuperuser</code> — then visit <code>/admin</code> in your browser.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 10 ══ -->
+        <section id="ch10">
+            <div class="chapter-header" data-num="10"><div class="chapter-num">Chapter 10</div><h1>Forms</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Django Forms</h2>
+                    <p>Django has a built-in form system that handles validation, rendering, and CSRF protection.</p>
+                    <div class="code-block"><code><span class="code-cmt"># forms.py</span>
+        <span class="code-kw">from</span> django <span class="code-kw">import</span> forms
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+
+        <span class="code-kw">class</span> BlogPostForm(forms.ModelForm):
+            <span class="code-kw">class</span> Meta:
+                model = BlogPost
+                fields = [<span class="code-str">'title'</span>, <span class="code-str">'content'</span>, <span class="code-str">'author'</span>]
+                widgets = {
+                    <span class="code-str">'content'</span>: forms.Textarea(attrs={<span class="code-str">'rows'</span>: <span class="code-num">10</span>}),
+                }</code></div>
+                    <div class="code-block"><code><span class="code-cmt"># views.py</span>
+        <span class="code-kw">def</span> <span class="code-fn">create_post</span>(request):
+            <span class="code-kw">if</span> request.method == <span class="code-str">'POST'</span>:
+                form = BlogPostForm(request.POST)
+                <span class="code-kw">if</span> form.is_valid():
+                    form.save()
+                    <span class="code-kw">return</span> redirect(<span class="code-str">'home'</span>)
+            <span class="code-kw">else</span>:
+                form = BlogPostForm()
+            <span class="code-kw">return</span> render(request, <span class="code-str">'create.html'</span>, {<span class="code-str">'form'</span>: form})</code></div>
+                    <div class="code-block"><code><span class="code-cmt">{# create.html #}</span>
+        &lt;form method=<span class="code-str">"POST"</span>&gt;
+            {% csrf_token %}
+            {{ form.as_p }}
+            &lt;button type=<span class="code-str">"submit"</span>&gt;Submit&lt;/button&gt;
+        &lt;/form&gt;</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 11 ══ -->
+        <section id="ch11">
+            <div class="chapter-header" data-num="11"><div class="chapter-num">Chapter 11</div><h1>Django Authentication</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Built-in Authentication</h2>
+                    <p>Django comes with a complete authentication system including user registration, login, logout, password reset, and more.</p>
+                    <div class="code-block"><code><span class="code-cmt"># urls.py</span>
+        <span class="code-kw">from</span> django.contrib.auth <span class="code-kw">import</span> views <span class="code-kw">as</span> auth_views
+
+        urlpatterns = [
+            path(<span class="code-str">'login/'</span>, auth_views.LoginView.as_view(), name=<span class="code-str">'login'</span>),
+            path(<span class="code-str">'logout/'</span>, auth_views.LogoutView.as_view(), name=<span class="code-str">'logout'</span>),
+            path(<span class="code-str">'signup/'</span>, views.signup, name=<span class="code-str">'signup'</span>),
+        ]</code></div>
+                    <div class="code-block"><code><span class="code-cmt"># views.py</span>
+        <span class="code-kw">from</span> django.contrib.auth.forms <span class="code-kw">import</span> UserCreationForm
+        <span class="code-kw">from</span> django.contrib.auth <span class="code-kw">import</span> login
+
+        <span class="code-kw">def</span> <span class="code-fn">signup</span>(request):
+            <span class="code-kw">if</span> request.method == <span class="code-str">'POST'</span>:
+                form = UserCreationForm(request.POST)
+                <span class="code-kw">if</span> form.is_valid():
+                    user = form.save()
+                    login(request, user)
+                    <span class="code-kw">return</span> redirect(<span class="code-str">'home'</span>)
+            <span class="code-kw">else</span>:
+                form = UserCreationForm()
+            <span class="code-kw">return</span> render(request, <span class="code-str">'signup.html'</span>, {<span class="code-str">'form'</span>: form})</code></div>
+                    <div class="callout callout-info"><span class="callout-icon">🔒</span><div class="callout-text"><strong>Protecting views:</strong> Use <code>@login_required</code> decorator to restrict access to authenticated users only.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 12 ══ -->
+        <section id="ch12">
+            <div class="chapter-header" data-num="12"><div class="chapter-num">Chapter 12</div><h1>Class-Based Views</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Common Built-in CBVs</h2>
+                    <p>Class-Based Views (CBVs) provide reusable view logic in an object-oriented way.</p>
+                    <div class="code-block"><code><span class="code-kw">from</span> django.views.generic <span class="code-kw">import</span> ListView, DetailView, CreateView, UpdateView, DeleteView
+        <span class="code-kw">from</span> django.contrib.auth.mixins <span class="code-kw">import</span> LoginRequiredMixin
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+
+        <span class="code-kw">class</span> PostListView(ListView):
+            model = BlogPost
+            template_name = <span class="code-str">'posts/list.html'</span>
+            context_object_name = <span class="code-str">'posts'</span>
+            ordering = [<span class="code-str">'-published_at'</span>]
+            paginate_by = <span class="code-num">10</span>
+
+        <span class="code-kw">class</span> PostDetailView(DetailView):
+            model = BlogPost
+            template_name = <span class="code-str">'posts/detail.html'</span>
+
+        <span class="code-kw">class</span> PostCreateView(LoginRequiredMixin, CreateView):
+            model = BlogPost
+            fields = [<span class="code-str">'title'</span>, <span class="code-str">'content'</span>]
+            template_name = <span class="code-str">'posts/create.html'</span>
+            success_url = <span class="code-str">'/'</span>
+
+            <span class="code-kw">def</span> <span class="code-fn">form_valid</span>(self, form):
+                form.instance.author = self.request.user
+                <span class="code-kw">return</span> super().form_valid(form)</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 13 ══ -->
+        <section id="ch13">
+            <div class="chapter-header" data-num="13"><div class="chapter-num">Chapter 13</div><h1>Django Middleware</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>What is Middleware?</h2>
+                    <p>Middleware sits between the request and response. It's a way to process every request/response globally — useful for authentication, logging, and security.</p>
+                    <div class="code-block"><code><span class="code-cmt"># middleware.py</span>
+        <span class="code-kw">class</span> RequestLoggingMiddleware:
+            <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, get_response):
+                self.get_response = get_response
+
+            <span class="code-kw">def</span> <span class="code-fn">__call__</span>(self, request):
+                <span class="code-cmt"># Runs before the view</span>
+                <span class="code-fn">print</span>(<span class="code-str">f"Request: {request.method} {request.path}"</span>)
+
+                response = self.get_response(request)
+
+                <span class="code-cmt"># Runs after the view</span>
+                <span class="code-fn">print</span>(<span class="code-str">f"Response: {response.status_code}"</span>)
+
+                <span class="code-kw">return</span> response</code></div>
+                    <div class="callout callout-info"><span class="callout-icon">⚙️</span><div class="callout-text"><strong>Registering middleware:</strong> Add your middleware to the <code>MIDDLEWARE</code> list in <code>settings.py</code>.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 14 ══ -->
+        <section id="ch14">
+            <div class="chapter-header" data-num="14"><div class="chapter-num">Chapter 14</div><h1>Static Files</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Handling Static Files</h2>
+                    <p>Static files include CSS, JavaScript, images, and other assets. Django handles them differently in development and production.</p>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py</span>
+        STATIC_URL = <span class="code-str">'/static/'</span>
+        STATICFILES_DIRS = [
+            BASE_DIR / <span class="code-str">"static"</span>,
+        ]
+        STATIC_ROOT = BASE_DIR / <span class="code-str">"staticfiles"</span>  <span class="code-cmt"># For production</span></code></div>
+                    <div class="code-block"><code><span class="code-cmt">{# In templates #}</span>
+        {% load static %}
+        &lt;link rel=<span class="code-str">"stylesheet"</span> href=<span class="code-str">"{% static 'css/style.css' %}"</span>&gt;
+        &lt;img src=<span class="code-str">"{% static 'images/logo.png' %}"</span> alt=<span class="code-str">"Logo"</span>&gt;
+
+        <span class="code-cmt"># Collect static files for production</span>
+        python manage.py collectstatic</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 15 ══ -->
+        <section id="ch15">
+            <div class="chapter-header" data-num="15"><div class="chapter-num">Chapter 15</div><h1>Django REST Framework</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Building APIs with DRF</h2>
+                    <p>Django REST Framework (DRF) is a powerful toolkit for building Web APIs in Django.</p>
+                    <div class="code-block"><code><span class="code-cmt"># Install DRF</span>
+        pip install djangorestframework
+
+        <span class="code-cmt"># serializers.py</span>
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> serializers
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+
+        <span class="code-kw">class</span> BlogPostSerializer(serializers.ModelSerializer):
+            <span class="code-kw">class</span> Meta:
+                model = BlogPost
+                fields = [<span class="code-str">'id'</span>, <span class="code-str">'title'</span>, <span class="code-str">'content'</span>, <span class="code-str">'author'</span>, <span class="code-str">'published_at'</span>]</code></div>
+                    <div class="code-block"><code><span class="code-cmt"># views.py (API)</span>
+        <span class="code-kw">from</span> rest_framework <span class="code-kw">import</span> generics
+        <span class="code-kw">from</span> .models <span class="code-kw">import</span> BlogPost
+        <span class="code-kw">from</span> .serializers <span class="code-kw">import</span> BlogPostSerializer
+
+        <span class="code-kw">class</span> PostListAPI(generics.ListCreateAPIView):
+            queryset = BlogPost.objects.<span class="code-fn">all</span>()
+            serializer_class = BlogPostSerializer
+
+        <span class="code-cmt"># urls.py (API)</span>
+        urlpatterns = [
+            path(<span class="code-str">'api/posts/'</span>, PostListAPI.as_view(), name=<span class="code-str">'api_posts'</span>),
+        ]</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 16 ══ -->
+        <section id="ch16">
+            <div class="chapter-header" data-num="16"><div class="chapter-num">Chapter 16</div><h1>Deployment</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Preparing for Production</h2>
+                    <p>Deploying a Django application involves several steps to ensure security and performance.</p>
+                    <div class="callout callout-warn"><span class="callout-icon">⚠️</span><div class="callout-text"><strong>Critical Settings Changes:</strong>
+                        <br />• <code>DEBUG = False</code>
+                        <br />• <code>ALLOWED_HOSTS = ['yourdomain.com']</code>
+                        <br />• Use environment variables for secret keys
+                        <br />• Set up a proper database (PostgreSQL recommended)</div></div>
+                    <div class="code-block"><code><span class="code-cmt"># settings.py for production</span>
+        <span class="code-kw">import</span> os
+        <span class="code-kw">from</span> django.core.management.utils <span class="code-kw">import</span> get_random_secret_key
+
+        SECRET_KEY = os.getenv(<span class="code-str">'DJANGO_SECRET_KEY'</span>, get_random_secret_key())
+        DEBUG = os.getenv(<span class="code-str">'DEBUG'</span>, <span class="code-str">'False'</span>) == <span class="code-str">'True'</span>
+        ALLOWED_HOSTS = os.getenv(<span class="code-str">'ALLOWED_HOSTS'</span>, <span class="code-str">'localhost'</span>).split(<span class="code-str">','</span>)</code></div>
+                    <div class="code-block"><code><span class="code-cmt"># Using Gunicorn + Nginx</span>
+        <span class="code-cmt"># Install Gunicorn</span>
+        pip install gunicorn
+
+        <span class="code-cmt"># Run with Gunicorn</span>
+        gunicorn --workers 4 myproject.wsgi:application
+
+        <span class="code-cmt"># For static files in production</span>
+        python manage.py collectstatic</code></div>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>🚀 Deployment Options</h4>
+                            <ul>
+                                <li>Heroku</li>
+                                <li>PythonAnywhere</li>
+                                <li>DigitalOcean</li>
+                                <li>AWS EC2</li>
+                                <li>Vercel</li>
+                            </ul>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🔧 Essential Tools</h4>
+                            <ul>
+                                <li>Gunicorn (WSGI server)</li>
+                                <li>Nginx (reverse proxy)</li>
+                                <li>PostgreSQL (database)</li>
+                                <li>Redis (caching)</li>
+                                <li>Celery (async tasks)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CLOSING ══ -->
+        <div class="closing">
+            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;">A message from the creator</p>
+            <p style="font-size:18px;line-height:1.85;max-width:620px;margin:0 auto;color:rgba(255,255,255,0.9);">
+                "We'll be learning all of this and so much more on this channel. I, <strong>Akarsh Vyas</strong>, as a creator and representative of Sheryians AI, would like to sincerely thank each and every one of you who stayed with us till the end. You are truly precious to us. Much love! 💙"
+            </p>
+            <p style="margin-top:36px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);">Sheryians Coding School</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section[id]");
+            const links = document.querySelectorAll(".sidebar a");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(a => a.classList.remove("active"));
+                        const link = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+                        if (link) link.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.25 });
+            sections.forEach(s => observer.observe(s));
+        });
+    </script>
+
+</body>
+</html>

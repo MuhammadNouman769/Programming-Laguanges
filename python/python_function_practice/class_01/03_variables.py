@@ -46,8 +46,6 @@ a = [1,2,3,45,6]
 print(a[1],a[-2])
 
 """
-<<<<<<< HEAD:python/python_function_practice/class_01/03_variables.py
-
 
 """
 

@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Complete Notes – Sheryians Coding School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --secondary: #2563eb;
+            --bg: #eff6ff;
+            --surface: #ffffff;
+            --text-body: #334155;
+            --text-dark: #1e1b4b;
+            --text-muted: #64748b;
+            --border: #93c5fd;
+            --shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
+            --radius: 16px;
+            --code-bg: #0f172a;
+            --code-text: #a5f3fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.7;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 265px;
+            height: 100vh;
+            background: var(--primary-dark);
+            overflow-y: auto;
+            z-index: 1000;
+            padding-bottom: 40px;
+            scrollbar-width: thin;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+        }
+        .sidebar-logo h2 {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .sidebar-logo p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11.5px;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-label {
+            padding: 12px 20px 4px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 7px 20px 7px 24px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+            font-weight: 450;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+            border-left-color: #60a5fa;
+        }
+
+        /* ---- MAIN ---- */
+        .main {
+            margin-left: 265px;
+            min-height: 100vh;
+        }
+
+        /* ---- COVER ---- */
+        .cover {
+            background: linear-gradient(145deg, #1d4ed8 0%, #2563eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -140px;
+            right: -140px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.035);
+        }
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.025);
+        }
+        .cover-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 6px 24px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cover h1 {
+            color: #fff;
+            font-size: clamp(40px, 6.5vw, 76px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .cover h1 span {
+            color: #93c5fd;
+        }
+        .cover-sub {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 17px;
+            max-width: 520px;
+            margin: 0 auto 40px;
+        }
+        .cover-note {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            max-width: 500px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14.5px;
+            line-height: 1.65;
+        }
+        .cover-footer {
+            position: absolute;
+            bottom: 28px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ---- CHAPTER HEADER ---- */
+        .chapter-header {
+            background: linear-gradient(145deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 56px 60px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-header::after {
+            content: attr(data-num);
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 110px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            pointer-events: none;
+            font-family: 'Segoe UI', monospace;
+        }
+        .chapter-num {
+            color: #93c5fd;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .chapter-header h1 {
+            color: #fff;
+            font-size: clamp(26px, 4vw, 42px);
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- CONTENT ---- */
+        .content {
+            padding: 48px 60px;
+            max-width: 1020px;
+        }
+
+        /* ---- SECTION CARD ---- */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s;
+        }
+        .section:hover {
+            box-shadow: 0 10px 32px rgba(37, 99, 235, 0.10);
+        }
+        .section h2 {
+            color: var(--primary);
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .section h3 {
+            color: var(--secondary);
+            font-size: 15.5px;
+            font-weight: 700;
+            margin: 20px 0 8px;
+        }
+        .section h4 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            margin: 16px 0 6px;
+        }
+        .section p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .section ul,
+        .section ol {
+            padding-left: 24px;
+            margin-bottom: 10px;
+        }
+        .section ul li,
+        .section ol li {
+            padding: 3px 0;
+            font-size: 15px;
+        }
+        .section ul li::marker {
+            color: var(--primary);
+        }
+
+        /* ---- CODE ---- */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin: 14px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 13.5px;
+            line-height: 1.8;
+        }
+        .code-block code {
+            color: var(--code-text);
+            white-space: pre;
+        }
+        .code-kw {
+            color: #f472b6;
+        }
+        .code-fn {
+            color: #34d399;
+        }
+        .code-str {
+            color: #fcd34d;
+        }
+        .code-cmt {
+            color: #6b7280;
+            font-style: italic;
+        }
+        .code-num {
+            color: #fb923c;
+        }
+        .code-tag {
+            color: #f87171;
+        }
+        .code-attr {
+            color: #60a5fa;
+        }
+        .code-value {
+            color: #fcd34d;
+        }
+        .code-selector {
+            color: #f472b6;
+        }
+        .code-property {
+            color: #60a5fa;
+        }
+
+        /* ---- TABLES ---- */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+        }
+        .styled-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .styled-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            background: #fff;
+        }
+        .styled-table tr:last-child td {
+            border-bottom: none;
+        }
+        .styled-table tr:nth-child(even) td {
+            background: var(--primary-light);
+        }
+        .styled-table td:first-child {
+            color: var(--secondary);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+        }
+
+        /* ---- CALLOUTS ---- */
+        .callout {
+            border-radius: 12px;
+            padding: 16px 22px;
+            margin: 14px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .callout-info {
+            background: var(--primary-light);
+            border-left: 5px solid var(--primary);
+        }
+        .callout-warn {
+            background: #fffbeb;
+            border-left: 5px solid #b45309;
+        }
+        .callout-success {
+            background: #ecfdf5;
+            border-left: 5px solid #0b7e4b;
+        }
+        .callout-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .callout-text {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
+        .callout-text strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+        }
+
+        /* ---- GRIDS ---- */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 14px 0;
+        }
+        .compare-card {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .compare-card h4 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .powers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+        .power-item {
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            border-left: 4px solid var(--primary);
+        }
+        .power-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+        .power-item span {
+            font-size: 13px;
+            color: var(--text-body);
+        }
+
+        /* ---- DEMO BOX ---- */
+        .demo-box {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 14px 0;
+            background: #fff;
+            min-height: 60px;
+        }
+        .demo-box .box {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+        .demo-box .box-red {
+            background: #ef4444;
+        }
+        .demo-box .box-green {
+            background: #22c55e;
+        }
+        .demo-box .box-blue {
+            background: #3b82f6;
+        }
+        .demo-box .flex-demo {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .demo-box .flex-demo .item {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        .demo-box .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .demo-box .grid-demo .item {
+            background: var(--primary);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .demo-box .position-demo {
+            position: relative;
+            height: 200px;
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .demo-box .position-demo .child {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        /* ---- CLOSING ---- */
+        .closing {
+            background: linear-gradient(145deg, #1d4ed8, #2563eb);
+            padding: 60px 80px;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+            }
+            .content {
+                padding: 24px 18px;
+            }
+            .chapter-header {
+                padding: 36px 22px 28px;
+            }
+            .compare-grid,
+            .powers-grid {
+                grid-template-columns: 1fr;
+            }
+            .cover {
+                padding: 60px 24px;
+            }
+            .demo-box .grid-demo {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══ SIDEBAR ══ -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Sheryians Coding School</h2>
+            <p>CSS Complete Notes</p>
+        </div>
+        <div class="nav-label">Start Here</div>
+        <a href="#cover">📘 Cover</a>
+        <div class="nav-label">Introduction</div>
+        <a href="#intro">🎨 What is CSS?</a>
+        <div class="nav-label">Chapters</div>
+        <a href="#ch01">01 — CSS Basics</a>
+        <a href="#ch02">02 — Selectors</a>
+        <a href="#ch03">03 — Colors &amp; Backgrounds</a>
+        <a href="#ch04">04 — Text &amp; Fonts</a>
+        <a href="#ch05">05 — Box Model</a>
+        <a href="#ch06">06 — Display &amp; Positioning</a>
+        <a href="#ch07">07 — Flexbox</a>
+        <a href="#ch08">08 — CSS Grid</a>
+        <a href="#ch09">09 — Transitions &amp; Animations</a>
+        <a href="#ch10">10 — Responsive Design</a>
+        <a href="#ch11">11 — Pseudo-Classes &amp; Pseudo-Elements</a>
+        <a href="#ch12">12 — CSS Variables</a>
+        <a href="#ch13">13 — Advanced Topics</a>
+    </nav>
+
+    <div class="main">
+
+        <!-- ══ COVER ══ -->
+        <section id="cover" class="cover">
+            <div class="cover-badge">Sheryians Coding School</div>
+            <h1>CSS<br><span>Complete Notes</span></h1>
+            <p class="cover-sub">From basic styling to advanced layouts — make your websites beautiful and responsive.</p>
+            <div class="cover-note">
+                🎬 <strong>Watch alongside!</strong> This book is designed to work hand-in-hand with the video series on <strong>Sheryians AI</strong> on YouTube. Every concept here has a matching video explanation.
+            </div>
+            <div class="cover-footer">written by Muhammad Nouman · Sheryians Coding School</div>
+        </section>
+
+        <!-- ══ INTRO ══ -->
+        <section id="intro">
+            <div class="chapter-header" data-num="00">
+                <div class="chapter-num">Introduction</div>
+                <h1>What is CSS?</h1>
+            </div>
+            <div class="content">
+
+                <div class="section">
+                    <h2>🎨 CSS in Simple Words</h2>
+                    <p><strong>CSS</strong> (Cascading Style Sheets) is a stylesheet language used to describe the <strong>presentation</strong> of a document written in HTML. It controls the look and feel of your web pages.</p>
+                    <p>Think of CSS as the <strong>skin</strong> or <strong>clothing</strong> of a website — it adds colors, fonts, spacing, layout, animations, and makes everything visually appealing.</p>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>🏗️ HTML = Structure</h4>
+                            <p>Defines the content and structure of the page (the skeleton).</p>
+                        </div>
+                        <div class="compare-card">
+                            <h4>🎨 CSS = Presentation</h4>
+                            <p>Defines the visual appearance (the skin).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>📝 How CSS Works</h2>
+                    <p>CSS works by selecting HTML elements and applying styles to them.</p>
+                    <div class="code-block"><code><span class="code-selector">selector</span> {
+            <span class="code-property">property</span>: <span class="code-value">value</span>;
+        }
+
+        <span class="code-cmt">/* Example */</span>
+        <span class="code-selector">h1</span> {
+            <span class="code-property">color</span>: <span class="code-value">blue</span>;
+            <span class="code-property">font-size</span>: <span class="code-value">24px</span>;
+        }
+
+        <span class="code-selector">.button</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">#2563eb</span>;
+            <span class="code-property">color</span>: <span class="code-value">white</span>;
+            <span class="code-property">padding</span>: <span class="code-value">10px 20px</span>;
+            <span class="code-property">border-radius</span>: <span class="code-value">8px</span>;
+        }</code></div>
+                </div>
+
+                <div class="section">
+                    <h2>🔗 Ways to Add CSS</h2>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📄 Inline CSS</h4>
+                            <p>Applied directly to an element using the <code>style</code> attribute.</p>
+                            <div class="code-block"><code><span class="code-tag">&lt;h1</span> <span class="code-attr">style=</span><span class="code-value">"color: blue;"</span><span class="code-tag">&gt;</span>Hello<span class="code-tag">&lt;/h1&gt;</span></code></div>
+                            <p style="font-size:12px;color:var(--text-muted);">⚠️ Not recommended for large projects</p>
+                        </div>
+                        <div class="compare-card">
+                            <h4>📄 Internal CSS</h4>
+                            <p>Defined inside the <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code>.</p>
+                            <div class="code-block"><code><span class="code-tag">&lt;style&gt;</span>
+                <span class="code-selector">h1</span> { <span class="code-property">color</span>: <span class="code-value">blue</span>; }
+            <span class="code-tag">&lt;/style&gt;</span></code></div>
+                        </div>
+                        <div class="compare-card" style="grid-column: 1/3;">
+                            <h4>📄 External CSS (Best Practice)</h4>
+                            <p>CSS in a separate <code>.css</code> file linked to the HTML.</p>
+                            <div class="code-block"><code><span class="code-cmt">&lt;!-- In HTML --&gt;</span>
+            <span class="code-tag">&lt;link</span> <span class="code-attr">rel=</span><span class="code-value">"stylesheet"</span> <span class="code-attr">href=</span><span class="code-value">"style.css"</span><span class="code-tag">&gt;</span>
+
+            <span class="code-cmt">/* In style.css */</span>
+            <span class="code-selector">h1</span> { <span class="code-property">color</span>: <span class="code-value">blue</span>; }</code></div>
+                            <p style="font-size:12px;color:#0b7e4b;">✅ Reusable, cacheable, maintainable</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout callout-success" style="margin:0;">
+                    <span class="callout-icon">🚀</span>
+                    <div class="callout-text"><strong>You're all set!</strong> Let's dive into the world of CSS. Head to Chapter 01!</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══ CH 01 ══ -->
+        <section id="ch01">
+            <div class="chapter-header" data-num="01"><div class="chapter-num">Chapter 01</div><h1>CSS Basics</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Syntax &amp; Structure</h2>
+                    <div class="code-block"><code><span class="code-selector">selector</span> {
+            <span class="code-property">property</span>: <span class="code-value">value</span>;
+            <span class="code-property">property</span>: <span class="code-value">value</span>;
+        }
+
+        <span class="code-cmt">/* Example */</span>
+        <span class="code-selector">p</span> {
+            <span class="code-property">color</span>: <span class="code-value">#333</span>;
+            <span class="code-property">font-size</span>: <span class="code-value">16px</span>;
+            <span class="code-property">line-height</span>: <span class="code-value">1.6</span>;
+            <span class="code-property">margin-bottom</span>: <span class="code-value">12px</span>;
+        }</code></div>
+
+                    <h3>CSS Comments</h3>
+                    <div class="code-block"><code><span class="code-cmt">/* This is a single-line comment */</span>
+
+        <span class="code-cmt">/* This is a
+           multi-line comment */</span></code></div>
+
+                    <h3>Case Sensitivity</h3>
+                    <p>CSS is <strong>case-insensitive</strong> for property names and values, but it's good practice to use lowercase. IDs and classes are case-sensitive in HTML.</p>
+
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Best Practice:</strong> Use lowercase for all CSS selectors, properties, and values. Use kebab-case for class names (e.g., <code>.my-class</code>).</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 02 ══ -->
+        <section id="ch02">
+            <div class="chapter-header" data-num="02"><div class="chapter-num">Chapter 02</div><h1>Selectors</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Types of Selectors</h2>
+
+                    <table class="styled-table">
+                        <tr><th>Selector</th><th>Example</th><th>Description</th></tr>
+                        <tr><td>Element</td><td>p</td><td>Selects all &lt;p&gt; elements</td></tr>
+                        <tr><td>Class</td><td>.my-class</td><td>Selects all elements with class="my-class"</td></tr>
+                        <tr><td>ID</td><td>#my-id</td><td>Selects the element with id="my-id"</td></tr>
+                        <tr><td>Universal</td><td>*</td><td>Selects all elements</td></tr>
+                        <tr><td>Descendant</td><td>div p</td><td>Selects all &lt;p&gt; inside &lt;div&gt;</td></tr>
+                        <tr><td>Child</td><td>div > p</td><td>Selects &lt;p&gt; that are direct children of &lt;div&gt;</td></tr>
+                        <tr><td>Adjacent Sibling</td><td>h1 + p</td><td>Selects &lt;p&gt; directly after &lt;h1&gt;</td></tr>
+                        <tr><td>General Sibling</td><td>h1 ~ p</td><td>Selects all &lt;p&gt; siblings after &lt;h1&gt;</td></tr>
+                        <tr><td>Attribute</td><td>[type="text"]</td><td>Selects elements with specific attribute</td></tr>
+                        <tr><td>Pseudo-class</td><td>a:hover</td><td>Selects elements in a specific state</td></tr>
+                        <tr><td>Pseudo-element</td><td>p::first-line</td><td>Selects part of an element</td></tr>
+                    </table>
+
+                    <div class="code-block"><code><span class="code-cmt">/* Multiple selectors */</span>
+        <span class="code-selector">h1, h2, h3</span> {
+            <span class="code-property">color</span>: <span class="code-value">#2563eb</span>;
+        }
+
+        <span class="code-cmt">/* Combining selectors */</span>
+        <span class="code-selector">div.container > p.highlight</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">yellow</span>;
+        }
+
+        <span class="code-cmt">/* Attribute selectors */</span>
+        <span class="code-selector">[class~="highlight"]</span> { <span class="code-cmt">/* Contains the word highlight */</span>
+            <span class="code-property">font-weight</span>: <span class="code-value">bold</span>;
+        }
+
+        <span class="code-selector">[href^="https"]</span> { <span class="code-cmt">/* Starts with https */</span>
+            <span class="code-property">color</span>: <span class="code-value">green</span>;
+        }
+
+        <span class="code-selector">[href$=".pdf"]</span> { <span class="code-cmt">/* Ends with .pdf */</span>
+            <span class="code-property">color</span>: <span class="code-value">red</span>;
+        }</code></div>
+
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Specificity Hierarchy:</strong> Inline styles > IDs > Classes/Attributes/Pseudo-classes > Elements/Pseudo-elements > Universal selector.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 03 ══ -->
+        <section id="ch03">
+            <div class="chapter-header" data-num="03"><div class="chapter-num">Chapter 03</div><h1>Colors &amp; Backgrounds</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Color Values</h2>
+                    <table class="styled-table">
+                        <tr><th>Method</th><th>Example</th><th>Description</th></tr>
+                        <tr><td>Named Color</td><td>red, blue, green</td><td>Predefined color names</td></tr>
+                        <tr><td>Hex</td><td>#FF5733</td><td>Hexadecimal values (0-9, A-F)</td></tr>
+                        <tr><td>RGB</td><td>rgb(255, 87, 51)</td><td>Red, Green, Blue (0-255)</td></tr>
+                        <tr><td>RGBA</td><td>rgba(255, 87, 51, 0.5)</td><td>RGB with alpha (transparency)</td></tr>
+                        <tr><td>HSL</td><td>hsl(12, 100%, 60%)</td><td>Hue, Saturation, Lightness</td></tr>
+                        <tr><td>HSLA</td><td>hsla(12, 100%, 60%, 0.5)</td><td>HSL with alpha</td></tr>
+                    </table>
+
+                    <div class="code-block"><code><span class="code-selector">.example1</span> {
+            <span class="code-property">color</span>: <span class="code-value">#2563eb</span>;
+            <span class="code-property">background-color</span>: <span class="code-value">#dbeafe</span>;
+        }
+
+        <span class="code-selector">.example2</span> {
+            <span class="code-property">color</span>: <span class="code-value">rgb(37, 99, 235)</span>;
+            <span class="code-property">background-color</span>: <span class="code-value">rgba(37, 99, 235, 0.1)</span>;
+        }
+
+        <span class="code-selector">.example3</span> {
+            <span class="code-property">color</span>: <span class="code-value">hsl(220, 80%, 50%)</span>;
+            <span class="code-property">background-color</span>: <span class="code-value">hsl(220, 80%, 50%, 0.1)</span>;
+        }</code></div>
+
+                    <h3>Background Properties</h3>
+                    <div class="code-block"><code><span class="code-selector">.background-example</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">#f0f4ff</span>;
+            <span class="code-property">background-image</span>: <span class="code-value">url('image.jpg')</span>;
+            <span class="code-property">background-repeat</span>: <span class="code-value">no-repeat</span>;
+            <span class="code-property">background-position</span>: <span class="code-value">center center</span>;
+            <span class="code-property">background-size</span>: <span class="code-value">cover</span>;
+            <span class="code-property">background-attachment</span>: <span class="code-value">fixed</span>;
+
+            <span class="code-cmt">/* Shorthand */</span>
+            <span class="code-property">background</span>: <span class="code-value">#f0f4ff url('image.jpg') no-repeat center center / cover fixed</span>;
+        }</code></div>
+
+                    <div class="demo-box">
+                        <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                            Gradient Background
+                        </div>
+                    </div>
+
+                    <div class="code-block"><code><span class="code-cmt">/* Gradients */</span>
+        <span class="code-selector">.gradient-linear</span> {
+            <span class="code-property">background</span>: <span class="code-value">linear-gradient(to right, #2563eb, #7c3aed)</span>;
+        }
+
+        <span class="code-selector">.gradient-radial</span> {
+            <span class="code-property">background</span>: <span class="code-value">radial-gradient(circle, #2563eb, #7c3aed)</span>;
+        }</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 04 ══ -->
+        <section id="ch04">
+            <div class="chapter-header" data-num="04"><div class="chapter-num">Chapter 04</div><h1>Text &amp; Fonts</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Font Properties</h2>
+                    <div class="code-block"><code><span class="code-selector">.text-example</span> {
+            <span class="code-property">font-family</span>: <span class="code-value">'Segoe UI', Tahoma, Geneva, Verdana, sans-serif</span>;
+            <span class="code-property">font-size</span>: <span class="code-value">18px</span>;
+            <span class="code-property">font-weight</span>: <span class="code-value">600</span>; <span class="code-cmt">/* or bold, normal, 100-900 */</span>
+            <span class="code-property">font-style</span>: <span class="code-value">italic</span>;
+            <span class="code-property">text-decoration</span>: <span class="code-value">underline</span>;
+            <span class="code-property">text-transform</span>: <span class="code-value">uppercase</span>;
+            <span class="code-property">line-height</span>: <span class="code-value">1.8</span>;
+            <span class="code-property">letter-spacing</span>: <span class="code-value">1px</span>;
+            <span class="code-property">word-spacing</span>: <span class="code-value">2px</span>;
+            <span class="code-property">text-align</span>: <span class="code-value">center</span>;
+            <span class="code-property">text-shadow</span>: <span class="code-value">2px 2px 4px rgba(0,0,0,0.3)</span>;
+        }</code></div>
+
+                    <h3>Google Fonts</h3>
+                    <div class="code-block"><code><span class="code-cmt">&lt;!-- In HTML head --&gt;</span>
+        <span class="code-tag">&lt;link</span> <span class="code-attr">href=</span><span class="code-value">"https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"</span> <span class="code-attr">rel=</span><span class="code-value">"stylesheet"</span><span class="code-tag">&gt;</span>
+
+        <span class="code-cmt">/* In CSS */</span>
+        <span class="code-selector">body</span> {
+            <span class="code-property">font-family</span>: <span class="code-value">'Inter', sans-serif</span>;
+        }</code></div>
+
+                    <h3>Text Alignment &amp; Decoration</h3>
+                    <table class="styled-table">
+                        <tr><th>Property</th><th>Values</th><th>Description</th></tr>
+                        <tr><td>text-align</td><td>left, right, center, justify</td><td>Horizontal alignment</td></tr>
+                        <tr><td>text-decoration</td><td>none, underline, overline, line-through</td><td>Text decoration</td></tr>
+                        <tr><td>text-transform</td><td>uppercase, lowercase, capitalize</td><td>Case transformation</td></tr>
+                        <tr><td>text-shadow</td><td>h-shadow v-shadow blur color</td><td>Shadow effect</td></tr>
+                        <tr><td>word-wrap</td><td>normal, break-word</td><td>Break long words</td></tr>
+                    </table>
+
+                    <div class="demo-box" style="text-align: center;">
+                        <p style="font-size: 24px; font-weight: 700; color: #2563eb; text-shadow: 2px 2px 4px rgba(37, 99, 235, 0.3);">Styled Text</p>
+                        <p style="font-size: 14px; color: #64748b; text-decoration: underline;">Underlined text with shadow</p>
+                        <p style="font-size: 16px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Uppercase with letter spacing</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 05 ══ -->
+        <section id="ch05">
+            <div class="chapter-header" data-num="05"><div class="chapter-num">Chapter 05</div><h1>Box Model</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Understanding the Box Model</h2>
+                    <p>Every element in CSS is a rectangular box with:</p>
+                    <ul>
+                        <li><strong>Content</strong> — The actual content (text, images)</li>
+                        <li><strong>Padding</strong> — Space between content and border</li>
+                        <li><strong>Border</strong> — Surrounds the padding (optional)</li>
+                        <li><strong>Margin</strong> — Space between the box and other elements</li>
+                    </ul>
+
+                    <div class="code-block"><code><span class="code-selector">.box</span> {
+            <span class="code-property">width</span>: <span class="code-value">300px</span>;
+            <span class="code-property">height</span>: <span class="code-value">200px</span>;
+            <span class="code-property">padding</span>: <span class="code-value">20px</span>;
+            <span class="code-property">border</span>: <span class="code-value">2px solid #2563eb</span>;
+            <span class="code-property">margin</span>: <span class="code-value">20px</span>;
+            <span class="code-property">box-sizing</span>: <span class="code-value">border-box</span>; <span class="code-cmt">/* Includes padding and border in width/height */</span>
+        }</code></div>
+
+                    <h3>Box Sizing</h3>
+                    <div class="compare-grid">
+                        <div class="compare-card">
+                            <h4>📦 Content Box (Default)</h4>
+                            <p>Width = content only. Padding and border add to the total width.</p>
+                            <div class="code-block"><code><span class="code-selector">.box</span> {
+                    <span class="code-property">box-sizing</span>: <span class="code-value">content-box</span>;
+                    <span class="code-property">width</span>: <span class="code-value">200px</span>;
+                    <span class="code-property">padding</span>: <span class="code-value">20px</span>;
+                    <span class="code-cmt">/* Total width = 240px */</span>
+                }</code></div>
+                        </div>
+                        <div class="compare-card">
+                            <h4>📦 Border Box (Recommended)</h4>
+                            <p>Width = content + padding + border. Much easier to work with!</p>
+                            <div class="code-block"><code><span class="code-selector">.box</span> {
+                    <span class="code-property">box-sizing</span>: <span class="code-value">border-box</span>;
+                    <span class="code-property">width</span>: <span class="code-value">200px</span>;
+                    <span class="code-property">padding</span>: <span class="code-value">20px</span>;
+                    <span class="code-cmt">/* Total width = 200px */</span>
+                }</code></div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Best Practice:</strong> Apply <code>box-sizing: border-box</code> to all elements using the universal selector:</div></div>
+                    <div class="code-block"><code><span class="code-selector">*</span>, <span class="code-selector">*::before</span>, <span class="code-selector">*::after</span> {
+            <span class="code-property">box-sizing</span>: <span class="code-value">border-box</span>;
+        }</code></div>
+
+                    <h3>Margin &amp; Padding Shorthand</h3>
+                    <div class="code-block"><code><span class="code-cmt">/* All four sides */</span>
+        <span class="code-property">margin</span>: <span class="code-value">20px</span>;
+        <span class="code-property">padding</span>: <span class="code-value">20px</span>;
+
+        <span class="code-cmt">/* Top & Bottom | Left & Right */</span>
+        <span class="code-property">margin</span>: <span class="code-value">10px 20px</span>;
+
+        <span class="code-cmt">/* Top | Right | Bottom | Left (clockwise) */</span>
+        <span class="code-property">margin</span>: <span class="code-value">10px 20px 30px 40px</span>;
+
+        <span class="code-cmt">/* Individual sides */</span>
+        <span class="code-property">margin-top</span>: <span class="code-value">10px</span>;
+        <span class="code-property">margin-right</span>: <span class="code-value">20px</span>;
+        <span class="code-property">margin-bottom</span>: <span class="code-value">30px</span>;
+        <span class="code-property">margin-left</span>: <span class="code-value">40px</span>;</code></div>
+
+                    <div class="demo-box">
+                        <div style="border: 2px solid #2563eb; padding: 20px; margin: 10px; background: #dbeafe; border-radius: 8px;">
+                            <p style="margin: 0;"><strong>Box Model Demo</strong></p>
+                            <p style="margin: 0; font-size: 13px; color: #64748b;">Content → Padding → Border → Margin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 06 ══ -->
+        <section id="ch06">
+            <div class="chapter-header" data-num="06"><div class="chapter-num">Chapter 06</div><h1>Display &amp; Positioning</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Display Property</h2>
+                    <table class="styled-table">
+                        <tr><th>Value</th><th>Description</th></tr>
+                        <tr><td>block</td><td>Full width, starts on a new line</td></tr>
+                        <tr><td>inline</td><td>Only takes needed width, no line break</td></tr>
+                        <tr><td>inline-block</td><td>Inline but can set width/height</td></tr>
+                        <tr><td>none</td><td>Completely removes the element</td></tr>
+                        <tr><td>flex</td><td>Flexbox container</td></tr>
+                        <tr><td>grid</td><td>Grid container</td></tr>
+                    </table>
+
+                    <h3>Position Property</h3>
+                    <table class="styled-table">
+                        <tr><th>Value</th><th>Description</th></tr>
+                        <tr><td>static</td><td>Default, normal flow</td></tr>
+                        <tr><td>relative</td><td>Positioned relative to its normal position</td></tr>
+                        <tr><td>absolute</td><td>Positioned relative to nearest positioned ancestor</td></tr>
+                        <tr><td>fixed</td><td>Positioned relative to viewport</td></tr>
+                        <tr><td>sticky</td><td>Switches between relative and fixed based on scroll</td></tr>
+                    </table>
+
+                    <div class="code-block"><code><span class="code-selector">.static-example</span> {
+            <span class="code-property">position</span>: <span class="code-value">static</span>;
+        }
+
+        <span class="code-selector">.relative-example</span> {
+            <span class="code-property">position</span>: <span class="code-value">relative</span>;
+            <span class="code-property">top</span>: <span class="code-value">10px</span>;
+            <span class="code-property">left</span>: <span class="code-value">20px</span>;
+        }
+
+        <span class="code-selector">.parent</span> {
+            <span class="code-property">position</span>: <span class="code-value">relative</span>;
+        }
+
+        <span class="code-selector">.absolute-example</span> {
+            <span class="code-property">position</span>: <span class="code-value">absolute</span>;
+            <span class="code-property">top</span>: <span class="code-value">0</span>;
+            <span class="code-property">right</span>: <span class="code-value">0</span>;
+        }
+
+        <span class="code-selector">.fixed-example</span> {
+            <span class="code-property">position</span>: <span class="code-value">fixed</span>;
+            <span class="code-property">bottom</span>: <span class="code-value">20px</span>;
+            <span class="code-property">right</span>: <span class="code-value">20px</span>;
+        }
+
+        <span class="code-selector">.sticky-example</span> {
+            <span class="code-property">position</span>: <span class="code-value">sticky</span>;
+            <span class="code-property">top</span>: <span class="code-value">0</span>;
+            <span class="code-property">background</span>: <span class="code-value">white</span>;
+            <span class="code-property">z-index</span>: <span class="code-value">100</span>;
+        }</code></div>
+
+                    <div class="demo-box">
+                        <div style="position: relative; height: 200px; background: #f1f5f9; border-radius: 8px;">
+                            <div style="position: absolute; bottom: 20px; right: 20px; background: #2563eb; color: white; padding: 10px 20px; border-radius: 8px;">
+                                Position: Absolute
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Z-Index</h3>
+                    <div class="code-block"><code><span class="code-selector">.element1</span> {
+            <span class="code-property">position</span>: <span class="code-value">relative</span>;
+            <span class="code-property">z-index</span>: <span class="code-value">10</span>; <span class="code-cmt">/* Higher number = on top */</span>
+        }
+
+        <span class="code-selector">.element2</span> {
+            <span class="code-property">position</span>: <span class="code-value">relative</span>;
+            <span class="code-property">z-index</span>: <span class="code-value">5</span>;
+        }</code></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 07 ══ -->
+        <section id="ch07">
+            <div class="chapter-header" data-num="07"><div class="chapter-num">Chapter 07</div><h1>Flexbox</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Flexbox — One-Dimensional Layout</h2>
+                    <p>Flexbox is a layout model that allows items to align and distribute space within a container.</p>
+
+                    <div class="code-block"><code><span class="code-selector">.flex-container</span> {
+            <span class="code-property">display</span>: <span class="code-value">flex</span>;
+            <span class="code-property">flex-direction</span>: <span class="code-value">row</span>; <span class="code-cmt">/* row | row-reverse | column | column-reverse */</span>
+            <span class="code-property">justify-content</span>: <span class="code-value">center</span>; <span class="code-cmt">/* Main axis alignment */</span>
+            <span class="code-property">align-items</span>: <span class="code-value">center</span>; <span class="code-cmt">/* Cross axis alignment */</span>
+            <span class="code-property">flex-wrap</span>: <span class="code-value">wrap</span>; <span class="code-cmt">/* Allow items to wrap */</span>
+            <span class="code-property">gap</span>: <span class="code-value">16px</span>; <span class="code-cmt">/* Space between items */</span>
+        }
+
+        <span class="code-selector">.flex-item</span> {
+            <span class="code-property">flex</span>: <span class="code-value">1</span>; <span class="code-cmt">/* Grow to fill space */</span>
+            <span class="code-property">flex</span>: <span class="code-value">1 1 200px</span>; <span class="code-cmt">/* flex-grow flex-shrink flex-basis */</span>
+            <span class="code-property">align-self</span>: <span class="code-value">center</span>; <span class="code-cmt">/* Override align-items */</span>
+            <span class="code-property">order</span>: <span class="code-value">2</span>; <span class="code-cmt">/* Change visual order */</span>
+        }</code></div>
+
+                    <h3>Justify Content</h3>
+                    <table class="styled-table">
+                        <tr><th>Value</th><th>Description</th></tr>
+                        <tr><td>flex-start</td><td>Items at the start</td></tr>
+                        <tr><td>flex-end</td><td>Items at the end</td></tr>
+                        <tr><td>center</td><td>Items in the center</td></tr>
+                        <tr><td>space-between</td><td>Even space between items</td></tr>
+                        <tr><td>space-around</td><td>Even space around items</td></tr>
+                        <tr><td>space-evenly</td><td>Equal space between and around</td></tr>
+                    </table>
+
+                    <h3>Align Items</h3>
+                    <table class="styled-table">
+                        <tr><th>Value</th><th>Description</th></tr>
+                        <tr><td>stretch</td><td>Stretch to fill container (default)</td></tr>
+                        <tr><td>flex-start</td><td>Items at the start</td></tr>
+                        <tr><td>flex-end</td><td>Items at the end</td></tr>
+                        <tr><td>center</td><td>Items in the center</td></tr>
+                        <tr><td>baseline</td><td>Items aligned by baseline</td></tr>
+                    </table>
+
+                    <div class="demo-box">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; background: #f1f5f9; padding: 16px; border-radius: 8px;">
+                            <div class="item" style="background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px;">Item 1</div>
+                            <div class="item" style="background: #7c3aed; color: white; padding: 12px 24px; border-radius: 8px;">Item 2</div>
+                            <div class="item" style="background: #0891b2; color: white; padding: 12px 24px; border-radius: 8px;">Item 3</div>
+                            <div class="item" style="background: #059669; color: white; padding: 12px 24px; border-radius: 8px;">Item 4</div>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; text-align: center;">Flexbox Demo — justify-content: center, flex-wrap: wrap</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 08 ══ -->
+        <section id="ch08">
+            <div class="chapter-header" data-num="08"><div class="chapter-num">Chapter 08</div><h1>CSS Grid</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Grid — Two-Dimensional Layout</h2>
+                    <p>CSS Grid is a powerful layout system for creating complex two-dimensional layouts.</p>
+
+                    <div class="code-block"><code><span class="code-selector">.grid-container</span> {
+            <span class="code-property">display</span>: <span class="code-value">grid</span>;
+            <span class="code-property">grid-template-columns</span>: <span class="code-value">200px 1fr 200px</span>;
+            <span class="code-property">grid-template-rows</span>: <span class="code-value">auto 1fr auto</span>;
+            <span class="code-property">grid-template-areas</span>:
+                <span class="code-value">"header header header"</span>
+                <span class="code-value">"sidebar main main"</span>
+                <span class="code-value">"footer footer footer"</span>;
+            <span class="code-property">gap</span>: <span class="code-value">16px</span>;
+        }
+
+        <span class="code-selector">.grid-item</span> {
+            <span class="code-property">grid-column</span>: <span class="code-value">1 / 3</span>; <span class="code-cmt">/* Span 2 columns */</span>
+            <span class="code-property">grid-row</span>: <span class="code-value">1 / 2</span>;
+        }
+
+        <span class="code-cmt">/* Using grid-area with named areas */</span>
+        <span class="code-selector">.header</span> { <span class="code-property">grid-area</span>: <span class="code-value">header</span>; }
+        <span class="code-selector">.sidebar</span> { <span class="code-property">grid-area</span>: <span class="code-value">sidebar</span>; }
+        <span class="code-selector">.main</span> { <span class="code-property">grid-area</span>: <span class="code-value">main</span>; }
+        <span class="code-selector">.footer</span> { <span class="code-property">grid-area</span>: <span class="code-value">footer</span>; }</code></div>
+
+                    <h3>Grid Units</h3>
+                    <table class="styled-table">
+                        <tr><th>Unit</th><th>Description</th></tr>
+                        <tr><td>px</td><td>Pixels (fixed)</td></tr>
+                        <tr><td>%</td><td>Percentage of container</td></tr>
+                        <tr><td>fr</td><td>Fractional unit (remaining space)</td></tr>
+                        <tr><td>auto</td><td>Based on content</td></tr>
+                        <tr><td>minmax(min, max)</td><td>Flexible range</td></tr>
+                    </table>
+
+                    <h3>Useful Grid Functions</h3>
+                    <div class="code-block"><code><span class="code-selector">.grid-auto</span> {
+            <span class="code-property">grid-template-columns</span>: <span class="code-value">repeat(auto-fit, minmax(250px, 1fr))</span>;
+            <span class="code-cmt">/* Auto-fit: creates as many columns as fit */</span>
+        }
+
+        <span class="code-selector">.grid-fixed</span> {
+            <span class="code-property">grid-template-columns</span>: <span class="code-value">repeat(3, 1fr)</span>;
+            <span class="code-cmt">/* 3 equal columns */</span>
+        }</code></div>
+
+                    <div class="demo-box">
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                            <div style="background: #2563eb; color: white; padding: 20px; text-align: center; border-radius: 8px;">1</div>
+                            <div style="background: #7c3aed; color: white; padding: 20px; text-align: center; border-radius: 8px;">2</div>
+                            <div style="background: #0891b2; color: white; padding: 20px; text-align: center; border-radius: 8px;">3</div>
+                            <div style="background: #059669; color: white; padding: 20px; text-align: center; border-radius: 8px;">4</div>
+                            <div style="background: #dc2626; color: white; padding: 20px; text-align: center; border-radius: 8px;">5</div>
+                            <div style="background: #d97706; color: white; padding: 20px; text-align: center; border-radius: 8px;">6</div>
+                            <div style="background: #7c3aed; color: white; padding: 20px; text-align: center; border-radius: 8px;">7</div>
+                            <div style="background: #2563eb; color: white; padding: 20px; text-align: center; border-radius: 8px;">8</div>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; text-align: center;">Grid Demo — 4 columns with 1fr each</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 09 ══ -->
+        <section id="ch09">
+            <div class="chapter-header" data-num="09"><div class="chapter-num">Chapter 09</div><h1>Transitions &amp; Animations</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Transitions</h2>
+                    <p>Transitions allow smooth changes between property values.</p>
+
+                    <div class="code-block"><code><span class="code-selector">.transition-example</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">#2563eb</span>;
+            <span class="code-property">transform</span>: <span class="code-value">scale(1)</span>;
+            <span class="code-property">transition</span>: <span class="code-value">all 0.3s ease-in-out</span>;
+        }
+
+        <span class="code-selector">.transition-example:hover</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">#7c3aed</span>;
+            <span class="code-property">transform</span>: <span class="code-value">scale(1.1)</span>;
+        }
+
+        <span class="code-cmt">/* Transition shorthand: property duration timing-function delay */</span>
+        <span class="code-selector">.custom-transition</span> {
+            <span class="code-property">transition</span>: <span class="code-value">background-color 0.3s ease 0s, transform 0.5s ease-in-out 0.1s</span>;
+        }</code></div>
+
+                    <h3>Transition Timing Functions</h3>
+                    <table class="styled-table">
+                        <tr><th>Function</th><th>Description</th></tr>
+                        <tr><td>ease</td><td>Slow start, fast middle, slow end (default)</td></tr>
+                        <tr><td>linear</td><td>Constant speed</td></tr>
+                        <tr><td>ease-in</td><td>Slow start, fast end</td></tr>
+                        <tr><td>ease-out</td><td>Fast start, slow end</td></tr>
+                        <tr><td>ease-in-out</td><td>Slow start and end</td></tr>
+                        <tr><td>cubic-bezier(n,n,n,n)</td><td>Custom curve</td></tr>
+                    </table>
+
+                    <h2>Animations</h2>
+                    <p>Animations provide more control than transitions with keyframes.</p>
+
+                    <div class="code-block"><code><span class="code-fn">@keyframes</span> <span class="code-selector">slide-in</span> {
+            <span class="code-value">0%</span> {
+                <span class="code-property">transform</span>: <span class="code-value">translateX(-100px)</span>;
+                <span class="code-property">opacity</span>: <span class="code-value">0</span>;
+            }
+            <span class="code-value">100%</span> {
+                <span class="code-property">transform</span>: <span class="code-value">translateX(0)</span>;
+                <span class="code-property">opacity</span>: <span class="code-value">1</span>;
+            }
+        }
+
+        <span class="code-selector">.animated-element</span> {
+            <span class="code-property">animation</span>: <span class="code-value">slide-in 1s ease-in-out forwards</span>;
+            <span class="code-cmt">/* name duration timing-function fill-mode */</span>
+        }
+
+        <span class="code-cmt">/* Animation properties */</span>
+        <span class="code-selector">.full-animation</span> {
+            <span class="code-property">animation-name</span>: <span class="code-value">slide-in</span>;
+            <span class="code-property">animation-duration</span>: <span class="code-value">1s</span>;
+            <span class="code-property">animation-timing-function</span>: <span class="code-value">ease-in-out</span>;
+            <span class="code-property">animation-delay</span>: <span class="code-value">0.5s</span>;
+            <span class="code-property">animation-iteration-count</span>: <span class="code-value">infinite</span>;
+            <span class="code-property">animation-direction</span>: <span class="code-value">alternate</span>;
+            <span class="code-property">animation-fill-mode</span>: <span class="code-value">forwards</span>;
+        }</code></div>
+
+                    <div class="demo-box">
+                        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <div style="background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; transition: all 0.3s ease-in-out; cursor: pointer;"
+                                 onmouseover="this.style.transform='scale(1.1)'; this.style.background='#7c3aed';"
+                                 onmouseout="this.style.transform='scale(1)'; this.style.background='#2563eb';">
+                                Hover Me (Transition)
+                            </div>
+                            <div style="background: #7c3aed; color: white; padding: 12px 24px; border-radius: 8px; animation: pulse 2s ease-in-out infinite; cursor: pointer;"
+                                 onmouseover="this.style.animationPlayState='paused';"
+                                 onmouseout="this.style.animationPlayState='running';">
+                                Pulse Animation (Hover to pause)
+                            </div>
+                        </div>
+                        <style>
+                            @keyframes pulse {
+                                0%, 100% { transform: scale(1); }
+                                50% { transform: scale(1.05); }
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 10 ══ -->
+        <section id="ch10">
+            <div class="chapter-header" data-num="10"><div class="chapter-num">Chapter 10</div><h1>Responsive Design</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Media Queries</h2>
+                    <p>Media queries allow you to apply different styles based on screen size, device type, or other conditions.</p>
+
+                    <div class="code-block"><code><span class="code-cmt">/* Mobile First Approach */</span>
+        <span class="code-selector">.container</span> {
+            <span class="code-property">display</span>: <span class="code-value">block</span>;
+            <span class="code-property">padding</span>: <span class="code-value">16px</span>;
+        }
+
+        <span class="code-cmt">/* Tablet */</span>
+        <span class="code-fn">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) {
+            <span class="code-selector">.container</span> {
+                <span class="code-property">display</span>: <span class="code-value">flex</span>;
+                <span class="code-property">padding</span>: <span class="code-value">24px</span>;
+            }
+        }
+
+        <span class="code-cmt">/* Desktop */</span>
+        <span class="code-fn">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">1024px</span>) {
+            <span class="code-selector">.container</span> {
+                <span class="code-property">max-width</span>: <span class="code-value">1200px</span>;
+                <span class="code-property">margin</span>: <span class="code-value">0 auto</span>;
+                <span class="code-property">padding</span>: <span class="code-value">32px</span>;
+            }
+        }
+
+        <span class="code-cmt">/* Print Styles */</span>
+        <span class="code-fn">@media</span> <span class="code-attr">print</span> {
+            <span class="code-selector">.no-print</span> {
+                <span class="code-property">display</span>: <span class="code-value">none</span>;
+            }
+        }</code></div>
+
+                    <h3>Common Breakpoints</h3>
+                    <table class="styled-table">
+                        <tr><th>Device</th><th>Width</th><th>Breakpoint</th></tr>
+                        <tr><td>Mobile</td><td>< 768px</td><td>Small</td></tr>
+                        <tr><td>Tablet</td><td>768px - 1024px</td><td>Medium</td></tr>
+                        <tr><td>Desktop</td><td>> 1024px</td><td>Large</td></tr>
+                        <tr><td>Large Desktop</td><td>> 1440px</td><td>XL</td></tr>
+                    </table>
+
+                    <h3>Responsive Units</h3>
+                    <div class="code-block"><code><span class="code-cmt">/* Viewport units */</span>
+        <span class="code-selector">.full-height</span> {
+            <span class="code-property">height</span>: <span class="code-value">100vh</span>; <span class="code-cmt">/* 100% of viewport height */</span>
+        }
+
+        <span class="code-selector">.full-width</span> {
+            <span class="code-property">width</span>: <span class="code-value">100vw</span>; <span class="code-cmt">/* 100% of viewport width */</span>
+        }
+
+        <span class="code-cmt">/* Relative units */</span>
+        <span class="code-selector">.relative-text</span> {
+            <span class="code-property">font-size</span>: <span class="code-value">1.2rem</span>; <span class="code-cmt">/* Relative to root font size */</span>
+            <span class="code-property">font-size</span>: <span class="code-value">1.2em</span>; <span class="code-cmt">/* Relative to parent font size */</span>
+            <span class="code-property">padding</span>: <span class="code-value">2%</span>; <span class="code-cmt">/* Relative to parent width */</span>
+        }</code></div>
+
+                    <div class="callout callout-info"><span class="callout-icon">💡</span><div class="callout-text"><strong>Mobile First:</strong> Design for mobile screens first, then add styles for larger screens. This is the industry standard approach.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 11 ══ -->
+        <section id="ch11">
+            <div class="chapter-header" data-num="11"><div class="chapter-num">Chapter 11</div><h1>Pseudo-Classes &amp; Pseudo-Elements</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Pseudo-Classes</h2>
+                    <p>Pseudo-classes target elements in a specific state.</p>
+
+                    <div class="code-block"><code><span class="code-cmt">/* Link states */</span>
+        <span class="code-selector">a:link</span> { <span class="code-property">color</span>: <span class="code-value">#2563eb</span>; }  <span class="code-cmt">/* Unvisited link */</span>
+        <span class="code-selector">a:visited</span> { <span class="code-property">color</span>: <span class="code-value">#7c3aed</span>; } <span class="code-cmt">/* Visited link */</span>
+        <span class="code-selector">a:hover</span> { <span class="code-property">color</span>: <span class="code-value">#dc2626</span>; } <span class="code-cmt">/* Hovered link */</span>
+        <span class="code-selector">a:active</span> { <span class="code-property">color</span>: <span class="code-value">#0891b2</span>; } <span class="code-cmt">/* Active link */</span>
+
+        <span class="code-cmt">/* Form states */</span>
+        <span class="code-selector">input:focus</span> {
+            <span class="code-property">border-color</span>: <span class="code-value">#2563eb</span>;
+            <span class="code-property">outline</span>: <span class="code-value">2px solid rgba(37, 99, 235, 0.3)</span>;
+        }
+
+        <span class="code-selector">input:disabled</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">#f1f5f9</span>;
+            <span class="code-property">opacity</span>: <span class="code-value">0.6</span>;
+        }
+
+        <span class="code-selector">input:checked</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">#2563eb</span>;
+        }
+
+        <span class="code-cmt">/* Structural pseudo-classes */</span>
+        <span class="code-selector">li:first-child</span> { <span class="code-property">font-weight</span>: <span class="code-value">bold</span>; }
+        <span class="code-selector">li:last-child</span> { <span class="code-property">border-bottom</span>: <span class="code-value">none</span>; }
+        <span class="code-selector">li:nth-child(odd)</span> { <span class="code-property">background</span>: <span class="code-value">#f1f5f9</span>; }
+        <span class="code-selector">li:nth-child(3n)</span> { <span class="code-property">background</span>: <span class="code-value">#dbeafe</span>; }</code></div>
+
+                    <h3>Pseudo-Elements</h3>
+                    <p>Pseudo-elements target specific parts of an element.</p>
+
+                    <div class="code-block"><code><span class="code-selector">p::first-line</span> {
+            <span class="code-property">font-weight</span>: <span class="code-value">bold</span>;
+            <span class="code-property">color</span>: <span class="code-value">#2563eb</span>;
+        }
+
+        <span class="code-selector">p::first-letter</span> {
+            <span class="code-property">font-size</span>: <span class="code-value">2em</span>;
+            <span class="code-property">font-weight</span>: <span class="code-value">bold</span>;
+            <span class="code-property">color</span>: <span class="code-value">#7c3aed</span>;
+        }
+
+        <span class="code-selector">p::before</span> {
+            <span class="code-property">content</span>: <span class="code-value">"✨ "</span>;
+            <span class="code-property">font-size</span>: <span class="code-value">1.2em</span>;
+        }
+
+        <span class="code-selector">p::after</span> {
+            <span class="code-property">content</span>: <span class="code-value">" ✨"</span>;
+            <span class="code-property">font-size</span>: <span class="code-value">1.2em</span>;
+        }
+
+        <span class="code-cmt">/* Selection */</span>
+        <span class="code-selector">::selection</span> {
+            <span class="code-property">background</span>: <span class="code-value">#2563eb</span>;
+            <span class="code-property">color</span>: <span class="code-value">white</span>;
+        }</code></div>
+
+                    <div class="demo-box">
+                        <p style="font-size: 18px; color: #2563eb;">
+                            <span style="font-size: 2em; font-weight: bold; color: #7c3aed; float: left; margin-right: 8px;">T</span>his paragraph demonstrates pseudo-elements. The first letter is styled with ::first-letter.
+                        </p>
+                        <p style="position: relative; padding-left: 30px; background: #f1f5f9; border-radius: 8px; padding: 12px;">
+                            <span style="position: absolute; left: 8px; color: #2563eb;">→</span> This uses ::before and ::after pseudo-elements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 12 ══ -->
+        <section id="ch12">
+            <div class="chapter-header" data-num="12"><div class="chapter-num">Chapter 12</div><h1>CSS Variables</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Custom Properties (CSS Variables)</h2>
+                    <p>CSS variables allow you to reuse values throughout your stylesheet.</p>
+
+                    <div class="code-block"><code><span class="code-selector">:root</span> {
+            <span class="code-cmt">/* Global variables */</span>
+            <span class="code-property">--primary-color</span>: <span class="code-value">#2563eb</span>;
+            <span class="code-property">--secondary-color</span>: <span class="code-value">#7c3aed</span>;
+            <span class="code-property">--font-family</span>: <span class="code-value">'Segoe UI', sans-serif</span>;
+            <span class="code-property">--spacing</span>: <span class="code-value">16px</span>;
+            <span class="code-property">--border-radius</span>: <span class="code-value">8px</span>;
+        }
+
+        <span class="code-selector">.button</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">var(--primary-color)</span>;
+            <span class="code-property">color</span>: <span class="code-value">white</span>;
+            <span class="code-property">padding</span>: <span class="code-value">var(--spacing)</span>;
+            <span class="code-property">border-radius</span>: <span class="code-value">var(--border-radius)</span>;
+            <span class="code-property">font-family</span>: <span class="code-value">var(--font-family)</span>;
+            <span class="code-property">transition</span>: <span class="code-value">all 0.3s ease</span>;
+        }
+
+        <span class="code-selector">.button:hover</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">var(--secondary-color)</span>;
+        }
+
+        <span class="code-cmt">/* Override in a specific component */</span>
+        <span class="code-selector">.dark-theme</span> {
+            <span class="code-property">--primary-color</span>: <span class="code-value">#1e293b</span>;
+            <span class="code-property">--secondary-color</span>: <span class="code-value">#0f172a</span>;
+        }</code></div>
+
+                    <h3>Benefits of CSS Variables</h3>
+                    <ul>
+                        <li><strong>Reusability:</strong> Define once, use everywhere</li>
+                        <li><strong>Maintainability:</strong> Change one value, update everywhere</li>
+                        <li><strong>Dynamic:</strong> Can be changed with JavaScript</li>
+                        <li><strong>Theming:</strong> Easy to implement dark/light modes</li>
+                    </ul>
+
+                    <div class="code-block"><code><span class="code-cmt">/* Using variables with JavaScript */</span>
+        <span class="code-tag">&lt;script&gt;</span>
+            document.documentElement.style.setProperty(<span class="code-str">'--primary-color'</span>, <span class="code-str">'#dc2626'</span>);
+        <span class="code-tag">&lt;/script&gt;</span>
+
+        <span class="code-cmt">/* Fallback values */</span>
+        <span class="code-selector">.element</span> {
+            <span class="code-property">color</span>: <span class="code-value">var(--custom-color, #2563eb)</span>;
+            <span class="code-cmt">/* If --custom-color is not set, use #2563eb */</span>
+        }</code></div>
+
+                    <div class="demo-box" style="--demo-primary: #2563eb; --demo-secondary: #7c3aed;">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <div style="background: var(--demo-primary, #2563eb); color: white; padding: 10px 20px; border-radius: 8px;">
+                                Primary Button
+                            </div>
+                            <div style="background: var(--demo-secondary, #7c3aed); color: white; padding: 10px 20px; border-radius: 8px;">
+                                Secondary Button
+                            </div>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">CSS Variables Demo — Colors controlled by --demo-primary and --demo-secondary</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CH 13 ══ -->
+        <section id="ch13">
+            <div class="chapter-header" data-num="13"><div class="chapter-num">Chapter 13</div><h1>Advanced Topics</h1></div>
+            <div class="content">
+                <div class="section">
+                    <h2>Transforms</h2>
+                    <div class="code-block"><code><span class="code-selector">.transform-example</span> {
+            <span class="code-property">transform</span>: <span class="code-value">translate(50px, 20px)</span>;
+            <span class="code-property">transform</span>: <span class="code-value">scale(1.5)</span>;
+            <span class="code-property">transform</span>: <span class="code-value">rotate(45deg)</span>;
+            <span class="code-property">transform</span>: <span class="code-value">skew(10deg, 5deg)</span>;
+            <span class="code-property">transform</span>: <span class="code-value">matrix(1, 0, 0, 1, 50, 20)</span>;
+            <span class="code-cmt">/* Multiple transforms */</span>
+            <span class="code-property">transform</span>: <span class="code-value">translate(50px, 20px) rotate(45deg) scale(1.2)</span>;
+            <span class="code-property">transform-origin</span>: <span class="code-value">center center</span>;
+        }</code></div>
+
+                    <h2>Filters</h2>
+                    <div class="code-block"><code><span class="code-selector">.filter-example</span> {
+            <span class="code-property">filter</span>: <span class="code-value">blur(5px)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">brightness(1.5)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">contrast(2)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">grayscale(1)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">hue-rotate(90deg)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">invert(1)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">saturate(2)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">sepia(0.8)</span>;
+            <span class="code-property">filter</span>: <span class="code-value">drop-shadow(4px 4px 8px rgba(0,0,0,0.3))</span>;
+        }</code></div>
+
+                    <h2>Clipping &amp; Masking</h2>
+                    <div class="code-block"><code><span class="code-selector">.clip-example</span> {
+            <span class="code-property">clip-path</span>: <span class="code-value">circle(50%)</span>;
+            <span class="code-property">clip-path</span>: <span class="code-value">polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)</span>;
+            <span class="code-property">clip-path</span>: <span class="code-value">inset(10px 20px 30px 40px)</span>;
+            <span class="code-property">clip-path</span>: <span class="code-value">ellipse(50% 50%)</span>;
+        }</code></div>
+
+                    <div class="demo-box">
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                            <div style="width: 100px; height: 100px; background: #2563eb; clip-path: circle(50%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                Circle
+                            </div>
+                            <div style="width: 100px; height: 100px; background: #7c3aed; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                Triangle
+                            </div>
+                            <div style="width: 100px; height: 100px; background: #0891b2; clip-path: inset(10px 20px); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                Inset
+                            </div>
+                            <div style="width: 100px; height: 100px; background: #059669; clip-path: ellipse(50% 50%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                Ellipse
+                            </div>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; text-align: center;">Clip-path Demo — Different shapes</p>
+                    </div>
+
+                    <h3>CSS Best Practices</h3>
+                    <ul>
+                        <li><strong>Use CSS variables</strong> for theming and reusability</li>
+                        <li><strong>Mobile first</strong> — design for mobile then enhance</li>
+                        <li><strong>Use classes</strong> instead of IDs for styling</li>
+                        <li><strong>Keep specificity low</strong> — avoid !important</li>
+                        <li><strong>Use Flexbox and Grid</strong> for modern layouts</li>
+                        <li><strong>Minify CSS</strong> for production</li>
+                        <li><strong>Use CSS preprocessors</strong> (Sass, Less) for larger projects</li>
+                    </ul>
+
+                    <div class="callout callout-success" style="margin:0;">
+                        <span class="callout-icon">🎯</span>
+                        <div class="callout-text"><strong>Congratulations!</strong> You've covered all the essential CSS concepts. Practice by building real projects and exploring advanced techniques like CSS animations, 3D transforms, and more.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ CLOSING ══ -->
+        <div class="closing">
+            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;">A message from the creator</p>
+            <p style="font-size:18px;line-height:1.85;max-width:620px;margin:0 auto;color:rgba(255,255,255,0.9);">
+                "We'll be learning all of this and so much more on this channel. I, <strong>Akarsh Vyas</strong>, as a creator and representative of Sheryians AI, would like to sincerely thank each and every one of you who stayed with us till the end. You are truly precious to us. Much love! 💙"
+            </p>
+            <p style="margin-top:36px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);">Sheryians Coding School</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section[id]");
+            const links = document.querySelectorAll(".sidebar a");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(a => a.classList.remove("active"));
+                        const link = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+                        if (link) link.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.25 });
+            sections.forEach(s => observer.observe(s));
+        });
+    </script>
+
+</body>
+</html>
