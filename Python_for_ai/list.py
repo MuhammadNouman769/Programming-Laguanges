@@ -73,7 +73,7 @@ print(f"Average: {avg}")
 
 number = [10,30,90, 20, 50, 70, 40, 60, 80]
 index = 0
-largest = number[0]
+largest = number[0] 
 for i in range(len(number)):
     if number[i] > largest:
         largest = number[i]
