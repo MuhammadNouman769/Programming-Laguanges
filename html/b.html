@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Interview · DSA · 150+ Q&A</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f1f6fa;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      padding: 2rem 1.2rem;
+      color: #0b1e2e;
+    }
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    /* header */
+    .header {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 10px 30px -8px rgba(0,20,40,0.08);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand i {
+      font-size: 2.4rem;
+      color: #306998;
+      background: #e6f0fa;
+      padding: 0.5rem;
+      border-radius: 18px;
+    }
+    .brand h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #1a3857, #2b5f8a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .brand span {
+      font-weight: 400;
+      font-size: 0.9rem;
+      background: #eef3f8;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      color: #1e3a5f;
+      -webkit-text-fill-color: #1e3a5f;
+      margin-left: 0.3rem;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #f1f5f9;
+      padding: 0.3rem 0.3rem 0.3rem 1.2rem;
+      border-radius: 60px;
+      border: 1px solid #dce3ec;
+      min-width: 220px;
+      transition: 0.15s;
+    }
+    .search-box:focus-within {
+      background: white;
+      border-color: #306998;
+      box-shadow: 0 0 0 3px rgba(48,105,152,0.15);
+    }
+    .search-box i {
+      color: #5f7d9c;
+    }
+    .search-box input {
+      border: none;
+      background: transparent;
+      padding: 0.7rem 0.6rem;
+      font-size: 0.95rem;
+      width: 180px;
+      outline: none;
+      color: #0f1f30;
+    }
+    .search-box input::placeholder {
+      color: #8ca3bc;
+    }
+    .stats-badge {
+      background: #dce8f2;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: #1a3857;
+      white-space: nowrap;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.6rem;
+    }
+    .filter-tabs button {
+      background: white;
+      border: 1px solid #dce3ec;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: #1f3b57;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-tabs button.active {
+      background: #1a3857;
+      color: white;
+      border-color: #1a3857;
+    }
+    .filter-tabs button:hover {
+      background: #e6eef7;
+    }
+    .filter-tabs button.active:hover {
+      background: #1f4468;
+    }
+    /* grid */
+    .qa-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .qa-card {
+      background: white;
+      border-radius: 1.6rem;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid #e6edf5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      transition: 0.1s;
+    }
+    .qa-card.hidden {
+      display: none;
+    }
+    .question-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .q-badge {
+      background: #eaf1f9;
+      min-width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #1a3857;
+    }
+    .q-text {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #0b1e2e;
+      margin-bottom: 0.25rem;
+    }
+    .q-text i {
+      color: #306998;
+      margin-right: 0.3rem;
+    }
+    .answer-body {
+      margin-left: 3.2rem;
+      margin-top: 0.6rem;
+      line-height: 1.7;
+      color: #1d2f44;
+      font-size: 0.96rem;
+    }
+    .answer-body p {
+      margin-bottom: 0.5rem;
+    }
+    .answer-body ul, .answer-body ol {
+      padding-left: 1.6rem;
+      margin: 0.4rem 0 0.8rem;
+    }
+    .answer-body li {
+      margin-bottom: 0.2rem;
+    }
+    .code-block {
+      background: #0f1a29;
+      color: #e2eaf5;
+      padding: 0.7rem 1.2rem;
+      border-radius: 14px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.88rem;
+      overflow-x: auto;
+      margin: 0.6rem 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .code-block i {
+      color: #facc15;
+      margin-right: 0.3rem;
+    }
+    .tag {
+      display: inline-block;
+      background: #dce8f2;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #1a3857;
+      padding: 0.1rem 0.7rem;
+      border-radius: 30px;
+      margin-right: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .highlight {
+      background: #fef5b8;
+      padding: 0.1rem 0.3rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .inline-code {
+      background: #eef3f8;
+      padding: 0.1rem 0.5rem;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.9em;
+      color: #0b1e2e;
+    }
+    .no-result {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #5f7d9c;
+      background: white;
+      border-radius: 2rem;
+    }
+    .no-result i {
+      font-size: 2.8rem;
+      color: #cbdae9;
+      margin-bottom: 0.6rem;
+    }
+    .footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #5f7d9c;
+      border-top: 1px solid #dee8f2;
+      padding-top: 2rem;
+    }
+    .footer i {
+      color: #306998;
+    }
+    @media (max-width: 700px) {
+      body { padding: 0.8rem; }
+      .header { flex-direction: column; align-items: stretch; gap: 0.8rem; padding: 1.2rem; }
+      .search-box { width: 100%; }
+      .search-box input { width: 100%; }
+      .answer-body { margin-left: 0; margin-top: 0.8rem; }
+      .qa-card { padding: 1.2rem; }
+      .brand h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="header">
+    <div class="brand">
+      <i class="fab fa-python"></i>
+      <h1>Python Interview <span>150+</span></h1>
+    </div>
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search Q&A ..." aria-label="Search">
+      <span class="stats-badge" id="resultCount"><i class="far fa-file-alt"></i> 150+</span>
+    </div>
+  </div>
+  <div class="filter-tabs">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="python">Python Core</button>
+    <button data-filter="dsa">DSA</button>
+    <button data-filter="django">Django</button>
+  </div>
+  <div class="qa-grid" id="qaContainer"></div>
+  <div class="footer"><i class="fas fa-code"></i>  Muhammad Nouman · Python + DSA Interview Prep · 2026</div>
+</div>
+
+<script>
+  (function() {
+    // ----------------------------------------------------------------
+    // 150+ questions: Python (1-100) + DSA (101-150+) + extra Django
+    // We keep detailed answers + examples from original doc + enrich.
+    // ----------------------------------------------------------------
+    const qa = [
+      // --- 1–77 from original (Python core + Django) ---
+      { id:1, cat:'python', q:'What is python?', a:`<p>Python ek high-level, interpreted, object-oriented programming language hai. Ye simple syntax ki wajah se famous hai aur web development, AI, automation, scripting aur data science me use hoti hai.</p><p><strong>Features:</strong></p><ul><li>Easy syntax</li><li>Readable code</li><li>Large community</li><li>Cross-platform</li><li>Huge libraries</li></ul><div class="code-block">print("Hello World")</div>` },
+      { id:2, cat:'python', q:'Python Interpreted Language q Kehlati Hai?', a:`<p>Python interpreted language is liye kehlati hai kyun ke iska code runtime par line by line execute hota hai. Source code ko pehle bytecode me convert karta hai aur PVM us bytecode ko execute karti hai.</p>` },
+      { id:3, cat:'python', q:'python interpreted hai ya compiled?', a:`<p>python interpreted b hai or compiled b — pehle step may code bytecode may Compile hota hai phir PVM (Python Virtual Machine) us bytecode ko line by line execute krti hai</p>` },
+      { id:4, cat:'python', q:'What are Data Types in Python?', a:`<p>Python me Data Types different types ka data store karne ke liye use hote hain. Har variable ka ek data type hota hai.</p><p><strong>Types:</strong> Numeric (int, float, complex), Sequence (list, tuple, range), Text (str), Set (set), Mapping (dict), Boolean (bool), Binary (bytes, bytearray, memoryview)</p><div class="code-block">x = 10          # int\ny = 3.14        # float\nname = "Python" # str</div>` },
+      { id:5, cat:'python', q:'Variables kia hote hain?', a:`<p>Variable aik named memory location hota hai jo data ko temporarily store karta hai.</p>` },
+      { id:6, cat:'python', q:'What is mutable and immutable in python?', a:`<p><span class="highlight">Mutable</span> – List, Dict, Set (value change kar sakte hain). <br><span class="highlight">Immutable</span> – Tuple, String, Int (value change nahi kar sakte).</p>` },
+      { id:7, cat:'python', q:'Difference Between List and Tuple?', a:`<p><strong>List</strong> mutable, square brackets [ ], slower. <br><strong>Tuple</strong> immutable, parentheses ( ), faster.</p>` },
+      { id:8, cat:'python', q:'What is Type Casting in Python?', a:`<p>aik data type ko dusre data type may convert krna. <br><strong>Implicit:</strong> Python auto convert. <br><strong>Explicit:</strong> manual conversion.</p>` },
+      { id:9, cat:'python', q:'Operators in python?', a:`<p><strong>Arithmetic:</strong> + - * / // % ** <br><strong>Comparison:</strong> == != > < >= <= <br><strong>Logical:</strong> and, or, not <br><strong>Assignment, Membership, Identity, Bitwise.</strong></p>` },
+      { id:10, cat:'python', q:'What is a function?', a:`<p>function aik reusable block of code jo specific task perform karta hai.</p><div class="code-block">def greet(name):\n    return f"hello {name}"</div>` },
+      { id:11, cat:'python', q:'parameter vs arguments?', a:`<p><strong>Parameters:</strong> variables jo function define karte waqt likhe. <br><strong>Arguments:</strong> actual values jo call karte waqt pass ki jati hain. <br>Types: Positional, Keyword, Default, Variable-length (*args, **kwargs)</p><div class="code-block">def student(name, math, science): ...\nstudent("Nouman", 80, 75)</div>` },
+      { id:12, cat:'python', q:'lambda function?', a:`<p>Lambda anonymous function, sirf ek expression, chhote operations ke liye.</p><div class="code-block">square = lambda x: x ** 2\nprint(square(5))  # 25</div><p><strong>map, filter, reduce:</strong></p><div class="code-block">list(map(lambda x: x*2, [1,2,3,4]))  # [2,4,6,8]</div>` },
+      { id:13, cat:'python', q:'*args and **kwargs?', a:`<p><strong>*args</strong> multiple positional arguments store karta hai. <br><strong>**kwargs</strong> multiple keyword arguments receive karta hai.</p>` },
+      { id:14, cat:'python', q:'What is scope?', a:`<p><strong>Local:</strong> function ke andar define, sirf usi function me access. <br><strong>Global:</strong> function k bahir define, puri file may accessible. <br>global keyword modify karne ke liye.</p><div class="code-block">x = 100\ndef func():\n    global x\n    x = 200</div>` },
+      { id:15, cat:'python', q:'What is recursion?', a:`<p>Recursion wo technique hai jisme function khud ko call karta hai. <br><strong>Base case</strong> (rukne ki condition) aur <strong>Recursive case</strong>.</p><div class="code-block">def factorial(n):\n    if n == 1: return 1\n    return n * factorial(n-1)</div>` },
+      { id:16, cat:'python', q:'exception handling?', a:`<p><strong>try:</strong> risky code, <strong>except:</strong> error handle, <strong>finally:</strong> hamesha chalega, <strong>raise:</strong> khud error generate karo.</p>` },
+      { id:17, cat:'python', q:'== vs is?', a:`<p><strong>==</strong> value compare karta hai. <br><strong>is</strong> memory location compare.</p><div class="code-block">a = [1,2]; b = [1,2]\nprint(a == b)  # True\nprint(a is b)   # False</div>` },
+      { id:18, cat:'python', q:'Deep copy vs shallow copy', a:`<p><strong>Deep copy</strong> poore object aur nested objects ki alag copy banati hai. <br><strong>Shallow copy</strong> naya object but nested objects ka reference share karti hai.</p>` },
+      { id:19, cat:'python', q:'Iterable vs Iterator?', a:`<p><strong>Iterable</strong> jis par iterate kar sakte (list, tuple, string). <br><strong>Iterator</strong> next() se ek ek value return karta hai.</p><div class="code-block">numbers = [1,2,3]\nit = iter(numbers)\nprint(next(it))  # 1</div>` },
+      { id:20, cat:'python', q:'Generator?', a:`<p>Generator yield keyword use karta hai, values one by one generate karta hai, memory efficient.</p><div class="code-block">def gen():\n    yield 10\n    yield 20\ng = gen()\nprint(next(g))  # 10</div>` },
+      { id:21, cat:'python', q:'yield vs return?', a:`<p><strong>return</strong> function ko khatam kar deta hai. <br><strong>yield</strong> function pause karta hai, agli call se continue.</p>` },
+      { id:22, cat:'python', q:'Generator kab use karte hain?', a:`<p>Large files read, large datasets process, memory optimization, streaming data.</p>` },
+      { id:23, cat:'python', q:'Generator dobara use kyun nahi hota?', a:`<p>Generator one-time iterator hai. Values consume ho jane ke baad khatam. Naya generator banaen.</p>` },
+      { id:24, cat:'python', q:'decorator?', a:`<p>Decorator function hai jo kisi dusre function ki functionality modify/extend karta hai. @ syntax.</p><div class="code-block">@my_decorator\ndef my_func(): print("hello")</div>` },
+      { id:25, cat:'python', q:'OOP?', a:`<p>OOP paradigm hai jisme real-world entities ko Classes aur Objects me represent karte hain.</p>` },
+      { id:26, cat:'python', q:'Class vs object?', a:`<p><strong>Class</strong> blueprint. <br><strong>Object</strong> class ka real instance.</p>` },
+      { id:27, cat:'python', q:'instance vs object?', a:`<p>Practically same. Har object class ka instance hota hai.</p>` },
+      { id:28, cat:'python', q:'Kya ek class se multiple objects bana sakte hain?', a:`<p>Haan, ek class se multiple objects/instances create kar sakte hain.</p>` },
+      { id:29, cat:'python', q:'Attributes ki types?', a:`<p><strong>Class Attributes:</strong> class ke andar __init__() ke bahar. <br><strong>Instance Attributes:</strong> __init__() ke andar self ke sath.</p>` },
+      { id:30, cat:'python', q:'Methods ki types?', a:`<p><strong>Instance method</strong> (self), <strong>Class method</strong> (@classmethod, cls), <strong>Static method</strong> (@staticmethod).</p>` },
+      { id:31, cat:'python', q:'Self Kya Hota Hai?', a:`<p>self current object (instance) ka reference hai.</p>` },
+      { id:32, cat:'python', q:'constructor __init__?', a:`<p>__init__() object create hote hi automatically call hota hai, object ko initialize karta hai.</p>` },
+      { id:33, cat:'python', q:'Access Modifiers?', a:`<p><strong>Public:</strong> har jagah. <br><strong>Protected:</strong> same class aur child class. <br><strong>Private:</strong> sirf class ke andar.</p>` },
+      { id:34, cat:'python', q:'Association?', a:`<p>Jab aik class ka object doosri class ke object se related ho. Dono independently exist kar sakte hain.</p>` },
+      { id:35, cat:'python', q:'Aggregation?', a:`<p>Aggregation Association ki special type hai jahan ek class doosri class ka object rakhti hai lekin dono independently exist kar sakte hain.</p>` },
+      { id:36, cat:'python', q:'Aggregation vs Association?', a:`<p>Association sirf relationship batati hai. Aggregation me HAS-A relationship hoti hai.</p>` },
+      { id:37, cat:'python', q:'Aggregation vs Composition', a:`<p><strong>Aggregation:</strong> weak HAS-A, child parent ke baghair exist kar sakti hai. <br><strong>Composition:</strong> strong HAS-A, child parent ke bina nahi kar sakta.</p>` },
+      { id:38, cat:'python', q:'Four Pillars of OOP?', a:`<p><strong>Encapsulation:</strong> data + methods bundle, secure. <br><strong>Inheritance:</strong> child class parent se inherit. <br><strong>Polymorphism:</strong> same method different behaviors. <br><strong>Abstraction:</strong> sirf important cheezain dikhana.</p>` },
+      { id:39, cat:'django', q:'Middleware kya hai?', a:`<p>Middleware Django ka component hai jo Request aur Response ke darmiyan kaam karta hai.</p>` },
+      { id:40, cat:'python', q:'Synchronous Programming?', a:`<p>Code line by line execute hota hai. Ek task complete hone ke baad hi dusra task start hota hai.</p>` },
+      { id:41, cat:'python', q:'Asynchronous Programming?', a:`<p>Jab aik task wait (I/O) me ho to program us waqt dusra task start kar sakta hai, efficient.</p>` },
+      { id:42, cat:'python', q:'super()?', a:`<p>super() parent class ke methods ya constructor ko child class se call karne ke liye.</p>` },
+      { id:43, cat:'python', q:'Diamond problem?', a:`<p>Multiple inheritance me ambiguity jab ek class do aisi classes se inherit kare jo dono ek common parent ko inherit krti hon.</p>` },
+      { id:44, cat:'python', q:'MRO?', a:`<p>MRO (Method Resolution Order) define karta hai k python pehle kis class k method ko call karega.</p>` },
+      { id:45, cat:'python', q:'Garbage Collection?', a:`<p>Automatic memory management process jo unused objects ki memory free karta hai.</p>` },
+      { id:46, cat:'python', q:'Python me Garbage Collection kaise kaam karti hai?', a:`<p><strong>Reference Counting:</strong> har object ka reference count, 0 ho jaye to free. <br><strong>Cyclic Garbage Collection:</strong> circular references detect karke free.</p>` },
+      { id:47, cat:'python', q:'Python memory management ke liye kya use karta hai?', a:`<p>Reference Counting aur Garbage Collection.</p>` },
+      { id:48, cat:'django', q:'What is MVT in Django?', a:`<p>MVT (Model-View-Template) Django ka architectural pattern.</p>` },
+      { id:49, cat:'django', q:'What is MVC?', a:`<p>MVC (Model-View-Controller) software architectural pattern.</p>` },
+      { id:50, cat:'django', q:'Django me MVC nahi MVT kyun?', a:`<p>Django MVT use karta hai. alag Controller nahi, URL dispatcher aur framework Controller ka role perform karte hain.</p>` },
+      { id:51, cat:'django', q:'What is Django?', a:`<p>Django high-level Python web framework, batteries-included, fast development.</p>` },
+      { id:52, cat:'django', q:'Django Project aur App?', a:`<p>Project poori application, App ek specific module/feature. Ek project me multiple apps.</p>` },
+      { id:53, cat:'django', q:'Django Request Lifecycle?', a:`<p>Browser → URL → Middleware → View → Model → View → Template/JSON → Middleware → Browser</p>` },
+      { id:54, cat:'django', q:'Middleware kitni baar execute hota hai?', a:`<p>2 baar: Request ke time aur Response ke time.</p>` },
+      { id:55, cat:'django', q:'Middleware types?', a:`<p><strong>Request Middleware:</strong> auth, session, logging. <br><strong>Response Middleware:</strong> modify response, headers.</p>` },
+      { id:56, cat:'django', q:'Custom Middleware?', a:`<p>Haan, hum custom middleware bana sakte hain aur settings.py me add kar dete hain.</p>` },
+      { id:57, cat:'django', q:'Common Built-in Middleware?', a:`<p>settings.py me MIDDLEWARE list: Security, Session, CSRF, Auth, etc.</p>` },
+      { id:58, cat:'django', q:'Model kya hai?', a:`<p>Model Django ki Python class jo database table represent karti hai.</p>` },
+      { id:59, cat:'django', q:'ORM?', a:`<p>Object Relational Mapper – Python objects ke through database operations, SQL likhne ki zaroorat nahi.</p>` },
+      { id:60, cat:'django', q:'Migration?', a:`<p>Django ka database schema update karne ka tareeqa.</p>` },
+      { id:61, cat:'django', q:'makemigrations vs migrate?', a:`<p><strong>makemigrations:</strong> model changes ke hisaab se migration files create. <br><strong>migrate:</strong> migration files ko database par apply.</p>` },
+      { id:62, cat:'django', q:'Django Relationships?', a:`<p>ForeignKey (Many-to-One), OneToOneField, ManyToManyField.</p>` },
+      { id:63, cat:'django', q:'CASCADE?', a:`<p>on_delete behavior – agar parent delete ho to child bhi delete ho jate hain.</p>` },
+      { id:64, cat:'django', q:'related_name?', a:`<p>reverse relationship ka naam define karta hai.</p>` },
+      { id:65, cat:'django', q:'Meta class?', a:`<p>Model ki extra settings jaise ordering, table name, permissions.</p>` },
+      { id:66, cat:'django', q:'QuerySet?', a:`<p>Database se retrieve hone wale objects ka collection, lazy loading.</p>` },
+      { id:67, cat:'django', q:'all() vs filter()?', a:`<p><strong>all()</strong> tamam records. <br><strong>filter()</strong> condition ke hisaab se.</p>` },
+      { id:68, cat:'django', q:'filter() vs get()?', a:`<p><strong>filter()</strong> multiple records. <br><strong>get()</strong> sirf ek object.</p>` },
+      { id:69, cat:'django', q:'exclude()?', a:`<p>Jo records condition match karte hain unhein hata kar baqi return.</p>` },
+      { id:70, cat:'django', q:'first, last, exists, distinct, annotate, aggregate, order_by?', a:`<p><strong>first()</strong> pehla, <strong>last()</strong> aakhri, <strong>distinct()</strong> duplicate remove, <strong>annotate()</strong> extra field, <strong>order_by()</strong> sort, <strong>aggregate()</strong> sum/avg/count, <strong>exists()</strong> check record.</p>` },
+      { id:71, cat:'django', q:'Function Based View (FBV)?', a:`<p>FBV simple function jo request receive karti hai aur response return karti hai.</p>` },
+      { id:72, cat:'django', q:'Class Based View (CBV)?', a:`<p>CBV class jo GET, POST ko alag methods me handle karti hai.</p>` },
+      { id:73, cat:'django', q:'FBV vs CBV?', a:`<p><strong>FBV:</strong> simple, easy, choti apps. <br><strong>CBV:</strong> reusable, inheritance, complex apps.</p>` },
+      { id:74, cat:'django', q:'Generic Views?', a:`<p>Built-in CBVs: ListView, DetailView, CreateView, UpdateView, DeleteView.</p>` },
+      { id:75, cat:'django', q:'APIView?', a:`<p>DRF base class for APIs, handles GET, POST, PUT, DELETE.</p>` },
+      { id:76, cat:'django', q:'GenericAPIView?', a:`<p>APIView ka extended version with serializer, queryset, pagination, filtering.</p>` },
+      { id:77, cat:'django', q:'Mixins?', a:`<p>Reusable classes: CreateModelMixin, ListModelMixin, UpdateModelMixin, DestroyModelMixin.</p>` },
+      // --- extra Python questions (78-100) ---
+      { id:78, cat:'python', q:'What is PEP 8?', a:`<p>PEP 8 Python style guide hai jo code ko readable aur consistent banane ke liye guidelines deta hai.</p>` },
+      { id:79, cat:'python', q:'What is __name__ == "__main__"?', a:`<p>Ye check karta hai ke script directly run ho rahi hai ya import ki gayi hai. Agar direct run ho to __name__ "__main__" hota hai.</p><div class="code-block">if __name__ == "__main__":\n    print("direct run")</div>` },
+      { id:80, cat:'python', q:'What is a module?', a:`<p>Module ek .py file hoti hai jisme Python code hota hai. import keyword se use karte hain.</p>` },
+      { id:81, cat:'python', q:'What is a package?', a:`<p>Package modules ka collection hota hai, jisme __init__.py file hoti hai.</p>` },
+      { id:82, cat:'python', q:'What is __init__.py?', a:`<p>__init__.py batata hai ke directory ek Python package hai. Isme initialization code ho sakta hai.</p>` },
+      { id:83, cat:'python', q:'What is a docstring?', a:`<p>Docstring function/class/module ka documentation hai, triple quotes """ """ me likha jata hai.</p><div class="code-block">def add(a,b):\n    """returns sum of a and b"""\n    return a+b</div>` },
+      { id:84, cat:'python', q:'What is the difference between list and array?', a:`<p>List heterogeneous (different types) ho sakti hai, array homogeneous hoti hai (same type) aur memory efficient.</p>` },
+      { id:85, cat:'python', q:'What is negative indexing?', a:`<p>Negative indexing last se shuru hoti hai. -1 last element, -2 second last, etc.</p><div class="code-block">arr = [10,20,30,40]\nprint(arr[-1])  # 40</div>` },
+      { id:86, cat:'python', q:'What is slicing?', a:`<p>Slicing se sequence ka subset nikalte hain. [start:stop:step]</p><div class="code-block">arr = [1,2,3,4,5]\nprint(arr[1:4])  # [2,3,4]</div>` },
+      { id:87, cat:'python', q:'What is a dictionary?', a:`<p>Dictionary key-value pairs store karta hai. Mutable, unordered.</p><div class="code-block">d = {"name":"Ali", "age":25}</div>` },
+      { id:88, cat:'python', q:'What is a set?', a:`<p>Set unordered collection of unique elements. Mutable.</p><div class="code-block">s = {1,2,3,3}  # {1,2,3}</div>` },
+      { id:89, cat:'python', q:'What is a frozenset?', a:`<p>Frozenset immutable set hai. Isme add/remove nahi kar sakte.</p>` },
+      { id:90, cat:'python', q:'What is enumerate?', a:`<p>enumerate() iterable ke saath index bhi return karta hai.</p><div class="code-block">for i, val in enumerate(['a','b']):\n    print(i, val)</div>` },
+      { id:91, cat:'python', q:'What is zip?', a:`<p>zip() multiple iterables ko pair karta hai aur tuples ka iterator return karta hai.</p><div class="code-block">list(zip([1,2], ['a','b']))  # [(1,'a'), (2,'b')]</div>` },
+      { id:92, cat:'python', q:'What is a comprehension?', a:`<p>Comprehension se lists, sets, dicts concise tarike se bana sakte hain.</p><div class="code-block">[x*2 for x in range(5)]  # [0,2,4,6,8]</div>` },
+      { id:93, cat:'python', q:'What is a decorator with parameters?', a:`<p>Decorator jo arguments bhi accept kare. Wrapper function ke andar nested function.</p>` },
+      { id:94, cat:'python', q:'What is a context manager?', a:`<p>Context manager with statement ke saath use hota hai, resources ko clean up karta hai. Example: file open/close.</p><div class="code-block">with open("file.txt") as f:\n    data = f.read()</div>` },
+      { id:95, cat:'python', q:'What is __enter__ and __exit__?', a:`<p>__enter__ context manager me enter karte waqt call hota hai, __exit__ exit karte waqt.</p>` },
+      { id:96, cat:'python', q:'What is a coroutine?', a:`<p>Coroutine async/await ke saath use hoti hai, concurrent programming ke liye.</p>` },
+      { id:97, cat:'python', q:'What is GIL?', a:`<p>GIL (Global Interpreter Lock) ek mutex hai jo multiple threads ko ek saath Python bytecode execute karne se rokta hai.</p>` },
+      { id:98, cat:'python', q:'What is multithreading vs multiprocessing?', a:`<p><strong>Multithreading:</strong> threads share memory, GIL ki wajah se CPU-bound tasks me limited. <br><strong>Multiprocessing:</strong> separate memory, true parallelism, CPU-bound tasks ke liye better.</p>` },
+      { id:99, cat:'python', q:'What is a classmethod vs staticmethod?', a:`<p><strong>classmethod:</strong> cls parameter leta hai, class ke sath kaam karta hai. <br><strong>staticmethod:</strong> na self na cls, utility function.</p>` },
+      { id:100, cat:'python', q:'What is __str__ vs __repr__?', a:`<p><strong>__str__:</strong> readable string for users. <br><strong>__repr__:</strong> unambiguous string for developers, often used for debugging.</p>` },
+      // --- DSA questions (101-150+) ---
+      { id:101, cat:'dsa', q:'What is time complexity?', a:`<p>Time complexity algorithm ka runtime measure hai, input size ke sath growth rate. Big O notation me likhte hain.</p><ul><li>O(1) – constant</li><li>O(n) – linear</li><li>O(log n) – logarithmic</li><li>O(n²) – quadratic</li></ul>` },
+      { id:102, cat:'dsa', q:'What is space complexity?', a:`<p>Space complexity algorithm ki memory usage measure karti hai input size ke sath.</p>` },
+      { id:103, cat:'dsa', q:'What is a linked list?', a:`<p>Linked list nodes ka sequence hai, har node data aur next pointer rakhta hai. Dynamic size, insertion/deletion efficient.</p><div class="code-block">class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None</div>` },
+      { id:104, cat:'dsa', q:'Singly vs Doubly linked list?', a:`<p><strong>Singly:</strong> har node sirf next pointer rakhta hai. <br><strong>Doubly:</strong> next aur prev pointer dono rakhta hai.</p>` },
+      { id:105, cat:'dsa', q:'What is a stack?', a:`<p>Stack LIFO (Last In First Out) data structure. push, pop, top operations. Implementation: list or collections.deque.</p><div class="code-block">stack = []\nstack.append(1)  # push\nstack.pop()      # pop</div>` },
+      { id:106, cat:'dsa', q:'What is a queue?', a:`<p>Queue FIFO (First In First Out) data structure. enqueue, dequeue. Implementation: collections.deque.</p><div class="code-block">from collections import deque\nq = deque()\nq.append(1)  # enqueue\nq.popleft()  # dequeue</div>` },
+      { id:107, cat:'dsa', q:'What is a tree?', a:`<p>Tree hierarchical data structure hai jisme nodes hain aur root node se start hota hai. Har node ke children ho sakte hain.</p>` },
+      { id:108, cat:'dsa', q:'Binary tree vs Binary search tree?', a:`<p><strong>Binary tree:</strong> har node ke 2 children max. <br><strong>BST:</strong> left subtree < node < right subtree.</p>` },
+      { id:109, cat:'dsa', q:'Tree traversal types?', a:`<p><strong>DFS:</strong> Inorder (left-root-right), Preorder (root-left-right), Postorder (left-right-root). <br><strong>BFS:</strong> Level order traversal.</p>` },
+      { id:110, cat:'dsa', q:'What is a heap?', a:`<p>Heap complete binary tree hai jo max-heap ya min-heap property follow karta hai. Priority queue implementation.</p>` },
+      { id:111, cat:'dsa', q:'What is a hash table?', a:`<p>Hash table key-value pairs store karta hai, O(1) average lookup. Python dictionary hash table hai.</p>` },
+      { id:112, cat:'dsa', q:'What is collision in hashing?', a:`<p>Collision tab hoti hai jab do different keys ka same hash index aa jaye. Chaining aur open addressing se resolve karte hain.</p>` },
+      { id:113, cat:'dsa', q:'What is sorting?', a:`<p>Sorting elements ko ascending/descending order me arrange karna. Common algorithms: Bubble, Selection, Insertion, Merge, Quick, Heap sort.</p>` },
+      { id:114, cat:'dsa', q:'Bubble sort?', a:`<p>Bubble sort repeated swapping of adjacent elements. O(n²) worst case. Simple but inefficient for large data.</p>` },
+      { id:115, cat:'dsa', q:'Merge sort?', a:`<p>Merge sort divide and conquer algorithm hai. Array ko half me divide karta hai, sort karta hai, phir merge karta hai. O(n log n).</p>` },
+      { id:116, cat:'dsa', q:'Quick sort?', a:`<p>Quick sort pivot choose karta hai, partition karta hai, recursively sort. Average O(n log n), worst O(n²).</p>` },
+      { id:117, cat:'dsa', q:'What is dynamic programming?', a:`<p>DP complex problems ko smaller subproblems me tod kar solve karta hai aur results store karta hai (memoization/tabulation).</p>` },
+      { id:118, cat:'dsa', q:'What is memoization?', a:`<p>Memoization top-down approach hai jisme subproblem results store kiye jate hain taaki dobara compute na karna pade.</p>` },
+      { id:119, cat:'dsa', q:'What is tabulation?', a:`<p>Tabulation bottom-up approach hai jisme table fill karte hain aur iterative way me solve karte hain.</p>` },
+      { id:120, cat:'dsa', q:'Fibonacci using DP?', a:`<div class="code-block">def fib(n):\n    dp = [0]*(n+1)\n    dp[1]=1\n    for i in range(2,n+1):\n        dp[i]=dp[i-1]+dp[i-2]\n    return dp[n]</div>` },
+      { id:121, cat:'dsa', q:'What is a graph?', a:`<p>Graph nodes (vertices) aur edges ka collection hai. Directed/undirected, weighted/unweighted.</p>` },
+      { id:122, cat:'dsa', q:'Graph traversal methods?', a:`<p><strong>BFS:</strong> queue use karta hai, level by level. <br><strong>DFS:</strong> stack/recursion use karta hai.</p>` },
+      { id:123, cat:'dsa', q:'What is Dijkstra’s algorithm?', a:`<p>Dijkstra shortest path algorithm hai weighted graph me, non-negative edges ke liye. O((V+E) log V).</p>` },
+      { id:124, cat:'dsa', q:'What is Bellman-Ford?', a:`<p>Bellman-Ford shortest path algorithm hai negative edges ke liye bhi kaam karta hai. O(VE).</p>` },
+      { id:125, cat:'dsa', q:'What is Floyd-Warshall?', a:`<p>Floyd-Warshall all-pairs shortest path algorithm, dynamic programming based. O(V³).</p>` },
+      { id:126, cat:'dsa', q:'What is a disjoint set (Union-Find)?', a:`<p>Disjoint set data structure components ko merge aur find karne ke liye. Cycle detection aur Kruskal’s algorithm me use.</p>` },
+      { id:127, cat:'dsa', q:'What is a trie?', a:`<p>Trie prefix tree hai, strings store karne ke liye efficient. Autocomplete, dictionary me use.</p>` },
+      { id:128, cat:'dsa', q:'What is segment tree?', a:`<p>Segment tree range queries aur updates ke liye use hoti hai (sum, min, max). O(log n) per query.</p>` },
+      { id:129, cat:'dsa', q:'What is Fenwick tree?', a:`<p>Fenwick tree (BIT) prefix sums aur point updates ke liye efficient. O(log n).</p>` },
+      { id:130, cat:'dsa', q:'What is a palindrome?', a:`<p>Palindrome wo string/sequence hai jo aage aur peeche se same parhti hai. Example: "racecar", "madam".</p>` },
+      { id:131, cat:'dsa', q:'Two sum problem?', a:`<p>Given array aur target, find two numbers jo sum target karein. O(n) using hashmap.</p><div class="code-block">def two_sum(arr, target):\n    seen = {}\n    for i, val in enumerate(arr):\n        if target-val in seen: return [seen[target-val], i]\n        seen[val] = i</div>` },
+      { id:132, cat:'dsa', q:'What is a sliding window?', a:`<p>Sliding window technique array/string me subarray/substring problems solve karne ke liye, O(n) me.</p>` },
+      { id:133, cat:'dsa', q:'Kadane’s algorithm?', a:`<p>Kadane’s algorithm maximum subarray sum find karta hai. O(n).</p><div class="code-block">max_so_far = float('-inf')\nmax_ending_here = 0\nfor x in arr:\n    max_ending_here = max(x, max_ending_here+x)\n    max_so_far = max(max_so_far, max_ending_here)</div>` },
+      { id:134, cat:'dsa', q:'What is binary search?', a:`<p>Binary search sorted array me element find karta hai, O(log n). mid compare karke left/right half me search.</p>` },
+      { id:135, cat:'dsa', q:'What is recursion vs iteration?', a:`<p><strong>Recursion:</strong> function khud ko call karta hai. <br><strong>Iteration:</strong> loops use karte hain. Recursion stack space use karta hai.</p>` },
+      { id:136, cat:'dsa', q:'What is a priority queue?', a:`<p>Priority queue elements ko priority ke hisaab se process karta hai. Heap based implementation.</p>` },
+      { id:137, cat:'dsa', q:'What is topological sort?', a:`<p>Topological sort DAG (Directed Acyclic Graph) ke nodes ka linear order hai, har edge u->v me u pehle aata hai.</p>` },
+      { id:138, cat:'dsa', q:'What is an AVL tree?', a:`<p>AVL tree self-balancing BST hai, har node ke left-right height difference ≤ 1. O(log n) operations.</p>` },
+      { id:139, cat:'dsa', q:'What is a Red-Black tree?', a:`<p>Red-Black tree self-balancing BST hai, properties ke sath O(log n) operations. Used in Java TreeMap, C++ map.</p>` },
+      { id:140, cat:'dsa', q:'What is LCA (Lowest Common Ancestor)?', a:`<p>LCA do nodes ka lowest common ancestor in a tree. Binary lifting, Euler tour se find kar sakte hain.</p>` },
+      { id:141, cat:'dsa', q:'N-Queens problem?', a:`<p>N-Queens problem NxN board par N queens place karna taake koi do queen ek dusre ko attack na karein. Backtracking.</p>` },
+      { id:142, cat:'dsa', q:'What is a knapsack problem?', a:`<p>Knapsack problem: items diye gaye (weight, value), maximum value nikalni hai kapacity ke andar. 0/1 knapsack DP.</p>` },
+      { id:143, cat:'dsa', q:'What is subset sum?', a:`<p>Subset sum problem: given array, kya kisi subset ka sum target ke barabar hai. DP based.</p>` },
+      { id:144, cat:'dsa', q:'What is KMP algorithm?', a:`<p>KMP (Knuth-Morris-Pratt) string pattern matching algorithm hai O(n+m) complexity. Prefix function use karta hai.</p>` },
+      { id:145, cat:'dsa', q:'What is Rabin-Karp?', a:`<p>Rabin-Karp string matching algorithm hai rolling hash use karta hai, average O(n+m).</p>` },
+      { id:146, cat:'dsa', q:'What is a monotonic stack?', a:`<p>Monotonic stack stack hai jisme elements increasing/decreasing order me hote hain. Next greater/smaller element problems me use.</p>` },
+      { id:147, cat:'dsa', q:'What is a circular queue?', a:`<p>Circular queue last position ke baad first position use karta hai, memory efficient.</p>` },
+      { id:148, cat:'dsa', q:'What is a skip list?', a:`<p>Skip list probabilistic data structure hai, O(log n) search. Leveled linked lists.</p>` },
+      { id:149, cat:'dsa', q:'What is a bloom filter?', a:`<p>Bloom filter probabilistic data structure hai, set membership check karta hai, false positive ho sakta hai.</p>` },
+      { id:150, cat:'dsa', q:'What is a suffix array?', a:`<p>Suffix array string ke suffixes ka sorted array hai. String matching, LCP (Longest Common Prefix) ke liye use.</p>` },
+      { id:151, cat:'dsa', q:'What is a Fenwick tree (BIT) update/query?', a:`<p>Fenwick tree point update O(log n), prefix query O(log n).</p>` },
+      { id:152, cat:'dsa', q:'What is the difference between stack and heap memory?', a:`<p><strong>Stack:</strong> static memory, function calls, local variables. <br><strong>Heap:</strong> dynamic memory, objects, data structures.</p>` },
+    ];
+
+    // ------------------------------------------------------------
+    // Render
+    // ------------------------------------------------------------
+    const container = document.getElementById('qaContainer');
+    const searchInput = document.getElementById('searchInput');
+    const resultCount = document.getElementById('resultCount');
+    const filterButtons = document.querySelectorAll('.filter-tabs button');
+    let currentFilter = 'all';
+
+    function render(filterText = '', category = 'all') {
+      const f = filterText.trim().toLowerCase();
+      let visible = 0;
+      let html = '';
+      qa.forEach(item => {
+        const matchText = f === '' || item.q.toLowerCase().includes(f) || item.a.toLowerCase().includes(f);
+        const matchCat = category === 'all' || item.cat === category;
+        const show = matchText && matchCat;
+        if (show) visible++;
+        const cls = show ? 'qa-card' : 'qa-card hidden';
+        html += `
+          <div class="${cls}" data-id="${item.id}" data-cat="${item.cat}">
+            <div class="question-row">
+              <div class="q-badge">${item.id}</div>
+              <div class="q-text"><i class="fas fa-question-circle"></i> ${item.q}</div>
+            </div>
+            <div class="answer-body">${item.a}</div>
+          </div>
+        `;
+      });
+      if (visible === 0) {
+        html = `<div class="no-result"><i class="fas fa-search-minus"></i><p>No questions match your search or filter.</p></div>`;
+      }
+      container.innerHTML = html;
+      resultCount.innerHTML = `<i class="far fa-file-alt"></i> ${visible}`;
+    }
+
+    // search
+    let timeout = null;
+    searchInput.addEventListener('input', function() {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        render(this.value, currentFilter);
+      }, 180);
+    });
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { this.value = ''; render('', currentFilter); }
+    });
+
+    // filter tabs
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        render(searchInput.value, currentFilter);
+      });
+    });
+
+    // initial
+    render('', 'all');
+  })();
+</script>
+</body>
+</html>

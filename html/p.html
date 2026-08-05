@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Interview Prep · Muhammad Nouman</title>
+    <!-- Font Awesome (free) for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f7fc;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1e293b;
+        }
+
+        /* main container */
+        .app {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* header / branding */
+        .header {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 20, 40, 0.12);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand i {
+            font-size: 2.2rem;
+            color: #3776ab;
+            background: #eaf2fa;
+            padding: 0.5rem;
+            border-radius: 18px;
+        }
+
+        .brand h1 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(145deg, #1e3a5f, #2b5b8b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand span {
+            font-weight: 400;
+            font-size: 1rem;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-left: 0.5rem;
+            -webkit-text-fill-color: #1e293b;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 0.4rem 0.4rem 0.4rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+            min-width: 240px;
+        }
+
+        .search-box:focus-within {
+            background: white;
+            box-shadow: 0 0 0 3px rgba(55, 118, 171, 0.2);
+            border-color: #3776ab;
+        }
+
+        .search-box i {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 0.7rem 0.7rem 0.7rem 0.5rem;
+            font-size: 0.95rem;
+            width: 200px;
+            outline: none;
+            color: #0f172a;
+        }
+
+        .search-box input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .stats-badge {
+            background: #eaf2fa;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3a5f;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* question cards grid */
+        .qa-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .qa-card {
+            background: white;
+            border-radius: 1.6rem;
+            padding: 1.6rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 20, 30, 0.04);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            transition: all 0.2s ease;
+        }
+
+        .qa-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 8px 24px rgba(0, 20, 40, 0.06);
+        }
+
+        .qa-card.hidden {
+            display: none;
+        }
+
+        .question {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .q-number {
+            background: #eef2f6;
+            min-width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1e3a5f;
+            background: #e6edf6;
+        }
+
+        .q-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0b1e33;
+            margin-bottom: 0.3rem;
+        }
+
+        .q-text i {
+            color: #3776ab;
+            margin-right: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .answer {
+            margin-left: 3.2rem;
+            margin-top: 0.6rem;
+            padding-left: 0.2rem;
+            color: #1e293b;
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+
+        .answer p {
+            margin-bottom: 0.6rem;
+        }
+
+        .answer ul, .answer ol {
+            padding-left: 1.6rem;
+            margin: 0.6rem 0 1rem 0;
+        }
+
+        .answer li {
+            margin-bottom: 0.3rem;
+        }
+
+        .code-block {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 0.8rem 0 0.2rem 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .code-block i {
+            color: #facc15;
+            margin-right: 0.3rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eaf2fa;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1e3a5f;
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+            margin-right: 0.4rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .highlight {
+            background: #fef9c3;
+            padding: 0.1rem 0.3rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .inline-code {
+            background: #eef2f6;
+            padding: 0.1rem 0.5rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #1e293b;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e9eef3;
+            margin: 1.2rem 0;
+        }
+
+        .no-result {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #64748b;
+            font-size: 1.1rem;
+            background: white;
+            border-radius: 2rem;
+        }
+
+        .no-result i {
+            font-size: 2.5rem;
+            color: #cbd5e1;
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 2rem;
+        }
+
+        .footer-note i {
+            color: #3776ab;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+                padding: 1.2rem;
+            }
+            .search-box {
+                width: 100%;
+            }
+            .search-box input {
+                width: 100%;
+            }
+            .qa-card {
+                padding: 1.2rem;
+            }
+            .question {
+                flex-wrap: wrap;
+            }
+            .answer {
+                margin-left: 0;
+                margin-top: 0.8rem;
+            }
+            .brand h1 {
+                font-size: 1.4rem;
+            }
+            .stats-badge {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- header -->
+        <div class="header">
+            <div class="brand">
+                <i class="fab fa-python"></i>
+                <h1>Python Interview <span>Prep</span></h1>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search questions..." aria-label="Search">
+                <span class="stats-badge" id="resultCount"><i class="far fa-file-alt"></i> 77</span>
+            </div>
+        </div>
+
+        <!-- QA grid -->
+        <div class="qa-grid" id="qaContainer">
+            <!-- Cards will be injected via JS -->
+        </div>
+
+        <div class="footer-note">
+            <i class="fas fa-code"></i>  Muhammad Nouman · Python Interview Q&A · 2026
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ------------------------------------------------------------
+            // DATA — raw questions & answers (as provided)
+            // We keep the exact formatting, but we add some minimal structure
+            // Each item: { id, question, answerHTML }
+            // The answerHTML is built manually from the text to keep it clean.
+            // ------------------------------------------------------------
+            const qaData = [
+                { id: 1, q: "What is python ?", 
+                  a: `<p>Python ek high-level, interpreted, object-oriented programming language hai. Ye simple syntax ki wajah se famous hai aur web development, AI, automation, scripting aur data science me use hoti hai.</p>
+                      <p><strong>Features:</strong></p>
+                      <ul><li>Easy syntax</li><li>Readable code</li><li>Large community support</li><li>Cross-platform</li><li>Huge libraries support</li></ul>
+                      <div class="code-block">print("Hello World")</div>` },
+                { id: 2, q: "Python Interpreted Language q Kehlati Hai?", 
+                  a: `<p>Python interpreted language is liye kehlati hai kyun ke iska code runtime par line by line execute hota hai. Python source code ko pehle bytecode me convert karta hai aur phir Python Virtual Machine (PVM) us bytecode ko execute karti hai.</p>` },
+                { id: 3, q: "python interpreted hai ya compiled?", 
+                  a: `<p>python interpreted b hai or compiled b — pehle step may code bytecode may Compile hota hai phir PVM (Python Virtual Machine) us bytecode ko line by line execute krti hai</p>` },
+                { id: 4, q: "What are Data Types in Python?", 
+                  a: `<p>Python me Data Types different types ka data store karne ke liye use hote hain. Har variable ka ek data type hota hai jo batata hai ke us variable me kis type ka data store hoga.</p>
+                      <p><strong>Types:</strong> Numeric (int, float, complex), Sequence (list, tuple, range), Text (str), Set (set), Mapping (dict), Boolean (bool), Binary (bytes, bytearray, memoryview)</p>
+                      <div class="code-block"># example\nx = 10          # int\ny = 3.14        # float\nname = "Python" # str</div>` },
+                { id: 5, q: "Variables kia hote hain?", 
+                  a: `<p>Variable aik named memory location hota hai jo data ko temporarily store karta hai.</p>` },
+                { id: 6, q: "What is mutable and immutable in python?", 
+                  a: `<p><span class="highlight">Mutable</span> wo data types hote hain jin ki value ko change kia ja skta hai. Example: List, Dict, Set.</p>
+                      <p><span class="highlight">Immutable</span> data types wo hote hain jin ki value ko change nahi kia ja skta. Example: Tuple, String, Int.</p>` },
+                { id: 7, q: "What is the Difference Between List and Tuple?", 
+                  a: `<p><strong>List</strong> mutable hai, square brackets [ ] may define hoti hai, tuple se thori slow.</p>
+                      <p><strong>Tuple</strong> immutable hai, parentheses ( ) may define hoti hai, list se thori fast.</p>` },
+                { id: 8, q: "What is Type Casting in Python?", 
+                  a: `<p>aik data type ko dusre data type may convert krna type casting kehlata hai. <br><strong>Implicit:</strong> Python automatically convert krta hai. <br><strong>Explicit:</strong> Hum manually conversion karte hain.</p>` },
+                { id: 9, q: "Operators in python ?", 
+                  a: `<p><strong>Arithmetic:</strong> + - * / // % ** <br><strong>Comparison:</strong> == != > < >= <= <br><strong>Logical:</strong> and, or, not <br><strong>Assignment, Membership, Identity, Bitwise.</strong></p>` },
+                { id: 10, q: "What is a function?", 
+                  a: `<p>function aik reusable block of code hota hai jo specific task ko perform krta hai</p>
+                      <div class="code-block">def greet(name):\n    return f"hello {name}"</div>` },
+                { id: 11, q: "What is the difference between parameter and arguments?", 
+                  a: `<p><strong>Parameters:</strong> variables jo function define karte waqt parentheses ke andar likhe jate hain. <br><strong>Arguments:</strong> actual values jo function ko call karte waqt pass ki jati hain.</p>
+                      <p><strong>Types:</strong> Positional, Keyword, Default, Variable-length (*args, **kwargs)</p>
+                      <div class="code-block">def student(name, math, science): ...<br>student("Nouman", 80, 75)  # positional</div>` },
+                { id: 12, q: "What is the lambda function?", 
+                  a: `<p>Lambda function aik anonymous (bina naam ka) function hota hai jo sirf ek expression rakhta hai aur chhote operations ke liye use hota hai.</p>
+                      <div class="code-block">square = lambda x: x ** 2<br>print(square(5))  # 25</div>
+                      <p><strong>map(), filter(), reduce():</strong></p>
+                      <div class="code-block"># map: apply function to each element<br>list(map(lambda x: x*2, [1,2,3,4]))  # [2,4,6,8]</div>` },
+                { id: 13, q: "what is *args and **kwargs?", 
+                  a: `<p><strong>*args</strong> multiple positional arguments store karta hai. <br><strong>**kwargs</strong> multiple keyword arguments receive karta hai.</p>` },
+                { id: 14, q: "What is scope?", 
+                  a: `<p>Scope variable ki accessibility define karti hai. <br><strong>Local:</strong> function ke andar define, sirf usi function me access. <br><strong>Global:</strong> function k bahir define, puri file may accessible.</p>
+                      <div class="code-block">x = 100         # global<br>def func():<br>    global x   # modify global<br>    x = 200</div>
+                      <p><span class="highlight">Trap:</span> agar function k andar global variable ko modify karna ho to ‘global’ keyword use karo.</p>` },
+                { id: 15, q: "What is recursion?", 
+                  a: `<p>Recursion wo technique hai jisme ek function khud ko call karta hai kisi problem ko chhote parts me solve karne ke liye. <br><strong>Base case</strong> (rukne ki condition) aur <strong>Recursive case</strong> (khud ko call).</p>
+                      <div class="code-block">def factorial(n):<br>    if n == 1: return 1<br>    return n * factorial(n-1)</div>` },
+                { id: 16, q: "What is exception handling", 
+                  a: `<p>Exception Handling mechanism jo program ko runtime errors ki wajah se crash hone se bachata hai. <br><strong>try:</strong> risky code, <strong>except:</strong> error handle, <strong>finally:</strong> hamesha chalega, <strong>raise:</strong> khud error generate karo.</p>` },
+                { id: 17, q: "Difference between == and is?", 
+                  a: `<p><strong>==</strong> do objects ki value compare karta hai. <br><strong>is</strong> do objects ki memory location compare krta hai.</p>
+                      <div class="code-block">a = [1,2]; b = [1,2]<br>print(a == b)  # True<br>print(a is b)   # False</div>` },
+                { id: 18, q: "Deep copy vs shallow copy", 
+                  a: `<p><strong>Deep copy</strong> poore object aur nested objects ki bhi alag copy banati hai. <br><strong>Shallow copy</strong> naya object create karti hai, lekin nested objects ka reference share karti hai.</p>` },
+                { id: 19, q: "Iterable vs Iterator ?", 
+                  a: `<p><strong>Iterable</strong> aisa object jis par hum iterate kar sakte hain (list, tuple, string, etc). <br><strong>Iterator</strong> object jo ek ek value return karta hai using next().</p>
+                      <div class="code-block">numbers = [1,2,3]<br>it = iter(numbers)<br>print(next(it))  # 1</div>` },
+                { id: 20, q: "What is a generator?", 
+                  a: `<p>Generator aik special function hai jo <span class="highlight">yield</span> keyword use karta hai aur values ko one by one generate karta hai. Sari values ko ek sath memory mein store nahi karta.</p>
+                      <div class="code-block">def gen():<br>    yield 10<br>    yield 20<br>g = gen()<br>print(next(g))  # 10</div>` },
+                { id: 21, q: "yield aur return me kya difference hai?", 
+                  a: `<p><strong>return</strong> function ko completely khatam kar deta hai. <br><strong>yield</strong> function ko pause karta hai aur agli call par wahi se continue karta hai.</p>` },
+                { id: 22, q: "Generator kab use karte hain?", 
+                  a: `<p>Large files read karne, large datasets process karne, memory optimization, streaming data ke liye.</p>` },
+                { id: 23, q: "Generator dobara use kyun nahi hota?", 
+                  a: `<p>Generator ek one-time iterator hota hai. Jab tamam values consume ho jati hain to wo khatam ho jata hai. Naya generator create karna parta hai.</p>` },
+                { id: 24, q: "What is a decorator?", 
+                  a: `<p>Decorator aik function hai jo kisi dusre function ki functionality ko bina change kiy modify ya extend krta hai. @ syntax ke sath use hote hain.</p>
+                      <div class="code-block">@my_decorator<br>def my_func():<br>    print("hello")</div>` },
+                { id: 25, q: "What is oop?", 
+                  a: `<p>OOP (Object-Oriented Programming) aik programming paradigm hai jisme hum real-world entities ko Classes aur Objects ki form me represent karte hain.</p>` },
+                { id: 26, q: "Class vs object?", 
+                  a: `<p><strong>Class</strong> aik blueprint (naqsha) hoti hai jiski basis par objects banaye jate hain. <br><strong>Object</strong> class ka real instance hota hai jo memory me create hota hai.</p>` },
+                { id: 27, q: "instance aur Object mein difference ?", 
+                  a: `<p>Practically dono terms ek hi meaning me use hoti hain. Har object class ka instance hota hai.</p>` },
+                { id: 28, q: "Kya ek class se multiple objects bana sakte hain?", 
+                  a: `<p>Haan, ek class se multiple objects ya instances create kiye ja sakte hain.</p>` },
+                { id: 29, q: "Attributes kitni Types k hote hain?", 
+                  a: `<p><strong>Class Attributes:</strong> class ke andar aur __init__() ke bahar define. <br><strong>Instance Attributes:</strong> __init__() ke andar self ke sath define.</p>` },
+                { id: 30, q: "Python may methods ki types kitni hoti hain?", 
+                  a: `<p><strong>Instance method</strong> (self), <strong>Class method</strong> (@classmethod, cls), <strong>Static method</strong> (@staticmethod).</p>` },
+                { id: 31, q: "Self Kya Hota Hai?", 
+                  a: `<p>self current object (instance) ka reference hota hai.</p>` },
+                { id: 32, q: "What is constructor __init__?", 
+                  a: `<p>__init__() Python ka special method hai jo object create hote hi automatically call hota hai. Object ko initialize karta hai.</p>` },
+                { id: 33, q: "What are Access Modifiers?", 
+                  a: `<p><strong>Public:</strong> har jagah se access. <br><strong>Protected:</strong> same class aur child class me use. <br><strong>Private:</strong> sirf class ke andar use.</p>` },
+                { id: 34, q: "Association kia hai?", 
+                  a: `<p>Jab aik class ka object doosri class ke object se related ho, to usay Association kehte hain. Dono objects independently exist kar sakte hain.</p>` },
+                { id: 35, q: "Aggregation kia hai:", 
+                  a: `<p>Aggregation Association ki special type hai jahan ek class doosri class ka object rakhti hai lekin dono independently exist kar sakte hain.</p>` },
+                { id: 36, q: "Aggregation aur Association me kya difference hai?", 
+                  a: `<p>Association sirf relationship batati hai. Aggregation me HAS-A relationship hoti hai aur ek class doosri class ka object rakhti hai.</p>` },
+                { id: 37, q: "Aggregation vs Composition", 
+                  a: `<p><strong>Aggregation:</strong> weak HAS-A, child object parent ke baghair bhi exist kar sakti hai. <br><strong>Composition:</strong> strong HAS-A, child object parent ke bina nahi kar sakta.</p>` },
+                { id: 38, q: "Four Pillars of OOP?", 
+                  a: `<p><strong>Encapsulation:</strong> data aur methods ko bundle, secure. <br><strong>Inheritance:</strong> child class parent se inherit. <br><strong>Polymorphism:</strong> same method different behaviors. <br><strong>Abstraction:</strong> sirf important cheezain dikhana.</p>` },
+                { id: 39, q: "Middleware kya hai", 
+                  a: `<p>Middleware Django ka component hai jo Request aur Response ke darmiyan kaam karta hai aur request ko View tak process karta hai.</p>` },
+                { id: 40, q: "What is Synchronous Programming", 
+                  a: `<p>Synchronous Programming me code line by line execute hota hai. Ek task complete hone ke baad hi dusra task start hota hai.</p>` },
+                { id: 41, q: "What is Asynchronous Programming?", 
+                  a: `<p>Asynchronous Programming me jab aik task wait (I/O) me ho to program us waqt dusra task start kar sakta hai, zyada efficient.</p>` },
+                { id: 42, q: "super() kia hai", 
+                  a: `<p>super() parent class ke methods ya constructor ko child class se call karne ke liye use hota hai.</p>` },
+                { id: 43, q: "Diamond problem kia hai?", 
+                  a: `<p>Diamond Problem multiple inheritance mein tab hota hai jab ek class do aisi classes se inherit kare jo dono ek common parent class ko inherit krti hon, ambiguity paida hoti hai.</p>` },
+                { id: 44, q: "MRO Kia hai?", 
+                  a: `<p>MRO (Method Resolution Order) define karta hai k python pehle kis class k method ko call karega jab multiple classes may same method ho.</p>` },
+                { id: 45, q: "What is Garbage Collection?", 
+                  a: `<p>Garbage Collection aik automatic memory management process hai jo un objects ki memory free karta hai jo program me ab use nahi ho rahe hote.</p>` },
+                { id: 46, q: "Python me Garbage Collection kaise kaam karti hai?", 
+                  a: `<p><strong>Reference Counting:</strong> har object ka reference count, jab 0 ho jaye to memory free. <br><strong>Cyclic Garbage Collection:</strong> circular references ko detect karke memory free karta hai.</p>` },
+                { id: 47, q: "Python memory management ke liye kya use karta hai?", 
+                  a: `<p>Python memory management ke liye Reference Counting aur Garbage Collection use karta hai.</p>` },
+                { id: 48, q: "What is MVT in Django?", 
+                  a: `<p>MVT (Model-View-Template) Django ka architectural pattern hai jo application ko 3 parts me divide karta hai.</p>` },
+                { id: 49, q: "What is MVC?", 
+                  a: `<p>MVC (Model-View-Controller) aik software architectural pattern hai jo application ko 3 parts me divide karta hai.</p>` },
+                { id: 50, q: "Django me MVC nahi MVT kyun hai?", 
+                  a: `<p>Django MVT architecture use karta hai. Django me alag Controller nahi hota, URL dispatcher aur framework Controller ka role perform karte hain.</p>` },
+                { id: 51, q: "What is Django?", 
+                  a: `<p>Django ek high-level Python web framework hai jo fast development aur clean, pragmatic design ke liye famous hai. Batteries-included approach.</p>` },
+                { id: 52, q: "Django Project aur App me kya difference hai?", 
+                  a: `<p>Django Project poori application hoti hai, jabke Django App us application ka ek specific module ya feature hota hai.</p>` },
+                { id: 53, q: "Django Request Lifecycle kya hai?", 
+                  a: `<p>Django Request Lifecycle wo process hai jisme user ki request browser se Django tak jati hai aur response wapas browser ko milta hai.</p>` },
+                { id: 54, q: "Middleware kitni baar execute hota hai?", 
+                  a: `<p>Middleware 2 baar execute hota hai: Request ke time aur Response ke time.</p>` },
+                { id: 55, q: "Django me Middleware kitni types ke hote hain?", 
+                  a: `<p><strong>Request Middleware:</strong> request ke time execute (auth, session, logging). <br><strong>Response Middleware:</strong> response ke time execute (modify, headers).</p>` },
+                { id: 56, q: "Custom Middleware bana sakte hain?", 
+                  a: `<p>Haan. Hum apni requirement ke mutabiq custom middleware bana sakte hain aur settings.py me MIDDLEWARE list me add kar dete hain.</p>` },
+                { id: 57, q: "Common Built-in Middleware kaha define hote hain ?", 
+                  a: `<p>settings.py ke MIDDLEWARE list me configure kiye jate hain (Security, Session, CSRF, Auth, etc.)</p>` },
+                { id: 58, q: "Model kya hai?", 
+                  a: `<p>Model Django ki ek Python class hoti hai jo database table ko represent karti hai. Har attribute database me field banta hai.</p>` },
+                { id: 59, q: "ORM kya hai?", 
+                  a: `<p>ORM (Object Relational Mapper) Python objects key through database ke sath kaam karne ka tareeqa hai, SQL likhne ki bajaye Python code se operations.</p>` },
+                { id: 60, q: "Migration kya hai?", 
+                  a: `<p>Migration Django ka database schema ko update karne ka tareeqa hai.</p>` },
+                { id: 61, q: "makemigrations aur migrate me kya difference hai?", 
+                  a: `<p><strong>makemigrations:</strong> model changes ke hisaab se migration files create karta hai. <br><strong>migrate:</strong> migration files ko database par apply karta hai.</p>` },
+                { id: 62, q: "Django Relationships kya hain?", 
+                  a: `<p>ForeignKey (Many-to-One), OneToOneField (One-to-One), ManyToManyField (Many-to-Many).</p>` },
+                { id: 63, q: "CASCADE kya hai?", 
+                  a: `<p>CASCADE ek on_delete behavior hai. Agar parent object delete ho jaye to us se related child objects bhi delete ho jate hain.</p>` },
+                { id: 64, q: "related_name kya hai?", 
+                  a: `<p>related_name reverse relationship ka naam define karta hai, jis se parent object se related child objects ko access kar sakte hain.</p>` },
+                { id: 65, q: "Meta class kya hai?", 
+                  a: `<p>Meta class model ki extra settings define karne ke liye use hoti hai, jaise ordering, table name, permissions.</p>` },
+                { id: 66, q: "QuerySet kya hai?", 
+                  a: `<p>QuerySet database se retrieve hone wale objects ka collection hota hai. Ye lazy loading follow karta hai.</p>` },
+                { id: 67, q: "all() vs filter()", 
+                  a: `<p><strong>all()</strong> Table ke tamam records return karta hai. <br><strong>filter()</strong> Condition ke hisaab se records return karta hai.</p>` },
+                { id: 68, q: "filter() vs get()", 
+                  a: `<p><strong>filter()</strong> Multiple records return kar sakta hai. <br><strong>get()</strong> Sirf ek object return karta hai.</p>` },
+                { id: 69, q: "exclude()", 
+                  a: `<p>Jo records condition ko match karte hain unhein hata kar baqi records return karta hai.</p>` },
+                { id: 70, q: "first() vs last() vs exists() vs distinct() vs annotate() vs aggregate() vs order_by()", 
+                  a: `<p><strong>first()</strong> pehla, <strong>last()</strong> aakhri, <strong>distinct()</strong> duplicate remove, <strong>annotate()</strong> extra field, <strong>order_by()</strong> sort, <strong>aggregate()</strong> sum/avg/count, <strong>exists()</strong> check record exists.</p>` },
+                { id: 71, q: "Function Based View (FBV)", 
+                  a: `<p>FBV ek simple function hoti hai jo request receive karti hai aur response return karti hai.</p>` },
+                { id: 72, q: "Class Based View (CBV)", 
+                  a: `<p>CBV ek class hoti hai jo GET, POST jaise HTTP methods ko alag methods ki form me handle karti hai.</p>` },
+                { id: 73, q: "FBV vs CBV", 
+                  a: `<p><strong>FBV:</strong> Simple, easy, choti applications ke liye. <br><strong>CBV:</strong> Reusable, inheritance support, complex apps.</p>` },
+                { id: 74, q: "Generic Views", 
+                  a: `<p>Django ki built-in CBVs: ListView, DetailView, CreateView, UpdateView, DeleteView.</p>` },
+                { id: 75, q: "APIView", 
+                  a: `<p>APIView DRF ki base class hai jo APIs banane ke liye use hoti hai, GET, POST, PUT, DELETE handle karti hai.</p>` },
+                { id: 76, q: "GenericAPIView", 
+                  a: `<p>GenericAPIView APIView ka extended version hai jo serializer, queryset, pagination, filtering ki support deta hai.</p>` },
+                { id: 77, q: "Mixins", 
+                  a: `<p>Mixins reusable classes hoti hain jo common functionality provide karti hain: CreateModelMixin, ListModelMixin, UpdateModelMixin, DestroyModelMixin.</p>` }
+            ];
+
+            // ------------------------------------------------------------
+            // Render
+            // ------------------------------------------------------------
+            const container = document.getElementById('qaContainer');
+            const searchInput = document.getElementById('searchInput');
+            const resultCount = document.getElementById('resultCount');
+
+            function render(filterText = '') {
+                const filter = filterText.trim().toLowerCase();
+                let visibleCount = 0;
+                let html = '';
+
+                qaData.forEach(item => {
+                    const qText = item.q.toLowerCase();
+                    const aText = item.a.toLowerCase();
+                    const match = filter === '' || qText.includes(filter) || aText.includes(filter);
+                    if (match) visibleCount++;
+
+                    const cardClass = match ? 'qa-card' : 'qa-card hidden';
+                    // build answer with a small "Q" prefix for number
+                    html += `
+                        <div class="${cardClass}" data-id="${item.id}">
+                            <div class="question">
+                                <div class="q-number">${item.id}</div>
+                                <div class="q-text"><i class="fas fa-question-circle"></i> ${item.q}</div>
+                            </div>
+                            <div class="answer">
+                                ${item.a}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                if (visibleCount === 0) {
+                    html = `
+                        <div class="no-result">
+                            <i class="fas fa-search-minus"></i>
+                            <p>No questions match your search.</p>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = html;
+                resultCount.innerHTML = `<i class="far fa-file-alt"></i> ${visibleCount}`;
+            }
+
+            // initial render
+            render();
+
+            // search listener (debounced)
+            let timeoutId = null;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    render(this.value);
+                }, 150);
+            });
+
+            // optional: clear on Escape
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    this.value = '';
+                    render('');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
