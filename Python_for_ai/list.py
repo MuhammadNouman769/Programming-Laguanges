@@ -80,3 +80,16 @@ for i in range(len(number)):
         index = i
 print(f"Largest number: {largest} at index: {index}")
 
+class A:
+    pass
+
+class B(A):
+    pass
+
+class C(A):
+    pass
+
+class D(B, C):
+    pass
+
+print(D.mro())

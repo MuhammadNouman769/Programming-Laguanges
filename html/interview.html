@@ -36,6 +36,7 @@
             direction: ltr;
         }
 
+        /* ── Scrollbar ── */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -60,13 +61,6 @@
             padding-bottom: 30px;
             border-right: 1px solid var(--border);
             direction: ltr;
-        }
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
         }
         .sidebar-logo {
             padding: 22px 20px 14px;
@@ -107,6 +101,14 @@
             background: rgba(56, 189, 248, 0.08);
             color: white;
             border-left-color: var(--accent);
+        }
+        .sidebar a .q-badge {
+            background: var(--accent-dark);
+            color: white;
+            font-size: 9px;
+            padding: 1px 8px;
+            border-radius: 12px;
+            margin-left: 6px;
         }
 
         /* ── Main ── */
@@ -249,46 +251,30 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 12px 20px;
+            padding: 10px 16px;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
         }
-        .lang-toggle .lang-label {
+        .lang-toggle label {
             font-size: 13px;
             color: var(--text-muted);
-            font-weight: 600;
-        }
-        .lang-toggle .lang-btn {
-            padding: 6px 18px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            background: transparent;
-            color: var(--text-muted);
-            font-size: 14px;
-            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             cursor: pointer;
-            transition: all 0.3s;
         }
-        .lang-toggle .lang-btn:hover {
-            border-color: var(--accent);
-            color: white;
-        }
-        .lang-toggle .lang-btn.active {
-            border-color: var(--accent);
-            background: rgba(56, 189, 248, 0.15);
-            color: var(--accent);
-        }
-        .lang-toggle .lang-btn .flag {
-            margin-right: 6px;
+        .lang-toggle input[type="radio"] {
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
         }
         .lang-toggle .active-lang {
             color: var(--gold);
             font-weight: 700;
-            font-size: 14px;
-            margin-left: auto;
         }
 
         /* ── Section Card ── */
@@ -344,6 +330,9 @@
         }
 
         /* ── Bilingual Content ── */
+        .bilingual {
+            display: block;
+        }
         .bilingual .en {
             display: block;
         }
@@ -371,15 +360,8 @@
             direction: ltr;
             text-align: left;
         }
-        .bilingual .ur .styled-table {
-            direction: ltr;
-        }
-        .bilingual .ur .styled-table th,
-        .bilingual .ur .styled-table td {
-            text-align: right;
-        }
 
-        /* Show Urdu when .ur-mode is active */
+        /* Show Urdu when .ur-mode is active on body */
         body.ur-mode .bilingual .en {
             display: none;
         }
@@ -412,28 +394,13 @@
             color: #A5F3FC;
             white-space: pre;
         }
-        .code-kw {
-            color: #F472B6;
-        }
-        .code-fn {
-            color: #34D399;
-        }
-        .code-str {
-            color: #FCD34D;
-        }
-        .code-cmt {
-            color: #64748B;
-            font-style: italic;
-        }
-        .code-num {
-            color: #FB923C;
-        }
-        .code-op {
-            color: #F472B6;
-        }
-        .code-var {
-            color: #93C5FD;
-        }
+        .code-kw { color: #F472B6; }
+        .code-fn { color: #34D399; }
+        .code-str { color: #FCD34D; }
+        .code-cmt { color: #64748B; font-style: italic; }
+        .code-num { color: #FB923C; }
+        .code-op { color: #F472B6; }
+        .code-var { color: #93C5FD; }
 
         /* ── Tables ── */
         .styled-table {
@@ -456,18 +423,9 @@
             border-bottom: 1px solid var(--border);
             color: var(--text);
         }
-        .styled-table tr:last-child td {
-            border-bottom: none;
-        }
-        .styled-table tr:nth-child(even) td {
-            background: rgba(30, 41, 59, 0.5);
-        }
-        .styled-table td:first-child {
-            color: var(--accent);
-            font-weight: 600;
-            font-family: monospace;
-            font-size: 14px;
-        }
+        .styled-table tr:last-child td { border-bottom: none; }
+        .styled-table tr:nth-child(even) td { background: rgba(30, 41, 59, 0.5); }
+        .styled-table td:first-child { color: var(--accent); font-weight: 600; font-family: monospace; font-size: 14px; }
 
         /* ── Callouts ── */
         .callout {
@@ -479,40 +437,13 @@
             align-items: flex-start;
             border-left: 4px solid;
         }
-        .callout-info {
-            background: rgba(96, 165, 250, 0.08);
-            border-left-color: var(--info);
-        }
-        .callout-warn {
-            background: rgba(251, 191, 36, 0.08);
-            border-left-color: var(--warning);
-        }
-        .callout-success {
-            background: rgba(52, 211, 153, 0.08);
-            border-left-color: var(--success);
-        }
-        .callout-danger {
-            background: rgba(248, 113, 113, 0.08);
-            border-left-color: var(--danger);
-        }
-        .callout-icon {
-            font-size: 18px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        .callout-text {
-            font-size: 14px;
-            color: var(--text);
-            line-height: 1.7;
-        }
-        .callout-text strong {
-            display: block;
-            margin-bottom: 2px;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-        }
+        .callout-info { background: rgba(96, 165, 250, 0.08); border-left-color: var(--info); }
+        .callout-warn { background: rgba(251, 191, 36, 0.08); border-left-color: var(--warning); }
+        .callout-success { background: rgba(52, 211, 153, 0.08); border-left-color: var(--success); }
+        .callout-danger { background: rgba(248, 113, 113, 0.08); border-left-color: var(--danger); }
+        .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+        .callout-text { font-size: 14px; color: var(--text); line-height: 1.7; }
+        .callout-text strong { display: block; margin-bottom: 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
 
         /* ── Compare Grid ── */
         .compare-grid {
@@ -533,24 +464,30 @@
             font-weight: 700;
             margin-bottom: 8px;
         }
-        .compare-card p,
-        .compare-card li {
+        .compare-card p, .compare-card li {
             font-size: 13.5px;
             color: var(--text);
         }
-        .compare-card ul {
-            list-style: none;
-            padding-left: 0;
+        .compare-card ul { list-style: none; padding-left: 0; }
+        .compare-card ul li { padding: 2px 0 2px 16px; position: relative; }
+        .compare-card ul li::before { content: "•"; position: absolute; left: 0; color: var(--accent); }
+
+        /* ── Falsy Grid ── */
+        .falsy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0;
         }
-        .compare-card ul li {
-            padding: 2px 0 2px 16px;
-            position: relative;
-        }
-        .compare-card ul li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
+        .falsy-item {
+            background: rgba(248, 113, 113, 0.12);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-family: monospace;
+            font-size: 15px;
+            color: var(--danger);
+            font-weight: 700;
         }
 
         /* ── Questions Section ── */
@@ -576,9 +513,7 @@
             padding: 12px 16px;
             margin-bottom: 10px;
         }
-        .q-item:last-child {
-            margin-bottom: 0;
-        }
+        .q-item:last-child { margin-bottom: 0; }
         .q-num {
             color: var(--accent);
             font-weight: 800;
@@ -605,12 +540,39 @@
             font-size: 12.5px;
             color: var(--text);
         }
-        .q-io .q-in {
-            color: var(--accent);
+        .q-io .q-in { color: var(--accent); }
+        .q-io .q-out { color: var(--success); }
+
+        /* ── Analogy Card ── */
+        .analogy-card {
+            background: rgba(251, 191, 36, 0.06);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin: 14px 0;
         }
-        .q-io .q-out {
-            color: var(--success);
+        .analogy-card h4 {
+            color: var(--gold);
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
+        .analogy-steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .analogy-step {
+            background: var(--code-bg);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .analogy-step .step-icon { font-size: 26px; margin-bottom: 4px; }
+        .analogy-step .step-kw { color: var(--accent); font-weight: 800; font-size: 13px; font-family: monospace; margin-bottom: 4px; }
+        .analogy-step .step-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
 
         /* ── Closing ── */
         .closing {
@@ -621,37 +583,28 @@
             border-top: 1px solid var(--border);
         }
 
+        /* ── Page Footer ── */
+        .page-footer {
+            text-align: center;
+            padding: 16px;
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 24px;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-            .main {
-                margin-left: 0;
-            }
-            .content {
-                padding: 18px 14px;
-            }
-            .chapter-header {
-                padding: 28px 18px 22px;
-            }
-            .compare-grid {
-                grid-template-columns: 1fr;
-            }
-            .cover {
-                padding: 60px 20px;
-            }
-            .cover h1 {
-                font-size: 28px;
-            }
-            .lang-toggle {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .lang-toggle .active-lang {
-                margin-left: 0;
-                text-align: center;
-            }
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+            .content { padding: 18px 14px; }
+            .chapter-header { padding: 28px 18px 22px; }
+            .compare-grid, .analogy-steps { grid-template-columns: 1fr; }
+            .cover { padding: 60px 20px; }
+            .cover h1 { font-size: 28px; }
+            .lang-toggle { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
@@ -718,10 +671,10 @@
             <div class="chapter-header" data-num="01"><div class="chapter-num">Question 1</div><h1>What is Python?</h1></div>
             <div class="content">
                 <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay">🇬🇧 English</span>
+                    <span style="color:var(--text-muted);font-size:13px;">🌐 Language:</span>
+                    <label><input type="radio" name="lang" value="en" checked> English</label>
+                    <label><input type="radio" name="lang" value="ur"> اردو</label>
+                    <span class="active-lang" id="langDisplay">English</span>
                 </div>
                 <div class="section">
                     <h2><span class="q-icon">🐍</span> Python</h2>
@@ -757,12 +710,6 @@
         <section id="q2">
             <div class="chapter-header" data-num="02"><div class="chapter-num">Question 2</div><h1>Interpreted vs Compiled</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay2">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">⚡</span> Why is Python Called Interpreted?</h2>
                     <div class="bilingual">
@@ -825,19 +772,10 @@
             </div>
         </section>
 
-        <!-- ══ Q3 to Q29 (all sections with same toggle pattern) ══ -->
-        <!-- Due to space, I'll show the pattern and include all sections with proper bilingual content -->
-
         <!-- ══ Q3 ══ -->
         <section id="q3">
             <div class="chapter-header" data-num="03"><div class="chapter-num">Question 3</div><h1>Data Types</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay3">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">📊</span> What are Data Types?</h2>
                     <div class="bilingual">
@@ -876,12 +814,6 @@
         <section id="q4">
             <div class="chapter-header" data-num="04"><div class="chapter-num">Question 4</div><h1>Variables &amp; Mutable/Immutable</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay4">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">📦</span> Variables and Mutable/Immutable</h2>
                     <div class="bilingual">
@@ -904,6 +836,10 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="callout callout-warn">
+                                <span class="callout-icon">⚠️</span>
+                                <div class="callout-text"><strong>Interview Tip:</strong> When an object changes, immutable types create a <strong>new object</strong>, while mutable types change the <strong>same object</strong>.</div>
+                            </div>
                         </div>
                         <div class="ur">
                             <p><strong>Variable</strong> ایک نامزد کردہ memory location ہے جو ڈیٹا کو عارضی طور پر ذخیرہ کرنے کے لیے استعمال ہوتی ہے۔</p>
@@ -924,6 +860,10 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="callout callout-warn">
+                                <span class="callout-icon">⚠️</span>
+                                <div class="callout-text"><strong>انٹرویو ٹپ:</strong> جب کوئی object تبدیل ہوتا ہے تو immutable types <strong>نیا object</strong> بناتے ہیں، جبکہ mutable types <strong>اسی object</strong> میں تبدیلی کرتے ہیں۔</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -934,12 +874,6 @@
         <section id="q5">
             <div class="chapter-header" data-num="05"><div class="chapter-num">Question 5</div><h1>List vs Tuple</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay5">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">📋</span> List vs Tuple</h2>
                     <div class="bilingual">
@@ -980,12 +914,6 @@ tup[<span class="code-num">0</span>] = <span class="code-num">99</span>       <s
         <section id="q6">
             <div class="chapter-header" data-num="06"><div class="chapter-num">Question 6</div><h1>Type Casting</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay6">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔄</span> What is Type Casting?</h2>
                     <div class="bilingual">
@@ -1036,33 +964,63 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
         <section id="q7">
             <div class="chapter-header" data-num="07"><div class="chapter-num">Question 7</div><h1>Operators</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay7">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">➕</span> Operators in Python</h2>
                     <div class="bilingual">
                         <div class="en">
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>Arithmetic</h4><p><code>+  -  *  /  //  %  **</code></p></div>
-                                <div class="compare-card"><h4>Comparison</h4><p><code>==  !=  &gt;  &lt;  &gt;=  &lt;=</code></p></div>
-                                <div class="compare-card"><h4>Logical</h4><p><code>and  or  not</code></p></div>
-                                <div class="compare-card"><h4>Assignment</h4><p><code>=  +=  -=  *=  /=  //=  %=  **=</code></p></div>
-                                <div class="compare-card"><h4>Membership</h4><p><code>in  not in</code></p></div>
-                                <div class="compare-card"><h4>Identity</h4><p><code>is  is not</code></p></div>
+                                <div class="compare-card">
+                                    <h4>Arithmetic</h4>
+                                    <p><code>+  -  *  /  //  %  **</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Comparison</h4>
+                                    <p><code>==  !=  &gt;  &lt;  &gt;=  &lt;=</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Logical</h4>
+                                    <p><code>and  or  not</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Assignment</h4>
+                                    <p><code>=  +=  -=  *=  /=  //=  %=  **=</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Membership</h4>
+                                    <p><code>in  not in</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Identity</h4>
+                                    <p><code>is  is not</code></p>
+                                </div>
                             </div>
                         </div>
                         <div class="ur">
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>Arithmetic</h4><p><code>+  -  *  /  //  %  **</code></p></div>
-                                <div class="compare-card"><h4>Comparison</h4><p><code>==  !=  &gt;  &lt;  &gt;=  &lt;=</code></p></div>
-                                <div class="compare-card"><h4>Logical</h4><p><code>and  or  not</code></p></div>
-                                <div class="compare-card"><h4>Assignment</h4><p><code>=  +=  -=  *=  /=  //=  %=  **=</code></p></div>
-                                <div class="compare-card"><h4>Membership</h4><p><code>in  not in</code></p></div>
-                                <div class="compare-card"><h4>Identity</h4><p><code>is  is not</code></p></div>
+                                <div class="compare-card">
+                                    <h4>Arithmetic</h4>
+                                    <p><code>+  -  *  /  //  %  **</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Comparison</h4>
+                                    <p><code>==  !=  &gt;  &lt;  &gt;=  &lt;=</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Logical</h4>
+                                    <p><code>and  or  not</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Assignment</h4>
+                                    <p><code>=  +=  -=  *=  /=  //=  %=  **=</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Membership</h4>
+                                    <p><code>in  not in</code></p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Identity</h4>
+                                    <p><code>is  is not</code></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1074,12 +1032,6 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
         <section id="q8">
             <div class="chapter-header" data-num="08"><div class="chapter-num">Question 8</div><h1>Functions</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay8">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔧</span> What is a Function?</h2>
                     <div class="bilingual">
@@ -1166,12 +1118,6 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
         <section id="q9">
             <div class="chapter-header" data-num="09"><div class="chapter-num">Question 9</div><h1>*args and **kwargs</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay9">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">📦</span> *args and **kwargs</h2>
                     <div class="bilingual">
@@ -1222,12 +1168,6 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
         <section id="q10">
             <div class="chapter-header" data-num="10"><div class="chapter-num">Question 10</div><h1>Scope</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay10">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🎯</span> What is Scope?</h2>
                     <div class="bilingual">
@@ -1312,12 +1252,6 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
         <section id="q11">
             <div class="chapter-header" data-num="11"><div class="chapter-num">Question 11</div><h1>Recursion</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay11">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔄</span> What is Recursion?</h2>
                     <div class="bilingual">
@@ -1356,12 +1290,6 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
         <section id="q12">
             <div class="chapter-header" data-num="12"><div class="chapter-num">Question 12</div><h1>Exception Handling</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay12">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">⚠️</span> Exception Handling</h2>
                     <div class="bilingual">
@@ -1383,6 +1311,10 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
     <span class="code-fn">print</span>(<span class="code-str">"Success:"</span>, result)
 <span class="code-kw">finally</span>:
     <span class="code-fn">print</span>(<span class="code-str">"This always runs."</span>)</code></div>
+                            <div class="callout callout-success">
+                                <span class="callout-icon">💡</span>
+                                <div class="callout-text"><strong>Remember:</strong> try = risky code · except = handle error · finally = always runs · raise = generate error yourself</div>
+                            </div>
                         </div>
                         <div class="ur">
                             <p>ایک mechanism جو runtime errors کی وجہ سے program کو crash ہونے سے بچاتی ہے۔</p>
@@ -1402,6 +1334,10 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
     <span class="code-fn">print</span>(<span class="code-str">"کامیاب:"</span>, result)
 <span class="code-kw">finally</span>:
     <span class="code-fn">print</span>(<span class="code-str">"یہ ہمیشہ چلے گا"</span>)</code></div>
+                            <div class="callout callout-success">
+                                <span class="callout-icon">💡</span>
+                                <div class="callout-text"><strong>یاد رکھیں:</strong> try = خطرناک کوڈ · except = error handle · finally = ہمیشہ چلے · raise = خود error بنائیں</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1412,12 +1348,6 @@ c = <span class="code-fn">float</span>(a)  <span class="code-cmt"># 10.0 → flo
         <section id="q13">
             <div class="chapter-header" data-num="13"><div class="chapter-num">Question 13</div><h1>== vs is</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay13">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔍</span> == vs is</h2>
                     <div class="bilingual">
@@ -1438,6 +1368,10 @@ b = [<span class="code-num">1</span>,<span class="code-num">2</span>]
 <span class="code-fn">print</span>(a is b)  <span class="code-cmt"># False</span></code></div>
                                 </div>
                             </div>
+                            <div class="callout callout-info">
+                                <span class="callout-icon">🎯</span>
+                                <div class="callout-text"><strong>Interview Tip:</strong> <code>is</code> checks <strong>identity</strong>, <code>==</code> checks <strong>equality</strong>. Use <code>is</code> for <code>None</code>, <code>True</code>, <code>False</code>.</div>
+                            </div>
                         </div>
                         <div class="ur">
                             <div class="compare-grid">
@@ -1456,6 +1390,10 @@ b = [<span class="code-num">1</span>,<span class="code-num">2</span>]
 <span class="code-fn">print</span>(a is b)  <span class="code-cmt"># False</span></code></div>
                                 </div>
                             </div>
+                            <div class="callout callout-info">
+                                <span class="callout-icon">🎯</span>
+                                <div class="callout-text"><strong>انٹرویو ٹپ:</strong> <code>is</code> <strong>identity</strong> چیک کرتا ہے، <code>==</code> <strong>equality</strong> چیک کرتا ہے۔ <code>None</code>, <code>True</code>, <code>False</code> کے لیے <code>is</code> استعمال کریں۔</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1466,12 +1404,6 @@ b = [<span class="code-num">1</span>,<span class="code-num">2</span>]
         <section id="q14">
             <div class="chapter-header" data-num="14"><div class="chapter-num">Question 14</div><h1>Deep Copy vs Shallow Copy</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay14">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">📋</span> Deep Copy vs Shallow Copy</h2>
                     <div class="bilingual">
@@ -1528,12 +1460,6 @@ original[<span class="code-num">0</span>][<span class="code-num">0</span>] = <sp
         <section id="q15">
             <div class="chapter-header" data-num="15"><div class="chapter-num">Question 15</div><h1>Iterable vs Iterator</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay15">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔁</span> Iterable vs Iterator</h2>
                     <div class="bilingual">
@@ -1586,12 +1512,6 @@ it = <span class="code-fn">iter</span>(nums)
         <section id="q16">
             <div class="chapter-header" data-num="16"><div class="chapter-num">Question 16</div><h1>Generators</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay16">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">⚡</span> Generators</h2>
                     <div class="bilingual">
@@ -1611,8 +1531,14 @@ g = <span class="code-fn">gen</span>()
 <span class="code-fn">print</span>(<span class="code-fn">next</span>(g))  <span class="code-cmt"># 30</span></code></div>
                             <h3>yield vs return</h3>
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>return</h4><p>Terminates the function completely.</p></div>
-                                <div class="compare-card"><h4>yield</h4><p>Pauses the function and resumes on the next call.</p></div>
+                                <div class="compare-card">
+                                    <h4>return</h4>
+                                    <p>Terminates the function completely.</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>yield</h4>
+                                    <p>Pauses the function and resumes on the next call.</p>
+                                </div>
                             </div>
                             <h3>When to Use Generators?</h3>
                             <ul>
@@ -1621,6 +1547,10 @@ g = <span class="code-fn">gen</span>()
                                 <li>Memory optimization</li>
                                 <li>Streaming data</li>
                             </ul>
+                            <div class="callout callout-warn">
+                                <span class="callout-icon">⚠️</span>
+                                <div class="callout-text"><strong>Important:</strong> Generators are <strong>one-time iterators</strong>. Once all values are consumed, they are exhausted and cannot be reused.</div>
+                            </div>
                         </div>
                         <div class="ur">
                             <p><strong>Generator</strong> ایک خاص function ہے جو <strong>yield</strong> keyword استعمال کرتا ہے اور values کو <strong>one by one</strong> generate کرتا ہے۔</p>
@@ -1638,8 +1568,14 @@ g = <span class="code-fn">gen</span>()
 <span class="code-fn">print</span>(<span class="code-fn">next</span>(g))  <span class="code-cmt"># 30</span></code></div>
                             <h3>yield بمقابلہ return</h3>
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>return</h4><p>Function کو مکمل طور پر ختم کر دیتا ہے۔</p></div>
-                                <div class="compare-card"><h4>yield</h4><p>Function کو pause کرتا ہے اور اگلی call پر وہیں سے جاری رکھتا ہے۔</p></div>
+                                <div class="compare-card">
+                                    <h4>return</h4>
+                                    <p>Function کو مکمل طور پر ختم کر دیتا ہے۔</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>yield</h4>
+                                    <p>Function کو pause کرتا ہے اور اگلی call پر وہیں سے جاری رکھتا ہے۔</p>
+                                </div>
                             </div>
                             <h3>Generator کب استعمال کریں؟</h3>
                             <ul>
@@ -1648,6 +1584,10 @@ g = <span class="code-fn">gen</span>()
                                 <li>Memory optimization کے لیے</li>
                                 <li>Streaming data کے لیے</li>
                             </ul>
+                            <div class="callout callout-warn">
+                                <span class="callout-icon">⚠️</span>
+                                <div class="callout-text"><strong>اہم بات:</strong> Generator <strong>one-time iterator</strong> ہے۔ جب تمام values consume ہو جائیں تو یہ ختم ہو جاتا ہے اور دوبارہ استعمال نہیں ہو سکتا۔</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1658,12 +1598,6 @@ g = <span class="code-fn">gen</span>()
         <section id="q17">
             <div class="chapter-header" data-num="17"><div class="chapter-num">Question 17</div><h1>Decorators</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay17">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🎀</span> Decorators</h2>
                     <div class="bilingual">
@@ -1678,7 +1612,10 @@ g = <span class="code-fn">gen</span>()
 <span class="code-fn">@my_decorator</span>
 <span class="code-kw">def</span> <span class="code-fn">say_hello</span>():
     <span class="code-fn">print</span>(<span class="code-str">"Hello!"</span>)
-<span class="code-fn">say_hello</span>()</code></div>
+<span class="code-fn">say_hello</span>()
+<span class="code-cmt"># Start</span>
+<span class="code-cmt"># Hello!</span>
+<span class="code-cmt"># End</span></code></div>
                             <h3>Common Uses:</h3>
                             <ul>
                                 <li>Logging</li>
@@ -1700,7 +1637,10 @@ g = <span class="code-fn">gen</span>()
 <span class="code-fn">@my_decorator</span>
 <span class="code-kw">def</span> <span class="code-fn">say_hello</span>():
     <span class="code-fn">print</span>(<span class="code-str">"ہیلو!"</span>)
-<span class="code-fn">say_hello</span>()</code></div>
+<span class="code-fn">say_hello</span>()
+<span class="code-cmt"># شروع</span>
+<span class="code-cmt"># ہیلو!</span>
+<span class="code-cmt"># اختتام</span></code></div>
                             <h3>عام استعمالات:</h3>
                             <ul>
                                 <li>Logging</li>
@@ -1720,12 +1660,6 @@ g = <span class="code-fn">gen</span>()
         <section id="q18">
             <div class="chapter-header" data-num="18"><div class="chapter-num">Question 18</div><h1>What is OOP?</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay18">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🏗️</span> Object-Oriented Programming</h2>
                     <div class="bilingual">
@@ -1733,20 +1667,44 @@ g = <span class="code-fn">gen</span>()
                             <p><strong>OOP</strong> is a programming paradigm where we represent <strong>real-world entities</strong> as <strong>Classes</strong> and <strong>Objects</strong>.</p>
                             <h3>Four Pillars of OOP:</h3>
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>🔒 Encapsulation</h4><p>Bundle data and methods inside a class</p></div>
-                                <div class="compare-card"><h4>🧬 Inheritance</h4><p>Child inherits properties from parent</p></div>
-                                <div class="compare-card"><h4>🔄 Polymorphism</h4><p>Same method, different behavior</p></div>
-                                <div class="compare-card"><h4>🎯 Abstraction</h4><p>Show essentials, hide details</p></div>
+                                <div class="compare-card">
+                                    <h4>🔒 Encapsulation</h4>
+                                    <p>Bundle data and methods inside a class</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🧬 Inheritance</h4>
+                                    <p>Child inherits properties from parent</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🔄 Polymorphism</h4>
+                                    <p>Same method, different behavior</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🎯 Abstraction</h4>
+                                    <p>Show essentials, hide details</p>
+                                </div>
                             </div>
                         </div>
                         <div class="ur">
                             <p><strong>OOP</strong> ایک programming paradigm ہے جس میں ہم <strong>حقیقی دنیا کی اشیاء</strong> کو <strong>Classes</strong> اور <strong>Objects</strong> کی شکل میں پیش کرتے ہیں۔</p>
                             <h3>OOP کے چار ستون:</h3>
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>🔒 Encapsulation</h4><p>Data اور methods کو class کے اندر bundle کرنا</p></div>
-                                <div class="compare-card"><h4>🧬 Inheritance</h4><p>Child class parent class سے properties inherit کرے</p></div>
-                                <div class="compare-card"><h4>🔄 Polymorphism</h4><p>ایک ہی method مختلف objects کے لیے مختلف رویہ</p></div>
-                                <div class="compare-card"><h4>🎯 Abstraction</h4><p>صرف ضروری چیزیں دکھانا، تفصیلات چھپانا</p></div>
+                                <div class="compare-card">
+                                    <h4>🔒 Encapsulation</h4>
+                                    <p>Data اور methods کو class کے اندر bundle کرنا</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🧬 Inheritance</h4>
+                                    <p>Child class parent class سے properties inherit کرے</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🔄 Polymorphism</h4>
+                                    <p>ایک ہی method مختلف objects کے لیے مختلف رویہ</p>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🎯 Abstraction</h4>
+                                    <p>صرف ضروری چیزیں دکھانا، تفصیلات چھپانا</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1758,25 +1716,47 @@ g = <span class="code-fn">gen</span>()
         <section id="q19">
             <div class="chapter-header" data-num="19"><div class="chapter-num">Question 19</div><h1>Class vs Object</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay19">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🏛️</span> Class vs Object</h2>
                     <div class="bilingual">
                         <div class="en">
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>🏗️ Class</h4><p>A <strong>blueprint</strong> based on which objects are created.</p><div class="code-block"><code><span class="code-kw">class</span> Car: <span class="code-kw">pass</span></code></div></div>
-                                <div class="compare-card"><h4>🚗 Object</h4><p>A <strong>real instance</strong> of a class created in memory.</p><div class="code-block"><code>c1 = Car(); c2 = Car()</code></div></div>
+                                <div class="compare-card">
+                                    <h4>🏗️ Class</h4>
+                                    <p>A <strong>blueprint</strong> based on which objects are created.</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Car:
+    <span class="code-kw">pass</span></code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🚗 Object</h4>
+                                    <p>A <strong>real instance</strong> of a class created in memory.</p>
+                                    <div class="code-block"><code>c1 = Car()
+c2 = Car()</code></div>
+                                </div>
+                            </div>
+                            <div class="callout callout-info">
+                                <span class="callout-icon">💡</span>
+                                <div class="callout-text"><strong>Instance vs Object:</strong> Practically both terms are used interchangeably. Every object is an <strong>instance</strong> of a class.</div>
                             </div>
                         </div>
                         <div class="ur">
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>🏗️ Class</h4><p><strong>Blueprint</strong> (نقشہ) جس کی بنیاد پر objects بنائے جاتے ہیں۔</p><div class="code-block"><code><span class="code-kw">class</span> Car: <span class="code-kw">pass</span></code></div></div>
-                                <div class="compare-card"><h4>🚗 Object</h4><p>Class کا <strong>حقیقی instance</strong> جو memory میں create ہوتا ہے۔</p><div class="code-block"><code>c1 = Car(); c2 = Car()</code></div></div>
+                                <div class="compare-card">
+                                    <h4>🏗️ Class</h4>
+                                    <p><strong>Blueprint</strong> (نقشہ) جس کی بنیاد پر objects بنائے جاتے ہیں۔</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Car:
+    <span class="code-kw">pass</span></code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>🚗 Object</h4>
+                                    <p>Class کا <strong>حقیقی instance</strong> جو memory میں create ہوتا ہے۔</p>
+                                    <div class="code-block"><code>c1 = Car()
+c2 = Car()</code></div>
+                                </div>
+                            </div>
+                            <div class="callout callout-info">
+                                <span class="callout-icon">💡</span>
+                                <div class="callout-text"><strong>Instance بمقابلہ Object:</strong> عملی طور پر دونوں اصطلاحات ایک ہی معنی میں استعمال ہوتی ہیں۔ ہر object class کا <strong>instance</strong> ہوتا ہے۔</div>
                             </div>
                         </div>
                     </div>
@@ -1788,12 +1768,6 @@ g = <span class="code-fn">gen</span>()
         <section id="q20">
             <div class="chapter-header" data-num="20"><div class="chapter-num">Question 20</div><h1>Constructor</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay20">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔧</span> Constructor __init__</h2>
                     <div class="bilingual">
@@ -1832,16 +1806,11 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q21">
             <div class="chapter-header" data-num="21"><div class="chapter-num">Question 21</div><h1>Access Modifiers</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay21">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔐</span> Access Modifiers</h2>
                     <div class="bilingual">
                         <div class="en">
+                            <p>Control who can access class data and methods.</p>
                             <table class="styled-table">
                                 <tr><th>Modifier</th><th>Syntax</th><th>Accessibility</th></tr>
                                 <tr><td>Public</td><td><code>self.name</code></td><td>From anywhere</td></tr>
@@ -1859,6 +1828,7 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
 <span class="code-fn">print</span>(s.__pin)     <span class="code-cmt"># ❌ AttributeError</span></code></div>
                         </div>
                         <div class="ur">
+                            <p>کنٹرول کرتے ہیں کہ class کے data اور methods کو <strong>کون access</strong> کر سکتا ہے۔</p>
                             <table class="styled-table">
                                 <tr><th>Modifier</th><th>Syntax</th><th>Accessibility</th></tr>
                                 <tr><td>Public</td><td><code>self.name</code></td><td>ہر جگہ سے</td></tr>
@@ -1884,33 +1854,67 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q22">
             <div class="chapter-header" data-num="22"><div class="chapter-num">Question 22</div><h1>Inheritance</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay22">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🧬</span> Inheritance</h2>
                     <div class="bilingual">
                         <div class="en">
                             <p>Child class <strong>inherits</strong> methods and properties from the parent class.</p>
-                            <h3>Types:</h3>
+                            <h3>Types of Inheritance:</h3>
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>Single</h4><p>One child, one parent</p><div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div></div>
-                                <div class="compare-card"><h4>Multiple</h4><p>One child, multiple parents</p><div class="code-block"><code><span class="code-kw">class</span> Child(P1, P2):</code></div></div>
-                                <div class="compare-card"><h4>Multilevel</h4><p>Grandparent → Parent → Child</p><div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div></div>
-                                <div class="compare-card"><h4>Hierarchical</h4><p>Multiple children, one parent</p><div class="code-block"><code><span class="code-kw">class</span> C1(P): <span class="code-kw">class</span> C2(P):</code></div></div>
+                                <div class="compare-card">
+                                    <h4>Single</h4>
+                                    <p>One child, one parent</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Multiple</h4>
+                                    <p>One child, multiple parents</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Child(P1, P2):</code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Multilevel</h4>
+                                    <p>Grandparent → Parent → Child</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Hierarchical</h4>
+                                    <p>Multiple children, one parent</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> C1(P): <span class="code-kw">class</span> C2(P):</code></div>
+                                </div>
+                            </div>
+                            <div class="callout callout-warn">
+                                <span class="callout-icon">💎</span>
+                                <div class="callout-text"><strong>Diamond Problem:</strong> In multiple inheritance, when a class inherits from two classes that both inherit from a common parent, ambiguity arises. Python uses <strong>MRO</strong> (Method Resolution Order) to resolve it.</div>
                             </div>
                         </div>
                         <div class="ur">
                             <p>Child class parent class کے <strong>methods اور properties</strong> کو inherit کرتی ہے۔</p>
-                            <h3>اقسام:</h3>
+                            <h3>Inheritance کی اقسام:</h3>
                             <div class="compare-grid">
-                                <div class="compare-card"><h4>Single</h4><p>ایک child، ایک parent</p><div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div></div>
-                                <div class="compare-card"><h4>Multiple</h4><p>ایک child، متعدد parents</p><div class="code-block"><code><span class="code-kw">class</span> Child(P1, P2):</code></div></div>
-                                <div class="compare-card"><h4>Multilevel</h4><p>Grandparent → Parent → Child</p><div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div></div>
-                                <div class="compare-card"><h4>Hierarchical</h4><p>متعدد children، ایک parent</p><div class="code-block"><code><span class="code-kw">class</span> C1(P): <span class="code-kw">class</span> C2(P):</code></div></div>
+                                <div class="compare-card">
+                                    <h4>Single</h4>
+                                    <p>ایک child، ایک parent</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Multiple</h4>
+                                    <p>ایک child، متعدد parents</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Child(P1, P2):</code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Multilevel</h4>
+                                    <p>Grandparent → Parent → Child</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Child(Parent):</code></div>
+                                </div>
+                                <div class="compare-card">
+                                    <h4>Hierarchical</h4>
+                                    <p>متعدد children، ایک parent</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> C1(P): <span class="code-kw">class</span> C2(P):</code></div>
+                                </div>
+                            </div>
+                            <div class="callout callout-warn">
+                                <span class="callout-icon">💎</span>
+                                <div class="callout-text"><strong>Diamond Problem:</strong> Multiple inheritance میں جب ایک class دو ایسی classes سے inherit کرے جو دونوں ایک common parent class کو inherit کرتی ہوں، تو ambiguity پیدا ہوتی ہے۔ Python اسے حل کرنے کے لیے <strong>MRO</strong> (Method Resolution Order) استعمال کرتا ہے۔</div>
                             </div>
                         </div>
                     </div>
@@ -1922,27 +1926,22 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q23">
             <div class="chapter-header" data-num="23"><div class="chapter-num">Question 23</div><h1>Polymorphism</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay23">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔄</span> Polymorphism</h2>
                     <div class="bilingual">
                         <div class="en">
                             <p>Same method provides <strong>different behavior</strong> for <strong>different objects</strong>.</p>
+                            <h3>Types:</h3>
                             <div class="compare-grid">
                                 <div class="compare-card">
                                     <h4>Method Overloading</h4>
-                                    <p>Same method with different parameters. Can be achieved with <code>*args</code> or defaults.</p>
+                                    <p>Same method with different parameters in the same class. Python doesn't support it directly but can be achieved with <code>*args</code> or <code>**kwargs</code>.</p>
                                     <div class="code-block"><code><span class="code-kw">def</span> <span class="code-fn">add</span>(a, b=0, c=0):
     <span class="code-kw">return</span> a + b + c</code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>Method Overriding</h4>
-                                    <p>Child class redefines parent's method with the same name.</p>
+                                    <p>Child class redefines the parent's method with the same name and implements its own behavior.</p>
                                     <div class="code-block"><code><span class="code-kw">class</span> Dog(Animal):
     <span class="code-kw">def</span> <span class="code-fn">speak</span>(self):
         <span class="code-kw">return</span> <span class="code-str">"Woof!"</span></code></div>
@@ -1951,16 +1950,17 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                         </div>
                         <div class="ur">
                             <p>ایک ہی method <strong>مختلف objects</strong> کے لیے <strong>مختلف رویہ</strong> فراہم کرتا ہے۔</p>
+                            <h3>اقسام:</h3>
                             <div class="compare-grid">
                                 <div class="compare-card">
                                     <h4>Method Overloading</h4>
-                                    <p>ایک ہی method مختلف parameters کے ساتھ۔ <code>*args</code> یا defaults سے حاصل کیا جا سکتا ہے۔</p>
+                                    <p>ایک ہی class میں ایک ہی method مختلف parameters کے ساتھ۔ Python براہ راست support نہیں کرتی، لیکن <code>*args</code> یا <code>**kwargs</code> سے حاصل کیا جا سکتا ہے۔</p>
                                     <div class="code-block"><code><span class="code-kw">def</span> <span class="code-fn">add</span>(a, b=0, c=0):
     <span class="code-kw">return</span> a + b + c</code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>Method Overriding</h4>
-                                    <p>Child class parent class کے method کو <strong>اسی نام</strong> سے دوبارہ define کرتی ہے۔</p>
+                                    <p>Child class parent class کے method کو <strong>اسی نام</strong> سے دوبارہ define کرتی ہے اور اپنا رویہ implement کرتی ہے۔</p>
                                     <div class="code-block"><code><span class="code-kw">class</span> Dog(Animal):
     <span class="code-kw">def</span> <span class="code-fn">speak</span>(self):
         <span class="code-kw">return</span> <span class="code-str">"Woof!"</span></code></div>
@@ -1976,30 +1976,26 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q24">
             <div class="chapter-header" data-num="24"><div class="chapter-num">Question 24</div><h1>Encapsulation</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay24">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔒</span> Encapsulation</h2>
                     <div class="bilingual">
                         <div class="en">
-                            <p>Data and methods are <strong>bundled</strong> inside a class and data is <strong>protected</strong> from direct access.</p>
+                            <p>Data (variables) and methods (functions) are <strong>bundled</strong> inside a class and data is <strong>protected</strong> from direct access.</p>
                             <h3>Getter &amp; Setter</h3>
                             <ul>
-                                <li><strong>Getter:</strong> Reads private variable value</li>
-                                <li><strong>Setter:</strong> Updates private variable value</li>
+                                <li><strong>Getter:</strong> Reads the value of a private variable</li>
+                                <li><strong>Setter:</strong> Updates the value of a private variable</li>
                             </ul>
                             <div class="code-block"><code><span class="code-kw">class</span> Student:
     <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name):
-        self.__name = name
-    <span class="code-kw">def</span> <span class="code-fn">get_name</span>(self): <span class="code-kw">return</span> self.__name
-    <span class="code-kw">def</span> <span class="code-fn">set_name</span>(self, name): self.__name = name</code></div>
+        self.__name = name  <span class="code-cmt"># Private</span>
+    <span class="code-kw">def</span> <span class="code-fn">get_name</span>(self):    <span class="code-cmt"># Getter</span>
+        <span class="code-kw">return</span> self.__name
+    <span class="code-kw">def</span> <span class="code-fn">set_name</span>(self, name):  <span class="code-cmt"># Setter</span>
+        self.__name = name</code></div>
                         </div>
                         <div class="ur">
-                            <p>Data اور methods کو <strong>class کے اندر bundle</strong> کیا جاتا ہے اور data کو <strong>direct access سے protect</strong> کیا جاتا ہے۔</p>
+                            <p>Data (variables) اور methods (functions) کو <strong>class کے اندر bundle</strong> کیا جاتا ہے اور data کو <strong>direct access سے protect</strong> کیا جاتا ہے۔</p>
                             <h3>Getter اور Setter</h3>
                             <ul>
                                 <li><strong>Getter:</strong> Private variable کی value <strong>پڑھنے</strong> کے لیے</li>
@@ -2007,9 +2003,11 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                             </ul>
                             <div class="code-block"><code><span class="code-kw">class</span> Student:
     <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name):
-        self.__name = name
-    <span class="code-kw">def</span> <span class="code-fn">get_name</span>(self): <span class="code-kw">return</span> self.__name
-    <span class="code-kw">def</span> <span class="code-fn">set_name</span>(self, name): self.__name = name</code></div>
+        self.__name = name  <span class="code-cmt"># Private</span>
+    <span class="code-kw">def</span> <span class="code-fn">get_name</span>(self):    <span class="code-cmt"># Getter</span>
+        <span class="code-kw">return</span> self.__name
+    <span class="code-kw">def</span> <span class="code-fn">set_name</span>(self, name):  <span class="code-cmt"># Setter</span>
+        self.__name = name</code></div>
                         </div>
                     </div>
                 </div>
@@ -2020,12 +2018,6 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q25">
             <div class="chapter-header" data-num="25"><div class="chapter-num">Question 25</div><h1>Abstraction</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay25">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🎯</span> Abstraction</h2>
                     <div class="bilingual">
@@ -2034,20 +2026,26 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                             <div class="code-block"><code><span class="code-kw">from</span> abc <span class="code-kw">import</span> ABC, abstractmethod
 <span class="code-kw">class</span> Shape(ABC):
     <span class="code-fn">@abstractmethod</span>
-    <span class="code-kw">def</span> <span class="code-fn">area</span>(self): <span class="code-kw">pass</span>
+    <span class="code-kw">def</span> <span class="code-fn">area</span>(self):
+        <span class="code-kw">pass</span>
 <span class="code-kw">class</span> Circle(Shape):
-    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, r): self.r = r
-    <span class="code-kw">def</span> <span class="code-fn">area</span>(self): <span class="code-kw">return</span> <span class="code-num">3.14</span> * self.r ** <span class="code-num">2</span></code></div>
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, r):
+        self.r = r
+    <span class="code-kw">def</span> <span class="code-fn">area</span>(self):
+        <span class="code-kw">return</span> <span class="code-num">3.14</span> * self.r ** <span class="code-num">2</span></code></div>
                         </div>
                         <div class="ur">
                             <p><strong>صرف ضروری چیزیں دکھانا</strong> اور <strong>implementation details چھپانا</strong> abstraction کہلاتا ہے۔</p>
                             <div class="code-block"><code><span class="code-kw">from</span> abc <span class="code-kw">import</span> ABC, abstractmethod
 <span class="code-kw">class</span> Shape(ABC):
     <span class="code-fn">@abstractmethod</span>
-    <span class="code-kw">def</span> <span class="code-fn">area</span>(self): <span class="code-kw">pass</span>
+    <span class="code-kw">def</span> <span class="code-fn">area</span>(self):
+        <span class="code-kw">pass</span>
 <span class="code-kw">class</span> Circle(Shape):
-    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, r): self.r = r
-    <span class="code-kw">def</span> <span class="code-fn">area</span>(self): <span class="code-kw">return</span> <span class="code-num">3.14</span> * self.r ** <span class="code-num">2</span></code></div>
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, r):
+        self.r = r
+    <span class="code-kw">def</span> <span class="code-fn">area</span>(self):
+        <span class="code-kw">return</span> <span class="code-num">3.14</span> * self.r ** <span class="code-num">2</span></code></div>
                         </div>
                     </div>
                 </div>
@@ -2058,25 +2056,20 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q26">
             <div class="chapter-header" data-num="26"><div class="chapter-num">Question 26</div><h1>super() &amp; MRO</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay26">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔗</span> super() and MRO</h2>
                     <div class="bilingual">
                         <div class="en">
                             <p><strong>super()</strong> is used to call parent class methods or constructors from a child class.</p>
                             <div class="code-block"><code><span class="code-kw">class</span> Parent:
-    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name): self.name = name
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name):
+        self.name = name
 <span class="code-kw">class</span> Child(Parent):
     <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name, age):
-        <span class="code-fn">super</span>().__init__(name)
+        <span class="code-fn">super</span>().__init__(name)  <span class="code-cmt"># Parent constructor call</span>
         self.age = age</code></div>
                             <h3>MRO (Method Resolution Order)</h3>
-                            <p>Defines which class's method Python calls first.</p>
+                            <p>Defines which class's method Python will call first when the same method exists in multiple classes.</p>
                             <div class="code-block"><code><span class="code-kw">class</span> A: <span class="code-kw">def</span> <span class="code-fn">show</span>(self): <span class="code-fn">print</span>(<span class="code-str">"A"</span>)
 <span class="code-kw">class</span> B(A): <span class="code-kw">def</span> <span class="code-fn">show</span>(self): <span class="code-fn">print</span>(<span class="code-str">"B"</span>)
 <span class="code-kw">class</span> C(A): <span class="code-kw">def</span> <span class="code-fn">show</span>(self): <span class="code-fn">print</span>(<span class="code-str">"C"</span>)
@@ -2086,13 +2079,14 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                         <div class="ur">
                             <p><strong>super()</strong> parent class کے methods یا constructor کو child class سے call کرنے کے لیے استعمال ہوتا ہے۔</p>
                             <div class="code-block"><code><span class="code-kw">class</span> Parent:
-    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name): self.name = name
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name):
+        self.name = name
 <span class="code-kw">class</span> Child(Parent):
     <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name, age):
-        <span class="code-fn">super</span>().__init__(name)
+        <span class="code-fn">super</span>().__init__(name)  <span class="code-cmt"># Parent constructor call</span>
         self.age = age</code></div>
                             <h3>MRO (Method Resolution Order)</h3>
-                            <p>تعریف کرتا ہے کہ Python پہلے <strong>کسی class</strong> کا method call کرے گا۔</p>
+                            <p>تعریف کرتا ہے کہ Python پہلے <strong>کسی class</strong> کا method call کرے گا جب ایک سے زیادہ classes میں ایک ہی method موجود ہو۔</p>
                             <div class="code-block"><code><span class="code-kw">class</span> A: <span class="code-kw">def</span> <span class="code-fn">show</span>(self): <span class="code-fn">print</span>(<span class="code-str">"A"</span>)
 <span class="code-kw">class</span> B(A): <span class="code-kw">def</span> <span class="code-fn">show</span>(self): <span class="code-fn">print</span>(<span class="code-str">"B"</span>)
 <span class="code-kw">class</span> C(A): <span class="code-kw">def</span> <span class="code-fn">show</span>(self): <span class="code-fn">print</span>(<span class="code-str">"C"</span>)
@@ -2108,12 +2102,6 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q27">
             <div class="chapter-header" data-num="27"><div class="chapter-num">Question 27</div><h1>Association vs Aggregation</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay27">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔗</span> Association vs Aggregation vs Composition</h2>
                     <div class="bilingual">
@@ -2121,15 +2109,34 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                             <div class="compare-grid">
                                 <div class="compare-card">
                                     <h4>🔹 Association</h4>
-                                    <p>Objects are <strong>related</strong>. Both can <strong>exist independently</strong>.</p>
+                                    <p>When one class object is <strong>related</strong> to another class object. Both can <strong>exist independently</strong>.</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Teacher:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name):
+        self.name = name
+<span class="code-kw">class</span> Student:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name, teacher):
+        self.name = name
+        self.teacher = teacher</code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>🔸 Aggregation (Weak HAS-A)</h4>
-                                    <p>One class holds another. Child can <strong>exist without</strong> parent.</p>
+                                    <p>One class holds another class object. The child object can <strong>exist without</strong> the parent.</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Engine:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, type):
+        self.type = type
+<span class="code-kw">class</span> Car:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, engine):
+        self.engine = engine</code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>🔹 Composition (Strong HAS-A)</h4>
-                                    <p>Child <strong>cannot exist</strong> without parent. Parent destroyed → child destroyed.</p>
+                                    <p>The child object <strong>cannot exist</strong> without the parent. If the parent is destroyed, the child is also destroyed.</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Engine:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+        self.type = <span class="code-str">"V8"</span>
+<span class="code-kw">class</span> Car:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+        self.engine = Engine()</code></div>
                                 </div>
                             </div>
                         </div>
@@ -2137,15 +2144,34 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                             <div class="compare-grid">
                                 <div class="compare-card">
                                     <h4>🔹 Association</h4>
-                                    <p>Objects <strong>related</strong> ہیں۔ دونوں <strong>آزادانہ طور پر</strong> exist کر سکتے ہیں۔</p>
+                                    <p>جب ایک class کا object دوسری class کے object سے <strong>related</strong> ہو۔ دونوں <strong>آزادانہ طور پر</strong> exist کر سکتے ہیں۔</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Teacher:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name):
+        self.name = name
+<span class="code-kw">class</span> Student:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name, teacher):
+        self.name = name
+        self.teacher = teacher</code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>🔸 Aggregation (کمزور HAS-A)</h4>
-                                    <p>ایک class دوسری کا object رکھتی ہے۔ Child <strong>parent کے بغیر</strong> exist کر سکتا ہے۔</p>
+                                    <p>ایک class دوسری class کا object رکھتی ہے۔ Child object <strong>parent کے بغیر بھی</strong> exist کر سکتا ہے۔</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Engine:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, type):
+        self.type = type
+<span class="code-kw">class</span> Car:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, engine):
+        self.engine = engine</code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>🔹 Composition (مضبوط HAS-A)</h4>
-                                    <p>Child <strong>parent کے بغیر exist نہیں</strong> کر سکتا۔ parent ختم → child ختم۔</p>
+                                    <p>Child object <strong>parent کے بغیر exist نہیں</strong> کر سکتا۔ اگر parent ختم ہو جائے تو child بھی ختم ہو جاتا ہے۔</p>
+                                    <div class="code-block"><code><span class="code-kw">class</span> Engine:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+        self.type = <span class="code-str">"V8"</span>
+<span class="code-kw">class</span> Car:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+        self.engine = Engine()</code></div>
                                 </div>
                             </div>
                         </div>
@@ -2158,12 +2184,6 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
         <section id="q28">
             <div class="chapter-header" data-num="28"><div class="chapter-num">Question 28</div><h1>Middleware</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay28">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">🔌</span> Middleware</h2>
                     <div class="bilingual">
@@ -2204,14 +2224,8 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
 
         <!-- ══ Q29 ══ -->
         <section id="q29">
-            <div class="chapter-header" data-num="29"><div class="chapter-num">Question 29</div><h1>Sync vs Async</h1></div>
+            <div class="chapter-header" data-num="29"><div class="chapter-num">Question 29</div><h1>Synchronous vs Asynchronous</h1></div>
             <div class="content">
-                <div class="lang-toggle">
-                    <span class="lang-label">🌐 Language:</span>
-                    <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                    <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
-                    <span class="active-lang" id="langDisplay29">🇬🇧 English</span>
-                </div>
                 <div class="section">
                     <h2><span class="q-icon">⏱️</span> Synchronous vs Asynchronous</h2>
                     <div class="bilingual">
@@ -2219,13 +2233,13 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                             <div class="compare-grid">
                                 <div class="compare-card">
                                     <h4>🔹 Synchronous</h4>
-                                    <p>Code executes <strong>line by line</strong>. One task must complete before the next starts. Flow is <strong>sequential</strong>.</p>
+                                    <p>Code executes <strong>line by line</strong>. One task must complete before the next starts. Program flow is <strong>sequential</strong>.</p>
                                     <div class="code-block"><code><span class="code-fn">print</span>(<span class="code-str">"Task 1"</span>)
 <span class="code-fn">print</span>(<span class="code-str">"Task 2"</span>)  <span class="code-cmt"># Runs after Task 1</span></code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>🔸 Asynchronous</h4>
-                                    <p>When a task is <strong>waiting</strong>, the program can <strong>start another task</strong>. More <strong>efficient</strong>.</p>
+                                    <p>When a task is <strong>waiting</strong> (I/O operation), the program can <strong>start another task</strong>. The application becomes <strong>more efficient</strong>.</p>
                                     <div class="code-block"><code><span class="code-kw">import</span> asyncio
 <span class="code-kw">async</span> <span class="code-kw">def</span> <span class="code-fn">task</span>():
     <span class="code-kw">await</span> asyncio.sleep(<span class="code-num">1</span>)
@@ -2234,20 +2248,20 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                             </div>
                             <div class="callout callout-info">
                                 <span class="callout-icon">📌</span>
-                                <div class="callout-text"><strong>Note:</strong> Async tasks run <strong>concurrently</strong> via event loop, not in parallel (unless using threads/processes).</div>
+                                <div class="callout-text"><strong>Note:</strong> In async, tasks don't run in parallel (unless using threads/processes). They run <strong>concurrently</strong> via an event loop.</div>
                             </div>
                         </div>
                         <div class="ur">
                             <div class="compare-grid">
                                 <div class="compare-card">
                                     <h4>🔹 Synchronous</h4>
-                                    <p>کوڈ <strong>line by line</strong> execute ہوتا ہے۔ ایک task مکمل ہونے کے بعد ہی دوسرا شروع ہوتا ہے۔ Flow <strong>sequential</strong> ہے۔</p>
+                                    <p>کوڈ <strong>line by line</strong> execute ہوتا ہے۔ ایک task مکمل ہونے کے بعد ہی دوسرا task شروع ہوتا ہے۔ پروگرام کا flow <strong>sequential</strong> ہوتا ہے۔</p>
                                     <div class="code-block"><code><span class="code-fn">print</span>(<span class="code-str">"Task 1"</span>)
 <span class="code-fn">print</span>(<span class="code-str">"Task 2"</span>)  <span class="code-cmt"># Task 1 کے بعد چلے گا</span></code></div>
                                 </div>
                                 <div class="compare-card">
                                     <h4>🔸 Asynchronous</h4>
-                                    <p>جب ایک task <strong>wait</strong> میں ہو تو program <strong>دوسرا task</strong> شروع کر سکتا ہے۔ <strong>زیادہ موثر</strong>۔</p>
+                                    <p>جب ایک task <strong>wait</strong> (I/O operation) میں ہو تو program اس وقت <strong>دوسرا task</strong> شروع کر سکتا ہے۔ ایپلیکیشن <strong>زیادہ موثر</strong> ہوتی ہے۔</p>
                                     <div class="code-block"><code><span class="code-kw">import</span> asyncio
 <span class="code-kw">async</span> <span class="code-kw">def</span> <span class="code-fn">task</span>():
     <span class="code-kw">await</span> asyncio.sleep(<span class="code-num">1</span>)
@@ -2256,7 +2270,7 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
                             </div>
                             <div class="callout callout-info">
                                 <span class="callout-icon">📌</span>
-                                <div class="callout-text"><strong>نوٹ:</strong> Async tasks event loop کے ذریعے <strong>concurrently</strong> چلتے ہیں، parallel نہیں (جب تک threads/processes استعمال نہ کریں)۔</div>
+                                <div class="callout-text"><strong>نوٹ:</strong> Async میں tasks parallel نہیں چلتے (جب تک threads/processes استعمال نہ کریں)۔ یہ event loop کے ذریعے <strong>concurrently</strong> چلتے ہیں۔</div>
                             </div>
                         </div>
                     </div>
@@ -2283,60 +2297,31 @@ s = Student(<span class="code-str">"Nouman"</span>, <span class="code-num">25</s
 
     <script>
         // ── Language Toggle ──
-        document.addEventListener('DOMContentLoaded', function() {
-            const langButtons = document.querySelectorAll('.lang-btn');
-            const langDisplays = document.querySelectorAll('.active-lang');
+        const langRadios = document.querySelectorAll('input[name="lang"]');
+        const langDisplay = document.getElementById('langDisplay');
 
-            // Load saved preference
-            const savedLang = localStorage.getItem('interviewLang') || 'en';
+        // Load saved preference
+        const savedLang = localStorage.getItem('interviewLang') || 'en';
+        document.querySelector(`input[name="lang"][value="${savedLang}"]`).checked = true;
+        updateLanguage(savedLang);
 
-            // Set initial state
-            langButtons.forEach(btn => {
-                if (btn.dataset.lang === savedLang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+        langRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                const lang = this.value;
+                localStorage.setItem('interviewLang', lang);s
+                updateLanguage(lang);
             });
-
-            // Update all displays
-            updateAllDisplays(savedLang);
-
-            // Toggle on click
-            langButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const lang = this.dataset.lang;
-
-                    // Update button states
-                    langButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Save preference
-                    localStorage.setItem('interviewLang', lang);
-
-                    // Update all displays
-                    updateAllDisplays(lang);
-                });
-            });
-
-            function updateAllDisplays(lang) {
-                // Update body class
-                if (lang === 'ur') {
-                    document.body.classList.add('ur-mode');
-                } else {
-                    document.body.classList.remove('ur-mode');
-                }
-
-                // Update all active-lang displays
-                langDisplays.forEach(el => {
-                    if (lang === 'ur') {
-                        el.textContent = '🇵🇰 اردو';
-                    } else {
-                        el.textContent = '🇬🇧 English';
-                    }
-                });
-            }
         });
+
+        function updateLanguage(lang) {
+            if (lang === 'ur') {
+                document.body.classList.add('ur-mode');
+                langDisplay.textContent = 'اردو';
+            } else {
+                document.body.classList.remove('ur-mode');
+                langDisplay.textContent = 'English';
+            }
+        }
 
         // ── Sidebar Active ──
         const sections = document.querySelectorAll("section[id]");
