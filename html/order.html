@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📋 Order · Bill · Wages Dashboard</title>
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+    body {
+      background: #f4f7fc;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dashboard {
+      max-width: 1400px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      padding: 28px 30px 35px;
+      transition: all 0.2s;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #0b2b4a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    h1 i {
+      color: #2a7de1;
+      font-size: 30px;
+    }
+    .subhead {
+      color: #4a5b6e;
+      font-weight: 400;
+      font-size: 15px;
+      border-left: 4px solid #2a7de1;
+      padding-left: 16px;
+      margin-bottom: 28px;
+      background: #f0f5ff;
+      border-radius: 0 20px 20px 0;
+      line-height: 1.6;
+      padding: 10px 20px;
+      width: fit-content;
+    }
+    /* grid: left (orders+bills) + right (wages) */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 850px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    /* cards */
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 18px 20px 24px;
+      box-shadow: 0 6px 18px rgba(0, 20, 40, 0.04);
+      border: 1px solid #eef3f9;
+      transition: 0.1s;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px dashed #dce5ef;
+      padding-bottom: 14px;
+    }
+    .card-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a2e44;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-header h2 i {
+      color: #2a7de1;
+      width: 28px;
+    }
+    .badge {
+      background: #e6edf6;
+      padding: 5px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #1f3a5c;
+    }
+    /* order list */
+    .order-item {
+      background: #f9fbfe;
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 5px solid #2a7de1;
+      transition: 0.15s;
+    }
+    .order-item:hover {
+      background: #f2f8ff;
+      border-left-color: #0f5bb5;
+    }
+    .order-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .order-id {
+      font-weight: 600;
+      color: #0b2b4a;
+      font-size: 16px;
+    }
+    .order-meta {
+      font-size: 13px;
+      color: #4a637e;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .order-meta i {
+      margin-right: 4px;
+      color: #5f7d9c;
+      width: 16px;
+    }
+    .order-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      border: none;
+      background: white;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: 0.15s;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .btn-primary {
+      background: #1f5fae;
+      color: white;
+    }
+    .btn-primary i {
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #154a8a;
+      transform: scale(0.97);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #cbd9e9;
+      color: #1f3a5c;
+    }
+    .btn-outline:hover {
+      background: #e6effa;
+      border-color: #8dabcc;
+    }
+    .btn-success {
+      background: #1f8b4c;
+      color: white;
+    }
+    .btn-success:hover {
+      background: #15733d;
+    }
+    .btn-warning {
+      background: #d4a22b;
+      color: white;
+    }
+    .btn-warning:hover {
+      background: #b8891e;
+    }
+    .btn-danger {
+      background: #b13a3a;
+      color: white;
+    }
+    .btn-danger:hover {
+      background: #922c2c;
+    }
+    .btn-sm {
+      padding: 4px 12px;
+      font-size: 12px;
+    }
+    .bill-area {
+      margin-top: 18px;
+      background: #f2f7ff;
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .bill-label {
+      font-weight: 500;
+      color: #1f3a5c;
+    }
+    .bill-amount {
+      font-weight: 700;
+      font-size: 20px;
+      color: #0b2b4a;
+    }
+    .print-btn {
+      background: #1b3e66;
+      color: white;
+      border: none;
+      padding: 8px 22px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .print-btn:hover {
+      background: #0f2b47;
+      transform: scale(0.97);
+    }
+    /* wages table */
+    .wages-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .wages-table th {
+      text-align: left;
+      padding: 8px 4px 10px 0;
+      font-weight: 600;
+      color: #1f3a5c;
+      border-bottom: 1px solid #dce5ef;
+    }
+    .wages-table td {
+      padding: 12px 4px 12px 0;
+      border-bottom: 1px solid #ecf1f7;
+      vertical-align: middle;
+    }
+    .wages-table tr:last-child td {
+      border-bottom: none;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #eef3f9;
+      color: #2c3f58;
+    }
+    .status-paid {
+      background: #d5f0e3;
+      color: #0f6e3a;
+    }
+    .status-unpaid {
+      background: #ffe8e0;
+      color: #a53f2b;
+    }
+    .status-advance {
+      background: #fff1cf;
+      color: #9f7722;
+    }
+    .action-icons {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .action-icons .btn {
+      padding: 2px 10px;
+      font-size: 11px;
+    }
+    .wage-summary {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: #f4f9ff;
+      border-radius: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .wage-summary span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .wage-summary i {
+      color: #2a7de1;
+    }
+    .hr-divider {
+      margin: 12px 0 18px;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, #d0ddea, transparent);
+    }
+    .flex-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 16px;
+    }
+    .mt-2 { margin-top: 12px; }
+    .text-muted { color: #5c7390; }
+    .fw-600 { font-weight: 600; }
+  </style>
+</head>
+<body>
+<div class="dashboard">
+  <h1><i class="fas fa-tachometer-alt"></i> Order · Bill · Wages</h1>
+  <div class="subhead">
+    <i class="fas fa-print" style="margin-right: 10px;"></i> 
+    Select order → print bill &nbsp;|&nbsp; Daily wages: paid / unpaid / advance
+  </div>
+
+  <div class="grid-2">
+    <!-- LEFT: ORDERS + BILL -->
+    <div class="card">
+      <div class="card-header">
+        <h2><i class="fas fa-clipboard-list"></i> Orders</h2>
+        <span class="badge"><i class="far fa-clock"></i> Today</span>
+      </div>
+      <!-- order list -->
+      <div id="orderList">
+        <!-- dynamically from JS -->
+      </div>
+
+      <!-- BILL preview & print -->
+      <div class="bill-area" id="billArea">
+        <div>
+          <div class="bill-label"><i class="fas fa-receipt"></i> Selected bill</div>
+          <div class="bill-amount" id="billAmount">₹ 0.00</div>
+          <div style="font-size:13px; color:#3c5d7e;" id="billOrderId">No order selected</div>
+        </div>
+        <button class="print-btn" id="printBillBtn"><i class="fas fa-print"></i> Print Bill</button>
+      </div>
+      <div style="margin-top: 10px; font-size:13px; color:#45739b; display: flex; gap: 16px; flex-wrap: wrap;">
+        <span><i class="fas fa-check-circle" style="color:#1f8b4c;"></i> Click order to select</span>
+        <span><i class="fas fa-print"></i> Print bill for selected</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: WAGES (labourers) -->
+    <div class="card">
+      <div class="card-header">
+        <h2><i class="fas fa-user-hard-hat"></i> Labour Wages</h2>
+        <span class="badge"><i class="fas fa-calendar-day"></i> Daily</span>
+      </div>
+      <table class="wages-table" id="wagesTable">
+        <thead>
+          <tr><th>Labour</th><th>Wage (₹)</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody id="wagesBody">
+          <!-- JS rendered -->
+        </tbody>
+      </table>
+      <!-- summary -->
+      <div class="wage-summary" id="wageSummary">
+        <span><i class="fas fa-rupee-sign"></i> Total: ₹<span id="totalWages">0</span></span>
+        <span><i class="fas fa-check-circle" style="color:#1f8b4c;"></i> Paid: <span id="paidCount">0</span></span>
+        <span><i class="fas fa-hourglass-half" style="color:#b8891e;"></i> Unpaid: <span id="unpaidCount">0</span></span>
+        <span><i class="fas fa-hand-holding-usd" style="color:#a37a1f;"></i> Advance: <span id="advanceCount">0</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- DATA ----------
+    // Orders 
+    const orders = [
+      { id: 'ORD-1001', customer: 'Ravi Sharma', items: 3, total: 2450, status: 'ready' },
+      { id: 'ORD-1002', customer: 'Meena K.', items: 2, total: 1890, status: 'pending' },
+      { id: 'ORD-1003', customer: 'John D.', items: 5, total: 4320, status: 'completed' },
+      { id: 'ORD-1004', customer: 'Priya Patel', items: 1, total: 750, status: 'ready' },
+      { id: 'ORD-1005', customer: 'Ahmed Khan', items: 4, total: 3100, status: 'pending' }
+    ];
+
+    // Labourers (daily wages)
+    let labourers = [
+      { name: 'Sunil Kumar', wage: 550, status: 'paid' },
+      { name: 'Ramesh Yadav', wage: 500, status: 'unpaid' },
+      { name: 'Nisha Devi', wage: 600, status: 'advance' },
+      { name: 'Vijay Singh', wage: 480, status: 'unpaid' },
+      { name: 'Sita Ram', wage: 520, status: 'paid' }
+    ];
+
+    // selected order ID (default first)
+    let selectedOrderId = orders[0]?.id || null;
+
+    // DOM refs
+    const orderListEl = document.getElementById('orderList');
+    const billAmountEl = document.getElementById('billAmount');
+    const billOrderIdEl = document.getElementById('billOrderId');
+    const wagesBody = document.getElementById('wagesBody');
+    const totalWagesEl = document.getElementById('totalWages');
+    const paidCountEl = document.getElementById('paidCount');
+    const unpaidCountEl = document.getElementById('unpaidCount');
+    const advanceCountEl = document.getElementById('advanceCount');
+    const printBtn = document.getElementById('printBillBtn');
+
+    // ---------- RENDER ORDERS ----------
+    function renderOrders() {
+      let html = '';
+      orders.forEach(order => {
+        const isSelected = (order.id === selectedOrderId);
+        const statusColor = order.status === 'completed' ? '#1f8b4c' : order.status === 'ready' ? '#2a7de1' : '#d4a22b';
+        html += `
+          <div class="order-item" style="${isSelected ? 'background:#e2edfc; border-left-color:#0b4b8a;' : ''}" data-orderid="${order.id}">
+            <div class="order-info">
+              <div class="order-id">${order.id} <span style="font-weight:400; font-size:13px; color:#2a4e72;">${order.customer}</span></div>
+              <div class="order-meta">
+                <span><i class="fas fa-box"></i> ${order.items} items</span>
+                <span><i class="fas fa-rupee-sign"></i> ${order.total}</span>
+                <span><i class="fas fa-circle" style="color:${statusColor}; font-size:10px;"></i> ${order.status}</span>
+              </div>
+            </div>
+            <div class="order-actions">
+              <button class="btn btn-outline btn-sm select-order-btn" data-id="${order.id}"><i class="fas fa-check"></i> Select</button>
+            </div>
+          </div>
+        `;
+      });
+      orderListEl.innerHTML = html;
+
+      // attach select events
+      document.querySelectorAll('.select-order-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const id = this.dataset.id;
+          selectedOrderId = id;
+          updateBill();
+          renderOrders(); // re-render to highlight
+        });
+      });
+
+      // click on whole item also selects
+      document.querySelectorAll('.order-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const id = this.dataset.orderid;
+          if (id) {
+            selectedOrderId = id;
+            updateBill();
+            renderOrders();
+          }
+        });
+      });
+
+      updateBill();
+    }
+
+    // ---------- UPDATE BILL ----------
+    function updateBill() {
+      const order = orders.find(o => o.id === selectedOrderId);
+      if (order) {
+        billAmountEl.textContent = `₹ ${order.total.toFixed(2)}`;
+        billOrderIdEl.textContent = `${order.id} · ${order.customer}`;
+      } else {
+        billAmountEl.textContent = '₹ 0.00';
+        billOrderIdEl.textContent = 'No order selected';
+      }
+    }
+
+    // ---------- RENDER WAGES ----------
+    function renderWages() {
+      let rows = '';
+      labourers.forEach((lab, index) => {
+        let statusClass = 'status-unpaid';
+        let statusText = 'Unpaid';
+        if (lab.status === 'paid') { statusClass = 'status-paid'; statusText = 'Paid'; }
+        else if (lab.status === 'advance') { statusClass = 'status-advance'; statusText = 'Advance'; }
+        
+        rows += `
+          <tr>
+            <td><i class="fas fa-user" style="color:#2a5f7a; margin-right:6px;"></i>${lab.name}</td>
+            <td>₹${lab.wage}</td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>
+              <div class="action-icons">
+                <button class="btn btn-success btn-sm wage-action" data-index="${index}" data-action="paid"><i class="fas fa-check"></i></button>
+                <button class="btn btn-warning btn-sm wage-action" data-index="${index}" data-action="advance"><i class="fas fa-hand-holding-usd"></i></button>
+                <button class="btn btn-danger btn-sm wage-action" data-index="${index}" data-action="unpaid"><i class="fas fa-times"></i></button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+      wagesBody.innerHTML = rows;
+
+      // attach wage action events
+      document.querySelectorAll('.wage-action').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const index = parseInt(this.dataset.index);
+          const action = this.dataset.action;
+          if (!isNaN(index) && labourers[index]) {
+            labourers[index].status = action;
+            renderWages();
+            updateWageSummary();
+          }
+        });
+      });
+
+      updateWageSummary();
+    }
+
+    // ---------- WAGE SUMMARY ----------
+    function updateWageSummary() {
+      let total = 0, paid = 0, unpaid = 0, advance = 0;
+      labourers.forEach(lab => {
+        total += lab.wage;
+        if (lab.status === 'paid') paid++;
+        else if (lab.status === 'unpaid') unpaid++;
+        else if (lab.status === 'advance') advance++;
+      });
+      totalWagesEl.textContent = total;
+      paidCountEl.textContent = paid;
+      unpaidCountEl.textContent = unpaid;
+      advanceCountEl.textContent = advance;
+    }
+
+    // ---------- PRINT BILL (simulate) ----------
+    function printBill() {
+      const order = orders.find(o => o.id === selectedOrderId);
+      if (!order) {
+        alert('Please select an order first.');
+        return;
+      }
+      // Build a printable bill preview
+      const billContent = `
+        ===== BILL =====
+        Order ID  : ${order.id}
+        Customer  : ${order.customer}
+        Items     : ${order.items}
+        Total     : ₹ ${order.total.toFixed(2)}
+        Status    : ${order.status}
+        Date      : ${new Date().toLocaleDateString()}
+        =================
+        Thank you!
+      `;
+      // print simulation: show in alert + console
+      alert(`🖨️ Bill printed (simulated):\n\n${billContent}`);
+      console.log('📄 PRINT BILL:\n' + billContent);
+      // optional: if you want a new window print:
+      // const win = window.open('', '_blank');
+      // win.document.write('<pre>' + billContent + '</pre>');
+      // win.print();
+    }
+
+    // ---------- INIT ----------
+    function init() {
+      renderOrders();
+      renderWages();
+      // print button
+      printBtn.addEventListener('click', printBill);
+    }
+
+    init();
+  })();
+</script>
+
+</body>
+</html>
