@@ -6,20 +6,20 @@ def my_gen():
     yield 300
     yield 400
 
-gen = my_gen()
+gens = my_gen()
 
-print(next(gen))
-print(next(gen))
-print(next(gen))
-print(next(gen))
+print(next(gens))
+print(next(gens))
+print(next(gens))
+print(next(gens))
 
 
 def count():
     for i in range(1, 6):
         yield i
 
-gen = count()
-for num in gen:
+gens = count()
+for num in gens:
     print(num)
 
 def numbers():
