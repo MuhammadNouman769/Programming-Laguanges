@@ -33,3 +33,21 @@
 #     print(f"{Number} is Even")
 # else:
 #     print(f"{Number} is Odd")    
+
+
+numbers = [77, 6, 2, 71, 8]
+
+largest = 0
+second_largest = 0
+
+for num in numbers:
+    
+    if num > largest:
+        second_largest = largest
+        largest = num
+        
+    elif num > second_largest and num != largest:
+        second_largest = num
+
+print("Largest:", largest)
+print("Second Largest:", second_largest)
