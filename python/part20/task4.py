@@ -2,7 +2,11 @@
 
 def largest(values):
     """Return the largest value."""
-    return max(values)
+    largest_value = values[0]
+    for value in values:
+        if value > largest_value:
+            largest_value = value
+    return largest_value
 
 def main():
     print(largest([int(value) for value in input("Values: ").split()]))

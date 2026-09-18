@@ -5,7 +5,12 @@ def average(*numbers):
     """Return the arithmetic mean of numbers."""
     if not numbers:
         raise ValueError("at least one number is required")
-    return sum(numbers) / len(numbers)
+    total = 0
+    count = 0
+    for number in numbers:
+        total += number
+        count += 1
+    return total / count
 
 
 def main():

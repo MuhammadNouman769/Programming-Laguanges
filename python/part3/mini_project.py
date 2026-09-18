@@ -10,7 +10,15 @@ def report(scores):
     """Return count, highest score, and average score."""
     if not scores:
         return {"count": 0, "highest": 0, "average": 0}
-    return {"count": len(scores), "highest": max(scores), "average": sum(scores) / len(scores)}
+    count = 0
+    total = 0
+    highest = scores[0]
+    for score in scores:
+        count += 1
+        total += score
+        if score > highest:
+            highest = score
+    return {"count": count, "highest": highest, "average": total / count}
 
 
 def main():

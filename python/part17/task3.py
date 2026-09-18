@@ -2,9 +2,11 @@
 
 def attempts_until(history, secret):
     """Return attempts through the first correct guess."""
-    for count, guess in enumerate(history, 1):
+    count = 1
+    for guess in history:
         if guess == secret:
             return count
+        count += 1
     return None
 
 def main():

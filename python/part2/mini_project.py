@@ -3,7 +3,10 @@
 
 def subtotal(prices):
     """Return the total before tax."""
-    return sum(prices)
+    total = 0
+    for price in prices:
+        total += price
+    return total
 
 
 def bill_total(prices, tax_rate=0.05):

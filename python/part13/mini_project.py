@@ -6,7 +6,12 @@ def add_item(items, item):
 
 def format_list(items):
     """Return numbered shopping lines."""
-    return [f"{index}. {item}" for index, item in enumerate(items, 1)]
+    formatted = []
+    index = 1
+    for item in items:
+        formatted.append(f"{index}. {item}")
+        index += 1
+    return formatted
 
 def main():
     items = [item.strip() for item in input("Items: ").split(",") if item.strip()]

@@ -5,10 +5,12 @@ def make_table(number, start=1, end=10):
     """Return table lines for the inclusive multiplier range."""
     if start > end:
         raise ValueError("start must not be greater than end")
-    return [
-        f"{number} x {multiplier} = {number * multiplier}"
-        for multiplier in range(start, end + 1)
-    ]
+    lines = []
+    multiplier = start
+    while multiplier <= end:
+        lines.append(f"{number} x {multiplier} = {number * multiplier}")
+        multiplier += 1
+    return lines
 
 
 def read_integer(prompt, default=None):

@@ -11,7 +11,10 @@ def count_even(numbers):
 
 
 def main():
-    print(count_even(map(int, input("Numbers: ").split())))
+    numbers = []
+    for value in input("Numbers: ").split():
+        numbers.append(int(value))
+    print(count_even(numbers))
 
 
 if __name__ == "__main__":

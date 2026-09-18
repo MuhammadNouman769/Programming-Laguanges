@@ -2,8 +2,11 @@
 
 def middle(text):
     """Return the middle half of text."""
-    start = len(text) // 4
-    end = len(text) - start
+    length = 0
+    for _character in text:
+        length += 1
+    start = length // 4
+    end = length - start
     return text[start:end]
 
 def main():

@@ -4,7 +4,12 @@ def is_prime(number):
     """Return whether number is prime."""
     if number < 2:
         return False
-    return all(number % divisor for divisor in range(2, int(number ** 0.5) + 1))
+    divisor = 2
+    while divisor <= int(number ** 0.5):
+        if number % divisor == 0:
+            return False
+        divisor += 1
+    return True
 
 def main():
     print(is_prime(int(input("Number: "))))

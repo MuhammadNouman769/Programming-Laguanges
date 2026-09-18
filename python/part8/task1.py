@@ -3,7 +3,12 @@
 
 def table(number, limit=10):
     """Return multiplication results."""
-    return [number * multiplier for multiplier in range(1, limit + 1)]
+    results = []
+    multiplier = 1
+    while multiplier <= limit:
+        results.append(number * multiplier)
+        multiplier += 1
+    return results
 
 
 def main():

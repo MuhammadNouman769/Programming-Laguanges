@@ -6,7 +6,12 @@ def convert(values, factor=1.0):
 
 def summary(values):
     """Return count and total."""
-    return {"count": len(values), "total": sum(values)}
+    count = 0
+    total = 0
+    for value in values:
+        count += 1
+        total += value
+    return {"count": count, "total": total}
 
 def main():
     values = convert(input("Measurements: ").split())

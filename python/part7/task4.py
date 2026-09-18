@@ -3,10 +3,15 @@
 
 class Team:
     def __init__(self, members):
-        self.members = list(members)
+        self.members = []
+        for member in members:
+            self.members.append(member)
 
     def count(self):
-        return len(self.members)
+        count = 0
+        for _member in self.members:
+            count += 1
+        return count
 
 
 def main():

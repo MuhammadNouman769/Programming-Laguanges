@@ -4,8 +4,10 @@
 def factorial(number):
     """Return a non-negative integer factorial."""
     result = 1
-    for value in range(2, number + 1):
+    value = 2
+    while value <= number:
         result *= value
+        value += 1
     return result
 
 

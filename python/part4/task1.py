@@ -3,12 +3,17 @@
 
 def countdown(start):
     """Yield integers from start down to one."""
-    for number in range(start, 0, -1):
+    number = start
+    while number > 0:
         yield number
+        number -= 1
 
 
 def main():
-    print(list(countdown(int(input("Start: ")))))
+    values = []
+    for number in countdown(int(input("Start: "))):
+        values.append(number)
+    print(values)
 
 
 if __name__ == "__main__":

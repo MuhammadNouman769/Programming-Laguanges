@@ -3,8 +3,10 @@
 def factorial(number):
     """Return factorial using range."""
     result = 1
-    for value in range(1, number + 1):
+    value = 1
+    while value <= number:
         result *= value
+        value += 1
     return result
 
 def main():

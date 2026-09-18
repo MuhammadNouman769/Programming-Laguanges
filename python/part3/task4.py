@@ -3,7 +3,11 @@
 
 def even_numbers(numbers):
     """Return only even numbers."""
-    return list(filter(lambda number: number % 2 == 0, numbers))
+    even = []
+    for number in numbers:
+        if number % 2 == 0:
+            even.append(number)
+    return even
 
 
 def main():
