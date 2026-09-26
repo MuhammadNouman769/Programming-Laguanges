@@ -16,7 +16,7 @@ def completed_topics(topics, completed=None):
         if completed is None:
             numbered.append(f"{index}. {topic}")
         else:
-            status = "✅" if topic in completed_topics_set else "⏳"
+            status = "" if topic in completed_topics_set else "⏳"
             numbered.append(f"{index}. {topic} {status}")
     return numbered
 
