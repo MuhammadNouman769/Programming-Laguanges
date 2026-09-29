@@ -1,103 +1,70 @@
 
+class Car:
+    
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = model
+        self.price = price
 
-class Book:
-    def __init__(self, title, author, pages, price):
-        self.title = title
-        self.author = author
-        self.pages = pages
-        self._price = None
-        self.price = price          # setter yahan call hoga
-
-    # ---------- @property / @setter ----------
-    @property
-    def price(self):
-        return self._price
-
-    @price.setter
-    def price(self, value):
-        if value < 0:
-            raise ValueError("Price negative nahi ho sakti")
-        self._price = value
-
-    # ---------- __str__ (user ke liye) ----------
     def __str__(self):
-        return f"{self.title} by {self.author} - Rs. {self.price}"
+        return f'{self.brand} {self.model}'
 
-    # ---------- __repr__ (developer ke liye) ----------
     def __repr__(self):
-        return f"Book(title={self.title!r}, author={self.author!r}, pages={self.pages}, price={self.price})"
+        return f"Car(brand={self.brand}, model={self.model})"
 
-    # ---------- __eq__ (title + author same to books equal) ----------
+    def __len__(self):
+        return len(self.brand) + len(self.model)
+
+    def __getitem__(self, index):
+        if index == 0:
+            return self.brand
+        elif index == 1:
+            return self.model
+        else:
+            return 'invalid index' 
+
     def __eq__(self, other):
-        if not isinstance(other, Book):
-            return NotImplemented
-        return self.title == other.title and self.author == other.author
+        return self.brand == other.brand and self.model == other.model     
 
-    # ---------- __lt__ / __gt__ (pages ke hisab se compare) ----------
     def __lt__(self, other):
-        return self.pages < other.pages
+        return self.price < other.price 
 
     def __gt__(self, other):
-        return self.pages > other.pages
+        return self.price > other.price
+    
 
+car1 = Car("Toyota", "Corolla", 50000)
+car2 = Car("Toyota", "Corolla", 70000)
+car3 = Car("honda", "city", 60000)
 
-class Library:
-    def __init__(self, name):
-        self.name = name
-        self.books = []
+print(car1 == car2)
 
-    def add_book(self, book):
-        if book in self.books:      # __eq__ use hoga
-            print(f"'{book.title}' pehle se maujood hai.")
-            return
-        self.books.append(book)
+print(car1)
 
-    # ---------- __len__ ----------
-    def __len__(self):
-        return len(self.books)
+print(car1.brand)
 
-    # ---------- __getitem__ (index se book, aur loop bhi chalega) ----------
-    def __getitem__(self, index):
-        return self.books[index]
+print(car1.model)
 
-    def __str__(self):
-        return f"{self.name} ({len(self)} books)"
+print(repr(car1))
 
+print(len(car1.brand))
 
-# ================= Use karke dekhein =================
-if __name__ == "__main__":
-    lib = Library("Muhammad Nouman Library")
+print(len(car1.model))
 
-    b1 = Book("Uswa-e-Rasool", "Muhammad Nouman", 320, 1200)
-    b2 = Book("Meri Aulad Meri Zimma Dari", "Muhammad Nouman", 207, 950)
-    b3 = Book("Beti Rehmat-e-Khudawandi", "Muhammad Nouman", 150, 700)
-    b4 = Book("Uswa-e-Rasool", "Muhammad Nouman", 320, 1200)  # duplicate
+print(len(car1))
 
-    lib.add_book(b1)
-    lib.add_book(b2)
-    lib.add_book(b3)
-    lib.add_book(b4)                # duplicate message aayega
+print(car1[0])
 
-    print(lib)                      # __str__  -> Muhammad Nouman Library (3 books)
-    print(len(lib))                 # __len__  -> 3
-    print(lib[0])                   # __getitem__ + __str__
-    print(repr(lib[1]))             # __repr__
+print(car1[1])
 
-    print(b1 == b4)                 # __eq__  -> True
-    print(b1 > b2)                  # __gt__  -> True (320 > 207)
-    print(b3 < b2)                  # __lt__  -> True (150 < 207)
+print(car1[2])
+print(car1 == car2)
 
-    # __getitem__ ki wajah se for loop bhi chalta hai
-    for book in lib:
-        print("-", book)
+print(car1 == car3)
+print(car1 < car2)
 
-    # sorted() ke liye __lt__ kaafi hai
-    for book in sorted(lib.books):
-        print(book.title, book.pages)
+print(car1 > car2)
 
-    # @setter validation
-    b2.price = 1000                 # theek
-    try:
-        b2.price = -50              # error
-    except ValueError as e:
-        print("Error:", e)
+ 
+car1.price = -50000
+print(car1.price)
