@@ -1,0 +1,12 @@
+{
+    "students": [
+        {
+            "name": "Muhammad Nouman",
+            "age": 27,
+            "email": "nomannisar769@gmail.com",
+            "roll_no": "025",
+            "grade": {}
+        }
+    ],
+    "teachers": []
+}
